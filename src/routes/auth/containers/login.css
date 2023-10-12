@@ -155,15 +155,6 @@ a {
   clear: both;
 }
 
-/* clear float */
-
-/* Position Relative */
-
-/* Position Absolute */
-
-/* vertical align baseline */
-
-/* vertical align top */
 
 nav.vertical ul li {
   display: block;
@@ -249,15 +240,20 @@ ul {
 body {
   box-sizing: border-box;
   background: #f1f1f1 !important;
-  min-height: 100vh;
+  height: 100%;
 }
 
-.w3layouts-two-grids {
-  width: 62%;
+#app {
+  border: 1px solid #f1f1f1;
   height: 100%;
-  background: #f1f1f1;
-  margin: 0em auto;
-  margin-top: -110px;
+}
+
+
+.w3layouts-two-grids2 {
+  width: 63%;
+  height: 472px;
+  margin-top: 200px;
+  margin-left: 300px;
   -webkit-box-shadow: -2px 7px 37px 8px rgba(167, 167, 167, 0.52);
   -moz-box-shadow: -2px 7px 37px 8px rgba(167, 167, 167, 0.52);
   box-shadow: -2px 7px 37px 8px rgba(167, 167, 167, 0.52);
@@ -286,6 +282,7 @@ h1.error {
 }
 
 .img-right-side {
+  flex: 1;
   background: #fff;
 }
 
@@ -314,7 +311,7 @@ h1.error {
 }
 
 .txt-left-side {
-  background: #3a3d6e;
+  background: #4d4d57;
 }
 
 .form-left-to-w3l {
@@ -493,31 +490,38 @@ a.for {
     letter-spacing: 3px;
     font-size: 49px;
   }
+
   .img-right-side,
   .txt-left-side {
     padding: 3.5em 4em 3em;
   }
+
   .copyrigh-wthree {
     padding: 3em 0em 4.5em;
   }
+
   .img-right-side h3,
   .txt-left-side h2 {
     font-size: 22px;
     margin-bottom: 29px;
   }
+
   .form-left-to-w3l span {
     font-size: 20px;
   }
+
   .img-right-side p,
   .txt-left-side p {
     font-size: 13.5px;
     line-height: 24px;
     margin-bottom: 48px;
   }
+
   #loginbtn {
     padding: 14px 20px;
     margin: 42px 0px 18px;
   }
+
   .form-left-to-w3l {
     margin: 0px 0px 25px;
   }

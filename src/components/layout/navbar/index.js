@@ -88,7 +88,6 @@ export default class Navbar extends React.Component {
                 <Menu.Item key="setting:1" onClick={(event) => this.showmodal()}>
                     修改密码
                 </Menu.Item>
-                {/* <Menu.Item key="setting:3">锁屏</Menu.Item> */}
                 <Menu.Divider />
                 <Menu.Item key="setting:5" onClick={(event) => this.showConfirm()}>
                     退出登录

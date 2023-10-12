@@ -1,11 +1,12 @@
 import userStore from '@/store/userStore';
-import { Form, message, Modal, Select } from 'antd';
+import { message } from 'antd';
 import React from 'react';
 import { hashHistory } from 'react-router';
 import api from '../../../api/api';
 import { randomString } from '../../../utils/tools';
 import AuthService from '../AuthService';
 import WsService from '../WsService';
+import NanxArt from './login.jpeg';
 
 import './login.css';
 
@@ -109,96 +110,53 @@ export default class Login extends React.Component {
     }
     render() {
         return (
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                    <path
-                        fill="#ffd700"
-                        fillOpacity="1"
-                        d="M0,192L48,181.3C96,171,192,149,288,138.7C384,128,480,128,576,144C672,160,768,192,864,192C960,192,1056,160,1152,160C1248,160,1344,192,1392,208L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
-                </svg>
+            <div className="w3layouts-two-grids2">
+                <div className="mid-class">
+                    <div className="txt-left-side">
+                        <h2> Nanx System</h2>
 
-                <div className="w3layouts-two-grids">
-                    <div className="mid-class">
-                        <div className="txt-left-side">
-                            <h2> Nanx System</h2>
-
-                            <form action="#" method="post">
-                                <div className="form-left-to-w3l">
-                                    <span className="fa fa-envelope-o" aria-hidden="true"></span>
-                                    <input
-                                        type="mobile"
-                                        id="boss_mobile"
-                                        name="mobile"
-                                        placeholder="手机号"
-                                        onChange={this.handleChange}
-                                        required=""
-                                    />
-                                    <div className="clear"></div>
-                                </div>
-                                <div className="form-left-to-w3l ">
-                                    <span className="fa fa-lock" aria-hidden="true"></span>
-                                    <input
-                                        type="password"
-                                        id="boss_pwd"
-                                        name="password"
-                                        placeholder="密码"
-                                        onChange={this.handleChange}
-                                        required=""
-                                    />
-                                    <div className="clear"></div>
-                                </div>
-
-                                <div className="btnn">
-                                    <button id="loginbtn" onClick={this.handleFormSubmitMobile} type="submit">
-                                        Login/登录
-                                    </button>
-                                </div>
-                            </form>
-                            <div className="w3layouts_more-buttn">
-                                <h3>
-                                    使用过程中需要帮助?
-                                    <a href="#/docs">查看文档DOC...</a>
-                                </h3>
+                        <form action="#" method="post">
+                            <div className="form-left-to-w3l">
+                                <span className="fa fa-envelope-o" aria-hidden="true"></span>
+                                <input
+                                    type="mobile"
+                                    id="boss_mobile"
+                                    name="mobile"
+                                    placeholder="手机号"
+                                    onChange={this.handleChange}
+                                    required=""
+                                />
+                                <div className="clear"></div>
                             </div>
-                        </div>
-                        <div className="img-right-side">
-                            <h2>Management System</h2>
-                            <h2>数据库:NANX(12345678/12345678)</h2>
-                            <br />
-
-                            <div style={{ marginLeft: '80px', display: 'flex', width: '100px' }}>
-                                <br />
+                            <div className="form-left-to-w3l ">
+                                <span className="fa fa-lock" aria-hidden="true"></span>
+                                <input
+                                    type="password"
+                                    id="boss_pwd"
+                                    name="password"
+                                    placeholder="密码"
+                                    onChange={this.handleChange}
+                                    required=""
+                                />
+                                <div className="clear"></div>
                             </div>
-                            <br />
-                            <br />
-                            <br />
+
+                            <div className="btnn">
+                                <button id="loginbtn" onClick={this.handleFormSubmitMobile} type="submit">
+                                    Login/登录
+                                </button>
+                            </div>
+                        </form>
+                        <div className="w3layouts_more-buttn">
+                            <h3>Low Code App Builder</h3>
                         </div>
                     </div>
-                    <Modal
-                        title="选择角色："
-                        onOk={this.handleOk.bind(this)}
-                        onCancel={this.handleCancel.bind(this)}
-                        okText="确认"
-                        cancelText="取消"
-                        width="400px"
-                        visible={this.state.visible}>
-                        <Form labelCol={{ span: 5 }} wrapperCol={{ span: 19 }}>
-                            <Form.Item label="选择角色：">
-                                <Select
-                                    style={{ width: '100%' }}
-                                    placeholder="请选择角色"
-                                    onChange={this.changeValue}
-                                    defaultValue={this.state.roles[0] ? this.state.roles[0].role_code : null}>
-                                    {this.state.roles.length &&
-                                        this.state.roles.map((item, index) => (
-                                            <Select.Option key={index} value={item.role_code}>
-                                                {item.role_name}
-                                            </Select.Option>
-                                        ))}
-                                </Select>
-                            </Form.Item>
-                        </Form>
-                    </Modal>
+                    <div className="img-right-side">
+                        <h2>Management System</h2>
+                        <h2>数据库:NANX(12345678/12345678)</h2>
+                        <img style={{ width: '280px' }} src={NanxArt} alt="fireSpot" />
+                        <br />
+                    </div>
                 </div>
             </div>
         );
