@@ -1,0 +1,268 @@
+// hide scrollbar of menu and content
+.portal_menu::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.ant-calendar-picker.ant-calendar-picker-default {
+  width: 100%;
+}
+.ant-input-number {
+  width: 100% !important;
+}
+
+.commonTable .react-resizable {
+  position: relative;
+  background-clip: padding-box;
+}
+
+.commonTable .react-resizable-handle {
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  bottom: 0;
+  right: -5px;
+  cursor: col-resize;
+  z-index: 1;
+}
+
+.portal_menu {
+  -ms-overflow-style: none;
+}
+
+.portal_menu {
+  overflow: -moz-scrollbars-none;
+}
+
+.portal_content::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.portal_content {
+  -ms-overflow-style: none;
+}
+
+.portal_content {
+  overflow: -moz-scrollbars-none;
+}
+
+// antd table 默认不换行
+.commonTable .ant-table-bordered .ant-table-thead > tr > th,
+.commonTable .ant-table-bordered .ant-table-tbody > tr > td {
+  border-right: 1px solid #e8e8e8;
+  width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+.marginRihgt10 {
+  margin-right: 10px;
+}
+
+.flex_wrapper {
+  margin: 10px 15px;
+  min-height: 600px;
+  border: 1px solid #ccc;
+}
+
+.dropdown {
+  float: right;
+  padding-right: 10px;
+
+  .user-avatar {
+    width: 45px;
+    margin-right: 5px;
+  }
+}
+
+.dropdownMenu {
+  box-shadow: 0 5px 5px #ccc;
+  top: 3px;
+  right: 5px;
+}
+
+.trigger_box {
+  margin: 0 10px;
+  float: left;
+  line-height: 50px;
+}
+
+.portal_bread_crumb {
+  float: left;
+
+  span,
+  a {
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+  }
+}
+
+.hamburger_box {
+  overflow: hidden;
+  line-height: 50px;
+  height: 50px;
+}
+
+.portal_main {
+  background: '#fff';
+  min-height: 280;
+  height: '100vh';
+  overflow-y: 'scroll';
+}
+
+.portal_header {
+  background: '#fff';
+  padding: 0;
+  line-height: '50px';
+  height: '50px';
+}
+
+.portal_silider {
+  padding: 0;
+  height: 100vh;
+  overflow-y: scroll;
+  margin-bottom: 0;
+}
+
+header.ant-layout-header {
+  background: #fff;
+  padding: 0px;
+  line-height: 50px;
+  height: 50px;
+  z-index: 1000;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+}
+
+.ant-layout-sider-children {
+  background: #304156;
+}
+
+.menuWrapper {
+  background: #304156 !important;
+  background-color: #304156 !important;
+  color: red;
+}
+
+.menuWrapper_inner {
+  margin: 40px;
+  width: 600px;
+  height: 1000px;
+  color: red;
+}
+
+.ant-menu-item-selected {
+  background-color: #304156 !important;
+}
+
+.ant-menu-item-selected span {
+  color: #409eff !important;
+}
+
+.ant-menu-dark,
+.ant-menu-dark .ant-menu-sub {
+  background: #304156 !important;
+}
+
+.ant-menu-item,
+.ant-menu-submenu-title {
+  margin: 0 !important;
+}
+
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+  box-shadow: 0 0 0 0 !important;
+}
+
+.ant-layout-content {
+  padding: 7px 7px 0 1px !important;
+}
+
+.bordered {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-bottom: 1px solid rgb(228, 219, 219);
+}
+
+//流程表单,把descriptions-title 字体改小
+.ant-descriptions-title {
+  font-size: 14px !important;
+  font-weight: 410 !important;
+}
+
+.form_group,
+.form_group_detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.form_group {
+  width: 100%;
+}
+
+.form_group_detail {
+  width: 50%;
+  float: left;
+}
+
+.form_group_detail.oppDesc {
+  width: 100%;
+  align-items: start;
+}
+
+.form_text_info {
+  flex: 0 0 120px;
+  line-height: 30rpx;
+  text-align: right;
+  color: #485a6a;
+}
+
+.form_value_node {
+  flex: 1 1 80%;
+  position: relative;
+}
+
+.errorMsg {
+  position: absolute;
+  bottom: -20px;
+  left: 5px;
+  font-size: 12px;
+  line-height: 20px;
+  color: #e4393c;
+}
+
+.formIcon {
+  color: #e4393c;
+  flex: 1 1 10px;
+}
+
+.form_value_node input,
+.form_value_node select,
+.form_value_node .search_input {
+  width: 100%;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0 10px;
+  line-height: 30px;
+  margin: 0;
+}
+
+.form_value_node .search_input {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+// 一键启动高度样式自适应
+.addmodal .ant-row {
+  height: auto !important;
+  min-height: 53px;
+}
+
+// 流程详情高度样式自适应
+.jOePSe {
+  height: auto !important;
+  min-height: 32px;
+}

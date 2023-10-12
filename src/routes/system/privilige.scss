@@ -1,0 +1,120 @@
+.allocationMenuContent {
+    padding      : 20px;
+    display      : flex;
+    align-items  : center;
+    justify-items: center;
+
+    .option_menu_box {
+        padding-left: 50px;
+    }
+}
+
+.current_role_text_box {
+    font-size   : 16px;
+    font-weight : bold;
+    line-height : 35px;
+    text-align  : left;
+    padding-left: 20px;
+}
+
+.roleButtonGroup {
+    display: flex;
+}
+
+.searchWrapper {
+    display    : flex;
+    align-items: center;
+
+    .searForm {
+        display    : flex;
+        line-height: 30px;
+    }
+
+    .searchInfo {
+        margin:8px;
+    }
+
+    .searcControl { 
+         margin:8px;
+    }
+}
+
+.buttonItem {
+    display: inline-block;
+}
+
+.buttonText {
+    display: inline-block;
+    padding: 5px 8px;
+    color  : #1890ff;
+}
+
+
+.user_detail_wrapper {
+    width : 600px;
+    margin: 20px;
+
+    .user_row {
+        display: flex;
+        border-left: 1px solid #ccc;
+        &.header_row {
+            border-top: 1px solid #ccc;
+        }
+
+        .user_col {
+            flex         : 1;
+            border-right : 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            line-height  : 30px;
+            padding      : 0 15px;
+
+            &.user_header {
+                font-size  : 16px;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+
+.header_info {
+	font-size  : 28px;
+	font-weight: bold;
+	text-align : center;
+	padding-top: 10px;
+}
+
+.form_group,
+.form_group_detail {
+	display        : flex;
+	align-items    : center;
+	justify-content: center;
+	padding        : 10px 0;
+}
+
+.form_group {
+	width: 100%;
+}
+
+
+.form_group_detail {
+	width: 50%;
+	float: left;
+}
+
+.form_group_detail.oppDesc {
+	width      : 100%;
+	align-items: start;
+}
+
+.form_text_info {
+	flex       : 0 0 120px;
+	line-height: 30rpx;
+	text-align : right;
+	color      : #485A6A;
+}
+
+.form_value_node {
+	flex    : 1 1 80%;
+	position: relative;
+}

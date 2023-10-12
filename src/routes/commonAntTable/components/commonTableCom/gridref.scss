@@ -1,0 +1,49 @@
+.approvalWrapper {
+    padding      : 10px 20px;
+    background   : #fff;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    .approvalBox{
+        text-align: center;
+    }
+}
+.wddb .ant-input{
+    width:50%
+}
+.wddb .ant-select{
+    width:50% !important
+}
+.approvalOption{
+    margin: 20px 0;
+    text-align: center;
+}
+.suggestionWrapper {
+    .suggestionRow {
+        display    : flex;
+        border-left: 1px solid #ccc;
+
+        &:nth-child(odd) {
+            background: #fafafa;
+        }
+
+        &:nth-child(even) {
+            background: #f1f1f1;
+        }
+
+        &.suggestionHeader {
+            font-weight: bold;
+            color      : #000;
+            border-top : 1px solid #ccc;
+        }
+
+        .suggestionCol {
+            flex         : 1;
+            padding      : 5px;
+            border-right : 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        .sortCol{
+            flex: 0 0 50px;
+        }
+    }
+}

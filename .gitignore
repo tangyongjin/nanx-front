@@ -1,0 +1,16 @@
+/node_modules/*
+/src/delete_later/*
+/build/*
+/build/static/*
+/dist/*
+/.idea
+package-lock.json
+/.vscode
+/.cache
+./README.md
+documents/names.txt
+./tags
+./debug.log
+./yarn-error.log
+./rundocker.sh
+
