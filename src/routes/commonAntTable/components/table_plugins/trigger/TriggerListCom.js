@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 
 @inject('dmStore')
 @observer
-export default class TriggerList extends React.Component {
+export default class TriggerListCom extends React.Component {
     constructor(props) {
         super(props);
         this.dmstore = this.props.dmStore;

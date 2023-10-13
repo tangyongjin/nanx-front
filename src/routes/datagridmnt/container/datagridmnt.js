@@ -94,8 +94,6 @@ export default class datagridmnt extends React.Component {
 
     changeStoreCfg(record) {
         console.log(record);
-
-        // this.setState({ current_processkey: toJS(record).processkey })
         this.dmstore.setCurrentActcode(toJS(record).datagrid_code);
         this.dmstore.clearMaintableColumns();
         this.dmstore.setCurrentActName(toJS(record).datagrid_title);

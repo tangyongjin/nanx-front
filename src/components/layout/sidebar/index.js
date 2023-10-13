@@ -17,7 +17,7 @@ export default class Sidebar extends React.Component {
     }
 
     async componentDidMount() {
-        await this.store.getMenuList();
+        await this.store.getMenuTreeByRoleCode();
         let { menuList } = this.store;
         this.setState({ menulist: menuList });
     }

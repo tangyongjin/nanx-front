@@ -9,7 +9,7 @@ import api from '@/api/api';
 const type = 'DragableBodyRow';
 
 @observer
-export default class Tablesort extends React.Component {
+export default class TableSortCom extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

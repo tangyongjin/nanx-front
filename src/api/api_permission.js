@@ -13,7 +13,7 @@ export default class permission {
         addRole: (params) => http(params, `${api_root}/Permission/addRole`),
         updateRole: (params) => http(params, `${api_root}/Permission/updateRole`),
         deleteRoleRow: (params) => http(params, `${api_root}/Permission/deleteRole`),
-        getMenuList: (params) => http(params, `${api_root}/Permission/getMenuList`),
+        getMenuTreeByRoleCode: (params) => http(params, `${api_root}/Permission/getMenuTreeByRoleCode`),
         getMenuIdAssosiedUsers: (params) => http(params, `${api_root}/Permission/getMenuIdAssosiedUsers`),
         getRoleByMenuId: (params) => http(params, `${api_root}/Permission/getRoleByMenuId`)
     };

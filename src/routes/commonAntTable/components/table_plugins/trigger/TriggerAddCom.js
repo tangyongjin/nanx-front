@@ -6,7 +6,7 @@ import triggerlineStore from './triggerlineStore';
 
 @inject('dmStore')
 @observer
-export default class TriggerAdder extends React.Component {
+export default class TriggerAddCom extends React.Component {
     constructor(props) {
         super(props);
         this.dmstore = this.props.dmStore;

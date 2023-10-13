@@ -174,7 +174,7 @@ class navigationStore {
     }
 
     @action
-    async getMenuList() {
+    async getMenuTreeByRoleCode() {
         // console.log('获取菜单....')
         //直接根据 token 就可以获取,不需要发送role_code
         let params = {
@@ -183,7 +183,7 @@ class navigationStore {
             },
             method: 'POST'
         };
-        let res = await api.permission.getMenuList(params);
+        let res = await api.permission.getMenuTreeByRoleCode(params);
 
         if (res.code == 200) {
             this.menuList = res.data.menuList;

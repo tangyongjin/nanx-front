@@ -25,7 +25,7 @@ export default class AllocationMenu extends React.Component {
             },
             method: 'POST'
         };
-        let res = await api.permission.getMenuList(params);
+        let res = await api.permission.getMenuTreeByRoleCode(params);
 
         this.setState({ menulist: res.data.menuList });
     }
