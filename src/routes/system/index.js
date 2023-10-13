@@ -51,14 +51,6 @@ export default {
                     cb(null, m.default);
                 });
             }
-        },
-        {
-            path: 'dev2online',
-            getComponent(nextState, cb) {
-                import('./containers/dev2online').then((m) => {
-                    cb(null, m.default);
-                });
-            }
         }
     ]
 };

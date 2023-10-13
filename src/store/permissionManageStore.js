@@ -148,43 +148,6 @@ class permissionManageStore {
         this.roleRowData = {};
     };
 
-    @action getFirstMenuList = async () => {
-        let params = {
-            data: {
-                role_code: this.currentRole.role_code
-            },
-            method: 'POST'
-        };
-        let res = await api.permission.getFirstMenuList(params);
-        this.rolePermissionList = res.code == 200 ? res.data : [];
-    };
-
-    @action getSecondMenuList = async (treeNode) => {
-        if (treeNode.props.children) {
-            return;
-        }
-        let params = {
-            data: {
-                key: treeNode.props.eventKey,
-                role_code: this.currentRole.role_code
-            },
-            method: 'POST'
-        };
-        let res = await api.permission.getSecondMenuList(params);
-        let children = [];
-        if (res.code == 200) {
-            treeNode.props.dataRef.children = res.data;
-
-            this.rolePermissionList = [...this.rolePermissionList];
-
-            return;
-        }
-
-        treeNode.props.dataRef.children = children;
-
-        this.rolePermissionList = [...this.rolePermissionList];
-    };
-
     /**************  角色Modal start ********************/
     @observable visibleModal = false;
     @observable roleRowData = {};
@@ -268,7 +231,6 @@ class permissionManageStore {
             this.selectTartgetMenukeys = nextTargetKeys;
             message.success('菜单分配成功！');
             await this.getRoleMenuList();
-            await this.getAllMenuList();
             return;
         }
         message.success('菜单分配失败！');
@@ -313,49 +275,12 @@ class permissionManageStore {
         this.selectMenukeys = [...sourceSelectedKeys, ...targetSelectedKeys];
     };
 
-    @action getAllMenuList = async () => {
-        let params = {
-            data: {
-                size: 1000,
-                currentPage: 1
-            },
-            method: 'POST'
-        };
-
-        let res = await api.permission.getAllMenuList(params);
-
-        if (res.code == 200) {
-            this.selectTartgetMenukeys.map((key) => {
-                res.data.filter((item) => item.key == key);
-            });
-
-            this.allMenuList = res.data;
-            return;
-        }
-        message.success('获取所有菜单失败');
-    };
-
     /**************  菜单button分配Start ********************/
     @observable selectButtonkeys = [];
     @observable selectTartgetButtonkeys = [];
 
     @action buttonSelectChange = (sourceSelectedKeys, targetSelectedKeys) => {
         this.selectButtonkeys = [...sourceSelectedKeys, ...targetSelectedKeys];
-    };
-
-    @action getRoleButtonList = async () => {
-        let params = {
-            data: {
-                role_code: this.currentRole.role_code
-            },
-            method: 'POST'
-        };
-        let res = await api.permission.getRoleButtonList(params);
-        if (res.code == 200) {
-            this.selectTartgetButtonkeys = res.data.map((item) => item.key);
-            return;
-        }
-        message.success('获取角色已分配的按钮失败');
     };
 
     /************************* 菜单管理 *********************/
@@ -368,27 +293,6 @@ class permissionManageStore {
 
     @action setMenuCurrentPage = (currentPage) => {
         this.pagination.currentPage = currentPage;
-
-        this.getTableMenuList();
-    };
-
-    @action getTableMenuList = async () => {
-        let params = {
-            data: {
-                currentPage: this.pagination.currentPage,
-                size: this.pagination.pageSize,
-                ...this.menuSearchData
-            },
-            method: 'POST'
-        };
-        let res = await api.permission.getAllMenuList(params);
-        if (res.code == 200) {
-            res.data.forEach((item) => {
-                item.parent_text = item.parent_text == undefined ? '' : item.parent_text;
-            });
-            this.menuList = res.data;
-            this.pagination.total = res.total;
-        }
     };
 
     @action searchMenuHandle = (event) => {
@@ -398,7 +302,6 @@ class permissionManageStore {
         }
 
         this.clearPagination();
-        this.getTableMenuList();
     };
 
     @action setSearMenuValue = (event, key) => (this.menuSearchData[key] = event.target.value);
@@ -427,84 +330,6 @@ class permissionManageStore {
         this.menuRowData = { ...record };
         this.menuRowData.isFirstMenu = record.menu_level == 1 ? true : false;
         this.showModal();
-        this.getAllMenuList();
-    };
-
-    @action deleteMenuRow = async (event, record) => {
-        let params = {
-            data: {
-                id: record.key
-            },
-            method: 'POST'
-        };
-        let res = await api.permission.deleteMenuRow(params);
-        if (res.code == 200) {
-            message.success('刪除成功');
-            this.getTableMenuList();
-
-            return;
-        }
-        return message.error('刪除失败');
-    };
-
-    @action addMenuButton = (event) => {
-        this.modalTitle = '新增菜单';
-        this.menuRowData = { isFirstMenu: false };
-        this.getAllMenuList();
-        this.showModal();
-    };
-
-    @action saveMenuHandle = async (event) => {
-        let params = {
-            data: this.menuRowData,
-            method: 'POST'
-        };
-        if (this.modalTitle == '编辑菜单') {
-            if (
-                params.data.text == '' ||
-                params.data.menu == '' ||
-                params.data.router == '' ||
-                params.data.type == ''
-            ) {
-                message.error('请将必填信息填写完整');
-            } else {
-                this.updateMenuHandle(params);
-            }
-            return;
-        }
-
-        if (!params.data.text || !params.data.menu || !params.data.router) {
-            message.error('请将必填信息填写完整');
-            return;
-        }
-        if (params.data.isFirstMenu == false && !params.data.parent_id) {
-            message.error('请将必填信息填写完整');
-        } else {
-            params.data.type = '菜单';
-            let res = await api.permission.addMenu(params);
-            if (res.code == 200) {
-                message.success('保存成功');
-                this.clearPagination();
-                this.getTableMenuList();
-                this.hideModal();
-                return;
-            } else {
-                message.error('保存失败');
-            }
-        }
-    };
-
-    @action updateMenuHandle = async (params) => {
-        params.data.id = params.data.key;
-        let res = await api.permission.updateMenu(params);
-        if (res.code == 200) {
-            message.success('修改成功');
-            this.clearPagination();
-            this.getTableMenuList();
-            this.hideModal();
-            return;
-        }
-        message.error('编辑失败');
     };
 
     /******************************* 按钮管理 ******************/
@@ -592,13 +417,6 @@ class permissionManageStore {
             return;
         }
         return message.error('刪除失败');
-    };
-
-    @action addButtonBtn = async (event) => {
-        this.modalTitle = '新增按钮';
-        this.buttonRowData = { isLeaf: true };
-        await this.getAllMenuList();
-        this.showModal();
     };
 
     @action saveButtonHandle = async (event) => {
