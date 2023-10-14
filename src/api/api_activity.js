@@ -6,7 +6,7 @@ const api_root = `${root_url}:${port}/${version_2}`;
 export default class activity {
     static apis = {
         getAssociateData: (params) => http(params, `${api_root}/${params.data.api}`),
-        getDataGridCfg: (params) => http(params, `${api_root}/DataGrid/getDataGridCfg`),
+        getDataGridCfg: (params) => http(params, `${api_root}/DataGridCfg/fetchDataGridCfg`),
         getPortalDataGrids: (params) => http(params, `${api_root}/DataGrid/getPortalDataGrids`),
         batchSetButtons: (params) => http(params, `${api_root}/DataGrid/batchSetButtons`),
         addActionButton: (params) => http(params, `${api_root}/DataGrid/addActionButton`),

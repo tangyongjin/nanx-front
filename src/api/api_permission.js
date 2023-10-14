@@ -8,7 +8,7 @@ export default class permission {
         getRoleMenuList: (params) => http(params, `${api_root}/Permission/getRoleMenuList`),
         getUserByRole: (params) => http(params, `${api_root}/Permission/getUserByRole`),
         getTreeMenuList: (params) => http(params, `${api_root}/Permission/getTreeMenuList`),
-        saveMenuPermission: (params) => http(params, `${api_root}/Permission/saveMenuPermissions`),
+        saveMenuPermission: (params) => http(params, `${api_root}/Permission/saveMenuPermission`),
         getRoleList: (params) => http(params, `${api_root}/Permission/getRoleList`),
         addRole: (params) => http(params, `${api_root}/Permission/addRole`),
         updateRole: (params) => http(params, `${api_root}/Permission/updateRole`),
