@@ -11,9 +11,7 @@ class permissionManageStore {
     };
 
     @observable roleList = [];
-
     @observable roleSearchData = {};
-
     @observable currentRole = {
         role_code: sessionStorage.getItem('currentRoleCode'),
         role_name: sessionStorage.getItem('currentRoleName')
@@ -29,12 +27,8 @@ class permissionManageStore {
 
     // 角色权限列表
     @observable rolePermissionList = [];
-
-    // 用户列表
     @observable userListHasRole = [];
-
     @observable searchText = '';
-
     @observable searchdataIndex = '';
 
     @action handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -254,7 +248,7 @@ class permissionManageStore {
     @action getTreeMenuList = async () => {
         let params = {
             data: {},
-            method: 'GET'
+            method: 'POST'
         };
 
         let res = await api.permission.getTreeMenuList(params);
