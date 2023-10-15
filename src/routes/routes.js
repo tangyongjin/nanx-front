@@ -1,6 +1,5 @@
 const routes = {
     path: '/',
-
     indexRoute: { onEnter: (nextState, replace) => replace('/home') },
     childRoutes: [
         require('./home').default,
