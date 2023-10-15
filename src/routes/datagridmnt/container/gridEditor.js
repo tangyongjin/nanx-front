@@ -1,8 +1,8 @@
 import React from 'react';
-import { Form, Row, Col, Input, Card, Checkbox, Select, Button, message, AutoComplete } from 'antd';
-import api from '../../../api/api';
+import { Form, Row, Col, Input, Card, Select, Button, message, AutoComplete } from 'antd';
+import api from '@/api/api';
 import { observer, inject } from 'mobx-react';
-import Editor from '@/components/Uform_extends/wangeditor';
+import Editor from '@/components/UformExtends/wangeditor';
 const { Option } = Select;
 
 @inject('dmStore')

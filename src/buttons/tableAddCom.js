@@ -1,5 +1,5 @@
-import CommonTableForm from '@/routes/commonAntTable/components/commonTableCom/commonTableForm';
-import CommonModal from '@/routes/commonAntTable/components/commonTableCom/commonModal';
+import CommonTableForm from '@/routes/commonAntTable/NanxTableCom/commonTableForm';
+import CommonModal from '@/routes/commonAntTable/NanxTableCom/commonModal';
 import React from 'react';
 import { observer } from 'mobx-react';
 import { Card } from 'antd';

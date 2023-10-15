@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, Popconfirm, Input } from 'antd';
 import { inject, observer } from 'mobx-react';
-import PortalTable from '../../../components/antdComponents/table';
-import RoleModal from '../../../components/antdComponents/modal';
-import RoleModalContent from '../components/roleModalContent';
-import getColumnSearchProps from '../../commonAntTable/components/commonTableCom/getColumnSearchProps';
+import PortalTable from './table';
+import RoleModal from './modal';
+import RoleModalContent from './roleModalContent';
+import getColumnSearchProps from '../../commonAntTable/NanxTableCom/getColumnSearchProps';
 import '../privilige.scss';
 
 @inject('permissionManageStore')

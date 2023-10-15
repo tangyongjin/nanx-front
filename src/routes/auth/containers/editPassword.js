@@ -1,6 +1,6 @@
 import { Form, Input, message, Modal } from 'antd';
 import React from 'react';
-import api from '../../api/api';
+import api from '@/api/api';
 export default class EditPassword extends React.Component {
     constructor(props) {
         super(props);
@@ -41,7 +41,14 @@ export default class EditPassword extends React.Component {
     };
     render() {
         return (
-            <Modal title="修改密码" onOk={this.handleOk} onCancel={this.props.onchanged} okText="确认" cancelText="取消" width="400px" visible={this.props.visible}>
+            <Modal
+                title="修改密码"
+                onOk={this.handleOk}
+                onCancel={this.props.onchanged}
+                okText="确认"
+                cancelText="取消"
+                width="400px"
+                visible={this.props.visible}>
                 <Form labelCol={{ span: 5 }} wrapperCol={{ span: 19 }}>
                     <Form.Item label="新密码：">
                         <Input type="password" onChange={(e) => this.txtChanged(e)} />

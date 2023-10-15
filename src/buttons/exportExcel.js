@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import CommonModal from '@/routes/commonAntTable/components/commonTableCom/commonModal';
+import CommonModal from '@/routes/commonAntTable/NanxTableCom/commonModal';
 import api from '@/api/api';
 
 @observer

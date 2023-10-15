@@ -2,9 +2,9 @@ import { Dropdown, Icon, Menu, Modal } from 'antd';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
-import api from '../../../api/api';
-import AuthService from '../../../routes/auth/AuthService';
-import EditPassword from '../../antdComponents/editPassword';
+import api from '@/api/api';
+import AuthService from '@/routes/auth/AuthService';
+import EditPassword from '@/routes/auth/containers/editPassword';
 import PortalBreadcrumb from './breadcrumb/PortalBreadcrumb';
 import Hamburger from './hamburger';
 

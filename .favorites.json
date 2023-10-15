@@ -1,18 +1,1 @@
-[
-    {
-        "type": "Group",
-        "name": "JS",
-        "parent_id": null,
-        "workspaceRoot": null,
-        "workspacePath": null,
-        "id": "JduWj6HQB7snNaei"
-    },
-    {
-        "type": "Directory",
-        "name": "/Users/alex/codebase/nanx/nanx-front/src/routes/commonAntTable/components/table_plugins",
-        "parent_id": null,
-        "workspaceRoot": "/Users/alex/codebase/nanx/nanx-front",
-        "workspacePath": "src/routes/commonAntTable/components/table_plugins",
-        "id": "fwWRH9eAXoxFjyVr"
-    }
-]
+[]

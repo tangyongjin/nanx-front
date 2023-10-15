@@ -6,7 +6,7 @@ export default {
         {
             path: 'commonXTable',
             getComponent(nextState, cb) {
-                import('./commonXTable').then((m) => {
+                import('./NanxTable').then((m) => {
                     cb(null, m.default);
                 });
             }

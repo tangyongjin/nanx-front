@@ -1,5 +1,5 @@
 import React from 'react';
-import CommonTable from '../../../routes/commonAntTable/components/commonTableCom/commonTable';
+import CommonTable from '@/routes/commonAntTable/NanxTableCom/commonTable';
 import { Form, Divider, Card } from 'antd';
 import { observer, inject } from 'mobx-react';
 import { reaction } from 'mobx';

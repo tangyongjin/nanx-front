@@ -1,7 +1,7 @@
 import React from 'react';
-import CommonTable from './commonTableCom/commonTable';
+import CommonTable from './NanxTableCom/commonTable';
 
-export default class CommonXTable extends React.Component {
+export default class NanxTable extends React.Component {
     render() {
         return (
             <CommonTable

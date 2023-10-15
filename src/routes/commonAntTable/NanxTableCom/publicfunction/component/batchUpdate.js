@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, message, Form, Select } from 'antd';
 import api from '@/api/api';
-import '@/components/Uform_extends';
+import '@/components/UformExtends';
 
 export default class BatchUpdate extends React.Component {
     constructor(props) {

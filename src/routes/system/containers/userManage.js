@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import api from '@/api/api';
-import SearchTree from '@/components/antdComponents/searchTree';
+import SearchTree from './searchTree';
 @inject('permissionManageStore')
 @observer
 export default class UserManage extends React.Component {
@@ -17,13 +16,12 @@ export default class UserManage extends React.Component {
         };
     }
 
-
     async getFirstNode() {
         const params = {
             data: {
-                "category_to_use": "sinnet",
-                "value": "sinnet",
-                "node": "1",
+                category_to_use: 'sinnet',
+                value: 'sinnet',
+                node: '1'
             },
             method: 'POST'
         };
@@ -37,7 +35,6 @@ export default class UserManage extends React.Component {
 
     async onClickTreeNode(treeNode) {
         console.log(treeNode);
-        
     }
 
     async loadData(treeNode) {
@@ -71,7 +68,6 @@ export default class UserManage extends React.Component {
     }
 
     render() {
-
         const treeProps = this.getTreeProps();
         return (
             <div className="custServiceContent">
