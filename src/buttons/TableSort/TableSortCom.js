@@ -14,14 +14,10 @@ export default class TableSortCom extends React.Component {
         super(props);
         this.state = {
             data: this.props.maintableColumns,
-            datagrid_code: this.props.current_DataGridCode
+            datagrid_code: this.props.DataGridCode
         };
     }
-    componentDidUpdate(props) {
-        if (props.current_DataGridCode != this.state.datagrid_code) {
-            this.props.onTabChange('tab0', 'key');
-        }
-    }
+
     DragableBodyRow = ({ index, moveRow, className, style, ...restProps }) => {
         const ref = React.useRef();
         const [{ isOver, dropClassName }, drop] = useDrop({

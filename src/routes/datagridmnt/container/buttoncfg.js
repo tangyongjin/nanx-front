@@ -14,7 +14,7 @@ class ButtonCfg extends React.Component {
         this.tbref = React.createRef();
         this.actcode_watcher = reaction(
             () => {
-                return this.dmstore.current_DataGridCode;
+                return this.dmstore.DataGridCode;
             },
             (currcode) => {
                 this.refreshCurrentcfg(currcode);
@@ -23,10 +23,10 @@ class ButtonCfg extends React.Component {
     }
 
     componentDidMount() {
-        if (this.dmstore.current_DataGridCode) {
-            this.refreshCurrentcfg(this.dmstore.current_DataGridCode);
+        if (this.dmstore.DataGridCode) {
+            this.refreshCurrentcfg(this.dmstore.DataGridCode);
         }
-        this.refreshCurrentcfg(this.dmstore.current_DataGridCode);
+        this.refreshCurrentcfg(this.dmstore.DataGridCode);
     }
 
     componentWillUnmount() {
@@ -50,20 +50,20 @@ class ButtonCfg extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
-                if (this.dmstore.current_DataGridCode === '') {
+                if (this.dmstore.DataGridCode === '') {
                     message.error('请选择ActionCode', 0.5);
                 } else {
                     let obj = {};
                     console.log(this.dmstore);
 
-                    obj = Object.assign({ datagrid_code: this.dmstore.current_DataGridCode }, values);
+                    obj = Object.assign({ datagrid_code: this.dmstore.DataGridCode }, values);
 
                     let params = {
                         data: obj,
                         method: 'POST'
                     };
 
-                    if (!this.dmstore.current_DataGridCode) {
+                    if (!this.dmstore.DataGridCode) {
                         message.error('请选择ActionCode', 0.5);
                         return;
                     }
@@ -78,8 +78,8 @@ class ButtonCfg extends React.Component {
     };
 
     render() {
-        // let xtitle = "设置按钮:" + this.dmstore.current_DataGridCode + "/" + this.dmstore.current_actname
-        let xtitle = '设置按钮:' + this.dmstore.current_DataGridCode + '/' + this.dmstore.current_actname;
+        // let xtitle = "设置按钮:" + this.dmstore.DataGridCode + "/" + this.dmstore.current_actname
+        let xtitle = '设置按钮:' + this.dmstore.DataGridCode + '/' + this.dmstore.current_actname;
 
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
@@ -93,7 +93,7 @@ class ButtonCfg extends React.Component {
                     ref={this.tbref}
                     datagrid_code="boss_portal_button_actcode"
                     is_association_process={false}
-                    dataGridcode={this.dmstore.current_DataGridCode}
+                    dataGridcode={this.dmstore.DataGridCode}
                 />
             </Card>
         );

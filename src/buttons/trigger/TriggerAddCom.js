@@ -49,7 +49,7 @@ export default class TriggerAddCom extends React.Component {
         let triggerObj = {};
         triggerObj.group_name = this.state.group_name;
         triggerObj.counter = this.state.linecounter;
-        triggerObj.DataGridCode = this.dmstore.current_DataGridCode;
+        triggerObj.DataGridCode = this.dmstore.DataGridCode;
         triggerObj.lines = [];
         this.state.lines.forEach((element) => {
             let ts = element.props.triggerlineStore;

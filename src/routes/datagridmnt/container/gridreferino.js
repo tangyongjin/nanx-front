@@ -14,7 +14,7 @@ class Gridreferino extends React.Component {
         this.tbref = React.createRef();
         this.actcode_watcher = reaction(
             () => {
-                return this.dmstore.current_DataGridCode;
+                return this.dmstore.DataGridCode;
             },
             (currcode) => {
                 this.refreshCurrentcfg(currcode);
@@ -29,10 +29,10 @@ class Gridreferino extends React.Component {
     };
 
     componentDidMount() {
-        if (this.dmstore.current_DataGridCode) {
-            this.refreshCurrentcfg(this.dmstore.current_DataGridCode);
+        if (this.dmstore.DataGridCode) {
+            this.refreshCurrentcfg(this.dmstore.DataGridCode);
         }
-        this.refreshCurrentcfg(this.dmstore.current_DataGridCode);
+        this.refreshCurrentcfg(this.dmstore.DataGridCode);
     }
 
     componentWillUnmount() {
@@ -58,7 +58,7 @@ class Gridreferino extends React.Component {
                     ref={this.tbref}
                     datagrid_code="boss_act_referenceinfo_cfg"
                     is_association_process={false}
-                    dataGridcode={this.dmstore.current_DataGridCode}
+                    dataGridcode={this.dmstore.DataGridCode}
                 />
 
                 <Divider style={{ color: 'red' }} orientation="center">

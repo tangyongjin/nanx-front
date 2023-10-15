@@ -33,7 +33,7 @@ class GridEditor extends React.Component {
     };
 
     saveOverrideTips = () => {
-        if (this.dmstore.current_DataGridCode === '') {
+        if (this.dmstore.DataGridCode === '') {
             message.error('请选择一个DataGrid');
             return;
         }
@@ -44,7 +44,7 @@ class GridEditor extends React.Component {
         }
         let params = {
             method: 'POST',
-            data: { DataGridCode: this.dmstore.current_DataGridCode, tips: this.state.activity_tips }
+            data: { DataGridCode: this.dmstore.DataGridCode, tips: this.state.activity_tips }
         };
         console.log(params);
         api.activity.saveTips(params);
@@ -55,7 +55,7 @@ class GridEditor extends React.Component {
     };
 
     resetQueryCfg = async () => {
-        if (this.dmstore.current_DataGridCode === '') {
+        if (this.dmstore.DataGridCode === '') {
             message.error('请选择一个DataGrid');
             return;
         }
@@ -64,7 +64,7 @@ class GridEditor extends React.Component {
     //针对某个activiticode的第一级别 querycfg, 如果存在,则会覆盖 commonTable的query_cfg
 
     saveOverrideQueryCfg = () => {
-        if (this.dmstore.current_DataGridCode === '') {
+        if (this.dmstore.DataGridCode === '') {
             message.error('请选择一个DataGrid');
             return;
         }
@@ -81,7 +81,7 @@ class GridEditor extends React.Component {
         let params = {
             method: 'POST',
             data: {
-                DataGridCode: this.dmstore.current_DataGridCode,
+                DataGridCode: this.dmstore.DataGridCode,
                 query_cfg_field: this.state.query_cfg_field,
                 query_cfg_value: this.state.query_cfg_value
             }
@@ -114,7 +114,7 @@ class GridEditor extends React.Component {
     };
 
     render() {
-        let xtitle = '编辑:' + this.dmstore.current_DataGridCode;
+        let xtitle = '编辑:' + this.dmstore.DataGridCode;
 
         let biztables = this.dmstore.biztableList;
         const { getFieldDecorator } = this.props.form;

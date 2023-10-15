@@ -5,7 +5,7 @@ import api from '../api/api';
 class dmStore {
     constructor() {
         autorun(() => {
-            if (this.current_DataGridCode) {
+            if (this.DataGridCode) {
                 this.initAll();
             }
         });
@@ -14,7 +14,7 @@ class dmStore {
     @observable dataGrids = [];
     @observable maintableColumns = [];
     @observable biztableList = [];
-    @observable current_DataGridCode = '';
+    @observable DataGridCode = null;
     @observable current_actname = '';
     @observable trigger_groups = [];
     @observable plugins = [];
@@ -43,7 +43,7 @@ class dmStore {
 
     @action setCurrentActcode = (DataGridCode) => {
         console.log('设置当前 DataGridCode');
-        this.current_DataGridCode = DataGridCode;
+        this.DataGridCode = DataGridCode;
     };
 
     @action clearMaintableColumns = () => {
@@ -58,10 +58,6 @@ class dmStore {
         this.current_actname = name;
     };
 
-    @action setCurrentActObj = (obj) => {
-        this.currentObj = obj;
-    };
-
     @action initAll = () => {
         console.log('初始化所有 dmStore 属性.');
         this.getAllGrids();
@@ -71,7 +67,6 @@ class dmStore {
         this.getAllPlugins();
         this.getAllCategory();
         this.getRelatedTableCols();
-        this.setCurrentBasetable();
     };
 
     @action getAllPlugins = async () => {
@@ -85,7 +80,7 @@ class dmStore {
         let params = {
             data: {
                 submitData: this.maintableColumns,
-                datagrid_code: this.current_DataGridCode
+                datagrid_code: this.DataGridCode
             },
             method: 'POST'
         };
@@ -102,16 +97,16 @@ class dmStore {
     };
 
     @action getActCols = async () => {
-        if (this.current_DataGridCode == '') {
+        if (this.DataGridCode === null) {
             this.maintableColumns = [];
         } else {
-            let params = { method: 'POST', data: { DataGridCode: this.current_DataGridCode } };
+            let params = { method: 'POST', data: { DataGridCode: this.DataGridCode } };
             let json = await api.activity.getActCols(params);
-            this.maintableColumns = json.data;
+            this.setMaintableColumns(json.data);
         }
     };
 
-    @action setMaintableColumns = (maintableColumns) => (this.maintableColumns = maintableColumns);
+    @action setMaintableColumns = (data) => (this.maintableColumns = data);
 
     @action getAllGrids = async () => {
         let params = { data: {} };
@@ -126,7 +121,7 @@ class dmStore {
     };
 
     @action getTriggerGroups = async () => {
-        let params = { method: 'POST', data: { DataGridCode: this.current_DataGridCode } };
+        let params = { method: 'POST', data: { DataGridCode: this.DataGridCode } };
         let json = await api.activity.getTriggerGroups(params);
         this.trigger_groups = json.data;
     };
@@ -147,13 +142,12 @@ class dmStore {
     };
 
     @action setFieldAttr = (field, attr, value) => {
-        let maintableColumns = [...maintableColumns];
-        maintableColumns.map((element, idx) => {
+        this.maintableColumns.map((element, idx) => {
             if (element.Field === field) {
                 element[attr] = value;
             }
         });
-        this.setMaintableColumns(maintableColumns);
+        // this.setMaintableColumns(this.maintableColumns);
     };
 
     @action saveFieldCfg = async (field) => {
@@ -166,7 +160,7 @@ class dmStore {
         });
 
         let obj = this.maintableColumns[indicator];
-        obj.DataGridCode = this.current_DataGridCode;
+        obj.DataGridCode = this.DataGridCode;
 
         let params = { data: obj, method: 'POST' };
         let json = await api.activity.saveFieldCfg(params);

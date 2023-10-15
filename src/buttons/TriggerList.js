@@ -28,7 +28,6 @@ export default class TriggerList extends React.Component {
             this.props.dmStore.clearMaintableColumns();
             this.props.dmStore.setCurrentActName(toJS(record).datagrid_title);
             this.props.dmStore.setCurrentBasetable(toJS(record).base_table);
-            this.props.dmStore.setCurrentActObj(toJS(record));
             this.setState({ visible: true });
         }
     }
@@ -51,19 +50,7 @@ export default class TriggerList extends React.Component {
                 onOk={() => this.onCancel()}
                 width={'1300px'}
                 title="管理联动">
-                {this.props.dmStore.maintableColumns.length == 0 ? null : (
-                    <TriggerListCom
-                        setMaintableColumns={this.props.dmStore.setMaintableColumns}
-                        batchUpdateFieldCfg={this.props.dmStore.batchUpdateFieldCfg}
-                        setFieldAttr={this.props.dmStore.setFieldAttr}
-                        saveFieldCfg={this.props.dmStore.saveFieldCfg}
-                        maintableColumns={this.props.dmStore.maintableColumns}
-                        current_actname={this.props.dmStore.current_actname}
-                        current_DataGridCode={this.props.dmStore.current_DataGridCode}
-                        plugins={this.props.dmStore.plugins}
-                        Categories={this.props.dmStore.Categories}
-                    />
-                )}
+                {this.props.dmStore.maintableColumns.length == 0 ? null : <TriggerListCom />}
             </Modal>
         ) : null;
     }

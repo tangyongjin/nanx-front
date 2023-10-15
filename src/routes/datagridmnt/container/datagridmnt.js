@@ -98,7 +98,6 @@ export default class datagridmnt extends React.Component {
         this.dmstore.clearMaintableColumns();
         this.dmstore.setCurrentActName(toJS(record).datagrid_title);
         this.dmstore.setCurrentBasetable(toJS(record).base_table);
-        this.dmstore.setCurrentActObj(toJS(record));
     }
 
     async deleteActioncode(idtodel) {

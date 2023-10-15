@@ -21,7 +21,7 @@ class ReferTable extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
-                if (this.dmstore.current_DataGridCode === '') {
+                if (this.dmstore.DataGridCode === '') {
                     message.error('请选择Actcode', 0.5);
                 } else {
                     let obj = {};
@@ -30,7 +30,7 @@ class ReferTable extends React.Component {
                             reftype: 'tableref',
                             maintable: this.dmstore.maintable,
                             act_name: this.dmstore.current_actname,
-                            datagrid_code: this.dmstore.current_DataGridCode
+                            datagrid_code: this.dmstore.DataGridCode
                         },
                         values
                     );
@@ -46,7 +46,7 @@ class ReferTable extends React.Component {
                                 and_or_0: 'and',
                                 field_0: 'datagrid_code',
                                 operator_0: '=',
-                                vset_0: this.dmstore.current_DataGridCode
+                                vset_0: this.dmstore.DataGridCode
                             }
                         };
                         this.props.tbref.current.setTableCompomentQueryCfg(query_cfg);
