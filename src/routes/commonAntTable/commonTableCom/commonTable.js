@@ -5,7 +5,7 @@ import { toJS } from 'mobx';
 import columnsRenderHandle from './columnsRender/columnsRenderHandle';
 import ResizeableTitle from './resizeableTitle';
 import commonTableStore from '@/store/commonTableStore';
-import '../../commonTable.scss';
+import '../commonTable.scss';
 import api from '@/api/api';
 import getTextWidth from './commonTableTextTool';
 
@@ -109,7 +109,7 @@ export default class CommonTable extends React.Component {
             }
 
             this.commonTableStore.setselectType(res.data.multiple);
-            this.commonTableStore.setTableButtonsJson(res.data.notStandardButtonConfig);
+            this.commonTableStore.setTableButtonsJson(res.data.buttons);
             this.commonTableStore.setBaseTable(res.data.base_table);
             this.commonTableStore.setCurd(res.data.curd);
             this.commonTableStore.setTableWidth(res.data.table_width);
@@ -204,21 +204,7 @@ export default class CommonTable extends React.Component {
     };
 
     getComponentByFile = (path) => {
-        let startpath = path.substring(0, 3);
-        let searchIndex = path.lastIndexOf('../');
-        let endpath = path.substring(searchIndex + 3, path.length);
-        let _compoment = null;
-        if (startpath == '../') {
-            if (searchIndex == 0) {
-                _compoment = require('../' + endpath).default;
-            } else if (searchIndex == 3) {
-                _compoment = require('../../' + endpath).default;
-            } else if (searchIndex == 6) {
-                _compoment = require('../../../' + endpath).default;
-            }
-        } else {
-            _compoment = require('' + path).default;
-        }
+        let _compoment = require(`../../../buttons/${path}`).default;
         return _compoment;
     };
 
@@ -247,20 +233,15 @@ export default class CommonTable extends React.Component {
 
     getButtonHandler(event, item) {
         let _compoment = this.getComponentByFile(item.file_path);
-
-        if (item.using_component == 'y') {
-            this.setState(
-                {
-                    button_code: item.button_code,
-                    buttonUsedComponent: _compoment
-                },
-                () => {
-                    this.pluginComRef['init']();
-                }
-            );
-        } else {
-            _compoment['init']();
-        }
+        this.setState(
+            {
+                button_code: item.button_code,
+                buttonUsedComponent: _compoment
+            },
+            () => {
+                this.pluginComRef['init']();
+            }
+        );
     }
 
     // commonTable 作为编辑器时候, x-props会传入 as_virtual属性,onChange 属性.

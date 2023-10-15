@@ -6,13 +6,11 @@ const routes = {
         require('./home').default,
         require('./auth').default,
         require('./commonAntTable').default,
-        require('./dashboard').default,
         require('./datagridmnt').default,
         require('./settings').default,
         require('./profile').default,
         require('./system').default,
-        require('./applog').default,
-        require('./report').default
+        require('./applog').default
     ]
 };
 

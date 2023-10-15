@@ -1,5 +1,5 @@
 import React from 'react';
-import CommonTable from '../components/commonTableCom/commonTable';
+import CommonTable from './commonTableCom/commonTable';
 
 export default class CommonXTable extends React.Component {
     render() {

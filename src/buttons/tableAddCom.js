@@ -1,8 +1,8 @@
-import CommonTableForm from '../commonTableCom/commonTableForm';
+import CommonTableForm from '@/routes/commonAntTable/components/commonTableCom/commonTableForm';
+import CommonModal from '@/routes/commonAntTable/components/commonTableCom/commonModal';
 import React from 'react';
 import { observer } from 'mobx-react';
 import { Card } from 'antd';
-import CommonModal from '../commonTableCom/commonModal';
 import api from '@/api/api';
 
 @observer

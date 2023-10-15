@@ -1,9 +1,8 @@
-import CommonTableForm from '../commonTableCom/commonTableForm';
+import CommonTableForm from '@/routes/commonAntTable/components/commonTableCom/commonTableForm';
+import CommonModal from '@/routes/commonAntTable/components/commonTableCom/commonModal';
 import React from 'react';
 import { message } from 'antd';
-import CommonModal from '../commonTableCom/commonModal';
 import navigationStore from '@/store/navigationStore';
-
 import api from '@/api/api';
 
 export default class TableEditCom extends React.Component {

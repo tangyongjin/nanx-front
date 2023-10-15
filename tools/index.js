@@ -49,7 +49,7 @@ inquirer.prompt(questions).then(async (answers) => {
             [buttonCode, buttonText, 'File', 'primary', '', 'y', 'y', compomentName]
         );
 
-        console.log(`成功插入数据到boss_portal_button表格，插入ID: ${rows.insertId}`);
+        console.log(`成功插入数据到boss_portal_button表格,插入ID: ${rows.insertId}`);
 
         // 查询 boss_portal_button_actcode 表格中 datagrid_code 为 DataGridCode 的记录总数
         const [rowCount] = await connection.execute(
@@ -65,7 +65,7 @@ inquirer.prompt(questions).then(async (answers) => {
             [buttonCode, DataGridCode, count + 1]
         );
 
-        console.log(`成功插入数据到 boss_portal_button_actcode 表格，插入ID: ${rowsActcode.insertId}`);
+        console.log(`成功插入数据到 boss_portal_button_actcode 表格,插入ID: ${rowsActcode.insertId}`);
     } catch (err) {
         console.error(`插入数据时发生错误: ${err}`);
     } finally {
