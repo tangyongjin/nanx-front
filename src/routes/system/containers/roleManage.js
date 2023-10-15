@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 import PortalTable from './table';
 import RoleModal from './modal';
 import RoleModalContent from './roleModalContent';
-import getColumnSearchProps from '../../commonAntTable/NanxTableCom/getColumnSearchProps';
+import getColumnSearchProps from '../../NanxTable/NanxTableCom/getColumnSearchProps';
 import '../privilige.scss';
 
 @inject('permissionManageStore')

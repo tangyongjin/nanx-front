@@ -1,5 +1,5 @@
-import CommonTableForm from '@/routes/commonAntTable/NanxTableCom/commonTableForm';
-import CommonModal from '@/routes/commonAntTable/NanxTableCom/commonModal';
+import CommonTableForm from '@/routes/NanxTable/NanxTableCom/commonTableForm';
+import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import React from 'react';
 import { message } from 'antd';
 import navigationStore from '@/store/navigationStore';

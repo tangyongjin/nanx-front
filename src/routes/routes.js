@@ -5,7 +5,7 @@ const routes = {
     childRoutes: [
         require('./home').default,
         require('./auth').default,
-        require('./commonAntTable').default,
+        require('./NanxTable').default,
         require('./datagridmnt').default,
         require('./settings').default,
         require('./profile').default,

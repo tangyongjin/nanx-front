@@ -16,7 +16,7 @@ import GetRadio from './getRadio';
 import Wangeditor from './wangeditor';
 import Dropdowncombox from './dropdowncombox';
 import YnSelect from './YnSelect';
-import CommonTable from '@/routes/commonAntTable/NanxTableCom/commonTable';
+import CommonTable from '@/routes/NanxTable/NanxTableCom/commonTable';
 import EditgetDate from './editgetDate';
 import CategoryDropDown from './categoryDropDown';
 
