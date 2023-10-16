@@ -50,69 +50,53 @@ class GridFieldManager extends React.Component {
     };
 
     render() {
-        let xtitle = '字段管理:' + this.props.current_actname + '/' + this.props.DataGridCode;
+        let xtitle = '[字段管理]:' + this.props.DataGridTitle + '/' + this.props.DataGridCode;
         let allcols = this.props.maintableColumns;
         console.log('当前Code= ' + this.props.DataGridCode + ' 所有字段:');
         console.log(toJS(allcols));
 
         return (
-            <Card title={xtitle}>
+            <Card style={{ width: '1550px' }} width={'1550px'} title={xtitle}>
                 <Row>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
-                        字段
-                    </Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
-                        Label
-                    </Col>
-                    <Col style={{ marginLeft: '10px' }} span={3}>
-                        插件
-                    </Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
-                        参数
-                    </Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
-                        tableX隐藏/可见
-                    </Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
-                        form隐藏/可见
-                    </Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
-                        form只读/可编辑
-                    </Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
-                        处理函数
-                    </Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
-                        数据字典
-                    </Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
-                        操作
-                    </Col>
+                    <Col span={2}>字段</Col>
+                    <Col span={2}>Label</Col>
+                    <Col span={3}>插件</Col>
+                    <Col span={2}>参数</Col>
+                    <Col span={2}>tableX隐藏/可见</Col>
+                    <Col span={2}>form隐藏/可见</Col>
+                    <Col span={2}>form只读/可编辑</Col>
+                    <Col span={2}>处理函数</Col>
+                    <Col span={5}>数据字典</Col>
+                    <Col span={2}>操作</Col>
                 </Row>
                 <Row>
-                    <Col style={{ marginLeft: '10px' }} span={2}></Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}></Col>
-                    <Col style={{ marginLeft: '10px' }} span={3}></Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}></Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
-                        <Checkbox onChange={(event) => this.changeVisible('column_hidden', event)}> 全选</Checkbox>
+                    <Col span={2}></Col>
+                    <Col span={2}></Col>
+                    <Col span={3}></Col>
+                    <Col span={2}></Col>
+                    <Col span={2}>
+                        <Checkbox
+                            style={{ marginLeft: '10px' }}
+                            onChange={(event) => this.changeVisible('column_hidden', event)}>
+                            {' '}
+                            全选
+                        </Checkbox>
                     </Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
+                    <Col span={2}>
                         <Checkbox onChange={(event) => this.changeVisible('form_hidden', event)}> 全选</Checkbox>
                     </Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
+                    <Col span={2}>
                         <Checkbox onChange={(event) => this.changeVisible('readonly', event)}> 全选</Checkbox>
                     </Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}></Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}></Col>
-                    <Col style={{ marginLeft: '10px' }} span={2}>
+                    <Col span={2}></Col>
+                    <Col span={5}></Col>
+                    <Col span={2}>
                         <Button type="primary" htmlType="button" onClick={(event) => this.props.batchUpdateFieldCfg()}>
                             保存
                         </Button>
                     </Col>
                 </Row>
                 <Divider />
-
                 {allcols.map((col, idx) => (
                     <Row style={{ height: '40px', maxHeight: 40 }} key={idx}>
                         <Col
@@ -120,13 +104,12 @@ class GridFieldManager extends React.Component {
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis ellipsis',
                                 height: '40px',
-                                marginLeft: '10px',
                                 maxHeight: 40
                             }}
                             span={2}>
                             {col.Comment.length == 0 ? col.Field : col.Field + '/' + col.Comment}
                         </Col>
-                        <Col style={{ marginLeft: '10px' }} span={2}>
+                        <Col span={2}>
                             <Input
                                 value={col.label}
                                 onChange={(e) => {
@@ -134,11 +117,11 @@ class GridFieldManager extends React.Component {
                                 }}
                             />
                         </Col>
-                        <Col style={{ marginLeft: '10px' }} span={3}>
+                        <Col span={3}>
                             <Select
                                 value={col.pluginname}
                                 key={col.pluginname}
-                                style={{ width: '130px' }}
+                                style={{ marginLeft: '10px', width: '140px' }}
                                 onChange={(e) => {
                                     this.changeCfg_dropdown(e, 'pluginname', col.Field);
                                 }}
@@ -153,7 +136,7 @@ class GridFieldManager extends React.Component {
                                     ))}
                             </Select>
                         </Col>
-                        <Col style={{ marginLeft: '10px' }} span={2}>
+                        <Col span={2}>
                             <Input
                                 disabled={col.Field == 'id'}
                                 value={col.uform_para}
@@ -162,7 +145,7 @@ class GridFieldManager extends React.Component {
                                 }}
                             />
                         </Col>
-                        <Col style={{ marginLeft: '10px' }} span={2}>
+                        <Col span={2}>
                             <Checkbox
                                 style={{ marginLeft: '8px' }}
                                 checked={col.column_hidden}
@@ -172,7 +155,7 @@ class GridFieldManager extends React.Component {
                                 隐藏
                             </Checkbox>
                         </Col>
-                        <Col style={{ marginLeft: '10px' }} span={2}>
+                        <Col span={2}>
                             <Checkbox
                                 checked={col.form_hidden}
                                 onChange={(e) => {
@@ -181,7 +164,7 @@ class GridFieldManager extends React.Component {
                                 隐藏
                             </Checkbox>
                         </Col>
-                        <Col style={{ marginLeft: '10px' }} span={2}>
+                        <Col span={2}>
                             <Checkbox
                                 checked={col.readonly}
                                 onChange={(e) => {
@@ -190,7 +173,7 @@ class GridFieldManager extends React.Component {
                                 只读
                             </Checkbox>
                         </Col>
-                        <Col style={{ marginLeft: '10px' }} span={2}>
+                        <Col span={2}>
                             <Input
                                 disabled={col.Field == 'id'}
                                 value={col.handler}
@@ -199,9 +182,9 @@ class GridFieldManager extends React.Component {
                                 }}
                             />
                         </Col>
-                        <Col style={{ marginLeft: '10px' }} span={2}>
+                        <Col span={5}>
                             <Select
-                                style={{ width: '80%' }}
+                                style={{ paddingLeft: '10px', width: '200px' }}
                                 value={col.category}
                                 onChange={(e) => {
                                     this.changeCfg_dropdown(e, 'category', col.Field);
@@ -219,7 +202,7 @@ class GridFieldManager extends React.Component {
                                     ))}
                             </Select>
                         </Col>
-                        <Col style={{ marginLeft: '10px' }} span={2}>
+                        <Col span={2}>
                             <Button type="primary" onClick={this.saveCfg.bind(this, col.Field)}>
                                 保存
                             </Button>

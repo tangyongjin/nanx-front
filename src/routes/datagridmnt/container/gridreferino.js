@@ -51,7 +51,7 @@ class Gridreferino extends React.Component {
     }
 
     render() {
-        let xtitle = '设置ReferinfoArea:' + this.dmstore.current_actname;
+        let xtitle = '设置ReferinfoArea:' + this.dmstore.DataGridTitle;
         return (
             <Card title={xtitle} style={{ width: '100%' }}>
                 <CommonTable

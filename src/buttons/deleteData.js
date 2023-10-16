@@ -15,37 +15,10 @@ export default class DeleteData extends React.Component {
             return;
         }
 
-        //this.props.commonTableStore.selectedRowKeys[0])
-
         let _tmprec = this.props.commonTableStore.selectedRows[0];
-
-        let canstart = false;
-        if (_tmprec.hasOwnProperty('flowstatus')) {
-            if (_tmprec.flowstatus == null || _tmprec.flowstatus.trim() == '') {
-                canstart = true;
-            }
-
-            if (_tmprec.flowstatus == '未提交') {
-                canstart = true;
-            }
-            if (_tmprec.flowstatus == '已退回') {
-                canstart = true;
-            }
-            if (_tmprec.flowstatus == '撤回') {
-                canstart = true;
-            }
-        } else {
-            canstart = true;
-        }
-        console.log('99' + _tmprec.ghost_author + '*****' + sessionStorage.getItem('user') + '&&&&&');
 
         if (_tmprec.hasOwnProperty('ghost_author') && _tmprec.ghost_author != sessionStorage.getItem('user')) {
             message.error('不是自己的数据不能删除');
-            return;
-        }
-
-        if (!canstart) {
-            message.error('流程已经启动,不能删除.');
             return;
         }
 

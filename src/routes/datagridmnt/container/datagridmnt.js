@@ -18,7 +18,6 @@ export default class datagridmnt extends React.Component {
 
     state = {
         searchText: '',
-        current_DataGridCode: '',
         DataGridCode: '',
         maintable: '',
         memo: '',

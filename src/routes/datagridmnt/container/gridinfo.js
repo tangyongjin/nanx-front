@@ -31,7 +31,7 @@ class Gridinfo extends React.Component {
     };
 
     render() {
-        let xtitle = '字段管理:' + this.dmstore.current_actname + '/' + this.dmstore.DataGridCode;
+        let xtitle = '字段管理:' + this.dmstore.DataGridTitle + '/' + this.dmstore.DataGridCode;
         return <div> {xtitle} </div>;
     }
 }

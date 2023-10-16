@@ -48,7 +48,7 @@ export default class GridFieldMnt extends React.Component {
                 destroyOnClose={true}
                 onCancel={() => this.onCancel()}
                 onOk={() => this.onCancel()}
-                width={'1300px'}
+                width={'1600px'}
                 title="字段管理">
                 {this.props.dmStore.maintableColumns.length == 0 ? null : (
                     <GridFieldManager
@@ -56,7 +56,7 @@ export default class GridFieldMnt extends React.Component {
                         batchUpdateFieldCfg={this.props.dmStore.batchUpdateFieldCfg}
                         saveFieldCfg={this.props.dmStore.saveFieldCfg}
                         maintableColumns={this.props.dmStore.maintableColumns}
-                        current_actname={this.props.dmStore.current_actname}
+                        DataGridTitle={this.props.dmStore.DataGridTitle}
                         DataGridCode={this.props.dmStore.DataGridCode}
                         plugins={this.props.dmStore.plugins}
                         Categories={this.props.dmStore.Categories}

@@ -45,8 +45,8 @@ inquirer.prompt(questions).then(async (answers) => {
 
     try {
         const [rows] = await connection.execute(
-            'INSERT INTO boss_portal_button (button_code, name, icon, style, file_path, is_standard, using_component, component_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [buttonCode, buttonText, 'File', 'primary', compomentName, 'y', 'y', compomentName]
+            'INSERT INTO boss_portal_button (button_code, name, icon, style, file_path, using_component, component_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            [buttonCode, buttonText, 'File', 'primary', compomentName, 'y', compomentName]
         );
 
         console.log(`成功插入数据到boss_portal_button表格,插入ID: ${rows.insertId}`);

@@ -163,21 +163,7 @@ class GridEditor extends React.Component {
                                 })(<Input disabled />)}
                             </Form.Item>
                         </Col>
-                        <Col span={4}>
-                            <Form.Item label="宽度">
-                                {getFieldDecorator('win_size_width', {
-                                    initialValue: this.dmstore.currentObj.win_size_width,
-
-                                    rules: [{ required: true, message: '宽度' }]
-                                })(
-                                    <AutoComplete placeholder="win_size_width">
-                                        <Input />
-                                    </AutoComplete>
-                                )}
-                            </Form.Item>
-                        </Col>
                     </Row>
-
                     <Row>
                         <Col span={4}>
                             <Form.Item label="getterurl">

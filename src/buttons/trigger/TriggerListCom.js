@@ -21,7 +21,7 @@ export default class TriggerListCom extends React.Component {
         return (
             <div style={{ marginLeft: '5px' }}>
                 <h3>
-                    管理联动: {this.dmstore.DataGridCode}/{this.dmstore.current_actname}
+                    管理联动: {this.dmstore.DataGridCode}/{this.dmstore.DataGridTitle}
                 </h3>
 
                 {this.dmstore.trigger_groups.map((item, idx) => (

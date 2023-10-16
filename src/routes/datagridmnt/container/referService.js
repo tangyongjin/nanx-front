@@ -24,7 +24,7 @@ class ReferService extends React.Component {
                         {
                             reftype: 'service',
                             maintable: this.dmstore.maintable,
-                            act_name: this.dmstore.current_actname,
+                            act_name: this.dmstore.DataGridTitle,
                             datagrid_code: this.dmstore.DataGridCode
                         },
                         values

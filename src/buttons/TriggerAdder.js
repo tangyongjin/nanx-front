@@ -49,7 +49,7 @@ export default class TriggerAdder extends React.Component {
                 onCancel={() => this.onCancel()}
                 onOk={() => this.onCancel()}
                 width={'1300px'}
-                title="字段管理">
+                title="添加联动">
                 {this.props.dmStore.maintableColumns.length == 0 ? null : <TriggerAddCom />}
             </Modal>
         ) : null;

@@ -29,7 +29,7 @@ class ReferTable extends React.Component {
                         {
                             reftype: 'tableref',
                             maintable: this.dmstore.maintable,
-                            act_name: this.dmstore.current_actname,
+                            act_name: this.dmstore.DataGridTitle,
                             datagrid_code: this.dmstore.DataGridCode
                         },
                         values

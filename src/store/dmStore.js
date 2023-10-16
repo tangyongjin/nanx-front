@@ -15,7 +15,7 @@ class dmStore {
     @observable maintableColumns = [];
     @observable biztableList = [];
     @observable DataGridCode = null;
-    @observable current_actname = '';
+    @observable DataGridTitle = '';
     @observable trigger_groups = [];
     @observable plugins = [];
     @observable Categories = [];
@@ -55,7 +55,7 @@ class dmStore {
     };
 
     @action setCurrentActName = (name) => {
-        this.current_actname = name;
+        this.DataGridTitle = name;
     };
 
     @action initAll = () => {

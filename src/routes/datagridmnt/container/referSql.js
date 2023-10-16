@@ -27,7 +27,7 @@ class ReferSql extends React.Component {
                         {
                             reftype: 'sql',
                             maintable: this.dmstore.maintable,
-                            act_name: this.dmstore.current_actname,
+                            act_name: this.dmstore.DataGridTitle,
                             datagrid_code: this.dmstore.DataGridCode
                         },
                         values
