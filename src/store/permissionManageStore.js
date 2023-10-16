@@ -297,58 +297,6 @@ class permissionManageStore {
     @observable buttonSearchData = {};
     @observable buttonList = [];
     @observable buttonRowData = {};
-
-    @action setButtonCurrentPage = (currentPage) => {
-        this.pagination.currentPage = currentPage;
-
-        this.getButtonList();
-    };
-
-    @action getButtonList = async () => {
-        let params = {
-            data: {
-                page: this.pagination.currentPage,
-                size: this.pagination.pageSize,
-                ...this.buttonSearchData
-            },
-            method: 'POST'
-        };
-
-        let res = await api.button.getButtonList(params);
-        if (res.code == 200) {
-            this.buttonList = res.data;
-            this.pagination.total = res.total;
-            console.log(555, this.buttonList);
-        }
-    };
-    @action getButtonList_noparams = async () => {
-        let params = {
-            data: {},
-            method: 'POST'
-        };
-        let res = await api.button.getButtonList(params);
-        if (res.code == 200) {
-            this.buttonList = res.data;
-            console.log(555, this.buttonList);
-        }
-    };
-
-    @action setButtonRowData = (event, key) => {
-        console.log(111, event, key);
-        this.buttonRowData[key] = event.target ? event.target.value : event;
-        console.log(222, this.buttonRowData);
-    };
-
-    @action toButtonDetail = (event, record) => {
-        this.buttonRowData = record;
-    };
-
-    @action editRowButtonBtn = (event, record) => {
-        this.modalTitle = '编辑按钮';
-
-        this.buttonRowData = { ...record };
-        this.showModal();
-    };
 }
 
 export default new permissionManageStore();
