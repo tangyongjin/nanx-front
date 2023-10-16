@@ -9,7 +9,6 @@ export default class activity {
         getDataGridCfg: (params) => http(params, `${api_root}/DataGridCfg/fetchDataGridCfg`),
         getPortalDataGrids: (params) => http(params, `${api_root}/DataGrid/getPortalDataGrids`),
         batchSetButtons: (params) => http(params, `${api_root}/DataGrid/batchSetButtons`),
-        addActionButton: (params) => http(params, `${api_root}/DataGrid/addActionButton`),
         addDataGridCode: (params) => http(params, `${api_root}/DataGrid/addDataGridCode`),
         deleteGridCode: (params) => http(params, `${api_root}/DataGrid/deleteGridCode`),
         getActCols: (params) => http(params, `${api_root}/DataGrid/getActCols`),

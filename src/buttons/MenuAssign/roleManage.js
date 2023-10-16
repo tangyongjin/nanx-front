@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button, Input } from 'antd';
+import { Button, Popconfirm, Input } from 'antd';
 import { inject, observer } from 'mobx-react';
 import PortalTable from './table';
 import RoleModal from './modal';
 import RoleModalContent from './roleModalContent';
-import getColumnSearchProps from '../../NanxTable/NanxTableCom/getColumnSearchProps';
+import getColumnSearchProps from '@/routes/NanxTable/NanxTableCom/getColumnSearchProps';
 import '@/styles/privilige.scss';
 
 @inject('permissionManageStore')
@@ -30,6 +30,14 @@ export default class RoleList extends React.Component {
             <div className="options">
                 <Button
                     className={record.key == this.state.selectKey ? 'marginRihgt10' : 'marginRihgt10'}
+                    onClick={(event) => this.store.allocationMenu(event, record)}
+                    size="small"
+                    type="primary">
+                    分配菜单
+                </Button>
+
+                <Button
+                    className={record.key == this.state.selectKey ? 'marginRihgt10' : 'marginRihgt10'}
                     onClick={(event) => this.store.toPermissionDetail(event, record)}
                     size="small"
                     type="primary">
@@ -42,6 +50,22 @@ export default class RoleList extends React.Component {
                     type="primary">
                     查看人员
                 </Button>
+                <Button
+                    className={record.key == this.state.selectKey ? 'marginRihgt10' : 'marginRihgt10'}
+                    onClick={(event) => this.store.editRowRoleButton(event, record)}
+                    size="small"
+                    type="primary">
+                    编辑
+                </Button>
+                <Popconfirm
+                    title="您确定要删除么?"
+                    okText="删除"
+                    cancelText="取消"
+                    onConfirm={(event) => this.store.deleteRoleRow(event, record)}>
+                    <Button type="danger" size="small" htmlType="button">
+                        删除
+                    </Button>
+                </Popconfirm>
             </div>
         );
     }

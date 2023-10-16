@@ -16,10 +16,8 @@ export default class PriviligeTransfer extends React.Component {
             onChange,
             onSelectChange,
             onScroll,
-            render,
             operations,
-            listStyle,
-            ...rest
+            listStyle
         } = this.props;
         console.log(this.props);
         return (

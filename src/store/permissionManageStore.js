@@ -78,18 +78,6 @@ class permissionManageStore {
         this.getRoleList();
     };
 
-    @action allocationMenu = (event, record) => {
-        this.customerHashPush('system/allocationMenu', record);
-    };
-
-    @action toPermissionDetail = (event, record) => {
-        this.customerHashPush('system/permissionDetail', record);
-    };
-
-    @action toLookUserByRole = (event, record) => {
-        this.customerHashPush('system/lookUserByRole', record);
-    };
-
     @action customerHashPush = (pathname, record) => {
         this.currentRole.role_code = record.role_code;
         this.currentRole.role_name = record.role_name;
@@ -111,28 +99,6 @@ class permissionManageStore {
         };
         let res = await api.permission.getUserByRole(params);
         this.userListHasRole = res.code == 200 ? res.data : [];
-    };
-
-    @action editRowRoleButton = (event, record) => {
-        this.modalTitle = '编辑角色';
-        this.roleRowData = { ...record };
-        this.showModal();
-    };
-
-    @action deleteRoleRow = async (event, record) => {
-        let params = {
-            data: {
-                id: record.key
-            },
-            method: 'POST'
-        };
-        let res = await api.permission.deleteRoleRow(params);
-        if (res.code == 200) {
-            message.success('刪除成功');
-            this.getRoleList();
-            return;
-        }
-        return message.error('刪除失败');
     };
 
     @action addRoleButton = (event) => {
@@ -367,18 +333,6 @@ class permissionManageStore {
         }
     };
 
-    @action searchButtonHandle = (event) => {
-        if (JSON.stringify(this.buttonSearchData) == '{}') {
-            message.error('请填写按钮称或者角色按钮编码！');
-            return;
-        }
-
-        this.clearPagination();
-        this.getButtonList();
-    };
-
-    @action setSearButtonValue = (event, key) => (this.buttonSearchData[key] = event.target.value);
-
     @action setButtonRowData = (event, key) => {
         console.log(111, event, key);
         this.buttonRowData[key] = event.target ? event.target.value : event;
@@ -394,77 +348,6 @@ class permissionManageStore {
 
         this.buttonRowData = { ...record };
         this.showModal();
-    };
-
-    @action deleteButtonRow = async (event, record) => {
-        console.log(788, record);
-        let params = {
-            data: {
-                id: record.id
-            },
-            method: 'POST'
-        };
-        let res = await api.button.deleteButton(params);
-        if (res.code == 200) {
-            message.success('刪除成功');
-            this.getButtonList();
-            return;
-        }
-        return message.error('刪除失败');
-    };
-
-    @action saveButtonHandle = async (event) => {
-        if (this.validateRoleData() == false) {
-            return;
-        }
-        console.log(888999, this.buttonRowData);
-        let params = {
-            data: this.buttonRowData,
-            method: 'POST'
-        };
-        if (this.modalTitle == '编辑按钮') {
-            if (
-                params.data.name == '' ||
-                params.data.button_code == '' ||
-                params.data.icon == '' ||
-                params.data.file_path == '' ||
-                params.data.is_standard_button == ''
-            ) {
-                message.error('请将必填信息填写完整');
-            } else {
-                this.updateButtonHandle(params);
-            }
-
-            return;
-        }
-        console.log(params);
-        if (!params.data.name) {
-            message.error('请将必填信息填写完整');
-        } else {
-            let res = await api.button.insertButton(params);
-            if (res.code == 200) {
-                message.success('保存成功');
-                this.clearPagination();
-                this.getButtonList();
-                this.hideModal();
-                return;
-            }
-            message.error('保存失败');
-        }
-    };
-
-    @action updateButtonHandle = async (params) => {
-        // params.data.id = params.id
-        console.log(4455, params);
-        let res = await api.button.updateButton(params);
-        if (res.code == 200) {
-            message.success('修改成功');
-            this.clearPagination();
-            this.getButtonList();
-            this.hideModal();
-            return;
-        }
-        message.error('编辑失败');
     };
 }
 

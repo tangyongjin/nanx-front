@@ -1,6 +1,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import '../privilige.scss';
+import '@/styles/privilige.scss';
 import { Menu, Icon } from 'antd';
 import api from '@/api/api';
 

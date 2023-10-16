@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card } from 'antd';
-import ButtonCfg from './buttoncfg';
 import GridEDitor from './gridEditor';
 import AddDatagrid from './gridAdder';
 import Gridinfo from './gridinfo';
@@ -45,7 +44,6 @@ export default class Dmtabs extends React.Component {
         const contentList = {
             tab1: <AddDatagrid />,
             tab2: <GridEDitor />,
-            tab3: <ButtonCfg />,
             tab9: <Gridinfo />
         };
 

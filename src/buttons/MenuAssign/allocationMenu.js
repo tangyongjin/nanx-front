@@ -1,7 +1,7 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import PriviligeTransfer from './priviligeTransfer';
-import '../privilige.scss';
+import '@/styles/privilige.scss';
 @inject('permissionManageStore')
 @observer
 export default class AllocationMenu extends React.Component {
