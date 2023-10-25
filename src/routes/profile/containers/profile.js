@@ -39,7 +39,6 @@ class Profile extends React.Component {
             mobile: '',
             receive_mail_notify: '',
             receive_sms_notify: '',
-            receive_dingtalk_notify: '',
             loading: false,
             imageUrl: '',
             authorization: '',
@@ -62,24 +61,6 @@ class Profile extends React.Component {
         if (res.code == 200) {
             this.setState({
                 roleList: res.data
-            });
-        }
-        let param = {
-            data: {
-                isFilterSelfData: 'n',
-                DataGridCode: 'nanx_organization',
-                currentPage: 1,
-                pageSize: 1000,
-                query_cfg: null,
-                role: sessionStorage.getItem('role_code'),
-                user: sessionStorage.getItem('user')
-            },
-            method: 'POST'
-        };
-        let resp = await api.curd.getDept(param);
-        if (resp.code == 200) {
-            this.setState({
-                deptList: resp.data
             });
         }
     }
@@ -119,7 +100,7 @@ class Profile extends React.Component {
                 receive_dingtalk_notify: this.state.receive_dingtalk_notify
             };
             let params = { method: 'POST', data: data };
-            let res = await api.user.updateUserInformation(params);
+            await api.user.updateUserInformation(params);
         });
     }
 
@@ -130,7 +111,6 @@ class Profile extends React.Component {
             return;
         }
         if (info.file.status === 'done') {
-            // Get this url from response in real world.
             getBase64(info.file.originFileObj, (imageUrl) =>
                 this.setState({
                     imageUrl,
@@ -183,30 +163,7 @@ class Profile extends React.Component {
                             {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
                         </Upload>
                     </Form.Item>
-                    <Form.Item label="部门：" hasFeedback>
-                        {getFieldDecorator('dept_name', {
-                            rules: [
-                                {
-                                    required: true,
-                                    message: '部门不能为空'
-                                }
-                            ],
-                            initialValue: this.state.department
-                        })(
-                            <Select
-                                showSearch
-                                style={{ width: '100%' }}
-                                optionFilterProp="children"
-                                onChange={this.deptonChange}
-                                onSearch={this.deptonSearch}
-                                // value={this.state.department }
-                            >
-                                {this.state.deptList.map((item) => {
-                                    return <Select.Option key={item.id}>{item.dept_name}</Select.Option>;
-                                })}
-                            </Select>
-                        )}
-                    </Form.Item>
+
                     <Form.Item label="角色：" hasFeedback>
                         {getFieldDecorator('role_code', {
                             rules: [
@@ -276,9 +233,7 @@ class Profile extends React.Component {
                             value={this.state.receive_sms_notify}
                         />
                     </Form.Item>
-                    {/* <Form.Item style={ { padding: '0px 0px 0px 95px' } } label="是否接受钉钉通知" hasFeedback>
-                        <Radio.Group name='receive_dingtalk_notify' options={ optionsWithDisabled } onChange={ this.onChange } value={ this.state.receive_dingtalk_notify } />
-                    </Form.Item> */}
+
                     <Form.Item style={{ padding: '0px 0px 0px 220px' }}>
                         <Button type="primary" onClick={this.submit}>
                             保存

@@ -1,10 +1,6 @@
-import { observable, action } from 'mobx';
+import { observable, action, toJS } from 'mobx';
 
 class commonTableStore {
-    /*
-     * 公用table配置,菜单button权限   // @后续添加搜索配置
-     */
-
     @observable datagrid_code = null;
 
     @observable selectedRowKeys = [];
@@ -165,7 +161,7 @@ class commonTableStore {
 
     @action setTotal = (total) => (this.total = total);
 
-    @action setTableColumnsJson = (tableColumnsJson) => (this.tableColumnsJson = tableColumnsJson);
+    @action setTableColumnsJson = (tableColumnsJson) => (this.tableColumnsJson = toJS(tableColumnsJson));
 
     @action setFormCfg = (formCfg) => (this.formCfg = formCfg);
 

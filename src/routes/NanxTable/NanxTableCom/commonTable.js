@@ -114,13 +114,8 @@ export default class CommonTable extends React.Component {
             this.commonTableStore.setCurd(res.data.curd);
             this.commonTableStore.setTableWidth(res.data.table_width);
 
-            //
             if (res.data.fixed_query_cfg) {
                 this.setTableCompomentQueryCfg(res.data.fixed_query_cfg);
-            }
-
-            if (this.props.as_virtual != 'y') {
-                // await this.listData()
             }
             return;
         }
@@ -132,13 +127,13 @@ export default class CommonTable extends React.Component {
 
     listDataParams = () => {
         var query_config = {};
-        if (typeof this.state.search_query_cfg != null && typeof this.state.search_query_cfg != 'object') {
+        if (this.state.search_query_cfg !== null && typeof this.state.search_query_cfg !== 'object') {
             query_config = this.state.search_query_cfg;
         } else {
             if (this.state.query_cfg == null && this.state.search_query_cfg != null) {
                 var arr = this.state.search_query_cfg;
                 query_config.count = arr.length;
-                arr.map((item) => {
+                arr.forEach((item) => {
                     query_config.lines = { ...query_config.lines, ...item };
                 });
             } else if (this.state.query_cfg != null && this.state.search_query_cfg == null) {
@@ -150,7 +145,7 @@ export default class CommonTable extends React.Component {
                 var num1 = queryarr.length / 4;
                 var count = queryarr.length / 4;
                 var num = this.state.search_query_cfg.length;
-                var arr = [];
+                arr = [];
                 for (var i = 0; i < num; i++) {
                     var str = JSON.stringify(this.state.search_query_cfg[i]) + '';
                     var key = '_' + i;
@@ -161,7 +156,7 @@ export default class CommonTable extends React.Component {
                 }
                 var query_cfg = {};
                 var query_cfg1 = {};
-                arr.map((item) => {
+                arr.foreach((item) => {
                     query_cfg.lines = { ...query_cfg.lines, ...item };
                 });
 
@@ -308,18 +303,17 @@ export default class CommonTable extends React.Component {
         };
 
     getTableColumns() {
-        let hideColumns = ['uuid', 'processDefinitionKey', 'transactid', 'nodeKey'];
+        let hideColumns = [];
         let columns = [];
+        console.log(this.commonTableStore.tableColumnsJson);
+
         this.commonTableStore.tableColumnsJson.map((item, index) => {
             let column = {
                 title: item.title,
                 dataIndex: item.key,
                 key: item.key,
                 width: item.width && item.width != null && item.width != '' ? parseFloat(item.width) : 200,
-                // ellipsis:true,
                 sorter: (a, b) => this.sorter(a[item.key], b[item.key]),
-                // onFilter: (value, record) => record[item.key].includes(value),
-                // ...getColumnSearchProps(item.key, this.commonTableStore),
                 render: (text, record) => {
                     return this.columnsRender(text, record, item);
                 }
@@ -447,11 +441,10 @@ export default class CommonTable extends React.Component {
                 showQuickJumper: true,
                 showTotal: (count) => {
                     let pageNum = Math.ceil(count / this.commonTableStore.pageSize);
-                    return '共 ' + pageNum + '页' + '/' + count + ' 条数据';
+                    return `共${pageNum}页/${count}条数据`;
                 },
                 onChange: (currentPage) => this.setCurrentPage(currentPage)
             }
-            // columns: this.getResizeColumns()
         };
     }
 
