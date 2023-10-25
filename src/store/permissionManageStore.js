@@ -13,8 +13,8 @@ class permissionManageStore {
     @observable roleList = [];
     @observable roleSearchData = {};
     @observable currentRole = {
-        role_code: sessionStorage.getItem('currentRoleCode'),
-        role_name: sessionStorage.getItem('currentRoleName')
+        role_code: sessionStorage.getItem('role_code'),
+        role_name: sessionStorage.getItem('role_name')
     };
 
     @action clearPagination = () => {

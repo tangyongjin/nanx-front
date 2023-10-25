@@ -1,15 +1,13 @@
-import userStore from '@/store/userStore';
-import { message } from 'antd';
 import React from 'react';
-import { hashHistory } from 'react-router';
-import api from '../../../api/api';
 import { randomString } from '../../../utils/tools';
 import AuthService from '../AuthService';
 import WsService from '../WsService';
 import NanxArt from './login.jpeg';
-
+import { inject, observer } from 'mobx-react';
 import './login.css';
 
+@inject('navigationStore')
+@observer
 export default class Login extends React.Component {
     constructor(props) {
         super();
@@ -21,10 +19,9 @@ export default class Login extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmitMobile = this.handleFormSubmitMobile.bind(this);
-        this.login_mobile = this.login_mobile.bind(this);
-        this.afterLogin = this.afterLogin.bind(this);
         this.changeValue = this.changeValue.bind(this);
         this.Auth = new AuthService();
+        this.navigationStore = props.navigationStore;
         this.WsService = new WsService();
     }
 
@@ -35,12 +32,13 @@ export default class Login extends React.Component {
     }
 
     componentDidMount() {
+        this.navigationStore.setBossTitle(null);
         this.WsService.wsinit(this.state.transaction_id);
     }
 
     handleFormSubmitMobile(e) {
         e.preventDefault();
-        this.login_mobile(this.state.mobile, this.state.password, this.state.transaction_id);
+        this.Auth.loginMobile(this.state.mobile, this.state.password, this.state.transaction_id);
     }
 
     handleChange(e) {
@@ -48,59 +46,7 @@ export default class Login extends React.Component {
             [e.target.name]: e.target.value
         });
     }
-    async login_mobile(mobile, password, transaction_id) {
-        localStorage.removeItem('id_token');
-        localStorage.removeItem('mobile');
-        let params = {
-            data: { mobile, password, transaction_id },
-            method: 'POST'
-        };
 
-        let res = await api.user.login_mobile(params);
-
-        if (res.code == 401) {
-            message.error('登陆失败，请检查手机号和密码！', 2.5);
-            return;
-        }
-
-        if (res.code == 200) {
-            this.afterLogin(res);
-        }
-    }
-    afterLogin(res) {
-        message.loading('登录成功,准备工作环境', 1.1, () => {
-            // navigationStore.saveSessionBadge(res.info);
-            // navigationStore.setBadge(res.info);
-            userStore.setUserProfile(res.profile);
-            userStore.setToken(res.token);
-            this.setState({
-                roles: res.profile.roles,
-                rolename: res.profile.roles[0].role_name,
-                rolecode: res.profile.roles[0].role_code
-            });
-            if (res.profile.roles.length == 1) {
-                userStore.setUserRole(res.profile.roles[0]);
-                hashHistory.push('/home');
-            } else {
-                this.setState({
-                    visible: true
-                });
-            }
-            console.log(456, this.state.roles);
-        });
-    }
-    handleOk() {
-        let obj = {};
-        obj.role_name = this.state.rolename;
-        obj.role_code = this.state.rolecode;
-        userStore.setUserRole(obj);
-        hashHistory.push('/home');
-    }
-    handleCancel() {
-        this.setState({
-            visible: false
-        });
-    }
     changeValue(a, b) {
         this.setState({
             rolecode: b.props.value,

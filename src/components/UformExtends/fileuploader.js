@@ -30,7 +30,7 @@ export default class Fileuploader extends React.Component {
             url: api.file.upload,
             method: 'post',
             headers: {
-                Authorization: localStorage.getItem('token')
+                Authorization: sessionStorage.getItem('token')
             },
             processData: false,
             data: formData,

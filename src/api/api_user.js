@@ -7,8 +7,7 @@ export default class user {
     static apis = {
         // 根据关键字（用户名）获取所有用户
 
-        login_mobile: (params) => http(params, `${api_root}/Auth/login_mobile`),
-        login_qrscan: (params) => http(params, `${api_root}/Auth/login_qrscan`),
+        loginMobile: (params) => http(params, `${api_root}/Auth/loginMobile`),
         saveRoleAsign: (params) => http(params, `${api_root}/User/saveRoleAsign`),
         profile: (params) => http(params, `${api_root}/Auth/profile`),
         edit_password: (params) => http(params, `${api_root}/Auth/changepwd`),

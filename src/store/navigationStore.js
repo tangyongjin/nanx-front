@@ -1,7 +1,7 @@
 import { observable, action, toJS } from 'mobx';
 import api from '../api/api';
 import { hashHistory } from 'react-router';
-import WsService from '@/routes/auth/WsService';
+import WsService from '@/routes/login/WsService';
 import { randomString } from '@/utils/tools';
 const wsService = new WsService();
 
@@ -36,17 +36,12 @@ class navigationStore {
         };
     }
 
-    @observable updateKey = '2222';
-
+    @observable updateKey = randomString(5);
     @observable breadcrumb = [];
     @observable isCollapse = false;
-    // @observable routerText = '首页'
-
     @observable openKeys = [];
     @observable selectedKeys = [];
-
     @observable currentMenu = {};
-
     @observable badge_sum = 0;
     @observable address_count = 0;
     @observable message_count = 0;
@@ -85,11 +80,6 @@ class navigationStore {
         ele.innerHTML = 'NaNX';
     };
 
-    // @action
-    // setRouterText = routerText => {
-    //     this.routerText = routerText
-    // }
-
     @action setCurrentMenu = (nav_row, state_action) => {
         // 没有菜单列表时，菜单配置为空处理
         if (nav_row == undefined) {
@@ -106,8 +96,8 @@ class navigationStore {
     };
 
     @action setBadge = (data) => {
-        this.message_count = data.unreadnumber;
-        this.affair_count = data.pendingnumber;
+        // this.message_count = data.unreadnumber ? data.unreadnumber : 0;
+        // this.affair_count = data.pendingnumber ? data.pendingnumber : 0;
     };
 
     @action getSessionBadge = () => {
@@ -175,8 +165,6 @@ class navigationStore {
 
     @action
     async getMenuTreeByRoleCode() {
-        // console.log('获取菜单....')
-        //直接根据 token 就可以获取,不需要发送role_code
         let params = {
             data: {
                 role_code: sessionStorage.getItem('role_code')

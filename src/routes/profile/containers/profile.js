@@ -53,7 +53,7 @@ class Profile extends React.Component {
     }
     async componentDidMount() {
         this.getprofile();
-        let auth_code = localStorage.getItem('token');
+        let auth_code = sessionStorage.getItem('token');
         this.setState({
             authorization: auth_code
         });

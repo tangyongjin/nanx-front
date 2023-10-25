@@ -64,7 +64,6 @@
         "postcss-safe-parser": "4.0.1",
         "prettier": "^2.2.1",
         "qrcode.react": "^0.9.3",
-        "rc-queue-anim": "^1.8.2",
         "react": "^16.9.0",
         "react-app-polyfill": "^1.0.3",
         "react-dev-utils": "^9.0.4",

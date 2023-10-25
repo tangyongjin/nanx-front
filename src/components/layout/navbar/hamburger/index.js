@@ -1,19 +1,17 @@
-import React from 'react'
-import { inject, observer } from 'mobx-react'
+import React from 'react';
+import { inject, observer } from 'mobx-react';
 
 import { Icon } from 'antd';
 
-@inject('navigation')
+@inject('navigationStore')
 @observer
 export default class Hamburger extends React.Component {
     constructor(props) {
         super();
-        this.store = props.navigation
+        this.store = props.navigationStore;
     }
 
-
     render() {
-
         return (
             <div className="trigger_box">
                 <Icon
@@ -23,6 +21,6 @@ export default class Hamburger extends React.Component {
                     onClick={this.store.toggleCollapse}
                 />
             </div>
-        )
+        );
     }
 }

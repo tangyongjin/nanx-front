@@ -1,38 +1,25 @@
-import React from 'react'
+import React from 'react';
 import { Breadcrumb } from 'antd';
-import QueueAnim from 'rc-queue-anim';
-import { inject, observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react';
 
-
-@inject('navigation')
+@inject('navigationStore')
 @observer
 export default class PortalBreadcrumb extends React.Component {
-    constructor(props) {
-        super(props);
-        //
-        console.log('navigation------PortalBreadcrumb3333------------')
-
-        console.log(props)
-    }
-
-
     render() {
-
-        if (!this.props.navigation.breadcrumb) {
-            return null
+        if (!this.props.navigationStore.breadcrumb) {
+            return null;
         }
 
-        console.log(this.props.navigation)
+        console.log(this.props.navigationStore);
         return (
-            <Breadcrumb key={ this.props.navigation.animationKey + 'breadcrumb' } separator=">" className="portal_bread_crumb">
-                {
-                    this.props.navigation.breadcrumb.map((item, index) => {
-                        return <Breadcrumb.Item key={ index }>
-                            { item.text }
-                        </Breadcrumb.Item>
-                    })
-                }
+            <Breadcrumb
+                key={this.props.navigationStore.animationKey + 'breadcrumb'}
+                separator=">"
+                className="portal_bread_crumb">
+                {this.props.navigationStore.breadcrumb.map((item, index) => {
+                    return <Breadcrumb.Item key={index}>{item.text}</Breadcrumb.Item>;
+                })}
             </Breadcrumb>
-        )
+        );
     }
 }

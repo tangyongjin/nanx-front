@@ -1,3 +1,4 @@
+import win_requireAuth from '@/routes/urlProtect';
 export default {
     onEnter: win_requireAuth, // add this
     path: 'table',

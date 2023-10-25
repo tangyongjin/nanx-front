@@ -3,9 +3,8 @@ const routes = {
     indexRoute: { onEnter: (nextState, replace) => replace('/home') },
     childRoutes: [
         require('./home').default,
-        require('./auth').default,
+        require('./login').default,
         require('./NanxTable').default,
-        require('./datagridmnt').default,
         require('./settings').default,
         require('./profile').default,
         require('./system').default,

@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
 
-@inject('navigation')
+@inject('navigationStore')
 @observer
 export default class Sidebar extends React.Component {
     constructor(props) {
@@ -13,7 +13,7 @@ export default class Sidebar extends React.Component {
         this.state = {
             menulist: []
         };
-        this.store = props.navigation;
+        this.store = props.navigationStore;
     }
 
     async componentDidMount() {
@@ -38,7 +38,6 @@ export default class Sidebar extends React.Component {
 
         this.store.setBreadcrumb(menuClicked);
         this.store.setCurrentMenu(menuClicked);
-
         this.store.setSelectedKeys(menuClicked.key);
         hashHistory.push({
             pathname: menuClicked.router,
@@ -89,11 +88,12 @@ export default class Sidebar extends React.Component {
                         theme="dark"
                         selectedKeys={this.store.selectedKeys}
                         onOpenChange={(openKeys) => this.onOpenChange(openKeys)}
-                        // inlineCollapsed={this.props.collapsed}
                         {...defaultProps}>
                         {this.state.menulist.map((menuitem, index) => this.getChildren(menuitem, index))}
                     </Menu>
-                ) : null}
+                ) : (
+                    <div>222</div>
+                )}
             </div>
         );
     }
