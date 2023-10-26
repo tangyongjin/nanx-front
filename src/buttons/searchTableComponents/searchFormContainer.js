@@ -102,7 +102,7 @@ export default class SearchFormContainer extends React.Component {
         this.setState({ field_group });
     };
 
-    getFormValue = async () => {
+    searchHandler = async () => {
         let submitData = [];
 
         for (let i = 0; i < this.state.field_group.length; i++) {

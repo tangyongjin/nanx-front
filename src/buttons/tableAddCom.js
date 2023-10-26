@@ -53,11 +53,7 @@ export default class TableAddCom extends React.Component {
         }
     };
 
-    saveFormData(fmdata, uuid, changeValue, as_virtual, optionType) {
-        if (uuid != '') {
-            fmdata.uuid = uuid;
-        }
-
+    saveFormData(fmdata, changeValue, as_virtual) {
         let data = {
             DataGridCode: this.props.commonTableStore.datagrid_code,
             rawdata: fmdata

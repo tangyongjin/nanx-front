@@ -60,7 +60,7 @@ export default class TableEditCom extends React.Component {
         this.refs.commonModalRef.onCancelHandle();
     }
 
-    saveFormData = (fmdata, changeValue, as_virtual, optionType) => {
+    saveFormData = (fmdata, changeValue, as_virtual) => {
         if (fmdata.customerid && fmdata.customerid != '') {
             fmdata.customerAddr = fmdata.customerid.split('-')[1];
             fmdata.customerid = fmdata.customerid.split('-')[0];

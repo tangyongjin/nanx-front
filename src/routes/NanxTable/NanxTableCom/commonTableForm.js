@@ -13,11 +13,10 @@ const hideField = (setFieldState, fieldName) => {
 
 // 提取出设置字段属性的函数
 const setFieldProperties = (setFieldState, fieldItem, commonTableStore, FormActions, formCfg) => {
-    setFieldState(fieldItem, (fieldItem) => {
-        console.log(fieldItem);
-        fieldItem.props['x-props'].commontablestore = commonTableStore;
-        fieldItem.props['x-props'].actions = FormActions;
-        fieldItem.props['x-props'].schema = formCfg;
+    setFieldState(fieldItem, (col) => {
+        col.props['x-props'].commontablestore = commonTableStore;
+        col.props['x-props'].actions = FormActions;
+        col.props['x-props'].schema = formCfg;
     });
 };
 
@@ -26,8 +25,9 @@ const handleFieldProperties = (setFieldState, commonTableStore, FormActions, for
     for (let newkey in formCfg.properties) {
         let newitem = formCfg.properties[newkey];
 
-        for (let key in newitem.properties) {
-            setFieldProperties(setFieldState, key, commonTableStore, FormActions, formCfg);
+        for (let col in newitem.properties) {
+            console.log('col', col);
+            setFieldProperties(setFieldState, col, commonTableStore, FormActions, formCfg);
         }
     }
 };
@@ -36,38 +36,22 @@ const CommonTableForm = (props) => {
     let formCfg = toJS(props.commonTableStore.formCfg);
     let layoutcfg = props.commonTableStore.layoutcfg;
     const [state, setRawData] = useState({});
-    const value = {};
 
     useEffect(() => {
-        // 这里执行初始化操作
-        console.log('组件已经渲染，并且初始化操作可以在这里执行。');
-
         setRawData({
             value: props.optionType == 'edit' ? { ...props.commonTableStore.selectedRows[0] } : {}
         });
-
-        // 如果需要进行一次性的清理操作，你可以返回一个清理函数
-        return () => {
-            console.log('组件即将卸载，可以在这里执行清理操作。');
-        };
     }, [props.commonTableStore.selectedRows, props.optionType]); // 空数组表示仅在组件挂载和卸载时执行
 
     const handleSaveClick = async (event) => {
         await FormActions.validate();
-        await props.saveFormData(
-            FormActions.getFormState().values,
-            '',
-            props.onChange,
-            props.as_virtual,
-            props.optionType
-        );
+        await props.saveFormData(FormActions.getFormState().values, props.onChange, props.as_virtual);
         props.hideModal();
     };
 
     return (
         <div className={layoutcfg == 2 ? 'addmodal' : layoutcfg == 3 ? 'addmodalt' : ''}>
             <SchemaForm
-                value={value}
                 initialValues={state.value}
                 actions={FormActions}
                 editable={true}

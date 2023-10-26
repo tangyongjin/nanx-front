@@ -10,9 +10,7 @@ export default class AssocSelect extends React.Component {
         this.state = {
             optionValue: null,
             optionList: [],
-            loading: false,
-            isInit: false,
-            assocGroup: []
+            loading: false
         };
         this.onSelect = this.onSelect.bind(this);
     }
@@ -161,10 +159,8 @@ export default class AssocSelect extends React.Component {
             let prev_value = element.tableStore.selectedRows[0]['ghost_' + element.props.ass_select_field_id];
 
             if (prev_value) {
-                console.log('查看prev_value', prev_value);
                 return prev_value;
             }
-            console.log('返回prev_value', element.props, element.props.default);
             return element.props.default;
         }
     }
