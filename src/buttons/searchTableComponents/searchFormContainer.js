@@ -166,7 +166,7 @@ export default class SearchFormContainer extends React.Component {
                             key={index}
                             saveActions={this.saveActions}
                             operation_list={this.state.operation_list}
-                            formCfg={this.props.formCfg.properties.group_all.properties}
+                            formCfg={this.props.formCfg.group_all.properties}
                             field_list={this.getFieldList()}
                             onOk={this.props.onOk}
                             form_index={item.inner_order}></SearchTableForm>

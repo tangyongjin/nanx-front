@@ -23,7 +23,7 @@ const CommonTableForm = (props) => {
                     initialValues={state.value}
                     actions={actions}
                     editable={state.editable}
-                    schema={formCfg}
+                    schema={formCfg.group_all}
                     effects={($, { setFieldState, getFieldState }) => {
                         const hide = (name) => {
                             setFieldState(name, (state) => {
@@ -38,8 +38,8 @@ const CommonTableForm = (props) => {
                                 value: props.optionType == 'edit' ? { ...props.commonTableStore.selectedRows[0] } : {}
                             });
 
-                            for (let newkey in formCfg.properties.group_all.properties) {
-                                let newitem = formCfg.properties.group_all.properties[newkey];
+                            for (let newkey in formCfg.group_all.properties) {
+                                let newitem = formCfg.group_all.properties[newkey];
 
                                 for (let key in newitem.properties) {
                                     let item = newitem.properties[key];

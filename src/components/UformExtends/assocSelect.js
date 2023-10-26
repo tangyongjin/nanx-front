@@ -111,8 +111,8 @@ export default class AssocSelect extends React.Component {
         }
         let group = [];
 
-        Object.keys(this.props.schema.properties.group_all.properties).map((gourp_key) => {
-            let fields_group = this.props.schema.properties.group_all.properties[gourp_key];
+        Object.keys(this.props.schema).map((gourp_key) => {
+            let fields_group = this.props.schema[gourp_key];
 
             for (let key in fields_group.properties) {
                 let item = fields_group.properties[key];

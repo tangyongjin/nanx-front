@@ -13,7 +13,6 @@ import GetActionCode from './getActionCode.js';
 import CheckBox from './checkbox';
 import GetRadio from './getRadio';
 import Wangeditor from './wangeditor';
-import Dropdowncombox from './dropdowncombox';
 import CommonTable from '@/routes/NanxTable/NanxTableCom/commonTable';
 import EditgetDate from './editgetDate';
 import CategoryDropDown from './categoryDropDown';
@@ -40,7 +39,6 @@ registerFormFields({
     GetActionCode: connect()((props) => <GetActionCode {...props} value={props.value || ''} />),
     CheckBox: connect()((props) => <CheckBox {...props} value={props.value || ''} />),
     Wangeditor: connect()((props) => <Wangeditor {...props} value={props.value || ''} />),
-    Dropdowncombox: connect()((props) => <Dropdowncombox {...props} value={props.value || ''} />),
     GetRadio: connect()((props) => <GetRadio {...props} value={props.value || ''} />),
     EditgetDate: connect()((props) => <EditgetDate {...props} value={props.value || ''} />)
 });
