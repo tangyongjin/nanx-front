@@ -2,12 +2,12 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import { Button, Table, message, Icon } from 'antd';
 import { toJS } from 'mobx';
-import columnsRenderHandle from './columnsRender/columnsRenderHandle';
 import ResizeableTitle from './resizeableTitle';
 import commonTableStore from '@/store/commonTableStore';
 import '../commonTable.scss';
 import api from '@/api/api';
 import getTextWidth from './commonTableTextTool';
+import columnsRender from './columnsRender';
 
 @observer
 export default class CommonTable extends React.Component {
@@ -95,7 +95,7 @@ export default class CommonTable extends React.Component {
             method: 'POST'
         };
 
-        let res = await api.activity.fetchDataGridCfg(params);
+        let res = await api.dataGrid.fetchDataGridCfg(params);
         if (res.code == 200) {
             console.log(res.data);
 
@@ -245,7 +245,6 @@ export default class CommonTable extends React.Component {
         if (this.state.buttonUsedComponent) {
             return (
                 <PluginCom
-                    // ref={PluginCom.name}
                     ref={(item) => {
                         this.pluginComRef = item;
                     }}
@@ -254,7 +253,7 @@ export default class CommonTable extends React.Component {
                     editable={true}
                     onChange={this.props.onChange}
                     commonTableStore={this.commonTableStore}
-                    dataGridcode={this.props.dataGridcode}
+                    dataGridcode2={this.props.dataGridCode}
                     refreshTable={this.refreshTable}
                     resetTable={this.resetTable}
                     setQueryCfg={this.setTableCompomentQueryCfg}
@@ -265,28 +264,6 @@ export default class CommonTable extends React.Component {
                 />
             );
         }
-    }
-
-    columnsRender(text, record, column_cfg) {
-        if (text === '' || text === undefined) {
-            return '';
-        }
-        let field_cfg = {};
-        let table_columns_render_cfg = field_cfg[this.props.datagrid_code];
-
-        if (column_cfg.handler) {
-            return columnsRenderHandle[column_cfg.handler](text, record, this.commonTableStore);
-        }
-
-        // 不存在处理函数
-        if (table_columns_render_cfg === undefined) {
-            return text;
-        }
-
-        if (Object.keys(table_columns_render_cfg).includes(column_cfg.key) === false) {
-            return text;
-        }
-        return columnsRenderHandle[table_columns_render_cfg[column_cfg.key]](text, record);
     }
 
     handleResize =
@@ -315,9 +292,10 @@ export default class CommonTable extends React.Component {
                 width: item.width && item.width != null && item.width != '' ? parseFloat(item.width) : 200,
                 sorter: (a, b) => this.sorter(a[item.key], b[item.key]),
                 render: (text, record) => {
-                    return this.columnsRender(text, record, item);
+                    return columnsRender(text, record, item, this.commonTableStore);
                 }
             };
+
             if (hideColumns.includes(item.key) == false) {
                 columns.push(column);
             }
@@ -382,6 +360,7 @@ export default class CommonTable extends React.Component {
             }
         };
     }
+
     onRowClick(event, record) {
         if (this.props.sendData) {
             let arr = [];
@@ -480,6 +459,7 @@ export default class CommonTable extends React.Component {
         return (
             <div className="table_wrapper" style={styles}>
                 {this.RenderTablePluginCom()}
+
                 <div className="table_button">
                     {this.renderButtons()}
                     {this.getFilterButton()}

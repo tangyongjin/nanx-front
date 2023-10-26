@@ -225,7 +225,7 @@ export default class AssocSelect extends React.Component {
             method: 'POST'
         };
 
-        let res = await api.activity.getAssociateData(params);
+        let res = await api.dataGrid.getAssociateData(params);
 
         if (res.code == 200) {
             let optionList = this.formatOptionList(res.data, query_cfg.label_field, query_cfg.value_field);

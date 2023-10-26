@@ -84,7 +84,7 @@ class dmStore {
             },
             method: 'POST'
         };
-        let json = await api.activity.batchUpdateFieldCfg(params);
+        let json = await api.dataGrid.batchUpdateFieldCfg(params);
         if (json.code == 200) {
             await this.getActCols();
         }
@@ -92,7 +92,7 @@ class dmStore {
 
     @action getAllCategory = async () => {
         let params = { data: {} };
-        let json = await api.activity.getAllCategory(params);
+        let json = await api.dataGrid.getAllCategory(params);
         this.Categories = json.data;
     };
 
@@ -101,7 +101,7 @@ class dmStore {
             this.maintableColumns = [];
         } else {
             let params = { method: 'POST', data: { DataGridCode: this.DataGridCode } };
-            let json = await api.activity.getActCols(params);
+            let json = await api.dataGrid.getActCols(params);
             this.setMaintableColumns(json.data);
         }
     };
@@ -110,7 +110,7 @@ class dmStore {
 
     @action getAllGrids = async () => {
         let params = { data: {} };
-        let json = await api.activity.getPortalDataGrids(params);
+        let json = await api.dataGrid.getPortalDataGrids(params);
         this.dataGrids = json.data;
     };
 
@@ -122,21 +122,21 @@ class dmStore {
 
     @action getTriggerGroups = async () => {
         let params = { method: 'POST', data: { DataGridCode: this.DataGridCode } };
-        let json = await api.activity.getTriggerGroups(params);
+        let json = await api.dataGrid.getTriggerGroups(params);
         this.trigger_groups = json.data;
     };
 
     @action saveTriggerGroup = async (obj) => {
         let params = { data: obj, method: 'POST' };
         console.log(obj);
-        let json = await api.activity.saveTriggerGroup(params);
+        let json = await api.dataGrid.saveTriggerGroup(params);
         message.info(json.message);
         this.getTriggerGroups();
     };
 
     @action deleteTriggerGroup = async (gpid) => {
         let params = { data: { groupid: gpid }, method: 'POST' };
-        let json = await api.activity.deleteTriggerGroup(params);
+        let json = await api.dataGrid.deleteTriggerGroup(params);
         message.info(json.message);
         this.getTriggerGroups();
     };
@@ -163,7 +163,7 @@ class dmStore {
         obj.DataGridCode = this.DataGridCode;
 
         let params = { data: obj, method: 'POST' };
-        let json = await api.activity.saveFieldCfg(params);
+        let json = await api.dataGrid.saveFieldCfg(params);
         message.info(json.message);
         this.getActCols();
     };

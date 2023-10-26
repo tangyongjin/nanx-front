@@ -61,7 +61,7 @@ export default class ReferpluginCom extends React.Component {
                     method: 'POST'
                 };
                 //console.log(params)
-                let resp = await api.activity.actionBasedRowPuller(params);
+                let resp = await api.dataGrid.actionBasedRowPuller(params);
                 console.log(resp);
                 this.props.uploadfunction(resp);
 

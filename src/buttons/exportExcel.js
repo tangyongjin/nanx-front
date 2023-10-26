@@ -25,7 +25,7 @@ export default class ExportExcelRemote extends React.Component {
             method: 'POST'
         };
 
-        let res = await api.activity.exportExcel(params);
+        let res = await api.curd.exportExcel(params);
 
         if (res.code == 200) {
             this.setState({

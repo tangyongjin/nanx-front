@@ -12,8 +12,6 @@ export default class TableAddCom extends React.Component {
 
     init(btncode) {
         console.log('button_code', this.props.parentTable.state.button_code);
-        // console.log(btncode)
-
         this.props.commonTableStore.rowSelectChange([], []);
         this.refs.commonModalRef.showModal();
         this.props.commonTableStore.setTableAction('add_table');
@@ -78,7 +76,7 @@ export default class TableAddCom extends React.Component {
                     hideModal={() => this.hideModal()}
                     formCfg={this.props.commonTableStore.formCfg}
                     referinfo={this.props.commonTableStore.referinfo}
-                    dataGridcode={this.props.dataGridcode}
+                    dataGridcode={this.props.dataGridCode}
                     layoutcfg={this.props.commonTableStore.layoutcfg}
                     staticformcfg={this.props.commonTableStore.staticformcfg}
                     selectedRows={this.props.commonTableStore.selectedRows}

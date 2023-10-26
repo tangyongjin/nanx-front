@@ -1,5 +1,5 @@
 import { port, root_url, version_2 } from './api_config/base_config';
-import activity from './api_activity';
+import dataGrid from './api_dataGrid';
 import auth from './api_auth';
 import button from './api_button';
 import curd from './api_curd';
@@ -17,7 +17,7 @@ export default class api {}
 api.button = button.apis;
 api.organization = organization.apis;
 api.processmanager = processmanager.apis;
-api.activity = activity.apis;
+api.dataGrid = dataGrid.apis;
 api.curd = curd.apis;
 api.auth = auth.apis;
 api.permission = permission.apis;
