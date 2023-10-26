@@ -70,9 +70,9 @@ export default class BatchUpdate extends React.Component {
     }
     showModal() {
         var obj = {};
-        var objarr = Object.keys(this.commonTableStore.formCfg.group_all.properties);
+        var objarr = Object.keys(this.commonTableStore.formCfg.properties);
         for (var i = 0; i < objarr.length; i++) {
-            obj = Object.assign(this.commonTableStore.formCfg.group_all.properties[objarr[i]].properties);
+            obj = Object.assign(this.commonTableStore.formCfg.properties[objarr[i]].properties);
         }
         var arr = this.commonTableStore.selectedRowKeys;
         this.setState({
