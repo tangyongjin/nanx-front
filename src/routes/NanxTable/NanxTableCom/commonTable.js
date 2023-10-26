@@ -1,13 +1,15 @@
-import React from 'react';
-import { observer } from 'mobx-react';
-import { Button, Table, message, Icon } from 'antd';
-import { toJS } from 'mobx';
-import ResizeableTitle from './resizeableTitle';
-import commonTableStore from '@/store/commonTableStore';
 import '../commonTable.scss';
+import { Button, Table } from 'antd';
+import { observer } from 'mobx-react';
+import { toJS } from 'mobx';
 import api from '@/api/api';
-import getTextWidth from './commonTableTextTool';
 import columnsRender from './columnsRender';
+import fetchDataGridCfg from './fetchDataGridCfg';
+import listDataParams from './listDataParams';
+import commonTableStore from '@/store/commonTableStore';
+import getTextWidth from './commonTableTextTool';
+import React from 'react';
+import ResizeableTitle from './resizeableTitle';
 
 @observer
 export default class CommonTable extends React.Component {
@@ -64,7 +66,7 @@ export default class CommonTable extends React.Component {
     }
 
     refreshTable = async () => {
-        await this.fetchDataGridCfg('refreshTable');
+        await fetchDataGridCfg(this.commonTableStore, this.setTableCompomentQueryCfg);
         if (this.props.as_virtual == 'y') {
             return;
         }
@@ -84,100 +86,8 @@ export default class CommonTable extends React.Component {
         );
     }
 
-    fetchDataGridCfg = async (source) => {
-        this.commonTableStore.clearSelectRowData();
-        let params = {
-            data: {
-                DataGridCode: this.commonTableStore.datagrid_code,
-                role: sessionStorage.getItem('role_code'),
-                user: sessionStorage.getItem('user')
-            },
-            method: 'POST'
-        };
-
-        let res = await api.dataGrid.fetchDataGridCfg(params);
-        if (res.code == 200) {
-            console.log(res.data);
-
-            this.commonTableStore.setTableColumnsJson(res.data.tableColumnConfig);
-            this.commonTableStore.setFormCfg(res.data.formcfg);
-            this.commonTableStore.setReferinfo(res.data.referinfo);
-            this.commonTableStore.setlayoutCfg(res.data.layoutcfg);
-            this.commonTableStore.setTips(res.data.tips);
-            if (res.data.staticformcfg) {
-                this.commonTableStore.setstaticformcfg(res.data.staticformcfg);
-            }
-
-            this.commonTableStore.setselectType(res.data.multiple);
-            this.commonTableStore.setTableButtonsJson(res.data.buttons);
-            this.commonTableStore.setBaseTable(res.data.base_table);
-            this.commonTableStore.setCurd(res.data.curd);
-            this.commonTableStore.setTableWidth(res.data.table_width);
-
-            if (res.data.fixed_query_cfg) {
-                this.setTableCompomentQueryCfg(res.data.fixed_query_cfg);
-            }
-            return;
-        }
-
-        this.commonTableStore.setTableColumnsJson([]);
-        this.commonTableStore.setFormCfg({});
-        message.error('获取表格配置失败');
-    };
-
-    listDataParams = () => {
-        var query_config = {};
-        if (this.state.search_query_cfg !== null && typeof this.state.search_query_cfg !== 'object') {
-            query_config = this.state.search_query_cfg;
-        } else {
-            if (this.state.query_cfg == null && this.state.search_query_cfg != null) {
-                var arr = this.state.search_query_cfg;
-                query_config.count = arr.length;
-                arr.forEach((item) => {
-                    query_config.lines = { ...query_config.lines, ...item };
-                });
-            } else if (this.state.query_cfg != null && this.state.search_query_cfg == null) {
-                query_config = this.state.query_cfg;
-            } else if (this.state.query_cfg == null && this.state.search_query_cfg == null) {
-                query_config = null;
-            } else if (this.state.query_cfg != null && this.state.search_query_cfg != null) {
-                var queryarr = Object.keys(this.state.query_cfg.lines);
-                var num1 = queryarr.length / 4;
-                var count = queryarr.length / 4;
-                var num = this.state.search_query_cfg.length;
-                arr = [];
-                for (var i = 0; i < num; i++) {
-                    var str = JSON.stringify(this.state.search_query_cfg[i]) + '';
-                    var key = '_' + i;
-                    var newkey = '_' + count;
-                    str = str.replace(new RegExp(key, 'g'), newkey);
-                    arr.push(JSON.parse(str));
-                    count++;
-                }
-                var query_cfg = {};
-                var query_cfg1 = {};
-                arr.foreach((item) => {
-                    query_cfg.lines = { ...query_cfg.lines, ...item };
-                });
-
-                Object.assign(query_cfg1, query_cfg.lines, this.state.query_cfg.lines);
-                query_config.count = num1 + num;
-                query_config.lines = query_cfg1;
-            }
-        }
-        return {
-            DataGridCode: this.commonTableStore.datagrid_code,
-            role: sessionStorage.getItem('role_code'),
-            user: sessionStorage.getItem('user'),
-            query_cfg: query_config,
-            isFilterSelfData: this.state.isFilterSelfData ? 'y' : 'n',
-            pageSize: this.commonTableStore.pageSize,
-            currentPage: this.commonTableStore.currentPage
-        };
-    };
-
     listData = async () => {
-        let data = this.listDataParams();
+        let data = listDataParams(this.commonTableStore, this.state);
         let params = {
             data: data,
             method: 'POST'
@@ -204,9 +114,6 @@ export default class CommonTable extends React.Component {
     };
 
     renderButtons() {
-        if (this.props.readOnly === true) {
-            return null;
-        }
         if (!this.commonTableStore.TableButtonsJson) {
             return null;
         }
@@ -435,20 +342,6 @@ export default class CommonTable extends React.Component {
         });
     };
 
-    getFilterButton = () => {
-        return this.state.isFilterSelfData ? (
-            <Icon
-                title="查看所有数据"
-                style={filter_style}
-                type="filter"
-                theme="filled"
-                onClick={() => this.filterSelfList(false)}
-            />
-        ) : (
-            <Icon title="只查看自己数据" style={filter_style} type="filter" onClick={() => this.filterSelfList(true)} />
-        );
-    };
-
     render() {
         let styles = {
             padding: '10px'
@@ -460,10 +353,7 @@ export default class CommonTable extends React.Component {
             <div className="table_wrapper" style={styles}>
                 {this.RenderTablePluginCom()}
 
-                <div className="table_button">
-                    {this.renderButtons()}
-                    {this.getFilterButton()}
-                </div>
+                <div className="table_button">{this.renderButtons()}</div>
                 <Table
                     size={this.props.size ? 'small' : 'default'}
                     columns={this.state.columns}
@@ -476,7 +366,3 @@ export default class CommonTable extends React.Component {
         );
     }
 }
-
-const filter_style = {
-    fontSize: '16px'
-};
