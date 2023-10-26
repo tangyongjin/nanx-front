@@ -6,32 +6,17 @@ export default class Dropdownlist extends React.Component {
     constructor(props) {
         super(props);
         console.log(props);
-    }
-
-    state = {
-        opts: ['aa', 'bb', 'cc', 'dd']
-    };
-
-    componentDidMount() {
-        //dropdownoptions
+        this.state = {
+            opts: ['aa', 'bb', 'cc', 'dd']
+        };
     }
 
     onChange = (e) => {
-        // console.log(e)
         this.props.getComponentValue(e);
     };
 
     render() {
-        let dropdownoptions = this.props.dropdownoptions.split(',');
-        // console.log(dropdownoptions)
-
-        // debugger;
-
-        // let defv = ''
-        // if (dropdownoptions.length > 0) {
-        //     defv = dropdownoptions[0]
-        // this.onChange(defv)
-        // }
+        let dropdownoptions = this.state.opts;
 
         return (
             <div>
