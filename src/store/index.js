@@ -1,4 +1,3 @@
-import associateSelectStore from './associateSelectStore';
 import commonTableStore from './commonTableStore';
 import dmStore from './dmStore';
 import navigationStore from './navigationStore';
@@ -12,8 +11,7 @@ const store = {
     commonTableStore: new commonTableStore(),
     permissionManageStore,
     pmStore,
-    dmStore,
-    associateSelectStore
+    dmStore
 };
 
 export default store;

@@ -111,19 +111,6 @@ class commonTableStore {
 
     @action setActionCode = (DataGridCode) => (this.datagrid_code = DataGridCode);
 
-    // TO-DO  如果已经有 fixed_query_cfg , 则应该合并 .
-    // @action setQueryCfg = newcfg => {
-    //     console.log("query_cfg 变化 ")
-    //     console.log(newcfg)
-    //     this.query_cfg = newcfg
-    // }
-
-    // @action setFixedQueryCfg = newcfg => {
-    //     console.log("setFixedQueryCfg 变化 ")
-    //     console.log(newcfg)
-    //     this.fixed_query_cfg = newcfg
-    // }
-
     // 设置操作table的类型
     @action setTableOptionType = (tableOptionType) => (this.tableOptionType = tableOptionType);
 

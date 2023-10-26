@@ -64,7 +64,7 @@ export default class CommonTable extends React.Component {
     }
 
     refreshTable = async () => {
-        await this.getDataGridCfg('refreshTable');
+        await this.fetchDataGridCfg('refreshTable');
         if (this.props.as_virtual == 'y') {
             return;
         }
@@ -84,7 +84,7 @@ export default class CommonTable extends React.Component {
         );
     }
 
-    getDataGridCfg = async (source) => {
+    fetchDataGridCfg = async (source) => {
         this.commonTableStore.clearSelectRowData();
         let params = {
             data: {
@@ -95,7 +95,7 @@ export default class CommonTable extends React.Component {
             method: 'POST'
         };
 
-        let res = await api.activity.getDataGridCfg(params);
+        let res = await api.activity.fetchDataGridCfg(params);
         if (res.code == 200) {
             console.log(res.data);
 

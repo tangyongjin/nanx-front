@@ -93,7 +93,7 @@ const CommonTableForm = (props) => {
                             htmlType="button"
                             className="marginRihgt10"
                             onClick={async (event) => {
-                                let res = await actions.validate();
+                                await actions.validate();
                                 await props.saveFormData(
                                     actions.getFormState().values,
                                     '',
