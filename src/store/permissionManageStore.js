@@ -1,5 +1,4 @@
 import { observable, action } from 'mobx';
-import { hashHistory } from 'react-router';
 import api from '../api/api';
 import { message } from 'antd';
 
@@ -76,18 +75,6 @@ class permissionManageStore {
         this.pagination.currentPage = currentPage;
 
         this.getRoleList();
-    };
-
-    @action customerHashPush = (pathname, record) => {
-        this.currentRole.role_code = record.role_code;
-        this.currentRole.role_name = record.role_name;
-        sessionStorage.setItem('currentRoleCode', this.currentRole.role_code);
-        sessionStorage.setItem('currentRoleName', this.currentRole.role_name);
-        let params = {
-            role_code: this.currentRole.role_code,
-            role_name: this.currentRole.role_name
-        };
-        hashHistory.push({ pathname, state: params });
     };
 
     @action getUserByRole = async () => {

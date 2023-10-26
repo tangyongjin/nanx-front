@@ -2,7 +2,6 @@ import CommonTableForm from '@/routes/NanxTable/NanxTableCom/commonTableForm';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import React from 'react';
 import { observer } from 'mobx-react';
-import { Card } from 'antd';
 import api from '@/api/api';
 
 @observer
@@ -35,7 +34,7 @@ export default class TableAddCom extends React.Component {
     };
 
     getGhostData = (formData) => {
-        this.props.commonTableStore.triggers.map((item) => {
+        this.props.commonTableStore.triggers.foreach((item) => {
             formData['ghost_' + item.props.ass_select_field_id] = formData[item.props.ass_select_field_id];
             let option_obj = item.state.optionList.find(
                 (optionItem) => optionItem.value == formData[item.props.ass_select_field_id]
@@ -58,10 +57,6 @@ export default class TableAddCom extends React.Component {
         if (uuid != '') {
             fmdata.uuid = uuid;
         }
-        if (fmdata.customerid && fmdata.customerid != '') {
-            fmdata.customerAddr = fmdata.customerid.split('-')[2];
-            fmdata.customerid = fmdata.customerid.split('-')[0];
-        }
 
         let data = {
             DataGridCode: this.props.commonTableStore.datagrid_code,
@@ -72,8 +67,6 @@ export default class TableAddCom extends React.Component {
     }
 
     render() {
-        let tips = this.props.commonTableStore.tips;
-
         return (
             <CommonModal
                 height="500px"
@@ -81,14 +74,6 @@ export default class TableAddCom extends React.Component {
                 title="新增记录"
                 ref="commonModalRef"
                 layoutcfg={this.props.commonTableStore.layoutcfg}>
-                {tips ? (
-                    <Card title="帮助信息" style={{ marginBottom: '12px' }}>
-                        <p dangerouslySetInnerHTML={{ __html: tips }}></p>
-                    </Card>
-                ) : (
-                    ''
-                )}
-
                 <CommonTableForm
                     as_virtual={this.props.as_virtual}
                     editable={true}

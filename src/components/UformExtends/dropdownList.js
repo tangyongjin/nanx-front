@@ -5,7 +5,7 @@ const { Option } = Select;
 export default class Dropdownlist extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        console.log('😡🧤😡🧤😡🧤😡🧤😡🧤😡🧤', props);
         this.state = {
             opts: ['aa', 'bb', 'cc', 'dd']
         };
@@ -17,10 +17,16 @@ export default class Dropdownlist extends React.Component {
 
     render() {
         let dropdownoptions = this.state.opts;
+        console.log('🧤🧤🧤🧤🧤🧤🧤', this.props.value);
+        console.log('🧤🧤🧤🧤🧤🧤🧤', this.props.default);
 
         return (
             <div>
-                <Select placeholder="请选择" style={{ width: 120 }} onChange={this.onChange}>
+                <Select
+                    value={this.props.value || this.props.default}
+                    placeholder="请选择"
+                    style={{ width: 120 }}
+                    onChange={this.onChange}>
                     {dropdownoptions
                         ? dropdownoptions.map((item, index) => {
                               return (

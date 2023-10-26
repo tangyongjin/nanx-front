@@ -51,34 +51,15 @@ const CommonTableForm = (props) => {
                                         state.props['x-props'].schema = formCfg;
                                     });
 
-                                    if (item['x-props'] && item['x-props'].field_id == 'customer_phone') {
-                                        setFieldState(key, (state) => {
-                                            state.props['x-rules'] = 'phone';
-                                        });
-                                    }
                                     if (item['x-props'] && item['x-props'].field_id == 'phone') {
                                         setFieldState(key, (state) => {
                                             state.props['x-rules'] = 'phone';
                                         });
                                     }
-                                    if (item['x-props'] && item['x-props'].field_id == 'contactPhone') {
-                                        setFieldState(key, (state) => {
-                                            state.props['x-rules'] = 'phone';
-                                        });
-                                    }
-                                    if (item['x-props'] && item['x-props'].field_id == 'customer_email') {
-                                        setFieldState(key, (state) => {
-                                            state.props['x-rules'] = 'email';
-                                        });
-                                    }
+
                                     if (item['x-props'] && item['x-props'].field_id == 'email') {
                                         setFieldState(key, (state) => {
                                             state.props['x-rules'] = 'email';
-                                        });
-                                    }
-                                    if (item['x-props'] && item['x-props'].field_id == 'postcode') {
-                                        setFieldState(key, (state) => {
-                                            state.props['x-rules'] = 'zip';
                                         });
                                     }
                                 }

@@ -32,9 +32,13 @@ export default class AssocSelect extends React.Component {
         // 因为 本组件就是下拉,不能一定认为是从 Activity 来 !
         let group = this.getDropdownGroups();
 
+        console.log(group);
+        console.log(this.props.query_cfg.level);
+
         if (this.props.query_cfg.level == group[this.props.query_cfg.trigger_group_uuid]) {
             //模拟用户选择
             this.simulateClick();
+        } else {
         }
     }
 
@@ -60,9 +64,11 @@ export default class AssocSelect extends React.Component {
         // 1、选择数据为空，
 
         if (this.store.selectedRows.length == 0) {
+            console.log('没有选择数据');
             return;
         }
 
+        console.log('模拟点击下拉并设置数据👹👹👹👹👹👹👹👹👹');
         // 2、公用table编辑状态
         if (this.store.table_action == 'edit_table') {
             for (let i = 0; i < this.store.triggers.length; i++) {
@@ -83,6 +89,7 @@ export default class AssocSelect extends React.Component {
         for (let i = 0; i < this.store.triggers.length; i++) {
             let element = this.store.triggers[i];
             // 2、同一组
+
             if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {
                 if (element.props.form_action == 'edit') {
                     element.initValues();
@@ -110,10 +117,13 @@ export default class AssocSelect extends React.Component {
             return;
         }
         let group = [];
+        console.log(' 🩸🩸🩸🩸🩸group>>🩸🩸🩸🩸🩸🩸 ');
+        console.log(this.props.schema);
 
-        Object.keys(this.props.schema).map((gourp_key) => {
-            let fields_group = this.props.schema[gourp_key];
+        Object.keys(this.props.schema.properties).map((gourp_key) => {
+            console.log(gourp_key + ': ');
 
+            let fields_group = this.props.schema.properties[gourp_key];
             for (let key in fields_group.properties) {
                 let item = fields_group.properties[key];
                 if (item['x-props'] && item['x-props'].query_cfg && item['x-props'].query_cfg.level) {
@@ -121,7 +131,6 @@ export default class AssocSelect extends React.Component {
 
                     if (group[query_cfg.trigger_group_uuid] == undefined) {
                         group[query_cfg.trigger_group_uuid] = 1;
-
                         continue;
                     }
                     group[query_cfg.trigger_group_uuid] =
@@ -171,6 +180,7 @@ export default class AssocSelect extends React.Component {
 
         // 关联字段设置
         for (let i = 0; i < this.store.triggers.length; i++) {
+            console.log('🪢🪢🪢🪢🪢🪢🪢🪢🪢🪢');
             let element = this.store.triggers[i];
 
             // 2、同一组
