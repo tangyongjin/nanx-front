@@ -6,7 +6,7 @@ export default class AssocSelect extends React.Component {
     constructor(props) {
         super(props);
 
-        this.store = props.commontablestore;
+        this.tableStore = props.commontablestore;
         this.state = {
             optionValue: null,
             optionList: [],
@@ -18,14 +18,14 @@ export default class AssocSelect extends React.Component {
     }
 
     componentWillUnmount() {
-        this.store.clearTrigger();
+        this.tableStore.clearTrigger();
     }
 
     componentDidMount() {
-        if (!this.store) {
+        if (!this.tableStore) {
             return;
         }
-        this.store.registerTrigger(this);
+        this.tableStore.registerTrigger(this);
         // 3、同一组的dom加载完毕
 
         // ??? 应该使用 本组件所在的formcfg来获取 Group,而不是使用 store.formCfg,
@@ -63,19 +63,19 @@ export default class AssocSelect extends React.Component {
     async simulateClick() {
         // 1、选择数据为空，
 
-        if (this.store.selectedRows.length == 0) {
+        if (this.tableStore.selectedRows.length == 0) {
             console.log('没有选择数据');
             return;
         }
 
         console.log('模拟点击下拉并设置数据👹👹👹👹👹👹👹👹👹');
         // 2、公用table编辑状态
-        if (this.store.table_action == 'edit_table') {
-            for (let i = 0; i < this.store.triggers.length; i++) {
-                let element = this.store.triggers[i];
+        if (this.tableStore.table_action == 'edit_table') {
+            for (let i = 0; i < this.tableStore.triggers.length; i++) {
+                let element = this.tableStore.triggers[i];
                 // 2、同一组
                 if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {
-                    let curren_value = element.store.selectedRows[0]['ghost_' + element.props.ass_select_field_id];
+                    let curren_value = element.tableStore.selectedRows[0]['ghost_' + element.props.ass_select_field_id];
                     await element.getDefaultOptionList(element);
                     element.props.onChange(curren_value);
                     element.setState({ optionValue: curren_value });
@@ -86,8 +86,8 @@ export default class AssocSelect extends React.Component {
 
         // 3、有值时初始化
 
-        for (let i = 0; i < this.store.triggers.length; i++) {
-            let element = this.store.triggers[i];
+        for (let i = 0; i < this.tableStore.triggers.length; i++) {
+            let element = this.tableStore.triggers[i];
             // 2、同一组
 
             if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {
@@ -146,8 +146,8 @@ export default class AssocSelect extends React.Component {
 
     // 获取上一个联动值
     getPrevSelValue(current_ele) {
-        for (let i = 0; i < this.store.triggers.length; i++) {
-            let element = this.store.triggers[i];
+        for (let i = 0; i < this.tableStore.triggers.length; i++) {
+            let element = this.tableStore.triggers[i];
 
             // 不同组结束本次循环
             if (element.props.query_cfg.trigger_group_uuid != current_ele.props.query_cfg.trigger_group_uuid) {
@@ -158,7 +158,7 @@ export default class AssocSelect extends React.Component {
                 continue;
             }
 
-            let prev_value = element.store.selectedRows[0]['ghost_' + element.props.ass_select_field_id];
+            let prev_value = element.tableStore.selectedRows[0]['ghost_' + element.props.ass_select_field_id];
 
             if (prev_value) {
                 console.log('查看prev_value', prev_value);
@@ -179,9 +179,9 @@ export default class AssocSelect extends React.Component {
         });
 
         // 关联字段设置
-        for (let i = 0; i < this.store.triggers.length; i++) {
+        for (let i = 0; i < this.tableStore.triggers.length; i++) {
             console.log('🪢🪢🪢🪢🪢🪢🪢🪢🪢🪢');
-            let element = this.store.triggers[i];
+            let element = this.tableStore.triggers[i];
 
             // 2、同一组
             if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {
