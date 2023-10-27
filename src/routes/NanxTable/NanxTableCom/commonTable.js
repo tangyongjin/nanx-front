@@ -65,6 +65,23 @@ export default class CommonTable extends React.Component {
         }
     }
 
+    getExportExcelPara = async () => {
+        await fetchDataGridCfg(this.commonTableStore, this.setTableCompomentQueryCfg);
+        if (this.props.as_virtual == 'y') {
+            return 'as_virtual=y';
+        }
+
+        await this.setState({ search_query_cfg: null });
+        let data = listDataParams(this.commonTableStore, this.state);
+        let params = {
+            data: data,
+            method: 'POST'
+        };
+
+        params.geturl = toJS(this.commonTableStore.curd).geturl;
+        return params;
+    };
+
     refreshTable = async () => {
         await fetchDataGridCfg(this.commonTableStore, this.setTableCompomentQueryCfg);
         if (this.props.as_virtual == 'y') {
@@ -74,17 +91,6 @@ export default class CommonTable extends React.Component {
             this.listData();
         });
     };
-
-    resetTable() {
-        this.setState(
-            {
-                query_cfg: null
-            },
-            () => {
-                this.listData();
-            }
-        );
-    }
 
     listData = async () => {
         let data = listDataParams(this.commonTableStore, this.state);
@@ -107,6 +113,17 @@ export default class CommonTable extends React.Component {
             this.rowSelectChange([], []);
         }
     };
+
+    resetTable() {
+        this.setState(
+            {
+                query_cfg: null
+            },
+            () => {
+                this.listData();
+            }
+        );
+    }
 
     getComponentByFile = (path) => {
         let _compoment = require(`../../../buttons/${path}`).default;

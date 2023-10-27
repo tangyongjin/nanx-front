@@ -1,32 +1,23 @@
 import React from 'react';
-import { observer } from 'mobx-react';
-import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import api from '@/api/api';
+import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 
-@observer
-export default class ExportExcelRemote extends React.Component {
+export default class ExportExcel extends React.Component {
     constructor(props) {
         super(props);
+
+        console.log(props);
         this.init = this.init.bind(this);
     }
+
     state = {
         visible: false,
         excelMsg: {}
     };
 
     async init() {
-        let params = {
-            data: {
-                DataGridCode: this.props.commonTableStore.datagrid_code,
-                role: sessionStorage.getItem('role_code'),
-                user: sessionStorage.getItem('user'),
-                ...this.props.parentTable.listDataParams()
-            },
-            method: 'POST'
-        };
-
-        let res = await api.curd.exportExcel(params);
-
+        let _para = await this.props.parentTable.getExportExcelPara();
+        let res = await api.curd.exportExcel(_para);
         if (res.code == 200) {
             this.setState({
                 excelMsg: res.data
