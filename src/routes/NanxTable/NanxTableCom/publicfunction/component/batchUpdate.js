@@ -46,7 +46,6 @@ export default class BatchUpdate extends React.Component {
             data: {
                 DataGridCode: this.commonTableStore.datagrid_code,
                 batch_ids: this.state.batchId,
-                table: this.commonTableStore.base_table,
                 rawdata: {}
             },
             method: 'POST'

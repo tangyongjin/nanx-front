@@ -11,7 +11,7 @@ export default class TableAddCom extends React.Component {
     };
 
     init(btncode) {
-        console.log('button_code', this.props.parentTable.state.button_code);
+        // console.log('button_code', this.props.parentTable.state.button_code);
         this.props.commonTableStore.rowSelectChange([], []);
         this.refs.commonModalRef.showModal();
         this.props.commonTableStore.setTableAction('add_table');

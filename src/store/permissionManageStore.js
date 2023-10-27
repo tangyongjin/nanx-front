@@ -27,19 +27,12 @@ class permissionManageStore {
     // 角色权限列表
     @observable rolePermissionList = [];
     @observable userListHasRole = [];
-    @observable searchText = '';
-    @observable searchdataIndex = '';
-
-    @action handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm();
-        this.searchText = selectedKeys[0];
-        this.searchdataIndex = dataIndex;
-    };
+    @observable searchStr = '';
 
     @action
     handleReset = (clearFilters) => {
         clearFilters();
-        this.searchText = '';
+        this.searchStr = '';
     };
 
     @action getRoleList = async () => {

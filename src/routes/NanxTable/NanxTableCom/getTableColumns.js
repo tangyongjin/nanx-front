@@ -1,6 +1,12 @@
 import columnsRender from './columnsRender';
 import getTextWidth from './commonTableTextTool';
 
+const sorter = (valueA, valueB) => {
+    let targetA = valueA != null && valueA.toString().toLowerCase();
+    let targetB = valueB != null && valueB.toString().toLowerCase();
+    return targetA != null && targetA.localeCompare ? targetA.localeCompare(targetB) : targetA - targetB;
+};
+
 const getTableColumns = (tableStore) => {
     let hideColumns = [];
     let columns = [];
@@ -12,7 +18,7 @@ const getTableColumns = (tableStore) => {
             dataIndex: item.key,
             key: item.key,
             width: item.width && item.width != null && item.width != '' ? parseFloat(item.width) : 200,
-            sorter: (a, b) => this.sorter(a[item.key], b[item.key]),
+            sorter: (a, b) => sorter(a[item.key], b[item.key]),
             render: (text, record) => {
                 return columnsRender(text, record, item, tableStore);
             }

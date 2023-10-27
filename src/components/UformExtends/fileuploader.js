@@ -97,11 +97,6 @@ export default class Fileuploader extends React.Component {
         if (res.code == '200') {
             // message.success("删除附件成功")
         }
-        // }
-        //"filename": fileurl,
-        // "table":this.props.commontablestore.base_table,
-        // "id":this.props.commontablestore.selectedRows[0].id,
-        // "uploadname":this.props.field_id
     }
     getFilesList() {
         console.log('文件上传组件props', this.props);

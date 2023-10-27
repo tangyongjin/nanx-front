@@ -96,7 +96,6 @@ export default class TableEditCom extends React.Component {
                     referinfo={this.props.commonTableStore.referinfo}
                     formCfg={this.props.commonTableStore.formCfg}
                     layoutcfg={this.props.commonTableStore.layoutcfg}
-                    staticformcfg={this.props.commonTableStore.staticformcfg}
                     commonTableStore={this.props.commonTableStore}
                     saveFormData={this.saveFormData.bind(this)}
                 />

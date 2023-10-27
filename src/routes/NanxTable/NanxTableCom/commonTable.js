@@ -1,5 +1,5 @@
 import '../commonTable.scss';
-import { Button, Table } from 'antd';
+import { Table } from 'antd';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
 import api from '@/api/api';
@@ -7,6 +7,7 @@ import fetchDataGridCfg from './fetchDataGridCfg';
 import listDataParams from './listDataParams';
 import commonTableStore from '@/store/commonTableStore';
 import getTableColumns from './getTableColumns';
+import renderButtons from './renderButtons';
 import React from 'react';
 import ResizeableTitle from './resizeableTitle';
 
@@ -14,33 +15,14 @@ import ResizeableTitle from './resizeableTitle';
 export default class CommonTable extends React.Component {
     constructor(props) {
         super(props);
-
         this.commonTableStore = new commonTableStore();
-
         this.state = {
-            buttonremark: 'false',
-            button_code: '',
-            buttonUsedComponent: null,
             columns: [],
             search_query_cfg: null,
             isFilterSelfData: false,
             query_cfg: this.props.query_cfg ? this.props.query_cfg : null //表格保持自己的query_cfg
         };
-        this.resetTable = this.resetTable.bind(this);
-        this.pluginComRef = null;
     }
-
-    // 查询
-    inquireModal = async (data) => {
-        await this.setState({ query_cfg: data });
-        await this.listData();
-    };
-
-    searchOrder = async (data) => {
-        await this.commonTableStore.setCurrentPage(1);
-        await this.setState({ search_query_cfg: data });
-        await this.listData();
-    };
 
     //设置表格自己的query_cfg ,不是store的 query_cfg
     setTableCompomentQueryCfg = async (cfg) => {
@@ -99,7 +81,6 @@ export default class CommonTable extends React.Component {
         };
 
         params.geturl = toJS(this.commonTableStore.curd).geturl;
-
         if (params.geturl === undefined) {
             return;
         }
@@ -113,145 +94,37 @@ export default class CommonTable extends React.Component {
         }
     };
 
-    resetTable() {
-        this.setState({ query_cfg: null }, () => {
-            this.listData();
-        });
-    }
-
-    getComponentByFile = (path) => {
-        let _compoment = require(`../../../buttons/${path}`).default;
-        return _compoment;
-    };
-
-    renderButtons() {
-        if (!this.commonTableStore.TableButtonsJson) {
-            return null;
-        }
-        return this.commonTableStore.TableButtonsJson.map((item, index) => {
-            return (
-                <Button
-                    key={index}
-                    type={item.ui_type}
-                    htmlType="button"
-                    onClick={(event) => this.getButtonHandler(event, item)}
-                    size="small"
-                    style={{ margin: 8 }}>
-                    {item.title}
-                </Button>
-            );
-        });
-    }
-
-    getButtonHandler(event, item) {
-        let _compoment = this.getComponentByFile(item.file_path);
-        this.setState(
-            {
-                button_code: item.button_code,
-                buttonUsedComponent: _compoment
-            },
-            () => {
-                this.pluginComRef['init']();
-            }
-        );
-    }
-
     RenderBthHolder() {
-        let ButthonHolder = this.state.buttonUsedComponent;
-        if (this.state.buttonUsedComponent) {
+        let HiddenModalContainer = this.commonTableStore.ButtonUsedCom;
+        if (this.commonTableStore.ButtonUsedCom) {
             return (
-                <div style={{ border: '1px solid red', height: '100px' }}>
-                    <ButthonHolder
-                        ref={(item) => {
-                            this.pluginComRef = item;
-                        }}
-                        parentTable={this}
-                        as_virtual={this.props.as_virtual}
-                        editable={true}
-                        onChange={this.props.onChange}
-                        commonTableStore={this.commonTableStore}
-                        dataGridcode2={this.props.dataGridCode}
-                        refreshTable={this.refreshTable}
-                        resetTable={this.resetTable}
-                        setQueryCfg={this.setTableCompomentQueryCfg}
-                        setSearchQueryConfig={this.setSearchQueryConfig}
-                        inquireModal={this.inquireModal}
-                        searchOrder={this.searchOrder}
-                        onCancel={this.props.onCancel}
-                    />
-                </div>
+                <HiddenModalContainer
+                    ref={async (item) => {
+                        await this.commonTableStore.setLazyButtonUsedCom(item);
+                    }}
+                    parentTable={this}
+                    commonTableStore={this.commonTableStore}
+                    setQueryCfg={this.setTableCompomentQueryCfg}
+                    setSearchQueryConfig={this.setSearchQueryConfig}
+                    refreshTable={this.refreshTable}
+                />
             );
         }
-    }
-
-    handleResize =
-        (col, index) =>
-        (e, { size }) => {
-            const nextColumns = [...this.state.columns];
-            nextColumns[index] = {
-                ...nextColumns[index],
-                width: size.width
-            };
-            this.setState({
-                columns: nextColumns
-            });
-        };
-
-    sorter(valueA, valueB) {
-        let targetA = valueA != null && valueA.toString().toLowerCase();
-        let targetB = valueB != null && valueB.toString().toLowerCase();
-        return targetA != null && targetA.localeCompare ? targetA.localeCompare(targetB) : targetA - targetB;
-    }
-
-    getResizeColumns() {
-        const columns = this.state.columns.map((col, index) => ({
-            ...col,
-            onHeaderCell: (column) => {
-                return {
-                    // width: column.width ? column.width : 200,
-                    onResize: this.handleResize(col, index)
-                };
-            }
-        }));
-        return columns;
     }
 
     async setCurrentPage(currentPage) {
-        if (this.commonTableStore.currentPage == currentPage) {
-            return;
-        }
         this.commonTableStore.setCurrentPage(currentPage);
         await this.listData();
     }
 
-    getTableComponents() {
-        return {
-            header: {
-                cell: ResizeableTitle
-            }
-        };
-    }
-
     onRowClick(event, record) {
-        if (this.props.sendData) {
-            let arr = [];
-            arr.push(record);
-            this.props.sendData(arr);
-        }
-        if (this.commonTableStore.selectType == 'y') {
-            this.commonTableStore.rowcheckChange([record.id], [record]);
-        } else {
-            this.commonTableStore.rowSelectChange([record.id], [record]);
-        }
+        this.commonTableStore.rowSelectChange([record.id], [record]);
         this.props.onChange && this.props.onChange(this.commonTableStore.selectedRows);
     }
 
     rowSelectChange(selectedRowKeys, selectedRows) {
         this.commonTableStore.rowSelectChange(selectedRowKeys, selectedRows);
         this.props.onChange && this.props.onChange(this.commonTableStore.selectedRows);
-        if (this.props.sendData) {
-            this.props.sendData(selectedRows);
-        }
     }
 
     onShowSizeChange = async (current, pageSize) => {
@@ -272,7 +145,7 @@ export default class CommonTable extends React.Component {
             bordered: true,
             dataSource: this.commonTableStore.dataSource,
             rowSelection: {
-                type: this.commonTableStore.selectType == 'y' ? 'checkbox' : 'radio',
+                type: 'radio',
                 selectedRowKeys: this.commonTableStore.selectedRowKeys,
                 onChange: (selectedRowKeys, selectedRows) => this.rowSelectChange(selectedRowKeys, selectedRows)
             },
@@ -316,14 +189,17 @@ export default class CommonTable extends React.Component {
         return (
             <div className="table_wrapper" style={styles}>
                 {this.RenderBthHolder()}
-
-                <div className="table_button">{this.renderButtons()}</div>
+                <div className="table_button">{renderButtons(this.commonTableStore)}</div>
                 <Table
                     size={this.props.size ? 'small' : 'default'}
                     columns={this.state.columns}
                     key={this.props.datagrid_code}
                     className="commonTable"
-                    components={this.getTableComponents()}
+                    components={{
+                        header: {
+                            cell: ResizeableTitle
+                        }
+                    }}
                     {...tableProps}
                 />
             </div>

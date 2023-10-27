@@ -21,13 +21,8 @@ const fetchDataGridCfg = async (tableStore, setTableCompomentQueryCfg) => {
         tableStore.setReferinfo(res.data.referinfo);
         tableStore.setlayoutCfg(res.data.layoutcfg);
         tableStore.setTips(res.data.tips);
-        if (res.data.staticformcfg) {
-            tableStore.setstaticformcfg(res.data.staticformcfg);
-        }
 
-        tableStore.setselectType(res.data.multiple);
         tableStore.setTableButtonsJson(res.data.buttons);
-        tableStore.setBaseTable(res.data.base_table);
         tableStore.setCurd(res.data.curd);
         tableStore.setTableWidth(res.data.table_width);
 
