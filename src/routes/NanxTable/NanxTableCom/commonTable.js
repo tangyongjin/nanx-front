@@ -14,16 +14,17 @@ import ResizeableTitle from './resizeableTitle';
 export default class CommonTable extends React.Component {
     constructor(props) {
         super(props);
+        console.log('common table,props', props);
         this.commonTableStore = new commonTableStore();
         this.state = {
             search_query_cfg: null,
             isFilterSelfData: false,
-            query_cfg: this.props.query_cfg ? this.props.query_cfg : null //表格保持自己的query_cfg
+            fixed_query_cfg: this.props.query_cfg ? this.props.query_cfg : null //表格保持自己的query_cfg
         };
     }
 
-    setTableCompomentQueryCfg = async (cfg) => {
-        this.setState({ query_cfg: cfg });
+    setFixedQueryCfg = async (cfg) => {
+        this.setState({ fixed_query_cfg: cfg });
     };
 
     setSearchQueryConfig = async (cfg) => {
@@ -44,15 +45,14 @@ export default class CommonTable extends React.Component {
     }
 
     getExportExcelPara = async () => {
-        await fetchDataGridCfg(this.commonTableStore, this.setTableCompomentQueryCfg);
+        await fetchDataGridCfg(this.commonTableStore, this.setFixedQueryCfg);
         if (this.props.as_virtual == 'y') {
             return 'as_virtual=y';
         }
 
-        await this.setState({ search_query_cfg: null });
-        let data = listDataParams(this.commonTableStore, this.state);
+        let paradata = listDataParams(this.commonTableStore, this.state);
         let params = {
-            data: data,
+            data: paradata,
             method: 'POST'
         };
 
@@ -61,7 +61,7 @@ export default class CommonTable extends React.Component {
     };
 
     refreshTable = async () => {
-        await fetchDataGridCfg(this.commonTableStore, this.setTableCompomentQueryCfg);
+        await fetchDataGridCfg(this.commonTableStore, this.setFixedQueryCfg);
         if (this.props.as_virtual == 'y') {
             return;
         }
@@ -101,7 +101,7 @@ export default class CommonTable extends React.Component {
                     }}
                     parentTable={this}
                     commonTableStore={this.commonTableStore}
-                    setQueryCfg={this.setTableCompomentQueryCfg}
+                    // setQueryCfg={this.setFixedQueryCfg}
                     setSearchQueryConfig={this.setSearchQueryConfig}
                     refreshTable={this.refreshTable}
                 />

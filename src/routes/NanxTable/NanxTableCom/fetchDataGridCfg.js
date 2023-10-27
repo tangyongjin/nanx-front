@@ -2,7 +2,7 @@ import api from '@/api/api';
 import { message } from 'antd';
 import { toJS } from 'mobx';
 
-const fetchDataGridCfg = async (tableStore, setTableCompomentQueryCfg) => {
+const fetchDataGridCfg = async (tableStore, setFixedQueryCfg) => {
     let params = {
         data: {
             DataGridCode: tableStore.datagrid_code,
@@ -24,7 +24,7 @@ const fetchDataGridCfg = async (tableStore, setTableCompomentQueryCfg) => {
         tableStore.setTableWidth(res.data.table_width);
 
         if (res.data.fixed_query_cfg) {
-            setTableCompomentQueryCfg(res.data.fixed_query_cfg);
+            setFixedQueryCfg(res.data.fixed_query_cfg);
         }
         return;
     } else {
