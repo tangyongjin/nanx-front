@@ -22,10 +22,8 @@ const fetchDataGridCfg = async (tableStore, setFixedQueryCfg) => {
         tableStore.setTableButtons(res.data.buttons);
         tableStore.setCurd(res.data.curd);
         tableStore.setTableWidth(res.data.table_width);
+        tableStore.setFixedQueryCfg(res.data.fixed_query_cfg);
 
-        if (res.data.fixed_query_cfg) {
-            setFixedQueryCfg(res.data.fixed_query_cfg);
-        }
         return;
     } else {
         message.error('获取表格配置失败');

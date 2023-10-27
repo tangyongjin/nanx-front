@@ -31,6 +31,8 @@ class commonTableStore {
 
     @action setPageSize = (pageSize) => (this.pageSize = pageSize);
 
+    @action setFixedQueryCfg = (fx) => (this.fixed_query_cfg = fx);
+
     @action registerTrigger(obj) {
         this.triggers.push(obj);
     }

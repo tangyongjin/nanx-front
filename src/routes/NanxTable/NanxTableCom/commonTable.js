@@ -5,7 +5,6 @@ import { toJS } from 'mobx';
 import api from '@/api/api';
 import fetchDataGridCfg from './fetchDataGridCfg';
 import listDataParams from './listDataParams';
-import commonTableStore from '@/store/commonTableStore';
 import renderButtons from './renderButtons';
 import React from 'react';
 import ResizeableTitle from './resizeableTitle';
@@ -15,19 +14,13 @@ import ResizeableTitle from './resizeableTitle';
 export default class CommonTable extends React.Component {
     constructor(props) {
         super(props);
-        console.log('common table,props', props);
-        // this.commonTableStore = new commonTableStore();
+        console.log('|||||||||||ommon table,props', props);
         this.commonTableStore = props.commonTableStore;
         this.state = {
             search_query_cfg: null,
-            isFilterSelfData: false,
-            fixed_query_cfg: this.props.query_cfg ? this.props.query_cfg : null //表格保持自己的query_cfg
+            isFilterSelfData: false
         };
     }
-
-    setFixedQueryCfg = async (cfg) => {
-        this.setState({ fixed_query_cfg: cfg });
-    };
 
     setSearchQueryConfig = async (cfg) => {
         this.setState({ search_query_cfg: cfg });
@@ -47,7 +40,7 @@ export default class CommonTable extends React.Component {
     }
 
     getExportExcelPara = async () => {
-        await fetchDataGridCfg(this.commonTableStore, this.setFixedQueryCfg);
+        await fetchDataGridCfg(this.commonTableStore);
         if (this.props.as_virtual == 'y') {
             return 'as_virtual=y';
         }
@@ -103,7 +96,6 @@ export default class CommonTable extends React.Component {
                     }}
                     parentTable={this}
                     commonTableStore={this.commonTableStore}
-                    // setQueryCfg={this.setFixedQueryCfg}
                     setSearchQueryConfig={this.setSearchQueryConfig}
                     refreshTable={this.refreshTable}
                 />

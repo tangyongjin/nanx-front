@@ -20,7 +20,6 @@ class dmStore {
     @observable plugins = [];
     @observable Categories = [];
     @observable currentObj = {};
-    @observable fixed_query_cfg = '';
     @observable maintable = '';
     @observable relatedtableColumns = [];
     @observable relatedtable = [];

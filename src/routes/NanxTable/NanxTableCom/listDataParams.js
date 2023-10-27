@@ -5,18 +5,18 @@ const listDataParams = (tableStore, parentState) => {
     if (parentState.search_query_cfg !== null && typeof parentState.search_query_cfg !== 'object') {
         query_config = parentState.search_query_cfg;
     } else {
-        if (parentState.fixed_query_cfg == null && parentState.search_query_cfg != null) {
+        if (tableStore.fixed_query_cfg == null && parentState.search_query_cfg != null) {
             var arr = parentState.search_query_cfg;
             query_config.count = arr.length;
             arr.forEach((item) => {
                 query_config.lines = { ...query_config.lines, ...item };
             });
-        } else if (parentState.fixed_query_cfg != null && parentState.search_query_cfg == null) {
-            query_config = parentState.fixed_query_cfg;
-        } else if (parentState.fixed_query_cfg == null && parentState.search_query_cfg == null) {
+        } else if (tableStore.fixed_query_cfg != null && parentState.search_query_cfg == null) {
+            query_config = tableStore.fixed_query_cfg;
+        } else if (tableStore.fixed_query_cfg == null && parentState.search_query_cfg == null) {
             query_config = null;
-        } else if (parentState.fixed_query_cfg != null && parentState.search_query_cfg != null) {
-            var queryarr = Object.keys(parentState.fixed_query_cfg.lines);
+        } else if (tableStore.fixed_query_cfg != null && parentState.search_query_cfg != null) {
+            var queryarr = Object.keys(tableStore.fixed_query_cfg.lines);
             var num1 = queryarr.length / 4;
             var count = queryarr.length / 4;
             var num = parentState.search_query_cfg.length;
@@ -36,7 +36,7 @@ const listDataParams = (tableStore, parentState) => {
                 query_cfg.lines = { ...query_cfg.lines, ...item };
             });
 
-            Object.assign(query_cfg1, query_cfg.lines, parentState.fixed_query_cfg.lines);
+            Object.assign(query_cfg1, query_cfg.lines, tableStore.fixed_query_cfg.lines);
             query_config.count = num1 + num;
             query_config.lines = query_cfg1;
         }
