@@ -11,7 +11,9 @@ const getTableColumns = (tableStore) => {
     let hideColumns = [];
     let columns = [];
 
-    tableStore.tableColumns.map((item, index) => {
+    console.log(tableStore.tableColumns);
+
+    tableStore.tableColumns.map((item) => {
         let column = {
             title: item.title,
             dataIndex: item.key,

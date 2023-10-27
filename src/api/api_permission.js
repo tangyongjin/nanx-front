@@ -6,7 +6,6 @@ const api_root = `${root_url}:${port}/${version_2}`;
 export default class permission {
     static apis = {
         getRoleMenuList: (params) => http(params, `${api_root}/Permission/getRoleMenuList`),
-        getUserByRole: (params) => http(params, `${api_root}/Permission/getUserByRole`),
         getTreeMenuList: (params) => http(params, `${api_root}/Permission/getTreeMenuList`),
         saveMenuPermission: (params) => http(params, `${api_root}/Permission/saveMenuPermission`),
         getRoleList: (params) => http(params, `${api_root}/Permission/getRoleList`),

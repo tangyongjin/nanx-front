@@ -1,4 +1,4 @@
-import { observable, action, toJS } from 'mobx';
+import { observable, action } from 'mobx';
 
 class commonTableStore {
     @observable datagrid_code = null;
@@ -95,7 +95,7 @@ class commonTableStore {
     @action setCurrentPage = (currentPage) => (this.currentPage = currentPage);
     @action setDataSource = (dataSource) => (this.dataSource = dataSource);
     @action setTotal = (total) => (this.total = total);
-    @action setTableColumns = (tableColumns) => (this.tableColumns = toJS(tableColumns));
+    @action setTableColumns = (tableColumns) => (this.tableColumns = tableColumns);
     @action setFormCfg = (formCfg) => (this.formCfg = formCfg);
     @action setReferinfo = (referinfo) => (this.referinfo = referinfo);
     @action setlayoutCfg = (layoutcfg) => (this.layoutcfg = layoutcfg);

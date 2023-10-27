@@ -1,5 +1,6 @@
 import api from '@/api/api';
 import { message } from 'antd';
+import { toJS } from 'mobx';
 
 const fetchDataGridCfg = async (tableStore, setTableCompomentQueryCfg) => {
     tableStore.clearSelectRowData();
@@ -15,8 +16,8 @@ const fetchDataGridCfg = async (tableStore, setTableCompomentQueryCfg) => {
     let res = await api.dataGrid.fetchDataGridCfg(params);
     if (res.code == 200) {
         console.log(res.data);
-
-        tableStore.setTableColumns(res.data.tableColumnConfig);
+        console.log(res.data.tableColumnConfig);
+        tableStore.setTableColumns(toJS(res.data.tableColumnConfig));
         tableStore.setFormCfg(res.data.formcfg);
         tableStore.setReferinfo(res.data.referinfo);
         tableStore.setlayoutCfg(res.data.layoutcfg);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import api from '@/api/api';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import CommonTable from '@/routes/NanxTable/NanxTableCom/commonTable';
 import GridRefer from './gridRefer';
 import { SchemaForm } from '@uform/antd';

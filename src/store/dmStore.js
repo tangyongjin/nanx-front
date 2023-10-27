@@ -142,7 +142,7 @@ class dmStore {
     };
 
     @action setFieldAttr = (field, attr, value) => {
-        this.maintableColumns.map((element, idx) => {
+        this.maintableColumns.foreach((element) => {
             if (element.Field === field) {
                 element[attr] = value;
             }

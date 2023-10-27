@@ -95,7 +95,7 @@ class navigationStore {
         sessionStorage.setItem('badge', JSON.stringify(data));
     };
 
-    @action setBadge = (data) => {
+    @action setBadge = () => {
         // this.message_count = data.unreadnumber ? data.unreadnumber : 0;
         // this.affair_count = data.pendingnumber ? data.pendingnumber : 0;
     };
