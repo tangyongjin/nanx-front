@@ -16,13 +16,13 @@ const fetchDataGridCfg = async (tableStore, setTableCompomentQueryCfg) => {
     if (res.code == 200) {
         console.log(res.data);
 
-        tableStore.setTableColumnsJson(res.data.tableColumnConfig);
+        tableStore.setTableColumns(res.data.tableColumnConfig);
         tableStore.setFormCfg(res.data.formcfg);
         tableStore.setReferinfo(res.data.referinfo);
         tableStore.setlayoutCfg(res.data.layoutcfg);
         tableStore.setTips(res.data.tips);
 
-        tableStore.setTableButtonsJson(res.data.buttons);
+        tableStore.setTableButtons(res.data.buttons);
         tableStore.setCurd(res.data.curd);
         tableStore.setTableWidth(res.data.table_width);
 
@@ -32,7 +32,7 @@ const fetchDataGridCfg = async (tableStore, setTableCompomentQueryCfg) => {
         return;
     }
 
-    tableStore.setTableColumnsJson([]);
+    tableStore.setTableColumns([]);
     tableStore.setFormCfg({});
     message.error('获取表格配置失败');
 };

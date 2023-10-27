@@ -78,7 +78,6 @@ export default class TableAddCom extends React.Component {
                     referinfo={this.props.commonTableStore.referinfo}
                     dataGridcode={this.props.dataGridCode}
                     layoutcfg={this.props.commonTableStore.layoutcfg}
-                    staticformcfg={this.props.commonTableStore.staticformcfg}
                     selectedRows={this.props.commonTableStore.selectedRows}
                     commonTableStore={this.props.commonTableStore}
                     saveFormData={this.saveFormData.bind(this)}

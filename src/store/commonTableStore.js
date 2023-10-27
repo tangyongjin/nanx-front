@@ -14,8 +14,8 @@ class commonTableStore {
     @observable layoutcfg = null;
     @observable tips = null;
     @observable curd = {};
-    @observable TableButtonsJson = [];
-    @observable tableColumnsJson = [];
+    @observable TableButtons = [];
+    @observable tableColumns = [];
 
     @observable triggers = [];
     @observable schmeForm = [];
@@ -59,7 +59,7 @@ class commonTableStore {
         this.formCfg = null;
         this.layoutcfg = null;
         this.curd = {};
-        this.tableColumnsJson = [];
+        this.tableColumns = [];
         this.query_cfg = null;
         // this.lazyButtonUsedCom = 'AAA';
     };
@@ -95,12 +95,12 @@ class commonTableStore {
     @action setCurrentPage = (currentPage) => (this.currentPage = currentPage);
     @action setDataSource = (dataSource) => (this.dataSource = dataSource);
     @action setTotal = (total) => (this.total = total);
-    @action setTableColumnsJson = (tableColumnsJson) => (this.tableColumnsJson = toJS(tableColumnsJson));
+    @action setTableColumns = (tableColumns) => (this.tableColumns = toJS(tableColumns));
     @action setFormCfg = (formCfg) => (this.formCfg = formCfg);
     @action setReferinfo = (referinfo) => (this.referinfo = referinfo);
     @action setlayoutCfg = (layoutcfg) => (this.layoutcfg = layoutcfg);
     @action setTips = (tips) => (this.tips = tips);
-    @action setTableButtonsJson = (json) => (this.TableButtonsJson = json);
+    @action setTableButtons = (json) => (this.TableButtons = json);
     @action setCurd = (curd) => (this.curd = curd);
     @action setTableWidth = (table_width) => (this.table_width = table_width);
 

@@ -10,9 +10,8 @@ const sorter = (valueA, valueB) => {
 const getTableColumns = (tableStore) => {
     let hideColumns = [];
     let columns = [];
-    console.log(tableStore.tableColumnsJson);
 
-    tableStore.tableColumnsJson.map((item, index) => {
+    tableStore.tableColumns.map((item, index) => {
         let column = {
             title: item.title,
             dataIndex: item.key,

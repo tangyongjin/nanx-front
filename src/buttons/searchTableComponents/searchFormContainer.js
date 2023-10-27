@@ -83,7 +83,7 @@ export default class SearchFormContainer extends React.Component {
     };
 
     getFieldList = () => {
-        return this.props.tableColumnsJson.map(({ title, key }) => ({ label: title, value: key }));
+        return this.props.tableColumns.map(({ title, key }) => ({ label: title, value: key }));
     };
 
     addField = (event) => {
