@@ -14,21 +14,12 @@ export default class SearchFormContainer extends React.Component {
         };
     }
 
-    componentDidMount() {
-        console.log(this.props);
-        this.getFieldList();
-    }
-
     saveActions = (actions, index) => {
         let { field_group } = this.state;
         field_group[index].actions = actions;
         this.setState({
             field_group
         });
-    };
-
-    getFieldList = () => {
-        return this.props.commonTableStore.rawTableColumns.map(({ title, key }) => ({ label: title, value: key }));
     };
 
     addLine = () => {
@@ -70,8 +61,8 @@ export default class SearchFormContainer extends React.Component {
 
         this.props.commonTableStore.setCurrentPage(1);
         this.props.commonTableStore.setSearchQueryConfig(submitData);
-        this.props.rowSelectChange([], []);
-        this.props.listData();
+        this.props.commonTableStore.rowSelectChange([], []);
+        this.props.commonTableStore.listData();
         this.props.hideModal();
     };
 
@@ -111,7 +102,6 @@ export default class SearchFormContainer extends React.Component {
                         <SearchTableForm
                             key={index}
                             saveActions={this.saveActions}
-                            field_list={this.getFieldList()}
                             onOk={this.props.onOk}
                             form_index={item.inner_order}></SearchTableForm>
                     );

@@ -2,7 +2,9 @@ import { observable, action } from 'mobx';
 import columnsRender from '@/routes/NanxTable/NanxTableCom/columnsRender';
 import getTextWidth from '@/routes/NanxTable/NanxTableCom/commonTableTextTool';
 import sorter from '@/routes/NanxTable/NanxTableCom//sorter';
-
+import listDataParams from '@/routes/NanxTable/NanxTableCom/listDataParams';
+import api from '@/api/api';
+import { toJS } from 'mobx';
 class commonTableStore {
     @observable datagrid_code = null;
     @observable selectedRowKeys = [];
@@ -10,7 +12,7 @@ class commonTableStore {
     @observable dataSource = [];
     @observable total = 0;
     @observable currentPage = 1;
-    @observable pageSize = 20;
+    @observable pageSize = 10;
     @observable formCfg = null;
     @observable referinfo = null;
     @observable layoutcfg = null;
@@ -58,7 +60,6 @@ class commonTableStore {
         this.curd = {};
         this.rawTableColumns = [];
         this.query_cfg = null;
-        // this.lazyButtonUsedCom = 'AAA';
     };
 
     @action clearPaginationStore = () => {
@@ -81,7 +82,12 @@ class commonTableStore {
     };
 
     @action setTableAction = (table_action) => (this.table_action = table_action);
-    @action setCurrentPage = (currentPage) => (this.currentPage = currentPage);
+
+    @action setCurrentPage = (currentPage) => {
+        this.currentPage = currentPage;
+        this.listData();
+    };
+
     @action setDataSource = (dataSource) => (this.dataSource = dataSource);
     @action setTotal = (total) => (this.total = total);
 
@@ -150,7 +156,53 @@ class commonTableStore {
         this.setTableColumns(columns);
         return columns;
     };
+
+    @action listData = async () => {
+        let data = listDataParams(this);
+        let params = {
+            data: data,
+            method: 'POST'
+        };
+
+        params.geturl = toJS(this.curd).geturl;
+        if (params.geturl === undefined) {
+            return;
+        }
+
+        let json = await api.curd.listData(params);
+        if (json.code == 200) {
+            this.setDataSource(json.data);
+            this.setTotal(json.total);
+            this.getTableColumns();
+            this.rowSelectChange([], []);
+        }
+    };
+
+    @action onShowSizeChange = async (current, pageSize) => {
+        await this.setCurrentPage(current);
+        await this.setPageSize(pageSize);
+        await this.listData();
+    };
+
+    // bug ?
+    getPageNation = async () => {
+        let pg = {
+            showSizeChanger: true,
+            onShowSizeChange: this.onShowSizeChange,
+            total: this.total,
+            showLessItems: true,
+            defaultCurrent: this.currentPage,
+            current: this.currentPage,
+            pageSize: this.pageSize,
+            showQuickJumper: true,
+            showTotal: (count) => {
+                let pageNum = Math.ceil(count / this.pageSize);
+                return `共${pageNum}页/${count}条数据`;
+            },
+            onChange: (currentPage) => this.setCurrentPage(currentPage)
+        };
+        return pg;
+    };
 }
 
 export default new commonTableStore();
-// export default commonTableStore;

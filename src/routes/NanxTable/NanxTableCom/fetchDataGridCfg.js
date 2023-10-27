@@ -2,7 +2,7 @@ import api from '@/api/api';
 import { message } from 'antd';
 import { toJS } from 'mobx';
 
-const fetchDataGridCfg = async (tableStore, setFixedQueryCfg) => {
+const fetchDataGridCfg = async (tableStore) => {
     let params = {
         data: {
             DataGridCode: tableStore.datagrid_code,

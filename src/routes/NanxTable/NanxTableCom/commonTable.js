@@ -2,7 +2,6 @@ import '../commonTable.scss';
 import { Table } from 'antd';
 import { observer, inject } from 'mobx-react';
 import { toJS } from 'mobx';
-import api from '@/api/api';
 import fetchDataGridCfg from './fetchDataGridCfg';
 import listDataParams from './listDataParams';
 import renderButtons from './renderButtons';
@@ -14,165 +13,102 @@ import ResizeableTitle from './resizeableTitle';
 export default class CommonTable extends React.Component {
     constructor(props) {
         super(props);
-        console.log('|||||||||||ommon table,props', props);
-        this.commonTableStore = props.commonTableStore;
+        this.tbStore = props.commonTableStore;
         this.state = {
-            // search_query_cfg: null,
             isFilterSelfData: false
         };
     }
 
     async componentDidMount() {
-        this.commonTableStore.resetTableStore();
-        this.commonTableStore.clearPaginationStore();
-        await this.commonTableStore.setDataGridCode(this.props.datagrid_code);
+        this.tbStore.resetTableStore();
+        this.tbStore.clearPaginationStore();
+        await this.tbStore.setDataGridCode(this.props.datagrid_code);
         await this.refreshTable();
-        this.setState({ columns: this.commonTableStore.getTableColumns() });
-
-        // 作为uform插件时的赋值处理
-        if (this.props.onChange) {
-            this.props.onChange(this.commonTableStore.dataSource);
-        }
     }
 
     getExportExcelPara = async () => {
-        await fetchDataGridCfg(this.commonTableStore);
-        if (this.props.as_virtual == 'y') {
-            return 'as_virtual=y';
-        }
-
-        let paradata = listDataParams(this.commonTableStore);
+        await fetchDataGridCfg(this.tbStore);
+        let paradata = listDataParams(this.tbStore);
         let params = {
             data: paradata,
             method: 'POST'
         };
 
-        params.geturl = toJS(this.commonTableStore.curd).geturl;
+        params.geturl = toJS(this.tbStore.curd).geturl;
         return params;
     };
 
     refreshTable = async () => {
-        await fetchDataGridCfg(this.commonTableStore, this.setFixedQueryCfg);
-        if (this.props.as_virtual == 'y') {
-            return;
-        }
-        await this.setState({ search_query_cfg: null }, () => {
-            this.listData();
-        });
-    };
-
-    listData = async () => {
-        let data = listDataParams(this.commonTableStore);
-        let params = {
-            data: data,
-            method: 'POST'
-        };
-
-        params.geturl = toJS(this.commonTableStore.curd).geturl;
-        if (params.geturl === undefined) {
-            return;
-        }
-
-        let json = await api.curd.listData(params);
-        if (json.code == 200) {
-            this.commonTableStore.setDataSource(json.data);
-            this.commonTableStore.setTotal(json.total);
-            this.setState({ columns: this.commonTableStore.getTableColumns() });
-            this.rowSelectChange([], []);
-        }
+        await fetchDataGridCfg(this.tbStore);
+        await this.tbStore.setSearchQueryConfig(null);
+        await this.tbStore.listData();
     };
 
     RenderBthHolder() {
-        let LazyModalContainer = this.commonTableStore.ButtonUsedCom;
-        if (this.commonTableStore.ButtonUsedCom) {
+        let LazyModalContainer = this.tbStore.ButtonUsedCom;
+        if (this.tbStore.ButtonUsedCom) {
             return (
                 <LazyModalContainer
                     ref={async (item) => {
-                        await this.commonTableStore.setLazyButtonUsedCom(item);
+                        await this.tbStore.setLazyButtonUsedCom(item);
                     }}
                     parentTable={this}
-                    commonTableStore={this.commonTableStore}
-                    setSearchQueryConfig={this.commonTableStore.setSearchQueryConfig}
+                    tbStore={this.tbStore}
                     refreshTable={this.refreshTable}
                 />
             );
         }
     }
 
-    async setCurrentPage(currentPage) {
-        this.commonTableStore.setCurrentPage(currentPage);
-        await this.listData();
-    }
-
-    onRowClick(event, record) {
-        this.commonTableStore.rowSelectChange([record.id], [record]);
-        this.props.onChange && this.props.onChange(this.commonTableStore.selectedRows);
-    }
-
-    rowSelectChange(selectedRowKeys, selectedRows) {
-        this.commonTableStore.rowSelectChange(selectedRowKeys, selectedRows);
-        this.props.onChange && this.props.onChange(this.commonTableStore.selectedRows);
-    }
-
-    onShowSizeChange = async (current, pageSize) => {
-        this.commonTableStore.setCurrentPage(current);
-        this.commonTableStore.setPageSize(pageSize);
-        await this.listData();
-    };
-
     getTableProps() {
         return {
             onRow: (record) => {
                 return {
-                    onClick: (event) => this.onRowClick(event, record) // 点击行选中
+                    onClick: () => this.tbStore.rowSelectChange([record.id], [record]) // 点击行选中
                 };
             },
             rowKey: (record) => record.id,
             bordered: true,
-            dataSource: this.commonTableStore.dataSource,
+            dataSource: this.tbStore.dataSource,
             rowSelection: {
                 type: 'radio',
-                selectedRowKeys: this.commonTableStore.selectedRowKeys,
-                onChange: (selectedRowKeys, selectedRows) => this.rowSelectChange(selectedRowKeys, selectedRows)
+                selectedRowKeys: this.tbStore.selectedRowKeys,
+                onChange: (selectedRowKeys, selectedRows) =>
+                    this.this.tbStore.rowSelectChange(selectedRowKeys, selectedRows)
             },
 
             scroll: {
-                x: parseInt(this.commonTableStore.table_width)
-                // y: '720px'
+                x: parseInt(this.tbStore.table_width)
             },
-
+            pagination2: this.tbStore.getPageNation(),
             pagination: {
                 showSizeChanger: true,
-                onShowSizeChange: this.onShowSizeChange,
-                total: this.commonTableStore.total,
+                onShowSizeChange: this.tbStore.onShowSizeChange,
+                total: this.tbStore.total,
                 showLessItems: true,
-                defaultCurrent: this.commonTableStore.currentPage,
-                current: this.commonTableStore.currentPage,
-                pageSize: this.commonTableStore.pageSize,
+                defaultCurrent: this.tbStore.currentPage,
+                current: this.tbStore.currentPage,
+                pageSize: this.tbStore.pageSize,
                 showQuickJumper: true,
                 showTotal: (count) => {
-                    let pageNum = Math.ceil(count / this.commonTableStore.pageSize);
+                    let pageNum = Math.ceil(count / this.tbStore.pageSize);
                     return `共${pageNum}页/${count}条数据`;
                 },
-                onChange: (currentPage) => this.setCurrentPage(currentPage)
+                onChange: (currentPage) => this.tbStore.setCurrentPage(currentPage)
             }
         };
     }
 
     render() {
-        let styles = {
-            padding: '10px'
-        };
-
         let tableProps = this.getTableProps();
 
         return (
-            <div className="table_wrapper" style={styles}>
+            <div className="table_wrapper">
                 {this.RenderBthHolder()}
-                <div className="table_button">{renderButtons(this.commonTableStore)}</div>
+                <div className="table_button">{renderButtons(this.tbStore)}</div>
                 <Table
                     size={this.props.size ? 'small' : 'default'}
-                    columns={this.commonTableStore.tableColumns}
+                    columns={this.tbStore.tableColumns}
                     key={this.props.datagrid_code}
                     className="commonTable"
                     components={{

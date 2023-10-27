@@ -54,9 +54,7 @@ export default class SearchTableModal extends React.Component {
             <Modal width={800} {...modalProps}>
                 <SearchFormContainer
                     ref="searchFormContainerRef"
-                    rowSelectChange={this.props.parentTable.rowSelectChange.bind(this.props.parentTable)}
                     hideModal={this.onCancelHandle}
-                    listData={this.props.parentTable.listData}
                     onOk={this.searchQuery}
                 />
             </Modal>

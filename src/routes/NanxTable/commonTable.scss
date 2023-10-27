@@ -1,52 +1,69 @@
-.ant-col-12{
-    height:auto
-}
-.addmodal .ant-row{
-    width:50%;
-    height:65px;
-    float:left;
+.ant-col-12 {
+    height: auto
 }
 
-.ant-modal-header{
-    border-radius:8px 8px 0 0
+.addmodal .ant-row {
+    width : 50%;
+    height: 65px;
+    float : left;
 }
-.ant-modal-content{
-    border-radius:8px;
+
+.ant-modal-header {
+    border-radius: 8px 8px 0 0
 }
-.ant-btn-primary{
-    background:#101316;
-    border-color:#101316
+
+.ant-modal-content {
+    border-radius: 8px;
 }
-.ant-btn-primary:hover{
-    background:#101316;
+
+.ant-btn-primary {
+    background  : #101316;
+    border-color: #101316
 }
-.ant-btn-primary:hover{
-    background:#101316;
+
+.ant-btn-primary:hover {
+    background: #101316;
 }
-.ant-btn-primary:focus{
-    background:#101316;
+
+.ant-btn-primary:hover {
+    background: #101316;
 }
-.ant-btn-primary:active{
-    background:#101316;
+
+.ant-btn-primary:focus {
+    background: #101316;
 }
-.ant-modal-close{
-    color:#fff
+
+.ant-btn-primary:active {
+    background: #101316;
 }
-.ant-modal-title{
-    color:#fff;
-    font-size:20px
+
+.ant-modal-close {
+    color: #fff
 }
-.ant-modal-header{
-    background:#101316
+
+.ant-modal-title {
+    color    : #fff;
+    font-size: 20px
 }
-.inquiremodal .ant-card-bordered{
-border:0px
+
+.ant-modal-header {
+    background: #101316
 }
-.inquiremodal .ant-row{
-    width:48%;
-    float:left;
-    margin-right:2%
+
+.inquiremodal .ant-card-bordered {
+    border: 0px
 }
-.inquiremodal .ant-card-body{
-    padding:0px
+
+.inquiremodal .ant-row {
+    width       : 48%;
+    float       : left;
+    margin-right: 2%
+}
+
+.inquiremodal .ant-card-body {
+    padding: 0px
+}
+
+.table_wrapper {
+    padding: '10px'
 }

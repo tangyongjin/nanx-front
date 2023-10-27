@@ -9,9 +9,7 @@ import { observer, inject } from 'mobx-react';
 export default class SearchTableForm extends React.Component {
     constructor(props) {
         super(props);
-
         let actions = createAsyncFormActions();
-
         this.state = {
             actions: actions
         };
@@ -76,6 +74,10 @@ export default class SearchTableForm extends React.Component {
         ]
     };
 
+    getFieldList = () => {
+        return this.props.commonTableStore.rawTableColumns.map(({ title, key }) => ({ label: title, value: key }));
+    };
+
     componentWillMount() {
         this.props.saveActions(this, this.props.form_index);
     }
@@ -89,7 +91,7 @@ export default class SearchTableForm extends React.Component {
         return (
             <SchemaForm
                 actions={this.state.actions}
-                effects={($, { setFieldState, getFieldState }) => {
+                effects={($, { setFieldState }) => {
                     $('onFormInit').subscribe(() => {
                         setFieldState('field_' + this.props.form_index, (state) => {
                             state.enum = this.props.fieldList;
@@ -184,7 +186,7 @@ export default class SearchTableForm extends React.Component {
                         name={'field_' + this.props.form_index}
                         default=""
                         required
-                        enum={this.props.field_list}
+                        enum={this.getFieldList()}
                         x-effect={(dispatch) => ({
                             onChange(value, type, option) {
                                 dispatch('onChangeOption', option);
