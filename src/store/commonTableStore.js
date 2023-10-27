@@ -145,4 +145,5 @@ class commonTableStore {
     };
 }
 
-export default commonTableStore;
+export default new commonTableStore();
+// export default commonTableStore;

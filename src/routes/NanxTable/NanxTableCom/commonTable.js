@@ -1,6 +1,6 @@
 import '../commonTable.scss';
 import { Table } from 'antd';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import { toJS } from 'mobx';
 import api from '@/api/api';
 import fetchDataGridCfg from './fetchDataGridCfg';
@@ -10,12 +10,14 @@ import renderButtons from './renderButtons';
 import React from 'react';
 import ResizeableTitle from './resizeableTitle';
 
+@inject('commonTableStore')
 @observer
 export default class CommonTable extends React.Component {
     constructor(props) {
         super(props);
         console.log('common table,props', props);
-        this.commonTableStore = new commonTableStore();
+        // this.commonTableStore = new commonTableStore();
+        this.commonTableStore = props.commonTableStore;
         this.state = {
             search_query_cfg: null,
             isFilterSelfData: false,

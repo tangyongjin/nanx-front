@@ -45,13 +45,13 @@ inquirer.prompt(questions).then(async (answers) => {
 
     try {
         const [rows] = await connection.execute(
-            'INSERT INTO boss_portal_button (button_code, name, icon, style, file_path, using_component, component_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO  nanx_portal_button (button_code, name, icon, style, file_path, using_component, component_name) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [buttonCode, buttonText, 'File', 'primary', compomentName, 'y', compomentName]
         );
 
-        console.log(`成功插入数据到boss_portal_button表格,插入ID: ${rows.insertId}`);
+        console.log(`成功插入数据到 nanx_portal_button表格,插入ID: ${rows.insertId}`);
 
-        // 查询 boss_portal_button_actcode 表格中 datagrid_code 为 DataGridCode 的记录总数
+        // 查询 nanx_portal_button_actcode 表格中 datagrid_code 为 DataGridCode 的记录总数
         const [rowCount] = await connection.execute(
             'SELECT COUNT(*) as count FROM nanx_portal_button_actcode WHERE datagrid_code = ?',
             [DataGridCode]
@@ -59,7 +59,7 @@ inquirer.prompt(questions).then(async (answers) => {
 
         const count = rowCount[0].count;
 
-        // 插入数据到 boss_portal_button_actcode 表格
+        // 插入数据到 nanx_portal_button_actcode 表格
         const [rowsActcode] = await connection.execute(
             'INSERT INTO nanx_portal_button_actcode (button_code, datagrid_code, btnorder) VALUES (?, ?, ?)',
             [buttonCode, DataGridCode, count + 1]

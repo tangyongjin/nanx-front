@@ -7,9 +7,11 @@ import userStore from './userStore';
 const store = {
     navigationStore,
     userStore,
-    commonTableStore: new commonTableStore(),
+    commonTableStore,
     permissionManageStore,
     dmStore
 };
+
+// commonTableStore: new commonTableStore(),
 
 export default store;

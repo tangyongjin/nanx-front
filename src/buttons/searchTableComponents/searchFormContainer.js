@@ -1,71 +1,16 @@
 import React from 'react';
 import { Button, message } from 'antd';
 import SearchTableForm from './searchTableForm';
+import { observer, inject } from 'mobx-react';
 
+@inject('commonTableStore')
+@observer
 export default class SearchFormContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             field_group: [{ inner_order: 0 }],
-            field_list: [],
-            operation_list: {
-                string: [
-                    {
-                        label: '包含',
-                        value: 'like'
-                    },
-                    {
-                        label: '等于',
-                        value: '='
-                    },
-                    {
-                        label: '不等于',
-                        value: '!='
-                    }
-                ],
-                date: [
-                    {
-                        label: '大于等于',
-                        value: '>='
-                    },
-                    {
-                        label: '等于',
-                        value: '='
-                    },
-                    {
-                        label: '小于等于',
-                        value: '<='
-                    }
-                ],
-                number: [
-                    {
-                        label: '大于等于',
-                        value: '>='
-                    },
-                    {
-                        label: '等于',
-                        value: '='
-                    },
-                    {
-                        label: '小于等于',
-                        value: '<='
-                    }
-                ],
-                other: [
-                    {
-                        label: '包含',
-                        value: 'like'
-                    },
-                    {
-                        label: '等于',
-                        value: '='
-                    },
-                    {
-                        label: '小于等于',
-                        value: '!='
-                    }
-                ]
-            }
+            field_list: []
         };
     }
 
@@ -83,17 +28,17 @@ export default class SearchFormContainer extends React.Component {
     };
 
     getFieldList = () => {
-        return this.props.tableColumns.map(({ title, key }) => ({ label: title, value: key }));
+        return this.props.commonTableStore.rawTableColumns.map(({ title, key }) => ({ label: title, value: key }));
     };
 
-    addField = () => {
+    addLine = () => {
         let { field_group } = this.state;
         let field_cfg = { inner_order: field_group.length };
         field_group.push(field_cfg);
         this.setState({ field_group });
     };
 
-    delField = () => {
+    deleteLine = () => {
         if (this.state.field_group.length == 1) {
             return;
         }
@@ -122,7 +67,8 @@ export default class SearchFormContainer extends React.Component {
         submitData.map((item) => {
             query_cfg.lines = { ...query_cfg.lines, ...item };
         });
-        this.props.setCurrentPage(1);
+
+        this.props.commonTableStore.setCurrentPage(1);
         this.props.setQueryCfg(submitData);
         this.props.rowSelectChange([], []);
         this.props.listData();
@@ -152,11 +98,11 @@ export default class SearchFormContainer extends React.Component {
                         type="primary"
                         htmlType="button"
                         size="small"
-                        onClick={this.addField}
+                        onClick={this.addLine}
                         style={{ marginRight: '10px' }}>
                         增加
                     </Button>
-                    <Button type="danger" htmlType="button" size="small" onClick={this.delField}>
+                    <Button type="danger" htmlType="button" size="small" onClick={this.deleteLine}>
                         删除
                     </Button>
                 </div>
@@ -165,8 +111,6 @@ export default class SearchFormContainer extends React.Component {
                         <SearchTableForm
                             key={index}
                             saveActions={this.saveActions}
-                            operation_list={this.state.operation_list}
-                            formCfg={this.props.formCfg.properties}
                             field_list={this.getFieldList()}
                             onOk={this.props.onOk}
                             form_index={item.inner_order}></SearchTableForm>

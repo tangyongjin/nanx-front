@@ -1,8 +1,7 @@
 import React from 'react';
-import { Modal } from 'antd';
-import SearchFormContainer from './searchFormContainer';
+import { Modal, message } from 'antd';
 
-export default class SearchTableModal extends React.Component {
+export default class FixedQueryBuilder extends React.Component {
     constructor(props) {
         super(props);
         this.init = this.init.bind(this);
@@ -12,6 +11,10 @@ export default class SearchTableModal extends React.Component {
     }
 
     init() {
+        if (this.props.commonTableStore.selectedRowKeys.length <= 0) {
+            message.error('请选择一条数据');
+            return;
+        }
         this.showModal();
     }
 
@@ -34,7 +37,7 @@ export default class SearchTableModal extends React.Component {
     getModalProps() {
         return {
             destroyOnClose: true,
-            title: '数据检索',
+            title: '设置FixedQueryConfig',
             bodyStyle: {
                 height: 'auto',
                 overflow: 'auto',
@@ -50,17 +53,6 @@ export default class SearchTableModal extends React.Component {
 
     render() {
         let modalProps = this.getModalProps();
-        return (
-            <Modal width={800} {...modalProps}>
-                <SearchFormContainer
-                    ref="searchFormContainerRef"
-                    rowSelectChange={this.props.parentTable.rowSelectChange.bind(this.props.parentTable)}
-                    hideModal={this.onCancelHandle}
-                    listData={this.props.parentTable.listData}
-                    setQueryCfg={this.props.setSearchQueryConfig}
-                    onOk={this.searchQuery}
-                />
-            </Modal>
-        );
+        return <Modal width={800} {...modalProps}></Modal>;
     }
 }

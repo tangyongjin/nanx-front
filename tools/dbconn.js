@@ -1,6 +1,6 @@
 module.exports = {
     msyqldb: {
-        host: '172.16.17.16',
+        host: '127.0.0.1',
         user: 'root',
         password: '123456',
         database: 'nanx',
