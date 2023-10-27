@@ -69,7 +69,7 @@ export default class SearchFormContainer extends React.Component {
         });
 
         this.props.commonTableStore.setCurrentPage(1);
-        this.props.setSearchQueryConfig(submitData);
+        this.props.commonTableStore.setSearchQueryConfig(submitData);
         this.props.rowSelectChange([], []);
         this.props.listData();
         this.props.hideModal();

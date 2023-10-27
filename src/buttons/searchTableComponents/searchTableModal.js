@@ -57,7 +57,6 @@ export default class SearchTableModal extends React.Component {
                     rowSelectChange={this.props.parentTable.rowSelectChange.bind(this.props.parentTable)}
                     hideModal={this.onCancelHandle}
                     listData={this.props.parentTable.listData}
-                    setSearchQueryConfig={this.props.setSearchQueryConfig}
                     onOk={this.searchQuery}
                 />
             </Modal>

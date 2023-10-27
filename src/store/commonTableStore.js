@@ -28,10 +28,15 @@ class commonTableStore {
     @observable table_width = 2000;
     @observable lazyButtonUsedCom = null;
     @observable ButtonUsedCom = null;
+    @observable search_query_cfg = null;
 
     @action setPageSize = (pageSize) => (this.pageSize = pageSize);
 
     @action setFixedQueryCfg = (fx) => (this.fixed_query_cfg = fx);
+
+    @action setSearchQueryConfig = async (cfg) => {
+        this.search_query_cfg = cfg;
+    };
 
     @action registerTrigger(obj) {
         this.triggers.push(obj);

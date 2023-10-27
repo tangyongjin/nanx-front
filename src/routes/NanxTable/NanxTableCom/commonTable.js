@@ -17,14 +17,10 @@ export default class CommonTable extends React.Component {
         console.log('|||||||||||ommon table,props', props);
         this.commonTableStore = props.commonTableStore;
         this.state = {
-            search_query_cfg: null,
+            // search_query_cfg: null,
             isFilterSelfData: false
         };
     }
-
-    setSearchQueryConfig = async (cfg) => {
-        this.setState({ search_query_cfg: cfg });
-    };
 
     async componentDidMount() {
         this.commonTableStore.resetTableStore();
@@ -45,7 +41,7 @@ export default class CommonTable extends React.Component {
             return 'as_virtual=y';
         }
 
-        let paradata = listDataParams(this.commonTableStore, this.state);
+        let paradata = listDataParams(this.commonTableStore);
         let params = {
             data: paradata,
             method: 'POST'
@@ -66,7 +62,7 @@ export default class CommonTable extends React.Component {
     };
 
     listData = async () => {
-        let data = listDataParams(this.commonTableStore, this.state);
+        let data = listDataParams(this.commonTableStore);
         let params = {
             data: data,
             method: 'POST'
@@ -96,7 +92,7 @@ export default class CommonTable extends React.Component {
                     }}
                     parentTable={this}
                     commonTableStore={this.commonTableStore}
-                    setSearchQueryConfig={this.setSearchQueryConfig}
+                    setSearchQueryConfig={this.commonTableStore.setSearchQueryConfig}
                     refreshTable={this.refreshTable}
                 />
             );
