@@ -86,14 +86,14 @@ export default class SearchFormContainer extends React.Component {
         return this.props.tableColumns.map(({ title, key }) => ({ label: title, value: key }));
     };
 
-    addField = (event) => {
+    addField = () => {
         let { field_group } = this.state;
         let field_cfg = { inner_order: field_group.length };
         field_group.push(field_cfg);
         this.setState({ field_group });
     };
 
-    delField = (event) => {
+    delField = () => {
         if (this.state.field_group.length == 1) {
             return;
         }

@@ -11,8 +11,6 @@ export default class curd {
         updateData: (params) => http(params, `${api_root}/${params.updateurl}`),
         addData: (params) => http(params, `${api_root}/${params.addurl}`),
         batchUpdate: (params) => http(params, `${api_root}/Curd/batchData`),
-        getProcessMaintableList: (params) => http(params, `${api_root}/Curd/getProcessMaintableList`),
-        getTableData: (params) => http(params, `${api_root}/Curd/getTableData`),
-        getDept: (params) => http(params, `${api_root}/Curd/listData`)
+        getTableData: (params) => http(params, `${api_root}/Curd/getTableData`)
     };
 }

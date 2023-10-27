@@ -11,10 +11,10 @@ const getButtonHandler = async (event, item, store) => {
 };
 
 const renderButtons = (tableStore) => {
-    if (!tableStore.TableButtons) {
+    if (!tableStore.tableButtons) {
         return null;
     }
-    return tableStore.TableButtons.map((item, index) => {
+    return tableStore.tableButtons.map((item, index) => {
         return (
             <Button
                 key={index}

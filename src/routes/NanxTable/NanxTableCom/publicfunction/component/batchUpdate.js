@@ -25,7 +25,7 @@ export default class BatchUpdate extends React.Component {
     }
     componentDidMount() {
         var columns = [];
-        this.commonTableStore.tableColumns.map((item, index) => {
+        this.commonTableStore.rawTableColumns.map((item, index) => {
             columns.push(<Select.Option key={item.key}>{item.title}</Select.Option>);
         });
         this.setState({

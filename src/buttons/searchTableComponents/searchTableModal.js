@@ -61,7 +61,7 @@ export default class SearchTableModal extends React.Component {
                     setQueryCfg={this.props.setSearchQueryConfig}
                     formCfg={this.props.commonTableStore.formCfg}
                     onOk={this.searchQuery}
-                    tableColumns={this.props.commonTableStore.tableColumns}
+                    tableColumns={this.props.commonTableStore.rawTableColumns}
                 />
             </Modal>
         );

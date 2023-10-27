@@ -10,11 +10,11 @@ export default class TableAddCom extends React.Component {
         visible: false
     };
 
-    init(btncode) {
+    init() {
         // console.log('button_code', this.props.parentTable.state.button_code);
         this.props.commonTableStore.rowSelectChange([], []);
         this.refs.commonModalRef.showModal();
-        this.props.commonTableStore.setTableAction('add_table');
+        this.props.commonTableStore.setTableAction('add');
     }
     hideModal() {
         this.refs.commonModalRef.onCancelHandle();

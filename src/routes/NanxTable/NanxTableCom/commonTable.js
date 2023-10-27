@@ -6,7 +6,6 @@ import api from '@/api/api';
 import fetchDataGridCfg from './fetchDataGridCfg';
 import listDataParams from './listDataParams';
 import commonTableStore from '@/store/commonTableStore';
-import getTableColumns from './getTableColumns';
 import renderButtons from './renderButtons';
 import React from 'react';
 import ResizeableTitle from './resizeableTitle';
@@ -17,14 +16,12 @@ export default class CommonTable extends React.Component {
         super(props);
         this.commonTableStore = new commonTableStore();
         this.state = {
-            columns: [],
             search_query_cfg: null,
             isFilterSelfData: false,
             query_cfg: this.props.query_cfg ? this.props.query_cfg : null //表格保持自己的query_cfg
         };
     }
 
-    //设置表格自己的query_cfg ,不是store的 query_cfg
     setTableCompomentQueryCfg = async (cfg) => {
         this.setState({ query_cfg: cfg });
     };
@@ -36,9 +33,9 @@ export default class CommonTable extends React.Component {
     async componentDidMount() {
         this.commonTableStore.resetTableStore();
         this.commonTableStore.clearPaginationStore();
-        await this.commonTableStore.setActionCode(this.props.datagrid_code);
+        await this.commonTableStore.setDataGridCode(this.props.datagrid_code);
         await this.refreshTable();
-        this.setState({ columns: getTableColumns(this.commonTableStore) });
+        this.setState({ columns: this.commonTableStore.getTableColumns() });
 
         // 作为uform插件时的赋值处理
         if (this.props.onChange) {
@@ -89,16 +86,16 @@ export default class CommonTable extends React.Component {
         if (json.code == 200) {
             this.commonTableStore.setDataSource(json.data);
             this.commonTableStore.setTotal(json.total);
-            this.setState({ columns: getTableColumns(this.commonTableStore) });
+            this.setState({ columns: this.commonTableStore.getTableColumns() });
             this.rowSelectChange([], []);
         }
     };
 
     RenderBthHolder() {
-        let HiddenModalContainer = this.commonTableStore.ButtonUsedCom;
+        let LazyModalContainer = this.commonTableStore.ButtonUsedCom;
         if (this.commonTableStore.ButtonUsedCom) {
             return (
-                <HiddenModalContainer
+                <LazyModalContainer
                     ref={async (item) => {
                         await this.commonTableStore.setLazyButtonUsedCom(item);
                     }}
@@ -140,7 +137,6 @@ export default class CommonTable extends React.Component {
                     onClick: (event) => this.onRowClick(event, record) // 点击行选中
                 };
             },
-            loading: this.commonTableStore.loading,
             rowKey: (record) => record.id,
             bordered: true,
             dataSource: this.commonTableStore.dataSource,
@@ -149,10 +145,12 @@ export default class CommonTable extends React.Component {
                 selectedRowKeys: this.commonTableStore.selectedRowKeys,
                 onChange: (selectedRowKeys, selectedRows) => this.rowSelectChange(selectedRowKeys, selectedRows)
             },
+
             scroll: {
                 x: parseInt(this.commonTableStore.table_width)
                 // y: '720px'
             },
+
             pagination: {
                 showSizeChanger: true,
                 onShowSizeChange: this.onShowSizeChange,
@@ -171,14 +169,6 @@ export default class CommonTable extends React.Component {
         };
     }
 
-    // 后台设置查看自己还是全部的数据
-    filterSelfList = (isFilterSelfData) => {
-        this.setState({ isFilterSelfData }, () => {
-            this.commonTableStore.setCurrentPage(1);
-            this.listData();
-        });
-    };
-
     render() {
         let styles = {
             padding: '10px'
@@ -192,7 +182,7 @@ export default class CommonTable extends React.Component {
                 <div className="table_button">{renderButtons(this.commonTableStore)}</div>
                 <Table
                     size={this.props.size ? 'small' : 'default'}
-                    columns={this.state.columns}
+                    columns={this.commonTableStore.tableColumns}
                     key={this.props.datagrid_code}
                     className="commonTable"
                     components={{

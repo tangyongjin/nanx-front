@@ -20,19 +20,12 @@ export default class AssocSelect extends React.Component {
     }
 
     componentDidMount() {
-        if (!this.tableStore) {
-            return;
-        }
         this.tableStore.registerTrigger(this);
         // 3、同一组的dom加载完毕
 
         // ??? 应该使用 本组件所在的formcfg来获取 Group,而不是使用 store.formCfg,
         // 因为 本组件就是下拉,不能一定认为是从 Activity 来 !
         let group = this.getDropdownGroups();
-
-        console.log(group);
-        console.log(this.props.query_cfg.level);
-
         if (this.props.query_cfg.level == group[this.props.query_cfg.trigger_group_uuid]) {
             //模拟用户选择
             this.simulateClick();
@@ -61,14 +54,12 @@ export default class AssocSelect extends React.Component {
     async simulateClick() {
         // 1、选择数据为空，
 
-        if (this.tableStore.selectedRows.length == 0) {
-            console.log('没有选择数据');
+        if (this.tableStore.table_action == 'add') {
             return;
         }
 
-        console.log('模拟点击下拉并设置数据👹👹👹👹👹👹👹👹👹');
         // 2、公用table编辑状态
-        if (this.tableStore.table_action == 'edit_table') {
+        if (this.tableStore.table_action == 'edit') {
             for (let i = 0; i < this.tableStore.triggers.length; i++) {
                 let element = this.tableStore.triggers[i];
                 // 2、同一组
@@ -115,8 +106,6 @@ export default class AssocSelect extends React.Component {
             return;
         }
         let group = [];
-        console.log(' 🩸🩸🩸🩸🩸group>>🩸🩸🩸🩸🩸🩸 ');
-        console.log(this.props.schema);
 
         Object.keys(this.props.schema.properties).map((gourp_key) => {
             console.log(gourp_key + ': ');
@@ -176,12 +165,10 @@ export default class AssocSelect extends React.Component {
 
         // 关联字段设置
         for (let i = 0; i < this.tableStore.triggers.length; i++) {
-            console.log('🪢🪢🪢🪢🪢🪢🪢🪢🪢🪢');
             let element = this.tableStore.triggers[i];
 
             // 2、同一组
             if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {
-                // 3、加载下一个联动select的option，并清空下一个select的value
                 if (element.props.query_cfg.level - this.props.query_cfg.level == 1) {
                     await element.getOptionList(element.props.query_cfg, value, element);
                     if (isClear === 'y') {

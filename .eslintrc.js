@@ -93,8 +93,7 @@ module.exports = {
     // NOTE: When adding rules here, you need to make sure they are compatible with
     // `typescript-eslint`, as some rules such as `no-array-constructor` aren't compatible.
     rules: {
-        // http://eslint.org/docs/rules/
-        'array-callback-return': 'warn',
+        'array-callback-return': 'off',
         'default-case': ['warn', { commentPattern: '^no default$' }],
         'dot-location': ['warn', 'property'],
         eqeqeq: [0, 'smart'],

@@ -23,7 +23,7 @@ export default class TableEditCom extends React.Component {
         }
 
         this.refs.commonModalRef.showModal();
-        this.props.commonTableStore.setTableAction('edit_table');
+        this.props.commonTableStore.setTableAction('edit');
     };
 
     hideModal() {
