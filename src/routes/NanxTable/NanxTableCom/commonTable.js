@@ -3,11 +3,10 @@ import { Button, Table } from 'antd';
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
 import api from '@/api/api';
-import columnsRender from './columnsRender';
 import fetchDataGridCfg from './fetchDataGridCfg';
 import listDataParams from './listDataParams';
 import commonTableStore from '@/store/commonTableStore';
-import getTextWidth from './commonTableTextTool';
+import getTableColumns from './getTableColumns';
 import React from 'react';
 import ResizeableTitle from './resizeableTitle';
 
@@ -57,7 +56,7 @@ export default class CommonTable extends React.Component {
         this.commonTableStore.clearPaginationStore();
         await this.commonTableStore.setActionCode(this.props.datagrid_code);
         await this.refreshTable();
-        this.getTableColumns();
+        this.setState({ columns: getTableColumns(this.commonTableStore) });
 
         // 作为uform插件时的赋值处理
         if (this.props.onChange) {
@@ -109,20 +108,15 @@ export default class CommonTable extends React.Component {
         if (json.code == 200) {
             this.commonTableStore.setDataSource(json.data);
             this.commonTableStore.setTotal(json.total);
-            this.getTableColumns();
+            this.setState({ columns: getTableColumns(this.commonTableStore) });
             this.rowSelectChange([], []);
         }
     };
 
     resetTable() {
-        this.setState(
-            {
-                query_cfg: null
-            },
-            () => {
-                this.listData();
-            }
-        );
+        this.setState({ query_cfg: null }, () => {
+            this.listData();
+        });
     }
 
     getComponentByFile = (path) => {
@@ -134,7 +128,6 @@ export default class CommonTable extends React.Component {
         if (!this.commonTableStore.TableButtonsJson) {
             return null;
         }
-
         return this.commonTableStore.TableButtonsJson.map((item, index) => {
             return (
                 <Button
@@ -163,29 +156,30 @@ export default class CommonTable extends React.Component {
         );
     }
 
-    // commonTable 作为编辑器时候, x-props会传入 as_virtual属性,onChange 属性.
-    RenderTablePluginCom() {
-        let PluginCom = this.state.buttonUsedComponent;
+    RenderBthHolder() {
+        let ButthonHolder = this.state.buttonUsedComponent;
         if (this.state.buttonUsedComponent) {
             return (
-                <PluginCom
-                    ref={(item) => {
-                        this.pluginComRef = item;
-                    }}
-                    parentTable={this}
-                    as_virtual={this.props.as_virtual}
-                    editable={true}
-                    onChange={this.props.onChange}
-                    commonTableStore={this.commonTableStore}
-                    dataGridcode2={this.props.dataGridCode}
-                    refreshTable={this.refreshTable}
-                    resetTable={this.resetTable}
-                    setQueryCfg={this.setTableCompomentQueryCfg}
-                    setSearchQueryConfig={this.setSearchQueryConfig}
-                    inquireModal={this.inquireModal}
-                    searchOrder={this.searchOrder}
-                    onCancel={this.props.onCancel}
-                />
+                <div style={{ border: '1px solid red', height: '100px' }}>
+                    <ButthonHolder
+                        ref={(item) => {
+                            this.pluginComRef = item;
+                        }}
+                        parentTable={this}
+                        as_virtual={this.props.as_virtual}
+                        editable={true}
+                        onChange={this.props.onChange}
+                        commonTableStore={this.commonTableStore}
+                        dataGridcode2={this.props.dataGridCode}
+                        refreshTable={this.refreshTable}
+                        resetTable={this.resetTable}
+                        setQueryCfg={this.setTableCompomentQueryCfg}
+                        setSearchQueryConfig={this.setSearchQueryConfig}
+                        inquireModal={this.inquireModal}
+                        searchOrder={this.searchOrder}
+                        onCancel={this.props.onCancel}
+                    />
+                </div>
             );
         }
     }
@@ -202,53 +196,6 @@ export default class CommonTable extends React.Component {
                 columns: nextColumns
             });
         };
-
-    getTableColumns() {
-        let hideColumns = [];
-        let columns = [];
-        console.log(this.commonTableStore.tableColumnsJson);
-
-        this.commonTableStore.tableColumnsJson.map((item, index) => {
-            let column = {
-                title: item.title,
-                dataIndex: item.key,
-                key: item.key,
-                width: item.width && item.width != null && item.width != '' ? parseFloat(item.width) : 200,
-                sorter: (a, b) => this.sorter(a[item.key], b[item.key]),
-                render: (text, record) => {
-                    return columnsRender(text, record, item, this.commonTableStore);
-                }
-            };
-
-            if (hideColumns.includes(item.key) == false) {
-                columns.push(column);
-            }
-        });
-
-        columns.map((item) => {
-            let fieldValues = [];
-            fieldValues.push(item.title);
-            this.commonTableStore.dataSource.forEach((record) => {
-                fieldValues.push(record[item.dataIndex]);
-            });
-            var longest = fieldValues.reduce(function (a, b) {
-                if (a == null) {
-                    a = '';
-                }
-                if (b == null) {
-                    b = '';
-                }
-                return a.length > b.length ? a : b;
-            });
-
-            if (['resource_logs', 'billsjson'].includes(item.dataIndex)) {
-                return (item.width = 200);
-            }
-            return (item.width = 45 + getTextWidth(longest));
-        });
-
-        this.setState({ columns: columns });
-    }
 
     sorter(valueA, valueB) {
         let targetA = valueA != null && valueA.toString().toLowerCase();
@@ -368,7 +315,7 @@ export default class CommonTable extends React.Component {
 
         return (
             <div className="table_wrapper" style={styles}>
-                {this.RenderTablePluginCom()}
+                {this.RenderBthHolder()}
 
                 <div className="table_button">{this.renderButtons()}</div>
                 <Table
