@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'antd';
+import { Modal, Button } from 'antd';
 import { inject, observer } from 'mobx-react';
 
 @inject('NanxTableStore')
@@ -36,10 +36,14 @@ export default class CommonModal extends React.Component {
                 overflow: 'auto',
                 bottom: 0
             },
-            okText: '关闭',
             visible: this.state.visible,
             onOk: this.onCancelHandle,
-            onCancel: () => this.onCancelHandle()
+            onCancel: this.onCancelHandle,
+            footer: [
+                <Button key="submit" onClick={this.onCancelHandle}>
+                    关闭
+                </Button>
+            ]
         };
     }
 

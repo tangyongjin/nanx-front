@@ -25,7 +25,7 @@ const CommonTableForm = (props) => {
                 actions={actions}
                 editable={rawData.editable}
                 schema={formCfg}
-                effects={($, { setFieldState, getFieldState }) => {
+                effects={($, { setFieldState }) => {
                     const hide = (name) => {
                         setFieldState(name, (field) => {
                             field.visible = false;
@@ -63,7 +63,7 @@ const CommonTableForm = (props) => {
                         type="primary"
                         htmlType="button"
                         className="marginRihgt10"
-                        onClick={async (event) => {
+                        onClick={async () => {
                             await actions.validate();
                             await props.saveFormData(
                                 actions.getFormState().values,
