@@ -9,8 +9,7 @@ export default class SearchFormContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            field_group: [{ inner_order: 0 }],
-            field_list: []
+            field_group: [{ inner_order: 0 }]
         };
     }
 
@@ -38,16 +37,29 @@ export default class SearchFormContainer extends React.Component {
         this.setState({ field_group });
     };
 
+    // 执行带搜索条件的后台查询
     searchHandler = async () => {
-        let submitData = [];
+        let queryLines = await this.returnQueryLines();
+        this.props.commonTableStore.setCurrentPage(1);
+        this.props.commonTableStore.setSearchQueryConfig(queryLines);
+        this.props.commonTableStore.rowSelectChange([], []);
+        this.props.commonTableStore.listData();
+        this.props.hideModal();
+    };
 
+    //  回传搜索条件给上级组件 returnQueryLines
+    returnQueryLines = async () => {
+        let queryLines = [];
+        console.log(this.state.field_group);
         for (let i = 0; i < this.state.field_group.length; i++) {
             let formValue = await this.state.field_group[i].actions.getSearchTableFormData();
+            console.log('formValue: ', formValue);
+
             formValue['and_or_' + i] = 'and';
-            submitData.push(formValue);
+            queryLines.push(formValue);
         }
 
-        if (this.validateRepeatField(submitData) === false) {
+        if (this.validateRepeatField(queryLines) === false) {
             return;
         }
 
@@ -55,15 +67,12 @@ export default class SearchFormContainer extends React.Component {
             count: this.state.field_group.length,
             lines: {}
         };
-        submitData.map((item) => {
+        queryLines.map((item) => {
             query_cfg.lines = { ...query_cfg.lines, ...item };
         });
 
-        this.props.commonTableStore.setCurrentPage(1);
-        this.props.commonTableStore.setSearchQueryConfig(submitData);
-        this.props.commonTableStore.rowSelectChange([], []);
-        this.props.commonTableStore.listData();
-        this.props.hideModal();
+        console.log('queryLines: ', queryLines);
+        return queryLines;
     };
 
     validateRepeatField = (submitData) => {
@@ -101,6 +110,7 @@ export default class SearchFormContainer extends React.Component {
                     return (
                         <SearchTableForm
                             key={index}
+                            fieldsList={this.props.fieldsList}
                             saveActions={this.saveActions}
                             onOk={this.props.onOk}
                             form_index={item.inner_order}></SearchTableForm>

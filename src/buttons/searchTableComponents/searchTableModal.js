@@ -48,6 +48,10 @@ export default class SearchTableModal extends React.Component {
         };
     }
 
+    getFieldList = () => {
+        return this.props.commonTableStore.rawTableColumns.map(({ title, key }) => ({ label: title, value: key }));
+    };
+
     render() {
         let modalProps = this.getModalProps();
         return (
@@ -55,6 +59,7 @@ export default class SearchTableModal extends React.Component {
                 <SearchFormContainer
                     ref="searchFormContainerRef"
                     hideModal={this.onCancelHandle}
+                    fieldsList={this.getFieldList()}
                     onOk={this.searchQuery}
                 />
             </Modal>

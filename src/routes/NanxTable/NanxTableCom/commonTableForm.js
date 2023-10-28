@@ -43,7 +43,7 @@ const CommonTableForm = (props) => {
         });
     }, [props.commonTableStore.selectedRows, props.optionType]); // 空数组表示仅在组件挂载和卸载时执行
 
-    const handleSaveClick = async (event) => {
+    const handleSaveClick = async () => {
         await FormActions.validate();
         await props.saveFormData(FormActions.getFormState().values, props.onChange, props.as_virtual);
         props.hideModal();

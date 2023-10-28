@@ -53,7 +53,7 @@ export default class CommonTable extends React.Component {
                         await this.tbStore.setLazyButtonUsedCom(item);
                     }}
                     parentTable={this}
-                    tbStore={this.tbStore}
+                    commonTableStore={this.tbStore}
                     refreshTable={this.refreshTable}
                 />
             );
