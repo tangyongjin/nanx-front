@@ -8,6 +8,7 @@ export default class CommonModal extends React.Component {
     constructor(props) {
         super(props);
         this.NanxTableStore = props.NanxTableStore;
+        this.onCancelHandle = this.onCancelHandle.bind(this);
     }
 
     state = {
@@ -35,8 +36,7 @@ export default class CommonModal extends React.Component {
                 overflow: 'auto',
                 bottom: 0
             },
-            cancelText: '取消',
-            okText: '保存',
+            okText: '关闭',
             visible: this.state.visible,
             onOk: this.onCancelHandle,
             onCancel: () => this.onCancelHandle()
