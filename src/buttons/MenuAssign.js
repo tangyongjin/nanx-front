@@ -5,7 +5,7 @@ import AllocationMenu from './MenuAssign/allocationMenu';
 export default class MenuAssign extends React.Component {
     constructor(props) {
         super(props);
-        this.commonTableStore = props.commonTableStore;
+        this.NanxTableStore = props.NanxTableStore;
         this.state = {
             record: null,
             visible: false
@@ -13,12 +13,12 @@ export default class MenuAssign extends React.Component {
     }
 
     async init() {
-        if (this.props.commonTableStore.selectedRows.length <= 0) {
+        if (this.props.NanxTableStore.selectedRows.length <= 0) {
             message.error('请选择一个角色');
             return;
         }
 
-        let currentrow = this.props.commonTableStore.selectedRows[0];
+        let currentrow = this.props.NanxTableStore.selectedRows[0];
         console.log(currentrow);
         this.setState({
             visible: true,

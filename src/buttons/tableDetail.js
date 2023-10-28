@@ -13,12 +13,12 @@ export default class TableDetail extends React.Component {
         this.init = this.init.bind(this);
     }
     init = async () => {
-        console.log(666, this.props.commonTableStore);
-        if (this.props.commonTableStore.selectedRows.length != 1) {
+        console.log(666, this.props.NanxTableStore);
+        if (this.props.NanxTableStore.selectedRows.length != 1) {
             message.error('请选择1条数据.');
             return;
         }
-        let rowdata = this.props.commonTableStore.selectedRows[0];
+        let rowdata = this.props.NanxTableStore.selectedRows[0];
         let data = {
             process_key: navigationStore.currentMenu.process_key,
             uuid: rowdata.uuid,

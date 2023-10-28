@@ -16,7 +16,7 @@ export default class TriggerAdder extends React.Component {
     }
 
     async init() {
-        let { selectedRows } = this.props.commonTableStore;
+        let { selectedRows } = this.props.NanxTableStore;
         if (selectedRows.length == 0) {
             message.info('必须选择一项');
             return;
@@ -41,7 +41,7 @@ export default class TriggerAdder extends React.Component {
     render() {
         console.log(this.props.dmStore);
 
-        let { selectedRows } = this.props.commonTableStore;
+        let { selectedRows } = this.props.NanxTableStore;
         return selectedRows.length > 0 ? (
             <Modal
                 visible={this.state.visible}

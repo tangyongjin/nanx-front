@@ -2,12 +2,12 @@ import React from 'react';
 import { Modal } from 'antd';
 import { inject, observer } from 'mobx-react';
 
-@inject('commonTableStore')
+@inject('NanxTableStore')
 @observer
 export default class CommonModal extends React.Component {
     constructor(props) {
         super(props);
-        this.commonTableStore = props.commonTableStore;
+        this.NanxTableStore = props.NanxTableStore;
     }
 
     state = {
@@ -28,7 +28,6 @@ export default class CommonModal extends React.Component {
 
     getModalProps() {
         return {
-            footer: this.props.footer,
             destroyOnClose: true,
             title: this.props.title,
             bodyStyle: {

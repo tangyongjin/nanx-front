@@ -6,7 +6,7 @@ import '@/components/UformExtends';
 export default class BatchUpdate extends React.Component {
     constructor(props) {
         super(props);
-        this.commonTableStore = props.commonTableStore;
+        this.NanxTableStore = props.NanxTableStore;
         this.state = {
             visible: false,
             editvisible: false,
@@ -25,7 +25,7 @@ export default class BatchUpdate extends React.Component {
     }
     componentDidMount() {
         var columns = [];
-        this.commonTableStore.rawTableColumns.map((item, index) => {
+        this.NanxTableStore.rawTableColumns.map((item, index) => {
             columns.push(<Select.Option key={item.key}>{item.title}</Select.Option>);
         });
         this.setState({
@@ -44,7 +44,7 @@ export default class BatchUpdate extends React.Component {
         }
         let params = {
             data: {
-                DataGridCode: this.commonTableStore.datagrid_code,
+                DataGridCode: this.NanxTableStore.datagrid_code,
                 batch_ids: this.state.batchId,
                 rawdata: {}
             },
@@ -61,7 +61,7 @@ export default class BatchUpdate extends React.Component {
         }
     }
     init() {
-        if (this.commonTableStore.selectedRowKeys.length == 0) {
+        if (this.NanxTableStore.selectedRowKeys.length == 0) {
             message.error('您还没有选择需要修改的数据，请选择');
         } else {
             this.showModal();
@@ -69,11 +69,11 @@ export default class BatchUpdate extends React.Component {
     }
     showModal() {
         var obj = {};
-        var objarr = Object.keys(this.commonTableStore.formCfg.properties);
+        var objarr = Object.keys(this.NanxTableStore.formCfg.properties);
         for (var i = 0; i < objarr.length; i++) {
-            obj = Object.assign(this.commonTableStore.formCfg.properties[objarr[i]].properties);
+            obj = Object.assign(this.NanxTableStore.formCfg.properties[objarr[i]].properties);
         }
-        var arr = this.commonTableStore.selectedRowKeys;
+        var arr = this.NanxTableStore.selectedRowKeys;
         this.setState({
             visible: true,
             batchId: arr,

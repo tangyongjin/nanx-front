@@ -3,27 +3,30 @@ import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import React from 'react';
 import { message } from 'antd';
 import api from '@/api/api';
-
+import { observer, inject } from 'mobx-react';
+@inject('NanxTableStore') // 'myStore' 是你在Provider中提供的store名称
+@observer
 export default class TableEditCom extends React.Component {
     state = {
         visible: false
     };
 
     init = async () => {
-        if (this.props.commonTableStore.selectedRows.length != 1) {
+        await this.props.NanxTableStore.setTableAction('edit');
+
+        if (this.props.NanxTableStore.selectedRows.length != 1) {
             message.error('请选择1条数据.');
             return;
         }
 
-        let _tmprec = this.props.commonTableStore.selectedRows[0];
+        let _tmprec = this.props.NanxTableStore.selectedRows[0];
 
         if (_tmprec.hasOwnProperty('ghost_author') && _tmprec.ghost_author != sessionStorage.getItem('user')) {
             message.error('不是自己的数据不能编辑');
             return;
         }
 
-        this.refs.commonModalRef.showModal();
-        this.props.commonTableStore.setTableAction('edit');
+        await this.refs.commonModalRef.showModal();
     };
 
     hideModal() {
@@ -37,18 +40,15 @@ export default class TableEditCom extends React.Component {
         }
 
         let data = {
-            DataGridCode: this.props.commonTableStore.datagrid_code,
+            DataGridCode: this.props.NanxTableStore.datagrid_code,
             rawdata: fmdata
         };
-        if (this.props.as_virtual == 'y') {
-            this.updateVirtualData(fmdata);
-            return;
-        }
+
         this.updateDateApi(data);
     };
 
     getGhostData = (formData) => {
-        this.props.commonTableStore.triggers.map((item) => {
+        this.props.NanxTableStore.triggers.map((item) => {
             formData['ghost_' + item.props.ass_select_field_id] = formData[item.props.ass_select_field_id];
             let option_obj = item.state.optionList.find(
                 (optionItem) => optionItem.value == formData[item.props.ass_select_field_id]
@@ -58,21 +58,11 @@ export default class TableEditCom extends React.Component {
         return formData;
     };
 
-    updateVirtualData = (fmdata) => {
-        let id = this.props.commonTableStore.selectedRowKeys[0];
-        let index = this.props.commonTableStore.dataSource.findIndex((item) => item.id == id);
-        fmdata.id = id;
-        fmdata = this.getGhostData(fmdata);
-        let dataSource = [...this.props.commonTableStore.dataSource];
-        dataSource[index] = { ...fmdata };
-        this.props.commonTableStore.setDataSource(dataSource);
-    };
-
     updateDateApi = async (fmdata) => {
-        let id = this.props.commonTableStore.selectedRowKeys[0];
+        let id = this.props.NanxTableStore.selectedRowKeys[0];
         fmdata.rawdata.id = id;
         let params = { data: fmdata, method: 'POST' };
-        params.updateurl = this.props.commonTableStore.curd.updateurl;
+        params.updateurl = this.props.NanxTableStore.curd.updateurl;
         let json = await api.curd.updateData(params);
         if (json.code == 200) {
             this.props.refreshTable();
@@ -86,17 +76,13 @@ export default class TableEditCom extends React.Component {
                 footer={null}
                 title="编辑"
                 ref="commonModalRef"
-                layoutcfg={this.props.commonTableStore.layoutcfg}>
+                layoutcfg={this.props.NanxTableStore.layoutcfg}>
                 <CommonTableForm
                     as_virtual={this.props.as_virtual}
                     editable={true}
-                    optionType="edit"
                     hideModal={() => this.hideModal()}
                     onChange={this.props.onChange}
-                    referinfo={this.props.commonTableStore.referinfo}
-                    formCfg={this.props.commonTableStore.formCfg}
-                    layoutcfg={this.props.commonTableStore.layoutcfg}
-                    commonTableStore={this.props.commonTableStore}
+                    NanxTableStore={this.props.NanxTableStore}
                     saveFormData={this.saveFormData.bind(this)}
                 />
             </CommonModal>

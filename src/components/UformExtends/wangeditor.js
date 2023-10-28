@@ -73,17 +73,9 @@ export default class Wangeditor extends React.Component {
             : editor.$textElem.attr('contenteditable', true);
 
         this.editor.txt.html(this.props.value);
-        if (
-            this.props.commontablestore &&
-            this.props.commontablestore.selectedRows.length != 0 &&
-            this.props.value == ''
-        ) {
-            this.editor.txt.html(this.props.commontablestore.selectedRows[0][this.props.field_id]);
+        if (this.props.NanxTableStore && this.props.NanxTableStore.selectedRows.length != 0 && this.props.value == '') {
+            this.editor.txt.html(this.props.NanxTableStore.selectedRows[0][this.props.field_id]);
         }
-        console.log(333, this.props);
-        // this.props.commontablestore.selectedRows[0][this.props.field_id]
-
-        // this.this.editor.txt.html()
     }
 
     render() {

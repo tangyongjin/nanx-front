@@ -13,7 +13,7 @@ import GetActionCode from './getActionCode.js';
 import CheckBox from './checkbox';
 import GetRadio from './getRadio';
 import Wangeditor from './wangeditor';
-import CommonTable from '@/routes/NanxTable/NanxTableCom/commonTable';
+import CommonTable from '@/routes/NanxTable/NanxTableCom/NanxTable';
 import EditgetDate from './editgetDate';
 import CategoryDropDown from './categoryDropDown';
 

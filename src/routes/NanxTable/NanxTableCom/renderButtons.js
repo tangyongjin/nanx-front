@@ -6,7 +6,6 @@ const getButtonHandler = async (event, item, store) => {
     let tmp = require(`../../../buttons/${item.file_path}`).default;
     // console.log('从文件来的组件', tmp);
     await store.setButtonUsedCom(tmp);
-    // console.log(this.commonTableStore.lazyButtonUsedCom);
     store.lazyButtonUsedCom['init']();
 };
 

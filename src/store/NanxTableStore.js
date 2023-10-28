@@ -1,11 +1,21 @@
-import { observable, action } from 'mobx';
+import { observable, action, autorun } from 'mobx';
 import columnsRender from '@/routes/NanxTable/NanxTableCom/columnsRender';
 import getTextWidth from '@/routes/NanxTable/NanxTableCom/commonTableTextTool';
 import sorter from '@/routes/NanxTable/NanxTableCom//sorter';
 import listDataParams from '@/routes/NanxTable/NanxTableCom/listDataParams';
 import api from '@/api/api';
 import { toJS } from 'mobx';
-class commonTableStore {
+
+class _NanxTableStore {
+    constructor() {
+        autorun(() => {
+            if (this.SERIALNO == null) {
+                // alert('SERIALNO is null');
+            }
+        });
+    }
+
+    @observable SERIALNO = null;
     @observable datagrid_code = null;
     @observable selectedRowKeys = [];
     @observable selectedRows = [];
@@ -69,19 +79,22 @@ class commonTableStore {
 
     @action setDataGridCode = (DataGridCode) => (this.datagrid_code = DataGridCode);
 
-    @action rowSelectChange = (selectedRowKeys, selectedRows) => {
+    @action rowSelectChange = async (selectedRowKeys, selectedRows) => {
         this.selectedRowKeys = selectedRowKeys;
         this.selectedRows = selectedRows;
     };
 
-    @action rowcheckChange = (selectedRowKeys, selectedRows) => {
+    @action rowcheckChange = async (selectedRowKeys, selectedRows) => {
         if (!this.selectedRowKeys.includes(selectedRowKeys[0])) {
             this.selectedRowKeys = this.selectedRowKeys.concat(selectedRowKeys);
             this.selectedRows = this.selectedRows.concat(selectedRows);
         }
     };
 
-    @action setTableAction = (table_action) => (this.table_action = table_action);
+    @action setTableAction = async (table_action) => {
+        console.log('设置🦊🦊🦊🦊🦊 TableAction:', table_action);
+        this.table_action = table_action;
+    };
 
     @action setCurrentPage = (currentPage) => {
         this.currentPage = currentPage;
@@ -204,5 +217,6 @@ class commonTableStore {
         return pg;
     };
 }
+const NanxTableStore = new _NanxTableStore();
 
-export default new commonTableStore();
+export default NanxTableStore;

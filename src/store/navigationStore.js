@@ -6,7 +6,7 @@ import { randomString } from '@/utils/tools';
 const wsService = new WsService();
 
 class navigationStore {
-    constructor(props) {
+    constructor() {
         // // 浏览器回退
         window.addEventListener(
             'popstate',

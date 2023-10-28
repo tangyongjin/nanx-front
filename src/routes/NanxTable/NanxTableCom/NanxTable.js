@@ -8,12 +8,12 @@ import renderButtons from './renderButtons';
 import React from 'react';
 import ResizeableTitle from './resizeableTitle';
 
-@inject('commonTableStore')
+@inject('NanxTableStore')
 @observer
-export default class CommonTable extends React.Component {
+export default class NanxTable extends React.Component {
     constructor(props) {
         super(props);
-        this.tbStore = props.commonTableStore;
+        this.tbStore = props.NanxTableStore;
         this.state = {
             isFilterSelfData: false
         };
@@ -53,7 +53,7 @@ export default class CommonTable extends React.Component {
                         await this.tbStore.setLazyButtonUsedCom(item);
                     }}
                     parentTable={this}
-                    commonTableStore={this.tbStore}
+                    NanxTableStore={this.tbStore}
                     refreshTable={this.refreshTable}
                 />
             );
@@ -64,7 +64,7 @@ export default class CommonTable extends React.Component {
         return {
             onRow: (record) => {
                 return {
-                    onClick: () => this.tbStore.rowSelectChange([record.id], [record]) // 点击行选中
+                    onClick: async () => this.tbStore.rowSelectChange([record.id], [record]) // 点击行选中
                 };
             },
             rowKey: (record) => record.id,
@@ -73,8 +73,8 @@ export default class CommonTable extends React.Component {
             rowSelection: {
                 type: 'radio',
                 selectedRowKeys: this.tbStore.selectedRowKeys,
-                onChange: (selectedRowKeys, selectedRows) =>
-                    this.this.tbStore.rowSelectChange(selectedRowKeys, selectedRows)
+                onChange: async (selectedRowKeys, selectedRows) =>
+                    this.tbStore.rowSelectChange(selectedRowKeys, selectedRows)
             },
 
             scroll: {

@@ -15,10 +15,6 @@ const divStyle = {
     alignItems: 'center'
 };
 
-const imgStyle = {
-    width: '220px'
-};
-
 @inject('navigationStore')
 @observer
 export default class Qrimg extends React.Component {

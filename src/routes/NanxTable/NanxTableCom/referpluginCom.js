@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import api from '@/api/api';
 import { Button, message } from 'antd';
-import CommonTable from '@/routes/NanxTable/NanxTableCom/commonTable';
+import CommonTable from '@/routes/NanxTable/NanxTableCom/NanxTable';
 import GridRefer from './gridRefer';
 import { SchemaForm } from '@uform/antd';
 
@@ -43,9 +43,9 @@ export default class ReferpluginCom extends React.Component {
     referHandler = async () => {
         this.setState({ visible: true });
         if (this.serachtableref.current) {
-            console.log(this.serachtableref.current.commonTableStore.selectedRows);
-            if (this.serachtableref.current.commonTableStore.selectedRows.length >= 1) {
-                let _srow = this.serachtableref.current.commonTableStore.selectedRows[0];
+            console.log(this.serachtableref.current.NanxTableStore.selectedRows);
+            if (this.serachtableref.current.NanxTableStore.selectedRows.length >= 1) {
+                let _srow = this.serachtableref.current.NanxTableStore.selectedRows[0];
                 console.log(_srow);
                 this.props.reportUUID(_srow.uuid);
                 this.props.reportOrginPaperno(_srow.paperno);

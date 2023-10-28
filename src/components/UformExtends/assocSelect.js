@@ -1,35 +1,48 @@
 import React from 'react';
 import { Select } from 'antd';
 import api from '@/api/api';
+import { observer, inject } from 'mobx-react';
 
+@inject('NanxTableStore') // 'myStore' 是你在Provider中提供的store名称
+@observer
 export default class AssocSelect extends React.Component {
     constructor(props) {
         super(props);
-
-        this.tableStore = props.commontablestore;
+        console.log(this.props.NanxTableStore);
         this.state = {
             optionValue: null,
             optionList: [],
             loading: false
+            // TableAction: this.props.NanxTableStore.table_action
         };
+
         this.onSelect = this.onSelect.bind(this);
     }
 
     componentWillUnmount() {
-        this.tableStore.clearTrigger();
+        console.log('----------------------componentWillUnmount');
+        this.props.NanxTableStore.clearTrigger();
     }
 
     componentDidMount() {
-        this.tableStore.registerTrigger(this);
-        // 3、同一组的dom加载完毕
+        this.props.NanxTableStore.registerTrigger(this);
 
-        // ??? 应该使用 本组件所在的formcfg来获取 Group,而不是使用 store.formCfg,
-        // 因为 本组件就是下拉,不能一定认为是从 Activity 来 !
-        let group = this.getDropdownGroups();
-        if (this.props.query_cfg.level == group[this.props.query_cfg.trigger_group_uuid]) {
+        let groups = this.getDropdownGroups();
+
+        console.log('🦊🦊🦊🦊🦊 trigger_group_uuid', this.props.query_cfg.trigger_group_uuid);
+        console.log('🦊🦊🦊🦊🦊 this.props.query_cfg.level', this.props.query_cfg.level);
+        console.log('🦊🦊🦊🦊🦊 groups ', groups);
+
+        console.log(
+            '🦊🦊🦊🦊🦊groups[this.props.query_cfg.trigger_group_uuid]',
+            groups[this.props.query_cfg.trigger_group_uuid]
+        );
+
+        if (this.props.query_cfg.level == groups[this.props.query_cfg.trigger_group_uuid]) {
             //模拟用户选择
             this.simulateClick();
         } else {
+            console.log('不一样', this.props.query_cfg.level, groups[this.props.query_cfg.trigger_group_uuid]);
         }
     }
 
@@ -54,17 +67,28 @@ export default class AssocSelect extends React.Component {
     async simulateClick() {
         // 1、选择数据为空，
 
-        if (this.tableStore.table_action == 'add') {
+        if (this.props.NanxTableStore.table_action === 'add') {
+            alert('simlate>>TableAction== Add ,exit');
             return;
         }
 
         // 2、公用table编辑状态
-        if (this.tableStore.table_action == 'edit') {
-            for (let i = 0; i < this.tableStore.triggers.length; i++) {
-                let element = this.tableStore.triggers[i];
+
+        if (this.props.NanxTableStore.table_action === 'edit') {
+            alert('simlate>>TableAction== edit ,执行');
+            for (let i = 0; i < this.props.NanxTableStore.triggers.length; i++) {
+                let element = this.props.NanxTableStore.triggers[i];
                 // 2、同一组
+
+                console.log('🩷​🩷​🩷​🩷​🩷​🩷​🩷​🩷​🩷​🩷​🩷​🩷​🩷​🩷 Table Action:​', this.state.TableAction);
+                console.log('🩵🩵🩵🩵🩵🩵🩵🩵🩵🩵🩵🩵 element:​', element);
+
                 if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {
-                    let curren_value = element.tableStore.selectedRows[0]['ghost_' + element.props.ass_select_field_id];
+                    let _tmp1_rows = element.props.nnstore.selectedRows;
+                    console.log('🩵🩵🩵🩵🩵🩵🩵🩵🩵🩵🩵🩵_tmp1_rows: ', _tmp1_rows);
+
+                    let curren_value = _tmp1_rows[0]['ghost_' + element.props.ass_select_field_id];
+
                     await element.getDefaultOptionList(element);
                     element.props.onChange(curren_value);
                     element.setState({ optionValue: curren_value });
@@ -75,8 +99,8 @@ export default class AssocSelect extends React.Component {
 
         // 3、有值时初始化
 
-        for (let i = 0; i < this.tableStore.triggers.length; i++) {
-            let element = this.tableStore.triggers[i];
+        for (let i = 0; i < this.props.NanxTableStore.triggers.length; i++) {
+            let element = this.props.NanxTableStore.triggers[i];
             // 2、同一组
 
             if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {
@@ -133,8 +157,8 @@ export default class AssocSelect extends React.Component {
 
     // 获取上一个联动值
     getPrevSelValue(current_ele) {
-        for (let i = 0; i < this.tableStore.triggers.length; i++) {
-            let element = this.tableStore.triggers[i];
+        for (let i = 0; i < this.props.NanxTableStore.triggers.length; i++) {
+            let element = this.props.NanxTableStore.triggers[i];
 
             // 不同组结束本次循环
             if (element.props.query_cfg.trigger_group_uuid != current_ele.props.query_cfg.trigger_group_uuid) {
@@ -145,7 +169,7 @@ export default class AssocSelect extends React.Component {
                 continue;
             }
 
-            let prev_value = element.tableStore.selectedRows[0]['ghost_' + element.props.ass_select_field_id];
+            let prev_value = element.props.nnstore.selectedRows[0]['ghost_' + element.props.ass_select_field_id];
 
             if (prev_value) {
                 return prev_value;
@@ -164,8 +188,8 @@ export default class AssocSelect extends React.Component {
         });
 
         // 关联字段设置
-        for (let i = 0; i < this.tableStore.triggers.length; i++) {
-            let element = this.tableStore.triggers[i];
+        for (let i = 0; i < this.props.NanxTableStore.triggers.length; i++) {
+            let element = this.props.NanxTableStore.triggers[i];
 
             // 2、同一组
             if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {

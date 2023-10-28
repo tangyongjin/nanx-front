@@ -4,7 +4,7 @@ import { toJS } from 'mobx';
 import { SchemaForm, createAsyncFormActions, Field, FormItemGrid } from '@uform/antd';
 import { observer, inject } from 'mobx-react';
 
-@inject('commonTableStore')
+@inject('NanxTableStore')
 @observer
 export default class SearchTableForm extends React.Component {
     constructor(props) {
@@ -141,7 +141,7 @@ export default class SearchTableForm extends React.Component {
                         )
 
                         .subscribe(async ({ state }) => {
-                            let formCfg = toJS(this.props.commonTableStore.formCfg.properties);
+                            let formCfg = toJS(this.props.NanxTableStore.formCfg.properties);
                             let operator = 'operator_' + this.props.form_index;
 
                             let keys = Object.keys(formCfg);

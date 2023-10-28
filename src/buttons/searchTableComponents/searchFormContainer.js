@@ -3,7 +3,7 @@ import { Button, message } from 'antd';
 import SearchTableForm from './searchTableForm';
 import { observer, inject } from 'mobx-react';
 
-@inject('commonTableStore')
+@inject('NanxTableStore')
 @observer
 export default class SearchFormContainer extends React.Component {
     constructor(props) {
@@ -40,10 +40,10 @@ export default class SearchFormContainer extends React.Component {
     // 执行带搜索条件的后台查询
     searchHandler = async () => {
         let queryLines = await this.returnQueryLines();
-        this.props.commonTableStore.setCurrentPage(1);
-        this.props.commonTableStore.setSearchQueryConfig(queryLines);
-        this.props.commonTableStore.rowSelectChange([], []);
-        this.props.commonTableStore.listData();
+        await this.props.NanxTableStore.setCurrentPage(1);
+        await this.props.NanxTableStore.setSearchQueryConfig(queryLines);
+        await this.props.NanxTableStore.rowSelectChange([], []);
+        await this.props.NanxTableStore.listData();
         this.props.hideModal();
     };
 

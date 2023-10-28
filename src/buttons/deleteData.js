@@ -1,8 +1,10 @@
 import React from 'react';
 import { Modal, message } from 'antd';
 import api from '@/api/api';
+import { observer, inject } from 'mobx-react';
 const { confirm } = Modal;
-
+@inject('NanxTableStore') // 'myStore' 是你在Provider中提供的store名称
+@observer
 export default class DeleteData extends React.Component {
     constructor(props) {
         super(props);
@@ -10,12 +12,12 @@ export default class DeleteData extends React.Component {
     }
 
     async init() {
-        if (this.props.commonTableStore.selectedRowKeys.length <= 0) {
+        if (this.props.NanxTableStore.selectedRowKeys.length <= 0) {
             message.error('请选择一条数据');
             return;
         }
 
-        let _tmprec = this.props.commonTableStore.selectedRows[0];
+        let _tmprec = this.props.NanxTableStore.selectedRows[0];
 
         if (_tmprec.hasOwnProperty('ghost_author') && _tmprec.ghost_author != sessionStorage.getItem('user')) {
             message.error('不是自己的数据不能删除');
@@ -33,7 +35,7 @@ export default class DeleteData extends React.Component {
 
                 if (this.props.as_virtual == 'y') {
                     this.deleteVirtualData();
-                    this.props.changeValue && this.props.changeValue(this.props.commonTableStore.dataSource);
+                    this.props.changeValue && this.props.changeValue(this.props.NanxTableStore.dataSource);
                     return;
                 }
 
@@ -47,21 +49,21 @@ export default class DeleteData extends React.Component {
 
     deleteVirtualData = () => {
         let tempArr = [];
-        this.props.commonTableStore.dataSource.map((item) => {
-            if (item.id != this.props.commonTableStore.selectedRowKeys[0]) {
+        this.props.NanxTableStore.dataSource.map((item) => {
+            if (item.id != this.props.NanxTableStore.selectedRowKeys[0]) {
                 tempArr.push(item);
             }
         });
-        this.props.commonTableStore.setDataSource(tempArr);
+        this.props.NanxTableStore.setDataSource(tempArr);
     };
 
     async deleteData() {
         let params = {
             data: {
-                DataGridCode: this.props.commonTableStore.datagrid_code,
-                selectedRowKeys: this.props.commonTableStore.selectedRowKeys
+                DataGridCode: this.props.NanxTableStore.datagrid_code,
+                selectedRowKeys: this.props.NanxTableStore.selectedRowKeys
             },
-            delurl: this.props.commonTableStore.curd.delurl,
+            delurl: this.props.NanxTableStore.curd.delurl,
             method: 'POST'
         };
         let json = await api.curd.deleteData(params);

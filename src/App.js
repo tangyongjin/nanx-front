@@ -1,5 +1,5 @@
 import React from 'react';
-import { Provider, inject, observer } from 'mobx-react';
+import { Provider } from 'mobx-react';
 import { Router, hashHistory } from 'react-router';
 import store from './store';
 

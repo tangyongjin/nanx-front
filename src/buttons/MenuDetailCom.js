@@ -23,7 +23,6 @@ export default class MenuDetailCom extends React.Component {
     constructor(props) {
         super(props);
         console.log(props);
-        this.commonTableStore = props.commonTableStore;
         this.store = new MenuRelatedStore();
         this.getRelatedRole();
     }

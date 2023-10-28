@@ -14,7 +14,7 @@ export default class FixedQueryBuilder extends React.Component {
     }
 
     async init() {
-        if (this.props.commonTableStore.selectedRows.length != 1) {
+        if (this.props.NanxTableStore.selectedRows.length != 1) {
             message.error('请选择1个DataGrid.');
             return;
         }
@@ -36,7 +36,7 @@ export default class FixedQueryBuilder extends React.Component {
 
     saveFixedQueryConfigure = async () => {
         let _searchLines = await this.refs.fixedBuilderRef.returnQueryLines();
-        let _tmprec = this.props.commonTableStore.selectedRows[0];
+        let _tmprec = this.props.NanxTableStore.selectedRows[0];
         let dataGridCode = _tmprec.datagrid_code;
         let params = {
             data: {
@@ -68,7 +68,7 @@ export default class FixedQueryBuilder extends React.Component {
 
     // 选中的 Datagrid 的列,不是 DataGridMNT 的 列
     getFieldList = async () => {
-        let _tmprec = this.props.commonTableStore.selectedRows[0];
+        let _tmprec = this.props.NanxTableStore.selectedRows[0];
         let dataGridCode = _tmprec.datagrid_code;
 
         let params = {

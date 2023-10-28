@@ -86,7 +86,6 @@ export default class Fileuploader extends React.Component {
         var newarrstr = JSON.stringify(arr);
         this.props.onChange(newarrstr);
 
-        // if(this.props.commontablestore.selectedRows.length==0){
         let params = {
             method: 'POST',
             data: {

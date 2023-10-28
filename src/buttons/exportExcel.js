@@ -17,14 +17,14 @@ export default class ExportExcel extends React.Component {
     };
 
     async getExportExcelPara() {
-        await fetchDataGridCfg(this.props.commonTableStore);
-        let paradata = listDataParams(this.props.commonTableStore);
+        await fetchDataGridCfg(this.props.NanxTableStore);
+        let paradata = listDataParams(this.props.NanxTableStore);
         let params = {
             data: paradata,
             method: 'POST'
         };
 
-        params.geturl = toJS(this.props.commonTableStore.curd).geturl;
+        params.geturl = toJS(this.props.NanxTableStore.curd).geturl;
         return params;
     }
 
@@ -50,7 +50,7 @@ export default class ExportExcel extends React.Component {
                 cancel={this.hideModal}
                 title="导出excel(点击下载)"
                 ref="commonModalRef"
-                layoutcfg={this.props.commonTableStore.layoutcfg}>
+                layoutcfg={this.props.NanxTableStore.layoutcfg}>
                 <a href={this.state.excelMsg.url}>{this.state.excelMsg.name}</a>
             </CommonModal>
         );

@@ -1,6 +1,7 @@
 import request from 'then-request';
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import userStore from '@/store/userStore';
 import navigationStore from '@/store/navigationStore';
 import { hashHistory } from 'react-router';
@@ -79,6 +80,8 @@ const http = (params, url) => {
                     } catch (e) {
                         hideloading();
                         const alert_key = Math.random().toString(36).substring(7);
+
+                        // return <div style={{padding: '10px'}} dangerouslySetInnerHTML={{ __html: this.state.xinfo}}></div>
                         console.log(res.body);
                         const alertmsg = (
                             <div>

@@ -17,7 +17,7 @@ export default class TableSort extends React.Component {
 
     async init() {
         this.props.dmStore.clearMaintableColumns();
-        let { selectedRows } = this.props.commonTableStore;
+        let { selectedRows } = this.props.NanxTableStore;
         if (selectedRows.length == 0) {
             message.info('必须选择一项');
             return;
