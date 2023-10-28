@@ -30,7 +30,7 @@ class commonTableStore {
     @observable table_width = 2000;
     @observable lazyButtonUsedCom = null;
     @observable ButtonUsedCom = null;
-    @observable search_query_cfg = null;
+    @observable search_query_cfg = [];
 
     @action setPageSize = (pageSize) => (this.pageSize = pageSize);
 

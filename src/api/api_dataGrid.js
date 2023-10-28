@@ -16,7 +16,7 @@ export default class dataGrid {
         saveFieldCfg: (params) => http(params, `${api_root}/DataGrid/saveFieldCfg`),
         actionBasedRowPuller: (params) => http(params, `${api_root}/DataGrid/actionBasedRowPuller`),
         batchUpdateFieldCfg: (params) => http(params, `${api_root}/DataGrid/batchUpdateFieldCfg`),
-        //表格排序接口
-        saveActCodeColumnOrder: (params) => http(params, `${api_root}/DataGrid/saveActCodeColumnOrder`)
+        saveActCodeColumnOrder: (params) => http(params, `${api_root}/DataGrid/saveActCodeColumnOrder`),
+        saveFixedQueryConfigure: (params) => http(params, `${api_root}/DataGrid/saveFixedQueryConfigure`)
     };
 }

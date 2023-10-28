@@ -18,15 +18,15 @@ export default class SearchTableForm extends React.Component {
     operation_list = {
         string: [
             {
-                label: '包含',
+                label: '字符串包含',
                 value: 'like'
             },
             {
-                label: '等于',
+                label: '字符串包含',
                 value: '='
             },
             {
-                label: '不等于',
+                label: '字符串包含',
                 value: '!='
             }
         ],
@@ -114,6 +114,7 @@ export default class SearchTableForm extends React.Component {
                             }
                         });
                     };
+
                     let contentfield = 'vset_' + this.props.form_index;
                     $('savevalue', contentfield).subscribe(() => {
                         this.props.onOk();
@@ -121,7 +122,8 @@ export default class SearchTableForm extends React.Component {
                     $('onFieldChange', contentfield).subscribe((fieldState) => {
                         if (fieldState.value) {
                             setFieldState(contentfield, (state) => {
-                                state.value = state.value ? state.value.replace(/(^\s*)|(\s*$)/g, '') : '';
+                                // state.value = state.value ? state.value.replace(/(^\s*)|(\s*$)/g, '') : '';
+                                state.value = state.value;
                             });
                         }
                     });
@@ -147,7 +149,8 @@ export default class SearchTableForm extends React.Component {
                             for (let i = 0; i < keys.length; i++) {
                                 let field_group_key = keys[i];
                                 if (formCfg[field_group_key].properties[state.value]) {
-                                    field = formCfg[field_group_key].properties[state.value].type;
+                                    type = formCfg[field_group_key].properties[state.value].type;
+                                    console.log('type: ', type);
                                     break;
                                 }
                             }
@@ -155,13 +158,19 @@ export default class SearchTableForm extends React.Component {
                             switch (type) {
                                 case 'string':
                                     setEnum(operator, this.operation_list.string);
-
                                     setType('vset_' + this.props.form_index, 'string');
                                     break;
+
+                                case 'Assocselect':
+                                    setEnum(operator, this.operation_list.string);
+                                    setType('vset_' + this.props.form_index, 'string');
+                                    break;
+
                                 case 'number':
                                     setEnum(operator, this.operation_list.number);
                                     setType('vset_' + this.props.form_index, 'number');
                                     break;
+
                                 case 'date':
                                     setEnum(operator, this.operation_list.date);
                                     setType('vset_' + this.props.form_index, 'date');

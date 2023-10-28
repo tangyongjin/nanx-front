@@ -19,7 +19,6 @@ export default class FixedQueryBuilder extends React.Component {
             return;
         }
         await this.getFieldList();
-
         this.showModal();
     }
 
@@ -37,7 +36,17 @@ export default class FixedQueryBuilder extends React.Component {
 
     saveFixedQueryConfigure = async () => {
         let _searchLines = await this.refs.fixedBuilderRef.returnQueryLines();
-        console.log('_searchLines: ', JSON.stringify(_searchLines));
+        let _tmprec = this.props.commonTableStore.selectedRows[0];
+        let dataGridCode = _tmprec.datagrid_code;
+        let params = {
+            data: {
+                datagrid_code: dataGridCode,
+                fixedQueryLiens: _searchLines
+            },
+            method: 'POST'
+        };
+        await api.dataGrid.saveFixedQueryConfigure(params);
+        this.props.refreshTable();
     };
 
     getModalProps() {

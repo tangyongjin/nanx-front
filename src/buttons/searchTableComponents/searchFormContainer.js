@@ -53,14 +53,19 @@ export default class SearchFormContainer extends React.Component {
         console.log(this.state.field_group);
         for (let i = 0; i < this.state.field_group.length; i++) {
             let formValue = await this.state.field_group[i].actions.getSearchTableFormData();
-            console.log('formValue: ', formValue);
-
             formValue['and_or_' + i] = 'and';
-            queryLines.push(formValue);
+            console.log('formValue: ', formValue);
+            let fixedFormValue = {};
+            fixedFormValue.and_or = formValue['and_or_' + i];
+            fixedFormValue.field = formValue['field_' + i];
+            fixedFormValue.operator = formValue['operator_' + i];
+            fixedFormValue.vset = formValue['vset_' + i];
+            console.log('fixedFormValue: ', fixedFormValue);
+            queryLines.push(fixedFormValue);
         }
 
         if (this.validateRepeatField(queryLines) === false) {
-            return;
+            return [];
         }
 
         let query_cfg = {

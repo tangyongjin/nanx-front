@@ -40,7 +40,7 @@ export default class CommonTable extends React.Component {
 
     refreshTable = async () => {
         await fetchDataGridCfg(this.tbStore);
-        await this.tbStore.setSearchQueryConfig(null);
+        await this.tbStore.setSearchQueryConfig([]);
         await this.tbStore.listData();
     };
 
