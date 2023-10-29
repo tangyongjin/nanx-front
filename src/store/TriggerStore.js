@@ -1,6 +1,6 @@
 import { observable, action, autorun } from 'mobx';
 import api from '@/api/api';
-
+import { toJS } from 'mobx';
 class _TriggerStore {
     constructor() {
         autorun(() => {
@@ -26,11 +26,12 @@ class _TriggerStore {
         }
         let group = [];
 
-        console.log('this.props.schema: ', schema);
+        console.log('this.props.schema: ', toJS(schema));
+
+        // 循环 dropdown_group_XXXX :
 
         Object.keys(schema.properties).map((gourp_key) => {
             console.log(gourp_key + ': ');
-
             let fields_group = schema.properties[gourp_key];
             for (let key in fields_group.properties) {
                 let item = fields_group.properties[key];

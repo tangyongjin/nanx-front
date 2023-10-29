@@ -10,53 +10,34 @@ export default class AssocSelect extends React.Component {
         super(props);
         this.state = {
             optionList: [],
-            loading: false
+            loading: false,
+            selectedValue: null // 下拉框选中的值
         };
 
         this.onSelect = this.onSelect.bind(this);
-        this.onDropdownVisibleChange = this.onDropdownVisibleChange.bind(this);
     }
 
     componentWillUnmount() {
         this.props.TriggerStore.clearTrigger();
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         //把自己(AssosSelect注册到 triggers )
 
         this.props.TriggerStore.registerTrigger(this);
         let groups = this.props.TriggerStore.getDropdownGroups(this.props.schema);
+        console.log('>>>>>>groups: ', groups);
+
+        if (this.props.query_cfg.level == 1) {
+            await this.getOptionList(this.props.query_cfg, null, this);
+        }
 
         if (this.props.query_cfg.level == groups[this.props.query_cfg.trigger_group_uuid]) {
             //模拟用户点击下拉选择
             if (this.props.NanxTableStore.table_action === 'edit') {
-                this.simulateClick();
+                await this.simulateClick();
             }
         }
-    }
-
-    initValues() {
-        // 没有ghost字段的处理
-        if (this.props.query_cfg.level == 1) {
-            this.getOptionList(this.props.query_cfg, null, this);
-
-            // this.props.TriggerStore.getOptionList(this.props.query_cfg, null, this);
-
-            this.props.value ? this.onSelect(this.props.value, 'n') : this.onSelect(this.props.default, 'n');
-            return;
-        }
-
-        // 前一个值为空
-        let prev_value = this.getPrevSelValue(this);
-        if (!prev_value) {
-            return;
-        }
-
-        this.getOptionList(this.props.query_cfg, prev_value, this);
-
-        // this.props.TriggerStore.getOptionList(this.props.query_cfg, prev_value, this);
-
-        this.props.value ? this.onSelect(this.props.value, 'n') : this.onSelect(this.props.default, 'n');
     }
 
     async simulateClick() {
@@ -70,7 +51,7 @@ export default class AssocSelect extends React.Component {
                     let curren_value = _tmp1_rows[0]['ghost_' + element.props.ass_select_field_id];
                     await element.getDefaultOptionList(element);
                     element.props.onChange(curren_value);
-                    element.setState({ optionValue: curren_value });
+                    element.setState({ selectedValue: curren_value });
                 }
             }
             return;
@@ -85,7 +66,6 @@ export default class AssocSelect extends React.Component {
         if (current_ele.props.query_cfg.level > 1) {
             prev_sel_value = current_ele.getPrevSelValue(current_ele);
         }
-
         await current_ele.getOptionList(current_ele.props.query_cfg, prev_sel_value, current_ele);
     }
 
@@ -118,7 +98,7 @@ export default class AssocSelect extends React.Component {
         this.props.onChange(value);
 
         this.setState({
-            optionValue: value
+            selectedValue: value
         });
 
         // 关联字段设置
@@ -131,7 +111,7 @@ export default class AssocSelect extends React.Component {
                     await element.getOptionList(element.props.query_cfg, value, element);
                     if (isClear === 'y') {
                         element.setState({
-                            optionValue: null
+                            selectedValue: null
                         });
                         element.props.value && element.props.onChange('');
                     }
@@ -141,18 +121,12 @@ export default class AssocSelect extends React.Component {
                     if (isClear === 'y') {
                         element.setState({
                             optionList: [],
-                            optionValue: null
+                            selectedValue: null
                         });
                         element.props.value && element.props.onChange('');
                     }
                 }
             }
-        }
-    }
-
-    async onDropdownVisibleChange() {
-        if (this.props.query_cfg.level == 1) {
-            await this.getOptionList(this.props.query_cfg, null, this);
         }
     }
 
@@ -167,21 +141,14 @@ export default class AssocSelect extends React.Component {
 
         let res = await api.dataGrid.getAssociateData(params);
         if (res.code == 200) {
-            let optionList = this.formatOptionList(res.data, query_cfg.label_field, query_cfg.value_field);
+            let optionList = this.props.TriggerStore.formatOptionList(
+                res.data,
+                query_cfg.label_field,
+                query_cfg.value_field
+            );
             element.setState({ optionList: optionList, loading: false });
         }
     };
-
-    formatOptionList(list, label_field, value_field) {
-        return list.map((item) => ({ label: item[label_field], value: item[value_field] }));
-    }
-
-    getOptionValue() {
-        if (!this.props.value) {
-            return;
-        }
-        return this.props.value;
-    }
 
     render() {
         return (
@@ -189,10 +156,9 @@ export default class AssocSelect extends React.Component {
                 loading={this.state.loading}
                 showSearch
                 disabled={this.props.disabled}
-                value={this.getOptionValue()}
+                value={this.props.value}
                 optionFilterProp="children"
-                onSelect={(event) => this.onSelect(event, 'y')}
-                onDropdownVisibleChange={this.onDropdownVisibleChange}>
+                onSelect={(event) => this.onSelect(event, 'y')}>
                 {this.state.optionList.map((option) => {
                     return (
                         <Select.Option key={option.value} value={option.value}>
