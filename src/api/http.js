@@ -34,7 +34,6 @@ const getUrl = (url, params) => {
 };
 
 const resKey = 'reponse';
-window.hideMsgArr = [];
 const http = (params, url) => {
     const headers = setHeader();
     const options = {
