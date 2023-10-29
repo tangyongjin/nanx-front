@@ -7,9 +7,7 @@ export default class Fileuploader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            fileList: [],
-            defaultValue: null,
-            uploading: false
+            fileList: []
         };
     }
 
@@ -23,9 +21,7 @@ export default class Fileuploader extends React.Component {
                 }
             }
         });
-        this.setState({
-            uploading: true
-        });
+
         reqwest({
             url: api.file.upload,
             method: 'post',
@@ -35,16 +31,13 @@ export default class Fileuploader extends React.Component {
             processData: false,
             data: formData,
             success: (res) => {
-                this.setState({
-                    uploading: false
-                });
                 let resp = JSON.parse(res);
                 if (resp.code == '200') {
                     var data = resp.data;
+                    let json;
                     if (this.props.value != '') {
                         let fileList = JSON.parse(this.props.value);
-                        var fileLista = fileList.toString();
-                        var fileListb = data.toString();
+
                         let filelistt = fileList.concat(data);
                         const obj = {};
                         const newObjArr = [];
@@ -54,10 +47,11 @@ export default class Fileuploader extends React.Component {
                                 obj[filelistt[i].name] = true;
                             }
                         }
-                        var json = JSON.stringify(newObjArr);
+                        json = JSON.stringify(newObjArr);
                     } else {
-                        var json = JSON.stringify(data);
+                        json = JSON.stringify(data);
                     }
+
                     this.props.onChange(json);
                     if (data.length != 0) {
                         // message.success('上传成功');
@@ -108,22 +102,18 @@ export default class Fileuploader extends React.Component {
                 fileListt[i].status = 'done';
             }
 
-            var fileList = fileListt.concat(this.state.fileList);
+            return fileListt.concat(this.state.fileList);
         } else {
-            var { fileList } = this.state;
+            let { fileList } = this.state;
+            return fileList;
         }
-        return fileList;
-
-        //
     }
 
     render() {
         console.log(this.props);
-
-        const { uploading, fileList } = this.state;
         const props = {
             multiple: true,
-            onChange: ({ file, fileList }) => {},
+            onChange: () => {},
             onRemove: (file) => {
                 this.setState((state) => {
                     if (file.type == undefined) {

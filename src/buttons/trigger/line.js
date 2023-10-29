@@ -19,14 +19,9 @@ class Line extends React.Component {
         this.props.descCounter(idx);
     }
 
-    handleSelectChange(e, f, g) {
-        console.log(e, f, g);
-    }
-
     render() {
         let biztables = this.DataGridStore.biztableList;
 
-        const { getFieldDecorator } = this.props.form;
         return (
             <div style={{ marginBottom: '10px' }}>
                 <Row>
@@ -76,7 +71,7 @@ class Line extends React.Component {
                             style={{ width: '98%' }}
                             onChange={this.tgstore.resetValueField}>
                             {this.tgstore.refercolumns.length &&
-                                this.tgstore.refercolumns.map((item, index) => (
+                                this.tgstore.refercolumns.map((item) => (
                                     <Option key={item.Field} value={item.Field}>
                                         {item.Field}
                                     </Option>

@@ -27,7 +27,7 @@ class GridEditor extends React.Component {
         this.setState({ query_cfg_value: value });
     };
 
-    setFieldQuery = (a, b, c) => {
+    setFieldQuery = (a) => {
         this.setState({ query_cfg_field: a });
     };
 

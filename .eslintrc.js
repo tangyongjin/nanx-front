@@ -1,8 +1,6 @@
 module.exports = {
     root: true,
-
-    parser: 'babel-eslint',
-
+    parser: '@babel/eslint-parser',
     plugins: ['import', 'no-unused-react-component-methods', 'react', 'flowtype', 'jsx-a11y', 'react', 'react-hooks'],
 
     env: {
@@ -14,7 +12,7 @@ module.exports = {
     },
 
     parserOptions: {
-        ecmaVersion: 2018,
+        ecmaVersion: 8,
         sourceType: 'module',
         ecmaFeatures: {
             jsx: true,

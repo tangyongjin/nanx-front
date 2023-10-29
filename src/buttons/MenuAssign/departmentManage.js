@@ -8,9 +8,7 @@ export default class DepartmentManage extends React.Component {
         super(props);
         this.state = {
             dataList: [],
-            orgOriginData: [],
-            userList: [],
-            top: 10
+            userList: []
         };
     }
 
@@ -18,7 +16,6 @@ export default class DepartmentManage extends React.Component {
         let res = await api.organization.orgTree();
 
         this.setState({
-            orgOriginData: res,
             dataList: res
         });
     }

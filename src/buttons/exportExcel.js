@@ -12,7 +12,6 @@ export default class ExportExcel extends React.Component {
     }
 
     state = {
-        visible: false,
         excelMsg: {}
     };
 

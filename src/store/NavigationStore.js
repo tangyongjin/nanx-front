@@ -8,7 +8,7 @@ class NavigationStore {
         // // 浏览器回退
         window.addEventListener(
             'popstate',
-            async (e) => {
+            async () => {
                 this.getBreadcrumbSessionStorage();
                 let url = window.location.href;
                 let actionIndex = url.indexOf('_k');
@@ -77,7 +77,7 @@ class NavigationStore {
         ele.innerHTML = 'NaNX';
     };
 
-    @action setCurrentMenu = (nav_row, state_action) => {
+    @action setCurrentMenu = (nav_row) => {
         // 没有菜单列表时，菜单配置为空处理
         if (nav_row == undefined) {
             return;

@@ -31,7 +31,7 @@ class GridFieldManager extends React.Component {
 
     changeVisible = (key, e) => {
         let { maintableColumns } = this.props;
-        maintableColumns.map((item, index) => {
+        maintableColumns.map((item) => {
             item[key] = e.target.checked;
             return item;
         });
@@ -41,7 +41,7 @@ class GridFieldManager extends React.Component {
 
     setFieldAttr = (field, attr, value) => {
         let { maintableColumns } = this.props;
-        maintableColumns.map((element, idx) => {
+        maintableColumns.map((element) => {
             if (element.Field === field) {
                 element[attr] = value;
             }
@@ -91,7 +91,7 @@ class GridFieldManager extends React.Component {
                     <Col span={2}></Col>
                     <Col span={5}></Col>
                     <Col span={2}>
-                        <Button type="primary" htmlType="button" onClick={(event) => this.props.batchUpdateFieldCfg()}>
+                        <Button type="primary" htmlType="button" onClick={() => this.props.batchUpdateFieldCfg()}>
                             保存
                         </Button>
                     </Col>

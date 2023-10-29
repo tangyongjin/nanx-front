@@ -6,7 +6,7 @@ import UserStore from '@/store/UserStore';
 import { message } from 'antd';
 
 export default class AuthService {
-    constructor(domain) {
+    constructor() {
         this.loginMobile = this.loginMobile.bind(this);
     }
 

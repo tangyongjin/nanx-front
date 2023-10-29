@@ -48,7 +48,7 @@ export default class Sidebar extends React.Component {
         });
     }
 
-    getChildren(menuitem, index) {
+    getChildren(menuitem) {
         let one = menuitem;
         if (!one.children) {
             one.children = [];

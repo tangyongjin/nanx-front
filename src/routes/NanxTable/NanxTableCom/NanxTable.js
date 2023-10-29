@@ -14,9 +14,6 @@ export default class NanxTable extends React.Component {
     constructor(props) {
         super(props);
         this.tbStore = props.NanxTableStore;
-        this.state = {
-            isFilterSelfData: false
-        };
     }
 
     async componentDidMount() {

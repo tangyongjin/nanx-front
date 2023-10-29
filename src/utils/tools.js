@@ -19,12 +19,11 @@ export function randomString(string_length) {
 
 export function formattingParams(paramsString) {
     //格式化表单参数
-    var theRequest = new Object();
-    var paramsString = paramsString.split('&');
+    var theRequest = {};
+    paramsString = paramsString.split('&');
     for (var i = 0; i < paramsString.length; i++) {
         theRequest[paramsString[i].split('=')[0]] = unescape(paramsString[i].split('=')[1]);
     }
-
     return theRequest;
 }
 
@@ -96,7 +95,11 @@ export function validate(validateFields, data, message) {
             message.error(emptyText);
             return false;
         }
-        if (Object.prototype.toString.call(data[item.key])[1] === 'Object' && item.require == 'yes' && JSON.stringify(data[item.key]) === '{}') {
+        if (
+            Object.prototype.toString.call(data[item.key])[1] === 'Object' &&
+            item.require == 'yes' &&
+            JSON.stringify(data[item.key]) === '{}'
+        ) {
             message.error(emptyText);
             return false;
         }

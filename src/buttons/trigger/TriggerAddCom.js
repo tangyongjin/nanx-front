@@ -18,7 +18,7 @@ export default class TriggerAddCom extends React.Component {
         lines: []
     };
 
-    increateCounter(a, b, c) {
+    increateCounter() {
         let tstore = new triggerlineStore();
         this.state.lines.push(
             <Line

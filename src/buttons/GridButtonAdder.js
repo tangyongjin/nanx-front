@@ -63,6 +63,7 @@ export default class GridButtonAdder extends React.Component {
         );
     }
 
+    //eslint-disable-next-line
     async init() {
         if (this.props.NanxTableStore.selectedRows.length <= 0) {
             message.error('请选择一条数据');
@@ -174,7 +175,7 @@ export default class GridButtonAdder extends React.Component {
                                             </Option>
                                         ))}
                                 </Select>
-                                <Button onClick={(event) => this.addGridButton()} style={{ marginLeft: '10px' }}>
+                                <Button onClick={() => this.addGridButton()} style={{ marginLeft: '10px' }}>
                                     添加
                                 </Button>
                             </div>

@@ -12,6 +12,7 @@ export default class MenuDetail extends React.Component {
         };
     }
 
+    // eslint-disable-next-line
     async init() {
         if (this.props.NanxTableStore.selectedRows.length <= 0) {
             message.error('请选择一条数据');

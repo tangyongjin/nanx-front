@@ -2,14 +2,14 @@ import React from 'react';
 import { Tag } from 'antd';
 
 class ColumnsHandle {
-    splitDate(text, record) {
+    splitDate(text) {
         if (!text) {
             return text;
         }
         let arr = text.split(' ');
         return arr[0];
     }
-    renderTag(text, record) {
+    renderTag(text) {
         if (text == 'y') {
             return <Tag color="#108ee9">已读</Tag>;
         }
@@ -18,7 +18,7 @@ class ColumnsHandle {
         }
     }
 
-    yesOrNoHandle(text, record) {
+    yesOrNoHandle(text) {
         if (!text) {
             return null;
         }

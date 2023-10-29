@@ -84,7 +84,7 @@ class Profile extends React.Component {
         });
     }
     async submit() {
-        this.props.form.validateFieldsAndScroll(async (err, values) => {
+        this.props.form.validateFieldsAndScroll(async (err) => {
             if (err) {
                 return;
             }

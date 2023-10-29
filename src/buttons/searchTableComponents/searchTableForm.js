@@ -119,14 +119,7 @@ export default class SearchTableForm extends React.Component {
                     $('savevalue', contentfield).subscribe(() => {
                         this.props.onOk();
                     });
-                    $('onFieldChange', contentfield).subscribe((fieldState) => {
-                        if (fieldState.value) {
-                            setFieldState(contentfield, (state) => {
-                                // state.value = state.value ? state.value.replace(/(^\s*)|(\s*$)/g, '') : '';
-                                state.value = state.value;
-                            });
-                        }
-                    });
+
                     let field = 'field_' + this.props.form_index;
 
                     $('onFieldChange', field)

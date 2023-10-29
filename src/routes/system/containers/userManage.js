@@ -9,10 +9,7 @@ export default class UserManage extends React.Component {
         super(props);
 
         this.state = {
-            dataList: [],
-            orgOriginData: [],
-            userList: [],
-            top: 10
+            dataList: []
         };
     }
 
@@ -28,7 +25,6 @@ export default class UserManage extends React.Component {
         const res = await api.cabinet_api.getCabinetData(params);
 
         this.setState({
-            orgOriginData: res.server_resp,
             dataList: res.server_resp
         });
     }

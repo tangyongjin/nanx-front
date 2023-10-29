@@ -10,12 +10,7 @@ import './login.css';
 export default class Login extends React.Component {
     constructor(props) {
         super();
-        this.state = {
-            visible: false,
-            roles: [],
-            rolename: '',
-            rolecode: ''
-        };
+        this.state = {};
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmitMobile = this.handleFormSubmitMobile.bind(this);
         this.changeValue = this.changeValue.bind(this);
@@ -45,10 +40,6 @@ export default class Login extends React.Component {
     }
 
     changeValue(a, b) {
-        this.setState({
-            rolecode: b.props.value,
-            rolename: b.props.children
-        });
         console.log(b.props.value, b.props.children);
     }
     render() {

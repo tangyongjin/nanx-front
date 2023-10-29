@@ -8,12 +8,7 @@ export default class AllocationMenu extends React.Component {
     constructor(props) {
         super(props);
         this.store = props.MenuStore;
-        this.state = {
-            targetKeys: [],
-            selectedKeys: [],
-            disabled: false,
-            dataSource: []
-        };
+        this.state = {};
     }
 
     async componentDidMount() {

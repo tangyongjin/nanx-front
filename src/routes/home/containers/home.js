@@ -6,8 +6,6 @@ export default class home extends React.Component {
 
         this.state = {
             stepsEnabled: true,
-            initialStep: 0,
-
             hintsEnabled: true,
             hints: [
                 {

@@ -2,13 +2,6 @@ import React from 'react';
 import E from 'wangeditor';
 
 export default class Wangeditor extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: ''
-        };
-    }
-
     componentDidMount() {
         this.initEditor();
     }

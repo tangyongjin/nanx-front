@@ -3,10 +3,6 @@ import { Transfer, Tree } from 'antd';
 
 const { TreeNode } = Tree;
 export default class PriviligeTransfer extends React.Component {
-    constructor(props) {
-        super();
-    }
-
     render() {
         let {
             dataSource,

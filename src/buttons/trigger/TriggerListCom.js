@@ -10,10 +10,7 @@ export default class TriggerListCom extends React.Component {
         this.DataGridStore = this.props.DataGridStore;
     }
 
-    state = {
-        group_name: '',
-        group_id: ''
-    };
+    state = {};
 
     render() {
         console.log(this.DataGridStore);
@@ -42,7 +39,7 @@ export default class TriggerListCom extends React.Component {
                             <Col span={3}>筛选字段</Col>
                             <Col span={1}>Level</Col>
                         </Row>
-                        {item.cfgs.map((xitem, idx) => (
+                        {item.cfgs.map((xitem) => (
                             <Row key={xitem.id}>
                                 <Col span={1}>{xitem.id}</Col>
                                 <Col span={5}>{xitem.base_table}</Col>

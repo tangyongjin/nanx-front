@@ -5,7 +5,6 @@ export default class EditPassword extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            visible: this.props.visible,
             new_pwd: '',
             confirm_pwd: ''
         };
