@@ -1,11 +1,9 @@
 import { observable, action, toJS } from 'mobx';
 import api from '../api/api';
 import { hashHistory } from 'react-router';
-import WsService from '@/routes/login/WsService';
 import { randomString } from '@/utils/tools';
-const wsService = new WsService();
 
-class navigationStore {
+class NavigationStore {
     constructor() {
         // // 浏览器回退
         window.addEventListener(
@@ -29,7 +27,6 @@ class navigationStore {
 
         // 浏览器刷新
         window.onload = () => {
-            wsService.wsinit(sessionStorage.getItem('session_id'));
             this.getBreadcrumbSessionStorage();
             this.getSessionBadge();
             this.setCurrentMenu(this.breadcrumb[this.breadcrumb.length - 1]);
@@ -215,4 +212,4 @@ class navigationStore {
     }
 }
 
-export default new navigationStore();
+export default new NavigationStore();

@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
 
-@inject('navigationStore')
+@inject('NavigationStore')
 @observer
 export default class Sidebar extends React.Component {
     constructor(props) {
@@ -13,7 +13,7 @@ export default class Sidebar extends React.Component {
         this.state = {
             menulist: []
         };
-        this.store = props.navigationStore;
+        this.store = props.NavigationStore;
     }
 
     async componentDidMount() {

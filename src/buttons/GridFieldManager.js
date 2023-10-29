@@ -4,7 +4,7 @@ import { toJS } from 'mobx';
 import { observer, inject } from 'mobx-react';
 
 const { Option } = Select;
-@inject('dmStore')
+@inject('DataGridStore')
 @observer
 class GridFieldManager extends React.Component {
     saveCfg(field_cfg) {

@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react';
 import TableSortCom from './TableSort/TableSortCom';
 import { toJS } from 'mobx';
 
-@inject('dmStore')
+@inject('DataGridStore')
 @observer
 export default class TableSort extends React.Component {
     constructor(props) {
@@ -16,15 +16,15 @@ export default class TableSort extends React.Component {
     }
 
     async init() {
-        this.props.dmStore.clearMaintableColumns();
+        this.props.DataGridStore.clearMaintableColumns();
         let { selectedRows } = this.props.NanxTableStore;
         if (selectedRows.length == 0) {
             message.info('必须选择一项');
             return;
         } else {
             let record = selectedRows[0];
-            this.props.dmStore.setCurrentActcode(toJS(record).datagrid_code);
-            this.props.dmStore.initAll();
+            this.props.DataGridStore.setCurrentActcode(toJS(record).datagrid_code);
+            this.props.DataGridStore.initAll();
             this.setState({ visible: true });
         }
     }
@@ -36,7 +36,7 @@ export default class TableSort extends React.Component {
     }
 
     render() {
-        console.log(this.props.dmStore);
+        console.log(this.props.DataGridStore);
 
         return (
             <Modal
@@ -46,10 +46,10 @@ export default class TableSort extends React.Component {
                 onOk={() => this.onCancel()}
                 width={'1300px'}
                 title="字段排序/BUG">
-                {this.props.dmStore.maintableColumns.length == 0 ? null : (
+                {this.props.DataGridStore.maintableColumns.length == 0 ? null : (
                     <TableSortCom
-                        maintableColumns={this.props.dmStore.maintableColumns}
-                        DataGridCode={this.props.dmStore.DataGridCode}
+                        maintableColumns={this.props.DataGridStore.maintableColumns}
+                        DataGridCode={this.props.DataGridStore.DataGridCode}
                     />
                 )}
             </Modal>

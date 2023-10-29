@@ -1,15 +1,17 @@
 import NanxTableStore from './NanxTableStore';
-import dmStore from './dmStore';
-import navigationStore from './navigationStore';
-import permissionManageStore from './permissionManageStore';
-import userStore from './userStore';
+import DataGridStore from './DataGridStore';
+import NavigationStore from './NavigationStore';
+import MenuStore from './MenuStore';
+import UserStore from './UserStore';
+import TriggerStore from './TriggerStore';
 
 const store = {
-    navigationStore,
-    userStore,
+    NavigationStore,
+    UserStore,
     NanxTableStore,
-    permissionManageStore,
-    dmStore
+    MenuStore,
+    DataGridStore,
+    TriggerStore
 };
 
 export default store;

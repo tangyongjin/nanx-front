@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react';
 import GridFieldManager from './GridFieldManager';
 import { toJS } from 'mobx';
 
-@inject('dmStore')
+@inject('DataGridStore')
 @observer
 export default class GridFieldMnt extends React.Component {
     constructor(props) {
@@ -23,11 +23,11 @@ export default class GridFieldMnt extends React.Component {
         } else {
             let record = selectedRows[0];
             console.log(record);
-            this.props.dmStore.initAll();
-            this.props.dmStore.setCurrentActcode(toJS(record).datagrid_code);
-            this.props.dmStore.clearMaintableColumns();
-            this.props.dmStore.setCurrentActName(toJS(record).datagrid_title);
-            this.props.dmStore.setCurrentBasetable(toJS(record).base_table);
+            this.props.DataGridStore.initAll();
+            this.props.DataGridStore.setCurrentActcode(toJS(record).datagrid_code);
+            this.props.DataGridStore.clearMaintableColumns();
+            this.props.DataGridStore.setCurrentActName(toJS(record).datagrid_title);
+            this.props.DataGridStore.setCurrentBasetable(toJS(record).base_table);
             this.setState({ visible: true });
         }
     }
@@ -39,7 +39,7 @@ export default class GridFieldMnt extends React.Component {
     }
 
     render() {
-        console.log(this.props.dmStore);
+        console.log(this.props.DataGridStore);
 
         let { selectedRows } = this.props.NanxTableStore;
         return selectedRows.length > 0 ? (
@@ -50,16 +50,16 @@ export default class GridFieldMnt extends React.Component {
                 onOk={() => this.onCancel()}
                 width={'1600px'}
                 title="字段管理">
-                {this.props.dmStore.maintableColumns.length == 0 ? null : (
+                {this.props.DataGridStore.maintableColumns.length == 0 ? null : (
                     <GridFieldManager
-                        setMaintableColumns={this.props.dmStore.setMaintableColumns}
-                        batchUpdateFieldCfg={this.props.dmStore.batchUpdateFieldCfg}
-                        saveFieldCfg={this.props.dmStore.saveFieldCfg}
-                        maintableColumns={this.props.dmStore.maintableColumns}
-                        DataGridTitle={this.props.dmStore.DataGridTitle}
-                        DataGridCode={this.props.dmStore.DataGridCode}
-                        plugins={this.props.dmStore.plugins}
-                        Categories={this.props.dmStore.Categories}
+                        setMaintableColumns={this.props.DataGridStore.setMaintableColumns}
+                        batchUpdateFieldCfg={this.props.DataGridStore.batchUpdateFieldCfg}
+                        saveFieldCfg={this.props.DataGridStore.saveFieldCfg}
+                        maintableColumns={this.props.DataGridStore.maintableColumns}
+                        DataGridTitle={this.props.DataGridStore.DataGridTitle}
+                        DataGridCode={this.props.DataGridStore.DataGridCode}
+                        plugins={this.props.DataGridStore.plugins}
+                        Categories={this.props.DataGridStore.Categories}
                     />
                 )}
             </Modal>

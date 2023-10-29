@@ -1,6 +1,6 @@
 import { observable, action, toJS } from 'mobx';
 
-class userStore {
+class UserStore {
     contractor() {
         if (!sessionStorage.getItem('token')) {
             this.getToken();
@@ -40,4 +40,4 @@ class userStore {
     }
 }
 
-export default new userStore();
+export default new UserStore();

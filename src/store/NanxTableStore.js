@@ -10,12 +10,12 @@ class _NanxTableStore {
     constructor() {
         autorun(() => {
             if (this.SERIALNO == null) {
-                // alert('SERIALNO is null');
             }
         });
     }
 
     @observable SERIALNO = null;
+    @observable buttonModalVisuble = false;
     @observable datagrid_code = null;
     @observable selectedRowKeys = [];
     @observable selectedRows = [];
@@ -32,15 +32,15 @@ class _NanxTableStore {
     @observable tableColumns = [];
     @observable rawTableColumns = [];
 
-    // @observable tableColumns = [];
-
-    @observable triggers = [];
     @observable table_action = null;
     @observable fixed_query_cfg = null;
     @observable table_width = 2000;
     @observable lazyButtonUsedCom = null;
     @observable ButtonUsedCom = null;
     @observable search_query_cfg = [];
+
+    @action hideButtonModal = async () => (this.buttonModalVisuble = false);
+    @action showButtonModal = async () => (this.buttonModalVisuble = true);
 
     @action setPageSize = (pageSize) => (this.pageSize = pageSize);
 
@@ -49,14 +49,6 @@ class _NanxTableStore {
     @action setSearchQueryConfig = async (cfg) => {
         this.search_query_cfg = cfg;
     };
-
-    @action registerTrigger(obj) {
-        this.triggers.push(obj);
-    }
-
-    @action clearTrigger() {
-        this.triggers = [];
-    }
 
     @action resetTableStore = () => {
         this.selectedRowKeys = [];
@@ -92,7 +84,6 @@ class _NanxTableStore {
     };
 
     @action setTableAction = async (table_action) => {
-        console.log('设置🦊🦊🦊🦊🦊 TableAction:', table_action);
         this.table_action = table_action;
     };
 

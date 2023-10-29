@@ -2,12 +2,12 @@ import React from 'react';
 import { Row, Col, Card, Button } from 'antd';
 import { inject, observer } from 'mobx-react';
 
-@inject('dmStore')
+@inject('DataGridStore')
 @observer
 export default class TriggerListCom extends React.Component {
     constructor(props) {
         super(props);
-        this.dmstore = this.props.dmStore;
+        this.DataGridStore = this.props.DataGridStore;
     }
 
     state = {
@@ -16,19 +16,21 @@ export default class TriggerListCom extends React.Component {
     };
 
     render() {
-        console.log(this.dmstore);
+        console.log(this.DataGridStore);
 
         return (
             <div style={{ marginLeft: '5px' }}>
                 <h3>
-                    管理联动: {this.dmstore.DataGridCode}/{this.dmstore.DataGridTitle}
+                    管理联动: {this.DataGridStore.DataGridCode}/{this.DataGridStore.DataGridTitle}
                 </h3>
 
-                {this.dmstore.trigger_groups.map((item, idx) => (
+                {this.DataGridStore.trigger_groups.map((item, idx) => (
                     <Card
                         key={idx}
                         title={item.group_name}
-                        extra={<Button onClick={() => this.dmstore.deleteTriggerGroup(item.group_id)}>删除</Button>}
+                        extra={
+                            <Button onClick={() => this.DataGridStore.deleteTriggerGroup(item.group_id)}>删除</Button>
+                        }
                         style={{ width: 1200 }}>
                         <Row>
                             <Col span={1}>ID</Col>

@@ -3,14 +3,14 @@ import { Form, Select, Row, Col, Button } from 'antd';
 import { inject, observer } from 'mobx-react';
 
 const { Option } = Select;
-@inject('dmStore')
+@inject('DataGridStore')
 @inject('triggerlineStore')
 @observer
 class Line extends React.Component {
     constructor(props) {
         super(props);
         console.log(props);
-        this.dmstore = props.dmStore;
+        this.DataGridStore = props.DataGridStore;
         this.tgstore = props.triggerlineStore;
     }
 
@@ -24,7 +24,7 @@ class Line extends React.Component {
     }
 
     render() {
-        let biztables = this.dmstore.biztableList;
+        let biztables = this.DataGridStore.biztableList;
 
         const { getFieldDecorator } = this.props.form;
         return (
@@ -45,8 +45,8 @@ class Line extends React.Component {
                             value={this.tgstore.field_e}
                             onChange={this.tgstore.resetFieldE}
                             style={{ width: '98%' }}>
-                            {this.dmstore.maintableColumns.length &&
-                                this.dmstore.maintableColumns.map((item, index) => (
+                            {this.DataGridStore.maintableColumns.length &&
+                                this.DataGridStore.maintableColumns.map((item, index) => (
                                     <Option key={index} value={item.Field}>
                                         {item.Field}
                                     </Option>

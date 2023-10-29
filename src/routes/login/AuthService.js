@@ -1,8 +1,8 @@
 import decode from 'jwt-decode';
 import { hashHistory } from 'react-router';
 import api from '../../api/api';
-import navigationStore from '@/store/navigationStore';
-import userStore from '@/store/userStore';
+import NavigationStore from '@/store/NavigationStore';
+import UserStore from '@/store/UserStore';
 import { message } from 'antd';
 
 export default class AuthService {
@@ -31,16 +31,16 @@ export default class AuthService {
 
     afterLoginSuccess(res) {
         message.loading('登录成功>>,准备工作环境 ', 1.1, () => {
-            navigationStore.saveSessionBadge(res.info);
-            navigationStore.setBadge(res.info);
-            userStore.setUserProfile(res.profile);
-            userStore.setToken(res.token);
+            NavigationStore.saveSessionBadge(res.info);
+            NavigationStore.setBadge(res.info);
+            UserStore.setUserProfile(res.profile);
+            UserStore.setToken(res.token);
             hashHistory.push('/home');
         });
     }
 
     loggedIn() {
-        let token = userStore.getToken(); //
+        let token = UserStore.getToken(); //
 
         if (token === null) {
             message.info('请重新登录', 2.5);
@@ -69,9 +69,9 @@ export default class AuthService {
     }
 
     logout() {
-        userStore.clearToken();
+        UserStore.clearToken();
         sessionStorage.clear();
-        navigationStore.clear();
+        NavigationStore.clear();
         hashHistory.push('/login');
     }
 }

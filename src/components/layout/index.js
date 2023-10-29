@@ -5,12 +5,12 @@ import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
 const { Header, Sider, Content } = Layout;
 
-@inject('navigationStore')
+@inject('NavigationStore')
 @observer
 export default class PortalLayout extends React.Component {
     constructor(props) {
         super();
-        this.store = props.navigationStore;
+        this.store = props.NavigationStore;
     }
 
     render() {

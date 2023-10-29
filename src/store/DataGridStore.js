@@ -2,7 +2,7 @@ import { observable, action, autorun } from 'mobx';
 import { message } from 'antd';
 import api from '../api/api';
 
-class dmStore {
+class DataGridStore {
     constructor() {
         autorun(() => {
             if (this.DataGridCode) {
@@ -58,7 +58,7 @@ class dmStore {
     };
 
     @action initAll = () => {
-        console.log('初始化所有 dmStore 属性.');
+        console.log('初始化所有 DataGridStore 属性.');
         this.getAllGrids();
         this.getAllBiztable();
         this.getActCols();
@@ -146,7 +146,6 @@ class dmStore {
                 element[attr] = value;
             }
         });
-        // this.setMaintableColumns(this.maintableColumns);
     };
 
     @action saveFieldCfg = async (field) => {
@@ -168,4 +167,4 @@ class dmStore {
     };
 }
 
-export default new dmStore();
+export default new DataGridStore();

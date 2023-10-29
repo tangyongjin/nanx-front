@@ -2,21 +2,21 @@ import React from 'react';
 import { Breadcrumb } from 'antd';
 import { inject, observer } from 'mobx-react';
 
-@inject('navigationStore')
+@inject('NavigationStore')
 @observer
 export default class PortalBreadcrumb extends React.Component {
     render() {
-        if (!this.props.navigationStore.breadcrumb) {
+        if (!this.props.NavigationStore.breadcrumb) {
             return null;
         }
 
-        console.log(this.props.navigationStore);
+        console.log(this.props.NavigationStore);
         return (
             <Breadcrumb
-                key={this.props.navigationStore.animationKey + 'breadcrumb'}
+                key={this.props.NavigationStore.animationKey + 'breadcrumb'}
                 separator=">"
                 className="portal_bread_crumb">
-                {this.props.navigationStore.breadcrumb.map((item, index) => {
+                {this.props.NavigationStore.breadcrumb.map((item, index) => {
                     return <Breadcrumb.Item key={index}>{item.text}</Breadcrumb.Item>;
                 })}
             </Breadcrumb>

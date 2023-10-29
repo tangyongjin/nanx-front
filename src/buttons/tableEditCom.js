@@ -4,13 +4,9 @@ import React from 'react';
 import { message } from 'antd';
 import api from '@/api/api';
 import { observer, inject } from 'mobx-react';
-@inject('NanxTableStore') // 'myStore' 是你在Provider中提供的store名称
+@inject('NanxTableStore')
 @observer
 export default class TableEditCom extends React.Component {
-    state = {
-        visible: false
-    };
-
     init = async () => {
         await this.props.NanxTableStore.setTableAction('edit');
 
@@ -25,13 +21,8 @@ export default class TableEditCom extends React.Component {
             message.error('不是自己的数据不能编辑');
             return;
         }
-
-        await this.refs.commonModalRef.showModal();
+        await this.props.NanxTableStore.showButtonModal();
     };
-
-    hideModal() {
-        this.refs.commonModalRef.onCancelHandle();
-    }
 
     saveFormData = (fmdata) => {
         if (fmdata.customerid && fmdata.customerid != '') {
@@ -47,17 +38,6 @@ export default class TableEditCom extends React.Component {
         this.updateDateApi(data);
     };
 
-    getGhostData = (formData) => {
-        this.props.NanxTableStore.triggers.map((item) => {
-            formData['ghost_' + item.props.ass_select_field_id] = formData[item.props.ass_select_field_id];
-            let option_obj = item.state.optionList.find(
-                (optionItem) => optionItem.value == formData[item.props.ass_select_field_id]
-            );
-            formData[item.props.ass_select_field_id] = option_obj.label;
-        });
-        return formData;
-    };
-
     updateDateApi = async (fmdata) => {
         let id = this.props.NanxTableStore.selectedRowKeys[0];
         fmdata.rawdata.id = id;
@@ -69,18 +49,23 @@ export default class TableEditCom extends React.Component {
         }
     };
 
+    getGhostData = (formData) => {
+        this.props.NanxTableStore.triggers.map((item) => {
+            formData['ghost_' + item.props.ass_select_field_id] = formData[item.props.ass_select_field_id];
+            let option_obj = item.state.optionList.find(
+                (optionItem) => optionItem.value == formData[item.props.ass_select_field_id]
+            );
+            formData[item.props.ass_select_field_id] = option_obj.label;
+        });
+        return formData;
+    };
+
     render() {
         return (
-            <CommonModal
-                height="500px"
-                footer={null}
-                title="编辑"
-                ref="commonModalRef"
-                layoutcfg={this.props.NanxTableStore.layoutcfg}>
+            <CommonModal height="500px" footer={null} title="编辑" layoutcfg={this.props.NanxTableStore.layoutcfg}>
                 <CommonTableForm
                     as_virtual={this.props.as_virtual}
                     editable={true}
-                    hideModal={() => this.hideModal()}
                     onChange={this.props.onChange}
                     NanxTableStore={this.props.NanxTableStore}
                     saveFormData={this.saveFormData.bind(this)}

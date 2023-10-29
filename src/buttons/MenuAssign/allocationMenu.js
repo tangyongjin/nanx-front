@@ -2,12 +2,12 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import PriviligeTransfer from './priviligeTransfer';
 import '@/styles/privilige.scss';
-@inject('permissionManageStore')
+@inject('MenuStore')
 @observer
 export default class AllocationMenu extends React.Component {
     constructor(props) {
         super(props);
-        this.store = props.permissionManageStore;
+        this.store = props.MenuStore;
         this.state = {
             targetKeys: [],
             selectedKeys: [],

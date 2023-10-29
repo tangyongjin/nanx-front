@@ -8,9 +8,6 @@ import { SchemaForm, createFormActions } from '@uform/antd';
 const actions = createFormActions();
 
 const CommonTableForm = (props) => {
-    console.log('props: ', props);
-
-    // let formCfg = toJS(props.formCfg);
     let formCfg = toJS(props.NanxTableStore.formCfg);
     let layoutcfg = props.layoutcfg;
     const [rawData, setRawData] = useState({ editable: props.editable });
@@ -48,7 +45,7 @@ const CommonTableForm = (props) => {
                             for (let key in newitem.properties) {
                                 setFieldState(key, (item) => {
                                     item.props['x-props'].nnstore = props.NanxTableStore;
-                                    item.props['x-props'].datagrid_code = props.dataGridcode;
+                                    item.props['x-props'].datagrid_code = props.NanxTableStore.datagrid_code;
                                     item.props['x-props'].actions = actions;
                                     item.props['x-props'].schema = formCfg;
                                 });
@@ -65,14 +62,8 @@ const CommonTableForm = (props) => {
                         className="marginRihgt10"
                         onClick={async () => {
                             await actions.validate();
-                            await props.saveFormData(
-                                actions.getFormState().values,
-                                '',
-                                props.onChange,
-                                props.as_virtual,
-                                props.optionType
-                            );
-                            props.hideModal();
+                            await props.saveFormData(actions.getFormState().values);
+                            // props.hideModal();
                         }}>
                         保存
                     </Button>

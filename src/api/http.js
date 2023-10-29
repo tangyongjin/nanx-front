@@ -2,19 +2,19 @@ import request from 'then-request';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import userStore from '@/store/userStore';
-import navigationStore from '@/store/navigationStore';
+import UserStore from '@/store/UserStore';
+import NavigationStore from '@/store/NavigationStore';
 import { hashHistory } from 'react-router';
 import { message, Alert } from 'antd';
 
 message.config({ top: 20, maxCount: 100 });
 
 const setHeader = () => {
-    const token_from_userStore = userStore.getToken();
+    const token_from_UserStore = UserStore.getToken();
     const headers = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: token_from_userStore
+        Authorization: token_from_UserStore
     };
     return headers;
 };
@@ -65,10 +65,10 @@ const http = (params, url) => {
                     hashHistory.push('/login');
                     hideloading();
                     message.error(JSON.parse(res.body).message, 3);
-                    userStore.clearToken();
+                    UserStore.clearToken();
                     sessionStorage.clear();
-                    navigationStore.clear();
-                    navigationStore.setBossTitle(null);
+                    NavigationStore.clear();
+                    NavigationStore.setBossTitle(null);
                     return;
                 }
 

@@ -3,12 +3,12 @@ import { inject, observer } from 'mobx-react';
 
 import { Icon } from 'antd';
 
-@inject('navigationStore')
+@inject('NavigationStore')
 @observer
 export default class Hamburger extends React.Component {
     constructor(props) {
         super();
-        this.store = props.navigationStore;
+        this.store = props.NavigationStore;
     }
 
     render() {

@@ -9,7 +9,7 @@ import Hamburger from './hamburger';
 
 const { confirm } = Modal;
 
-@inject('navigationStore')
+@inject('NavigationStore')
 @observer
 export default class Navbar extends React.Component {
     constructor(props) {
@@ -18,12 +18,12 @@ export default class Navbar extends React.Component {
             visible: false,
             imageUrl: null
         };
-        this.navigationStore = props.navigationStore;
+        this.NavigationStore = props.NavigationStore;
         this.AuthService = new AuthService();
     }
 
     logout = () => {
-        this.navigationStore.setBossTitle(null);
+        this.NavigationStore.setBossTitle(null);
         this.AuthService.logout();
     };
 
@@ -67,14 +67,14 @@ export default class Navbar extends React.Component {
 
     switchToWaiting(datagrid_code) {
         if (
-            this.navigationStore.currentMenu.datagrid_code === datagrid_code &&
-            location.hash.indexOf(this.navigationStore.currentMenu.router) != -1
+            this.NavigationStore.currentMenu.datagrid_code === datagrid_code &&
+            location.hash.indexOf(this.NavigationStore.currentMenu.router) != -1
         ) {
-            this.navigationStore.changeUpdateKey();
+            this.NavigationStore.changeUpdateKey();
             return;
         }
 
-        this.navigationStore.switchRouter({ datagrid_code: datagrid_code });
+        this.NavigationStore.switchRouter({ datagrid_code: datagrid_code });
     }
     render() {
         return (

@@ -5,12 +5,12 @@ import { observer, inject } from 'mobx-react';
 
 const { Option } = Select;
 
-@inject('dmStore')
+@inject('DataGridStore')
 @observer
 class GridEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.dmstore = props.dmStore;
+        this.DataGridStore = props.DataGridStore;
     }
 
     state = {
@@ -32,7 +32,7 @@ class GridEditor extends React.Component {
     };
 
     resetQueryCfg = async () => {
-        if (this.dmstore.current_actcode === '') {
+        if (this.DataGridStore.current_actcode === '') {
             message.error('请选择一个DataGrid');
             return;
         }
@@ -41,7 +41,7 @@ class GridEditor extends React.Component {
     //针对某个activiticode的第一级别 querycfg, 如果存在,则会覆盖 commonTable的query_cfg
 
     saveOverrideQueryCfg = () => {
-        if (this.dmstore.current_actcode === '') {
+        if (this.DataGridStore.current_actcode === '') {
             message.error('请选择一个DataGrid');
             return;
         }
@@ -58,7 +58,7 @@ class GridEditor extends React.Component {
         let params = {
             method: 'POST',
             data: {
-                actcode: this.dmstore.current_actcode,
+                actcode: this.DataGridStore.current_actcode,
                 query_cfg_field: this.state.query_cfg_field,
                 query_cfg_value: this.state.query_cfg_value
             }
@@ -82,7 +82,7 @@ class GridEditor extends React.Component {
                 let ret = await api.activity.modifyActionCode(params);
                 if (ret.code == 200) {
                     message.info(ret.message, 1.5);
-                    this.dmstore.initAll();
+                    this.DataGridStore.initAll();
                 }
             } else {
                 message.error('请检查输入项', 0.5);
@@ -91,9 +91,9 @@ class GridEditor extends React.Component {
     };
 
     render() {
-        let xtitle = '编辑:' + this.dmstore.current_actcode;
+        let xtitle = '编辑:' + this.DataGridStore.current_actcode;
 
-        let biztables = this.dmstore.biztableList;
+        let biztables = this.DataGridStore.biztableList;
         const { getFieldDecorator } = this.props.form;
 
         return (
@@ -105,7 +105,7 @@ class GridEditor extends React.Component {
                             <Form.Item label="ActionCode">
                                 {getFieldDecorator('activity_code', {
                                     disabled: true,
-                                    initialValue: this.dmstore.currentObj.activity_code,
+                                    initialValue: this.DataGridStore.currentObj.activity_code,
                                     rules: [{ required: true, message: 'ActionCode' }]
                                 })(<Input disabled />)}
                             </Form.Item>
@@ -113,7 +113,7 @@ class GridEditor extends React.Component {
                         <Col span={4}>
                             <Form.Item label="标题">
                                 {getFieldDecorator('grid_title', {
-                                    initialValue: this.dmstore.currentObj.grid_title,
+                                    initialValue: this.DataGridStore.currentObj.grid_title,
 
                                     rules: [{ required: true, message: '输入标题' }]
                                 })(
@@ -126,7 +126,7 @@ class GridEditor extends React.Component {
                         <Col span={4}>
                             <Form.Item label="基础表格">
                                 {getFieldDecorator('base_table', {
-                                    initialValue: this.dmstore.currentObj.base_table,
+                                    initialValue: this.DataGridStore.currentObj.base_table,
                                     rules: [{ required: true, message: '选择基表' }]
                                 })(
                                     <Select showSearch placeholder="选择基表">
@@ -143,7 +143,7 @@ class GridEditor extends React.Component {
                         <Col span={4}>
                             <Form.Item label="宽度">
                                 {getFieldDecorator('win_size_width', {
-                                    initialValue: this.dmstore.currentObj.win_size_width,
+                                    initialValue: this.DataGridStore.currentObj.win_size_width,
 
                                     rules: [{ required: true, message: '宽度' }]
                                 })(
@@ -157,7 +157,7 @@ class GridEditor extends React.Component {
                         <Form.Item label="多选">
                             {getFieldDecorator('multiple', {
                                 valuePropName: 'checked',
-                                initialValue: this.dmstore.currentObj.multiple === 'n' ? false : true,
+                                initialValue: this.DataGridStore.currentObj.multiple === 'n' ? false : true,
                                 rules: [{ required: false, message: '多选' }]
                             })(<Switch style={{ marginLeft: '10px' }} checkedChildren="y" unCheckedChildren="n" />)}
                         </Form.Item>
@@ -167,7 +167,7 @@ class GridEditor extends React.Component {
                         <Col span={4}>
                             <Form.Item label="getterurl">
                                 {getFieldDecorator('geturl', {
-                                    initialValue: this.dmstore.currentObj.geturl,
+                                    initialValue: this.DataGridStore.currentObj.geturl,
                                     rules: [{ required: true, message: 'geturl' }]
                                 })(
                                     <AutoComplete placeholder="geturl">
@@ -179,7 +179,7 @@ class GridEditor extends React.Component {
                         <Col span={4}>
                             <Form.Item label="addurl">
                                 {getFieldDecorator('addurl', {
-                                    initialValue: this.dmstore.currentObj.addurl,
+                                    initialValue: this.DataGridStore.currentObj.addurl,
                                     rules: [{ required: true, message: 'addurl' }]
                                 })(
                                     <AutoComplete placeholder="addurl">
@@ -191,7 +191,7 @@ class GridEditor extends React.Component {
                         <Col span={4}>
                             <Form.Item label="delurl">
                                 {getFieldDecorator('delurl', {
-                                    initialValue: this.dmstore.currentObj.delurl,
+                                    initialValue: this.DataGridStore.currentObj.delurl,
                                     rules: [{ required: true, message: 'delurl' }]
                                 })(
                                     <AutoComplete placeholder="delurl">
@@ -204,7 +204,7 @@ class GridEditor extends React.Component {
                             {' '}
                             <Form.Item label="updateurl">
                                 {getFieldDecorator('updateurl', {
-                                    initialValue: this.dmstore.currentObj.updateurl,
+                                    initialValue: this.DataGridStore.currentObj.updateurl,
                                     rules: [{ required: true, message: 'updateurl' }]
                                 })(
                                     <AutoComplete placeholder="updateurl">
@@ -218,7 +218,7 @@ class GridEditor extends React.Component {
                             {' '}
                             <Form.Item label="layoutcfg">
                                 {getFieldDecorator('layoutcfg', {
-                                    initialValue: this.dmstore.currentObj.layoutcfg,
+                                    initialValue: this.DataGridStore.currentObj.layoutcfg,
                                     rules: [{ required: true, message: 'layoutcfg' }]
                                 })(
                                     <AutoComplete placeholder="layoutcfg">
@@ -246,7 +246,7 @@ class GridEditor extends React.Component {
                                 <Input.TextArea
                                     style={{ minWidth: '800px' }}
                                     disabled
-                                    value={this.dmstore.currentObj.fixed_query_cfg}
+                                    value={this.DataGridStore.currentObj.fixed_query_cfg}
                                 />{' '}
                             </div>
                         </Col>
@@ -266,8 +266,8 @@ class GridEditor extends React.Component {
                                 value={this.state.query_cfg_field}
                                 onChange={this.setFieldQuery}
                                 style={{ width: '98%' }}>
-                                {this.dmstore.maintableColumns.length &&
-                                    this.dmstore.maintableColumns.map((item, index) => (
+                                {this.DataGridStore.maintableColumns.length &&
+                                    this.DataGridStore.maintableColumns.map((item, index) => (
                                         <Option key={index} value={item.Field}>
                                             {item.Field}
                                         </Option>

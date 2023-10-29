@@ -2,7 +2,7 @@ import { observable, action } from 'mobx';
 import api from '../api/api';
 import { message } from 'antd';
 
-class permissionManageStore {
+class MenuStore {
     @observable selectButtonkeys = [];
     @observable menuList = [];
     @observable currentRole = {
@@ -73,4 +73,4 @@ class permissionManageStore {
     };
 }
 
-export default new permissionManageStore();
+export default new MenuStore();

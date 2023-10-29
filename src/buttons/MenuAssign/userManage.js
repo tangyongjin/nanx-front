@@ -2,7 +2,7 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import api from '@/api/api';
 import SearchTree from './searchTree';
-@inject('permissionManageStore')
+@inject('MenuStore')
 @observer
 export default class UserManage extends React.Component {
     constructor(props) {

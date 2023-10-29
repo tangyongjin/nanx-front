@@ -1,12 +1,11 @@
 import React from 'react';
 import { randomString } from '../../../utils/tools';
 import AuthService from '../AuthService';
-import WsService from '../WsService';
 import NanxArt from './login.jpeg';
 import { inject, observer } from 'mobx-react';
 import './login.css';
 
-@inject('navigationStore')
+@inject('NavigationStore')
 @observer
 export default class Login extends React.Component {
     constructor(props) {
@@ -21,8 +20,7 @@ export default class Login extends React.Component {
         this.handleFormSubmitMobile = this.handleFormSubmitMobile.bind(this);
         this.changeValue = this.changeValue.bind(this);
         this.Auth = new AuthService();
-        this.navigationStore = props.navigationStore;
-        this.WsService = new WsService();
+        this.NavigationStore = props.NavigationStore;
     }
 
     componentWillMount() {
@@ -32,8 +30,7 @@ export default class Login extends React.Component {
     }
 
     componentDidMount() {
-        this.navigationStore.setBossTitle(null);
-        this.WsService.wsinit(this.state.transaction_id);
+        this.NavigationStore.setBossTitle(null);
     }
 
     handleFormSubmitMobile(e) {
