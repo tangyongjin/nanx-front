@@ -3,15 +3,14 @@ import { Select } from 'antd';
 import api from '@/api/api';
 import { observer, inject } from 'mobx-react';
 
-@inject('NanxTableStore', 'TriggerStore') //
+@inject('NanxTableStore', 'TriggerStore')
 @observer
 export default class AssocSelect extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             optionList: [],
-            loading: false,
-            selectedValue: null // 下拉框选中的值
+            loading: false
         };
 
         this.onSelect = this.onSelect.bind(this);
@@ -26,9 +25,8 @@ export default class AssocSelect extends React.Component {
 
         this.props.TriggerStore.registerTrigger(this);
         let groups = this.props.TriggerStore.getDropdownGroups(this.props.schema);
-        console.log('>>>>>>groups: ', groups);
 
-        if (this.props.query_cfg.level == 1) {
+        if (this.props.query_cfg.level == 1 && this.props.NanxTableStore.table_action === 'add') {
             await this.getOptionList(this.props.query_cfg, null, this);
         }
 
@@ -41,23 +39,19 @@ export default class AssocSelect extends React.Component {
     }
 
     async simulateClick() {
-        if (this.props.NanxTableStore.table_action === 'edit') {
-            for (let i = 0; i < this.props.TriggerStore.triggers.length; i++) {
-                let element = this.props.TriggerStore.triggers[i];
-                // 2、同一组
+        for (let i = 0; i < this.props.TriggerStore.triggers.length; i++) {
+            let element = this.props.TriggerStore.triggers[i];
 
-                if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {
-                    let _tmp1_rows = element.props.nnstore.selectedRows;
-                    let curren_value = _tmp1_rows[0]['ghost_' + element.props.ass_select_field_id];
-                    await element.getDefaultOptionList(element);
-                    element.props.onChange(curren_value);
-                    element.setState({ selectedValue: curren_value });
-                }
+            if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {
+                let _tmp1_rows = element.props.nnstore.selectedRows;
+                let curren_value = _tmp1_rows[0]['ghost_' + element.props.ass_select_field_id];
+                await element.getDefaultOptionList(element);
+                element.props.onChange(curren_value);
             }
-            return;
         }
     }
 
+    // eslint-disable-next-line
     async getDefaultOptionList(current_ele) {
         let prev_sel_value = null;
         if (current_ele.props.query_cfg.level == 1) {
@@ -66,10 +60,12 @@ export default class AssocSelect extends React.Component {
         if (current_ele.props.query_cfg.level > 1) {
             prev_sel_value = current_ele.getPrevSelValue(current_ele);
         }
+
         await current_ele.getOptionList(current_ele.props.query_cfg, prev_sel_value, current_ele);
     }
 
-    // 获取上一个联动值
+    // 获取上一个级别的联动值
+    // eslint-disable-next-line
     getPrevSelValue(current_ele) {
         for (let i = 0; i < this.props.TriggerStore.triggers.length; i++) {
             let element = this.props.TriggerStore.triggers[i];
@@ -84,7 +80,6 @@ export default class AssocSelect extends React.Component {
             }
 
             let prev_value = element.props.nnstore.selectedRows[0]['ghost_' + element.props.ass_select_field_id];
-
             if (prev_value) {
                 return prev_value;
             }
@@ -92,16 +87,9 @@ export default class AssocSelect extends React.Component {
         }
     }
 
-    async onSelect(value, isClear) {
-        console.log('select', value);
-        // 1、设置当前字段的value
+    async onSelect(value) {
         this.props.onChange(value);
 
-        this.setState({
-            selectedValue: value
-        });
-
-        // 关联字段设置
         for (let i = 0; i < this.props.TriggerStore.triggers.length; i++) {
             let element = this.props.TriggerStore.triggers[i];
 
@@ -109,33 +97,22 @@ export default class AssocSelect extends React.Component {
             if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {
                 if (element.props.query_cfg.level - this.props.query_cfg.level == 1) {
                     await element.getOptionList(element.props.query_cfg, value, element);
-                    if (isClear === 'y') {
-                        element.setState({
-                            selectedValue: null
-                        });
-                        element.props.value && element.props.onChange('');
-                    }
+                    element.props.value && element.props.onChange('');
                 }
                 // 4、清空level - 当前level >= 2 的字段的value和optionList
                 if (element.props.query_cfg.level - this.props.query_cfg.level >= 2) {
-                    if (isClear === 'y') {
-                        element.setState({
-                            optionList: [],
-                            selectedValue: null
-                        });
-                        element.props.value && element.props.onChange('');
-                    }
+                    element.props.value && element.props.onChange('');
                 }
             }
         }
     }
 
-    getOptionList = async (query_cfg, value, element) => {
+    getOptionList = async (query_cfg, searchValue, element) => {
         this.setState({
             loading: true
         });
         let params = {
-            data: { ...query_cfg, value_field: value },
+            data: { ...query_cfg, value_field: searchValue },
             method: 'POST'
         };
 

@@ -3,7 +3,7 @@ module.exports = {
 
     parser: 'babel-eslint',
 
-    plugins: ['import', 'flowtype', 'jsx-a11y', 'react', 'react-hooks'],
+    plugins: ['import', 'no-unused-react-component-methods', 'react', 'flowtype', 'jsx-a11y', 'react', 'react-hooks'],
 
     env: {
         browser: true,
@@ -93,6 +93,8 @@ module.exports = {
     // NOTE: When adding rules here, you need to make sure they are compatible with
     // `typescript-eslint`, as some rules such as `no-array-constructor` aren't compatible.
     rules: {
+        'no-unused-react-component-methods/no-unused-react-component-methods': 'warn',
+        'react/no-unused-state': 'warn',
         'array-callback-return': 'off',
         'default-case': ['warn', { commentPattern: '^no default$' }],
         'dot-location': ['warn', 'property'],

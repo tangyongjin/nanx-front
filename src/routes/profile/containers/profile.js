@@ -34,7 +34,6 @@ class Profile extends React.Component {
         this.state = {
             department: '',
             role_code: '',
-            user: '',
             email: '',
             mobile: '',
             receive_mail_notify: '',
@@ -42,8 +41,7 @@ class Profile extends React.Component {
             loading: false,
             imageUrl: '',
             authorization: '',
-            roleList: [],
-            deptList: []
+            roleList: []
         };
         this.submit = this.submit.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -70,7 +68,6 @@ class Profile extends React.Component {
             this.setState({
                 department: res.data.deptid,
                 role_code: res.data.role_code,
-                user: res.data.user,
                 email: res.data.email,
                 mobile: res.data.mobile,
                 receive_mail_notify: res.data.receive_mail_notify != null ? res.data.receive_mail_notify : '',

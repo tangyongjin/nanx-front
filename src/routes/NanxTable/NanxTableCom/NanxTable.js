@@ -105,7 +105,7 @@ export default class NanxTable extends React.Component {
         return (
             <div className="table_wrapper">
                 {this.RenderBthHolder()}
-                <div className="table_button">{renderButtons(this.tbStore)}</div>
+                <div>{renderButtons(this.tbStore)}</div>
                 <Table
                     size={this.props.size ? 'small' : 'default'}
                     columns={this.tbStore.tableColumns}

@@ -6,6 +6,7 @@ import AuthService from '@/routes/login/AuthService';
 import EditPassword from '@/routes/login/containers/editPassword';
 import PortalBreadcrumb from './breadcrumb/PortalBreadcrumb';
 import Hamburger from './hamburger';
+import MyImage from './loading.gif';
 
 const { confirm } = Modal;
 
@@ -15,8 +16,7 @@ export default class Navbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            visible: false,
-            imageUrl: null
+            visible: false
         };
         this.NavigationStore = props.NavigationStore;
         this.AuthService = new AuthService();
@@ -38,49 +38,42 @@ export default class Navbar extends React.Component {
             }
         });
     }
+
     showmodal() {
         this.setState({
             visible: true
         });
     }
-    handleCancel = (e) => {
+
+    handleCancel = () => {
         this.setState({
             visible: false
         });
     };
+
     getUserBox = () => {
         return (
             <Menu className="dropdownMenu">
-                <Menu.Item key="setting:2" onClick={(event) => hashHistory.push('/profile')}>
+                <Menu.Item key="setting:2" onClick={() => hashHistory.push('/profile')}>
                     个人中心
                 </Menu.Item>
-                <Menu.Item key="setting:1" onClick={(event) => this.showmodal()}>
+                <Menu.Item key="setting:1" onClick={() => this.showmodal()}>
                     修改密码
                 </Menu.Item>
                 <Menu.Divider />
-                <Menu.Item key="setting:5" onClick={(event) => this.showConfirm()}>
+                <Menu.Item key="setting:5" onClick={() => this.showConfirm()}>
                     退出登录
                 </Menu.Item>
             </Menu>
         );
     };
 
-    switchToWaiting(datagrid_code) {
-        if (
-            this.NavigationStore.currentMenu.datagrid_code === datagrid_code &&
-            location.hash.indexOf(this.NavigationStore.currentMenu.router) != -1
-        ) {
-            this.NavigationStore.changeUpdateKey();
-            return;
-        }
-
-        this.NavigationStore.switchRouter({ datagrid_code: datagrid_code });
-    }
     render() {
         return (
             <div className="hamburger_box">
                 <Hamburger className="hamburger-container" />
                 <PortalBreadcrumb />
+                <img style={{ marginLeft: '30%', width: '125px' }} src={MyImage} alt="horse" />
                 <Dropdown overlay={this.getUserBox()} trigger={['click']} className="dropdown">
                     <div className="ant-dropdown-link" href="#">
                         <span style={{ paddingRight: '5px', color: '#97a8be', fontSize: '14px' }}>

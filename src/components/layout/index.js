@@ -3,6 +3,7 @@ import Sidebar from './sidebar';
 import Navbar from './navbar';
 import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
+
 const { Header, Sider, Content } = Layout;
 
 @inject('NavigationStore')
@@ -32,7 +33,6 @@ export default class PortalLayout extends React.Component {
                     <Header>
                         <Navbar />
                     </Header>
-
                     <Content
                         key={this.store.updateKey}
                         style={{
