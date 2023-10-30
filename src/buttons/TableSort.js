@@ -16,15 +16,18 @@ export default class TableSort extends React.Component {
     }
 
     async init() {
-        this.props.DataGridStore.clearMaintableColumns();
+        this.props.DataGridStore.clearColsDbInfo();
         let { selectedRows } = this.props.NanxTableStore;
         if (selectedRows.length == 0) {
             message.info('必须选择一项');
             return;
         } else {
             let record = selectedRows[0];
+            console.log(record);
             this.props.DataGridStore.setCurrentActcode(toJS(record).datagrid_code);
-            this.props.DataGridStore.initAll();
+            this.props.DataGridStore.setCurrentActName(toJS(record).datagrid_title);
+            this.props.DataGridStore.setCurrentBasetable(toJS(record).base_table);
+            this.props.DataGridStore.prepareDataGirdEnv();
             this.setState({ visible: true });
         }
     }
@@ -46,11 +49,8 @@ export default class TableSort extends React.Component {
                 onOk={() => this.onCancel()}
                 width={'1300px'}
                 title="字段排序/BUG">
-                {this.props.DataGridStore.maintableColumns.length == 0 ? null : (
-                    <TableSortCom
-                        maintableColumns={this.props.DataGridStore.maintableColumns}
-                        DataGridCode={this.props.DataGridStore.DataGridCode}
-                    />
+                {this.props.DataGridStore.ColsDbInfo.length == 0 ? null : (
+                    <TableSortCom DataGridCode={this.props.DataGridStore.DataGridCode} />
                 )}
             </Modal>
         );

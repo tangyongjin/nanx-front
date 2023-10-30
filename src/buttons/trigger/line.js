@@ -40,8 +40,8 @@ class Line extends React.Component {
                             value={this.tgstore.field_e}
                             onChange={this.tgstore.resetFieldE}
                             style={{ width: '98%' }}>
-                            {this.DataGridStore.maintableColumns.length &&
-                                this.DataGridStore.maintableColumns.map((item, index) => (
+                            {this.DataGridStore.ColsDbInfo.length &&
+                                this.DataGridStore.ColsDbInfo.map((item, index) => (
                                     <Option key={index} value={item.Field}>
                                         {item.Field}
                                     </Option>

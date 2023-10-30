@@ -8,7 +8,7 @@ const { Option } = Select;
 @observer
 class GridFieldManager extends React.Component {
     saveCfg(field_cfg) {
-        this.props.saveFieldCfg(field_cfg);
+        this.props.DataGridStore.saveFieldCfg(field_cfg);
     }
 
     changeCfg_input = function (a, attr, field) {
@@ -30,29 +30,30 @@ class GridFieldManager extends React.Component {
     };
 
     changeVisible = (key, e) => {
-        let { maintableColumns } = this.props;
-        maintableColumns.map((item) => {
+        let { ColsDbInfo } = this.props;
+        ColsDbInfo.map((item) => {
             item[key] = e.target.checked;
             return item;
         });
-        console.log(key, e.target.checked, this.props.maintableColumns);
-        this.props.setMaintableColumns(maintableColumns);
+        console.log(key, e.target.checked, this.props.DataGridStore.ColsDbInfo);
+        this.props.DataGridStore.setColsDbInfo(ColsDbInfo);
     };
 
     setFieldAttr = (field, attr, value) => {
-        let { maintableColumns } = this.props;
-        maintableColumns.map((element) => {
+        let { ColsDbInfo } = this.props;
+        ColsDbInfo.map((element) => {
             if (element.Field === field) {
                 element[attr] = value;
             }
         });
-        this.props.setMaintableColumns(maintableColumns);
+        this.props.DataGridStore.setColsDbInfo(ColsDbInfo);
     };
 
     render() {
-        let xtitle = '当前DataGrid: ' + this.props.DataGridTitle + '/' + this.props.DataGridCode;
-        let allcols = this.props.maintableColumns;
-        console.log('当前Code= ' + this.props.DataGridCode + ' 所有字段:');
+        let xtitle =
+            '当前DataGrid: ' + this.props.DataGridStore.DataGridTitle + '/' + this.props.DataGridStore.DataGridCode;
+        let allcols = this.props.DataGridStore.ColsDbInfo;
+        console.log('当前Code= ' + this.props.DataGridStore.DataGridCode + ' 所有字段:');
         console.log(toJS(allcols));
 
         return (
@@ -91,7 +92,10 @@ class GridFieldManager extends React.Component {
                     <Col span={2}></Col>
                     <Col span={5}></Col>
                     <Col span={2}>
-                        <Button type="primary" htmlType="button" onClick={() => this.props.batchUpdateFieldCfg()}>
+                        <Button
+                            type="primary"
+                            htmlType="button"
+                            onClick={() => this.props.DataGridStore.batchUpdateFieldCfg()}>
                             保存
                         </Button>
                     </Col>
@@ -128,8 +132,8 @@ class GridFieldManager extends React.Component {
                                 disabled={col.Field == 'id'}
                                 placeholder="UForm字段类型"
                                 name="plugin">
-                                {this.props.plugins.length &&
-                                    this.props.plugins.map((item, index) => (
+                                {this.props.DataGridStore.plugins.length &&
+                                    this.props.DataGridStore.plugins.map((item, index) => (
                                         <Option key={index} value={item.plugid}>
                                             {item.plugname}
                                         </Option>
@@ -194,8 +198,8 @@ class GridFieldManager extends React.Component {
                                 disabled={col.Field == 'id'}
                                 placeholder="字典表"
                                 name="category">
-                                {this.props.Categories.length &&
-                                    this.props.Categories.map((item, index) => (
+                                {this.props.DataGridStore.Categories.length &&
+                                    this.props.DataGridStore.Categories.map((item, index) => (
                                         <Option key={index} value={item.catid}>
                                             {item.catname}
                                         </Option>

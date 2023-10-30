@@ -81,19 +81,33 @@ export default class Sidebar extends React.Component {
     render() {
         const defaultProps = this.store.isCollapse ? {} : { openKeys: this.store.openKeys };
         return (
-            <div className="menuWrapper">
-                {this.state.menulist ? (
-                    <Menu
-                        mode="inline"
-                        theme="dark"
-                        selectedKeys={this.store.selectedKeys}
-                        onOpenChange={(openKeys) => this.onOpenChange(openKeys)}
-                        {...defaultProps}>
-                        {this.state.menulist.map((menuitem, index) => this.getChildren(menuitem, index))}
-                    </Menu>
-                ) : (
-                    <div>222</div>
-                )}
+            <div>
+                <div
+                    id="logo"
+                    style={{
+                        display: 'flex',
+                        height: '80px',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                    Nanx
+                </div>
+                <div className="menuWrapper">
+                    {this.state.menulist ? (
+                        <Menu
+                            mode="inline"
+                            theme="dark"
+                            selectedKeys={this.store.selectedKeys}
+                            onOpenChange={(openKeys) => this.onOpenChange(openKeys)}
+                            {...defaultProps}>
+                            {this.state.menulist.map((menuitem, index) => this.getChildren(menuitem, index))}
+                        </Menu>
+                    ) : (
+                        <div>222</div>
+                    )}
+                </div>
             </div>
         );
     }

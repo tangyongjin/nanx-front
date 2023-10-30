@@ -23,7 +23,6 @@ export default class GridFieldMnt extends React.Component {
         } else {
             let record = selectedRows[0];
             console.log(record);
-
             this.props.DataGridStore.setCurrentActcode(toJS(record).datagrid_code);
             this.props.DataGridStore.setCurrentActName(toJS(record).datagrid_title);
             this.props.DataGridStore.setCurrentBasetable(toJS(record).base_table);
@@ -50,18 +49,7 @@ export default class GridFieldMnt extends React.Component {
                 onOk={() => this.onCancel()}
                 width={'1600px'}
                 title="字段管理面板">
-                {this.props.DataGridStore.maintableColumns.length == 0 ? null : (
-                    <GridFieldManager
-                        setMaintableColumns={this.props.DataGridStore.setMaintableColumns}
-                        batchUpdateFieldCfg={this.props.DataGridStore.batchUpdateFieldCfg}
-                        saveFieldCfg={this.props.DataGridStore.saveFieldCfg}
-                        maintableColumns={this.props.DataGridStore.maintableColumns}
-                        DataGridTitle={this.props.DataGridStore.DataGridTitle}
-                        DataGridCode={this.props.DataGridStore.DataGridCode}
-                        plugins={this.props.DataGridStore.plugins}
-                        Categories={this.props.DataGridStore.Categories}
-                    />
-                )}
+                {this.props.DataGridStore.ColsDbInfo.length == 0 ? null : <GridFieldManager />}
             </Modal>
         ) : null;
     }

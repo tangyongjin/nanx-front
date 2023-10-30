@@ -49,7 +49,7 @@ export default class TriggerAdder extends React.Component {
                 onOk={() => this.onCancel()}
                 width={'1300px'}
                 title="添加联动">
-                {this.props.DataGridStore.maintableColumns.length == 0 ? null : <TriggerAddCom />}
+                {this.props.DataGridStore.ColsDbInfo.length == 0 ? null : <TriggerAddCom />}
             </Modal>
         ) : null;
     }

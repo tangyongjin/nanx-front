@@ -3,21 +3,14 @@ import { Table, Button } from 'antd';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import api from '@/api/api';
 
 const type = 'DragableBodyRow';
 
+@inject('DataGridStore')
 @observer
 export default class TableSortCom extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: this.props.maintableColumns,
-            datagrid_code: this.props.DataGridCode
-        };
-    }
-
     DragableBodyRow = ({ index, moveRow, className, style, ...restProps }) => {
         const ref = React.useRef();
         const [{ isOver, dropClassName }, drop] = useDrop({
@@ -80,7 +73,7 @@ export default class TableSortCom extends React.Component {
         }
         let params = {
             data: {
-                datagrid_code: this.state.datagrid_code,
+                datagrid_code: this.props.DataGridStore.DataGridCode,
                 filedids: dataarr
             },
             method: 'POST'
@@ -107,7 +100,7 @@ export default class TableSortCom extends React.Component {
                 <Table
                     rowKey={(row) => row.Field}
                     columns={columns}
-                    dataSource={this.state.data}
+                    dataSource={this.props.DataGridStore.ColsDbInfo}
                     pagination={false}
                     components={this.components}
                     onRow={(record, index) => ({

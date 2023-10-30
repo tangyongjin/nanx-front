@@ -6,7 +6,7 @@ export default class dataGrid {
     static apis = {
         getAssociateData: (params) => post(`${api_root}/${params.data.api}`, params),
         getPortalDataGrids: (params) => post(`${api_root}/DataGrid/getPortalDataGrids`, params),
-        getActCols: (params) => post(`${api_root}/DataGrid/getActCols`, params),
+        getColsDbInfo: (params) => post(`${api_root}/DataGrid/getColsDbInfo`, params),
         getAllCategory: (params) => post(`${api_root}/DataGrid/getAllCategory`, params),
         saveTriggerGroup: (params) => post(`${api_root}/DataGrid/saveTriggerGroup`, params),
         getTriggerGroups: (params) => post(`${api_root}/DataGrid/getTriggerGroups`, params),

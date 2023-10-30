@@ -49,7 +49,7 @@ export default class TriggerList extends React.Component {
                 onOk={() => this.onCancel()}
                 width={'1300px'}
                 title="管理联动">
-                {this.props.DataGridStore.maintableColumns.length == 0 ? null : <TriggerListCom />}
+                {this.props.DataGridStore.ColsDbInfo.length == 0 ? null : <TriggerListCom />}
             </Modal>
         ) : null;
     }
