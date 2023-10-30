@@ -1,6 +1,6 @@
 import React from 'react';
 import { randomString } from '../../../utils/tools';
-import AuthService from '../AuthService';
+import LoginService from '../LoginService';
 import NanxArt from './login.jpeg';
 import { inject, observer } from 'mobx-react';
 import './login.css';
@@ -14,7 +14,7 @@ export default class Login extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmitMobile = this.handleFormSubmitMobile.bind(this);
         this.changeValue = this.changeValue.bind(this);
-        this.Auth = new AuthService();
+        this.Auth = new LoginService();
         this.NavigationStore = props.NavigationStore;
     }
 

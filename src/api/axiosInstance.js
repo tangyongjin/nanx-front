@@ -1,6 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
-import AuthStore from '@/storeMobx/AuthStore';
+import AuthStore from '@/store/AuthStore';
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -17,7 +17,7 @@ const axiosInstance = axios.create({
     }
 });
 
-axiosInstance.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+axiosInstance.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
 
 function nowString() {
     const now = moment();
@@ -65,13 +65,16 @@ axiosInstance.interceptors.response.use(
 );
 
 // this is good
-export async function post(url, data, config) {
+export async function post(url, params, config) {
+    console.log('config: ', config);
+    console.log('params: ', params);
     try {
-        const response = await axiosInstance.post(url, { ...data }, { ...config });
+        const response = await axiosInstance.post(url, params.data, { ...config });
         console.log(response);
         return response.data;
     } catch (error) {
         console.error(error);
+        return error.response.data;
     }
 }
 

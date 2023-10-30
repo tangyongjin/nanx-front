@@ -5,7 +5,7 @@ import NavigationStore from '@/store/NavigationStore';
 import UserStore from '@/store/UserStore';
 import { message } from 'antd';
 
-export default class AuthService {
+export default class LoginService {
     constructor() {
         this.loginMobile = this.loginMobile.bind(this);
     }
@@ -19,6 +19,8 @@ export default class AuthService {
         };
 
         let res = await api.user.loginMobile(params);
+        console.log('res: ', res);
+
         if (res.code == 401) {
             message.error('登陆失败，请检查手机号和密码！', 2.5);
             return;

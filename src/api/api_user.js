@@ -1,13 +1,13 @@
 import { root_url, port, version_2 } from './api_config/base_config';
-import http from './http';
+import { post } from './axiosInstance';
 
 const api_root = `${root_url}:${port}/${version_2}`;
 
 export default class user {
     static apis = {
-        loginMobile: (params) => http(params, `${api_root}/Auth/loginMobile`),
-        profile: (params) => http(params, `${api_root}/Auth/profile`),
-        edit_password: (params) => http(params, `${api_root}/Auth/changepwd`),
-        updateUserInformation: (params) => http(params, `${api_root}/User/updateUserInformation`)
+        loginMobile: (params) => post(`${api_root}/Auth/loginMobile`, params),
+        profile: (params) => post(`${api_root}/Auth/profile`, params),
+        edit_password: (params) => post(`${api_root}/Auth/changepwd`, params),
+        updateUserInformation: (params) => post(`${api_root}/User/updateUserInformation`, params)
     };
 }

@@ -6,23 +6,47 @@ class DataGridStore {
     constructor() {
         autorun(() => {
             if (this.DataGridCode) {
-                this.initAll();
+                // this.initAll();
             }
         });
     }
 
     @observable dataGrids = [];
-    @observable maintableColumns = [];
     @observable biztableList = [];
-    @observable DataGridCode = null;
-    @observable DataGridTitle = '';
-    @observable trigger_groups = [];
     @observable plugins = [];
     @observable Categories = [];
-    @observable currentObj = {};
-    @observable maintable = '';
+
+    // 单个DataGrid相关
+    @observable DataGridCode = null;
+    @observable DataGridTitle = '';
+    @observable BaseTable = '';
+    @observable maintableColumns = [];
+    @observable trigger_groups = [];
     @observable relatedtableColumns = [];
-    @observable relatedtable = [];
+    @observable relatedtable = '';
+
+    @action prepareDataGirdEnv = async () => {
+        await this.initAll();
+        await this.getDataGridConfigure();
+    };
+
+    @action initAll = async () => {
+        console.log('初始化所有 DataGridStore 属性.');
+        await this.getAllGrids();
+        await this.getAllBiztable();
+        await this.getAllPlugins();
+        await this.getAllCategory();
+        // 单个 DataGrid 配置
+        // this.getActCols();
+        // this.getTriggerGroups();
+        // this.getRelatedTableCols();
+    };
+
+    @action getDataGridConfigure() {
+        this.getActCols();
+        this.getTriggerGroups();
+        this.getRelatedTableCols();
+    }
 
     @action setRelatedtable = (table) => {
         this.relatedtable = table;
@@ -50,22 +74,11 @@ class DataGridStore {
     };
 
     @action setCurrentBasetable = (table) => {
-        this.maintable = table;
+        this.BaseTable = table;
     };
 
     @action setCurrentActName = (name) => {
         this.DataGridTitle = name;
-    };
-
-    @action initAll = () => {
-        console.log('初始化所有 DataGridStore 属性.');
-        this.getAllGrids();
-        this.getAllBiztable();
-        this.getActCols();
-        this.getTriggerGroups();
-        this.getAllPlugins();
-        this.getAllCategory();
-        this.getRelatedTableCols();
     };
 
     @action getAllPlugins = async () => {
@@ -97,7 +110,7 @@ class DataGridStore {
 
     @action getActCols = async () => {
         if (this.DataGridCode === null) {
-            this.maintableColumns = [];
+            this.setMaintableColumns([]);
         } else {
             let params = { method: 'POST', data: { DataGridCode: this.DataGridCode } };
             let json = await api.dataGrid.getActCols(params);

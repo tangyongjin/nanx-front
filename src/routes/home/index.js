@@ -15,11 +15,11 @@ export default {
     ]
 };
 
-// import AuthService from '../login/AuthService';
+// import LoginService from '../login/LoginService';
 // window.win_requireAuth = function (nextState, replace, callback) {
 //     // 判断是否登录
 //     alert(' 判断是否登录 home/index');
-//     this.Auth = new AuthService();
+//     this.Auth = new LoginService();
 //     if (!this.Auth.loggedIn()) {
 //         console.log('not login');
 //         replace('/login'); // 如果没有登录就跳转到登录路由

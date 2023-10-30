@@ -18,16 +18,16 @@ export default class GridFieldMnt extends React.Component {
     async init() {
         let { selectedRows } = this.props.NanxTableStore;
         if (selectedRows.length == 0) {
-            message.info('必须选择一项');
+            message.info('必须选择一个DataGrid');
             return;
         } else {
             let record = selectedRows[0];
             console.log(record);
-            this.props.DataGridStore.initAll();
+
             this.props.DataGridStore.setCurrentActcode(toJS(record).datagrid_code);
-            this.props.DataGridStore.clearMaintableColumns();
             this.props.DataGridStore.setCurrentActName(toJS(record).datagrid_title);
             this.props.DataGridStore.setCurrentBasetable(toJS(record).base_table);
+            this.props.DataGridStore.prepareDataGirdEnv();
             this.setState({ visible: true });
         }
     }
@@ -49,7 +49,7 @@ export default class GridFieldMnt extends React.Component {
                 onCancel={() => this.onCancel()}
                 onOk={() => this.onCancel()}
                 width={'1600px'}
-                title="字段管理">
+                title="字段管理面板">
                 {this.props.DataGridStore.maintableColumns.length == 0 ? null : (
                     <GridFieldManager
                         setMaintableColumns={this.props.DataGridStore.setMaintableColumns}

@@ -50,7 +50,7 @@ class GridFieldManager extends React.Component {
     };
 
     render() {
-        let xtitle = '[字段管理]:' + this.props.DataGridTitle + '/' + this.props.DataGridCode;
+        let xtitle = '当前DataGrid: ' + this.props.DataGridTitle + '/' + this.props.DataGridCode;
         let allcols = this.props.maintableColumns;
         console.log('当前Code= ' + this.props.DataGridCode + ' 所有字段:');
         console.log(toJS(allcols));

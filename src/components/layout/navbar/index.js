@@ -2,11 +2,11 @@ import { Dropdown, Icon, Menu, Modal } from 'antd';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
-import AuthService from '@/routes/login/AuthService';
+import LoginService from '@/routes/login/LoginService';
 import EditPassword from '@/routes/login/containers/editPassword';
 import PortalBreadcrumb from './breadcrumb/PortalBreadcrumb';
 import Hamburger from './hamburger';
-import MyImage from './loading.gif';
+import LoadingGif from './loading.gif';
 
 const { confirm } = Modal;
 
@@ -19,12 +19,12 @@ export default class Navbar extends React.Component {
             visible: false
         };
         this.NavigationStore = props.NavigationStore;
-        this.AuthService = new AuthService();
+        this.LoginService = new LoginService();
     }
 
     logout = () => {
         this.NavigationStore.setBossTitle(null);
-        this.AuthService.logout();
+        this.LoginService.logout();
     };
 
     showConfirm() {
@@ -73,7 +73,9 @@ export default class Navbar extends React.Component {
             <div className="hamburger_box">
                 <Hamburger className="hamburger-container" />
                 <PortalBreadcrumb />
-                <img style={{ marginLeft: '30%', width: '125px' }} src={MyImage} alt="horse" />
+                <div id="preloader" style={{ marginLeft: '30%', width: '125px', display: 'none' }}>
+                    <img style={{ marginLeft: '30%', width: '125px' }} src={LoadingGif} alt="loading" />
+                </div>
                 <Dropdown overlay={this.getUserBox()} trigger={['click']} className="dropdown">
                     <div className="ant-dropdown-link" href="#">
                         <span style={{ paddingRight: '5px', color: '#97a8be', fontSize: '14px' }}>

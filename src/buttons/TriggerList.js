@@ -23,11 +23,10 @@ export default class TriggerList extends React.Component {
         } else {
             let record = selectedRows[0];
             console.log(record);
-            this.props.DataGridStore.initAll();
             this.props.DataGridStore.setCurrentActcode(toJS(record).datagrid_code);
-            this.props.DataGridStore.clearMaintableColumns();
             this.props.DataGridStore.setCurrentActName(toJS(record).datagrid_title);
             this.props.DataGridStore.setCurrentBasetable(toJS(record).base_table);
+            this.props.DataGridStore.prepareDataGirdEnv();
             this.setState({ visible: true });
         }
     }
