@@ -32,7 +32,13 @@ export default class Navbar extends React.Component {
             content: <h4>您确定要退出系统么？</h4>,
             onOk: () => this.logout(),
             cancelText: '取消',
+            icon: (
+                <div>
+                    <a-icon type="exclamation-circle" />
+                </div>
+            ),
             okText: '确定',
+            okButtonProps: { style: { backgroundColor: '#343c41', color: '#fff', borderColor: '#343c41' } },
             onCancel() {
                 console.log('Cancel');
             }

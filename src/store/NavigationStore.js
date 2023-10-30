@@ -65,7 +65,19 @@ class NavigationStore {
     };
 
     @action toggleCollapse = () => {
+        console.log('侧边栏收齐/展开');
         this.isCollapse = !this.isCollapse;
+
+        // set id =logo text :
+        let ele = document.getElementById('logo');
+        ele.style['font-size'] = '16px';
+
+        if (this.isCollapse) {
+            ele.innerHTML = 'Nanx+';
+        } else {
+            ele.innerHTML = '[Nanx+]';
+            ele.style['font-size'] = '21px';
+        }
     };
 
     @action setBossTitle = (staff_name) => {

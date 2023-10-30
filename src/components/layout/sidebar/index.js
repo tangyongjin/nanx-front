@@ -13,12 +13,12 @@ export default class Sidebar extends React.Component {
         this.state = {
             menulist: []
         };
-        this.store = props.NavigationStore;
+        this.NavigationStore = props.NavigationStore;
     }
 
     async componentDidMount() {
-        await this.store.getMenuTreeByRoleCode();
-        let { menuList } = this.store;
+        await this.NavigationStore.getMenuTreeByRoleCode();
+        let { menuList } = this.NavigationStore;
         this.setState({ menulist: menuList });
     }
 
@@ -29,16 +29,16 @@ export default class Sidebar extends React.Component {
 
         // 点击菜单刷新右侧功能
         if (
-            JSON.stringify(menuClicked) == JSON.stringify(this.store.currentMenu) &&
+            JSON.stringify(menuClicked) == JSON.stringify(this.NavigationStore.currentMenu) &&
             window.location.href.indexOf(menuClicked.router) != -1
         ) {
-            this.store.changeUpdateKey();
+            this.NavigationStore.changeUpdateKey();
             return;
         }
 
-        this.store.setBreadcrumb(menuClicked);
-        this.store.setCurrentMenu(menuClicked);
-        this.store.setSelectedKeys(menuClicked.key);
+        this.NavigationStore.setBreadcrumb(menuClicked);
+        this.NavigationStore.setCurrentMenu(menuClicked);
+        this.NavigationStore.setSelectedKeys(menuClicked.key);
         hashHistory.push({
             pathname: menuClicked.router,
             state: {
@@ -75,11 +75,11 @@ export default class Sidebar extends React.Component {
     }
 
     onOpenChange(openKeys) {
-        this.store.setOpenKeys(openKeys);
+        this.NavigationStore.setOpenKeys(openKeys);
     }
 
     render() {
-        const defaultProps = this.store.isCollapse ? {} : { openKeys: this.store.openKeys };
+        const defaultProps = this.NavigationStore.isCollapse ? {} : { openKeys: this.NavigationStore.openKeys };
         return (
             <div>
                 <div
@@ -88,18 +88,20 @@ export default class Sidebar extends React.Component {
                         display: 'flex',
                         height: '80px',
                         color: 'white',
+                        marginTop: '-12px',
+                        fontSize: '21px',
                         fontWeight: 'bold',
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                    Nanx
+                    [Nanx+]
                 </div>
                 <div className="menuWrapper">
                     {this.state.menulist ? (
                         <Menu
                             mode="inline"
                             theme="dark"
-                            selectedKeys={this.store.selectedKeys}
+                            selectedKeys={this.NavigationStore.selectedKeys}
                             onOpenChange={(openKeys) => this.onOpenChange(openKeys)}
                             {...defaultProps}>
                             {this.state.menulist.map((menuitem, index) => this.getChildren(menuitem, index))}

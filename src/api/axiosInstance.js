@@ -66,8 +66,13 @@ axiosInstance.interceptors.response.use(
 
 // this is good
 export async function post(url, params, config) {
+    console.log('url: ', url);
     console.log('config: ', config);
     console.log('params: ', params);
+    if (!params) {
+        params = { data: {} };
+    }
+
     try {
         const response = await axiosInstance.post(url, params.data, { ...config });
         console.log(response);

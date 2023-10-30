@@ -1,35 +1,34 @@
 // 现在没有用到，  以后备用
-import React from 'react'
+import React from 'react';
 import { Tree, Input } from 'antd';
 
 const { TreeNode } = Tree;
 const { Search } = Input;
-
 export default class SearchTree extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             expandedKeys: [],
             searchValue: '',
-            autoExpandParent: true,
-        }
-        this.renderTreeNodes = this.renderTreeNodes.bind(this)
+            autoExpandParent: true
+        };
+        this.renderTreeNodes = this.renderTreeNodes.bind(this);
     }
     componentDidMount() {
         this.props.getFirstNode();
     }
 
-    onExpand = expandedKeys => {
+    onExpand = (expandedKeys) => {
         this.setState({
             expandedKeys,
-            autoExpandParent: false,
+            autoExpandParent: false
         });
     };
 
-    onChange = e => {
+    onChange = (e) => {
         const { value } = e.target;
         const expandedKeys = this.props.dataList
-            .map(item => {
+            .map((item) => {
                 if (item[this.props.treeKey].indexOf(value) > -1) {
                     return this.getParentKey(item.key, this.props.dataList);
                 }
@@ -39,7 +38,7 @@ export default class SearchTree extends React.Component {
         this.setState({
             expandedKeys,
             searchValue: value,
-            autoExpandParent: true,
+            autoExpandParent: true
         });
     };
 
@@ -48,7 +47,7 @@ export default class SearchTree extends React.Component {
         for (let i = 0; i < tree.length; i++) {
             const node = tree[i];
             if (node.children) {
-                if (node.children.some(item => item.key === key)) {
+                if (node.children.some((item) => item.key === key)) {
                     parentKey = node.key;
                 } else if (this.getParentKey(key, node.children)) {
                     parentKey = this.getParentKey(key, node.children);
@@ -56,14 +55,14 @@ export default class SearchTree extends React.Component {
             }
         }
         return parentKey;
+    };
+
+    nodeClick() {
+        console.log('node');
     }
 
-    nodeClick(){
-        console.log('node')
-    }
-
-    renderTreeNodes = data =>
-        data.map(item => {
+    renderTreeNodes = (data) =>
+        data.map((item) => {
             const index = item[this.props.treeTitle].indexOf(this.state.searchValue);
             const beforeStr = item[this.props.treeTitle].substr(0, index);
             const afterStr = item[this.props.treeTitle].substr(index + this.state.searchValue.length);
@@ -75,8 +74,8 @@ export default class SearchTree extends React.Component {
                         {afterStr}
                     </span>
                 ) : (
-                        <span>{item[this.props.treeTitle]}</span>
-                    );
+                    <span>{item[this.props.treeTitle]}</span>
+                );
             if (item.children) {
                 return (
                     <TreeNode key={item[this.props.treeKey]} title={title} onClick={this.nodeClick}>
@@ -88,7 +87,6 @@ export default class SearchTree extends React.Component {
         });
 
     getDefaultPropsHandler() {
-
         const { expandedKeys, autoExpandParent } = this.state;
         let treeDefaultProps = {
             showLine: true,
@@ -96,25 +94,22 @@ export default class SearchTree extends React.Component {
             expandedKeys: expandedKeys,
             autoExpandParent: autoExpandParent,
             multiple: this.props.multiple ? true : false
-        }
+        };
 
         if (this.props.loadData) {
-            treeDefaultProps.loadData = this.props.loadData
+            treeDefaultProps.loadData = this.props.loadData;
         }
-        if(this.props.onSelect){
-            treeDefaultProps.onSelect = this.props.onSelect
+        if (this.props.onSelect) {
+            treeDefaultProps.onSelect = this.props.onSelect;
         }
         return treeDefaultProps;
     }
 
     render() {
-
         return (
             <div>
                 <Search style={{ marginBottom: 8 }} placeholder="搜索" onChange={this.onChange} />
-                <Tree {...this.getDefaultPropsHandler()}>
-                    {this.renderTreeNodes(this.props.dataList)}
-                </Tree>
+                <Tree {...this.getDefaultPropsHandler()}>{this.renderTreeNodes(this.props.dataList)}</Tree>
             </div>
         );
     }
