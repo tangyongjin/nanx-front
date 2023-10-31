@@ -117,7 +117,6 @@ class NavigationStore {
         }
     };
 
-    //三级未测试
     @action setBreadcrumb(item) {
         let paths = [];
         this.xloop(toJS(this.menuList), item.parent_id, paths);
@@ -181,7 +180,6 @@ class NavigationStore {
             method: 'POST'
         };
         let res = await api.permission.getMenuTreeByRoleCode(params);
-
         if (res.code == 200) {
             this.menuList = res.data.menuList;
             // 登录后首页面包屑展示

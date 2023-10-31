@@ -44,11 +44,23 @@ export default class Login extends React.Component {
     }
     render() {
         return (
-            <div className="w3layouts-two-grids2">
-                <div className="mid-class">
-                    <div className="txt-left-side">
+            <div className="auth-bg">
+                <div className="w3layouts-two-grids2">
+                    <div
+                        style={{
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            height: '140px'
+                        }}
+                        className="text-left-side">
+                        <h2>[Nanx+] AWS Management System</h2>
+                        <h3>数据库:NANX(12345678/12345678)</h3>
+                        <br />
+                    </div>
+                    <div style={{ height: '440px' }} className="txt-left-side">
                         <h2> Nanx System</h2>
-
                         <form action="#" method="post">
                             <div className="form-left-to-w3l">
                                 <span className="fa fa-envelope-o" aria-hidden="true"></span>
@@ -84,12 +96,6 @@ export default class Login extends React.Component {
                         <div className="w3layouts_more-buttn">
                             <h3>Low Code App Builder</h3>
                         </div>
-                    </div>
-                    <div className="img-right-side">
-                        <h2>Management System</h2>
-                        <h2>数据库:NANX(12345678/12345678)</h2>
-                        <img style={{ width: '280px' }} src={NanxArt} alt="fireSpot" />
-                        <br />
                     </div>
                 </div>
             </div>

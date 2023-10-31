@@ -1,12 +1,6 @@
 import { observable, action, toJS } from 'mobx';
 
 class UserStore {
-    contractor() {
-        if (!sessionStorage.getItem('token')) {
-            this.getToken();
-        }
-    }
-
     @observable userInfo = null;
     @observable token = null;
 

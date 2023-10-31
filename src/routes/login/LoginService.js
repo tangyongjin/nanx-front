@@ -27,19 +27,19 @@ export default class LoginService {
         }
 
         if (res.code == 200) {
-            this.afterLoginSuccess(res);
+            await UserStore.setToken(res.token);
+            await NavigationStore.saveSessionBadge(res.info);
+            await NavigationStore.setBadge(res.info);
+            await UserStore.setUserProfile(res.profile);
+            await this.afterLoginSuccess(res);
         }
     }
 
-    afterLoginSuccess(res) {
-        message.loading('登录成功>>,准备工作环境 ', 1.1, () => {
-            NavigationStore.saveSessionBadge(res.info);
-            NavigationStore.setBadge(res.info);
-            UserStore.setUserProfile(res.profile);
-            UserStore.setToken(res.token);
+    afterLoginSuccess = async () => {
+        message.loading('登录成功,准备工作环境 ', 1.1, async () => {
             hashHistory.push('/home');
         });
-    }
+    };
 
     loggedIn() {
         let token = UserStore.getToken(); //

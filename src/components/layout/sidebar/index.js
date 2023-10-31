@@ -22,6 +22,10 @@ export default class Sidebar extends React.Component {
         this.setState({ menulist: menuList });
     }
 
+    async componentWillUnmount() {
+        // cancel all axios request
+    }
+
     menuclickHandler(menuItem, item) {
         item.domEvent.preventDefault();
         item.domEvent.stopPropagation();

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
+import { hashHistory } from 'react-router';
 import AuthStore from '@/store/AuthStore';
 
 const { v4: uuidv4 } = require('uuid');
@@ -17,7 +18,7 @@ const axiosInstance = axios.create({
     }
 });
 
-axiosInstance.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
+let source = axios.CancelToken.source();
 
 function nowString() {
     const now = moment();
@@ -31,7 +32,6 @@ axiosInstance.interceptors.request.use(
         const requestId = uuidv4();
         console.log('Request ID:', requestId);
         config.requestId = requestId + config.url;
-
         console.log('Axios拦截>>🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩>>>>>>' + config.url);
         AuthStore.setLoading(true);
         AuthStore.setValue(1997);
@@ -53,13 +53,21 @@ axiosInstance.interceptors.response.use(
         console.log('Response ID:', response.config.requestId);
         AuthStore.setLoading(false);
         AuthStore.delRunnitem(response.config.requestId);
-        console.log(response);
+        console.log('响应数据:', response);
         return response;
     },
     (error) => {
         console.log('Error:', error);
+
         AuthStore.delRunnitem(error.config.requestId);
         AuthStore.setLoading(false);
+
+        if (error.response.status === 401) {
+            console.log('Session过期等各种情况,route to /login');
+            source.cancel('Landing Component got unmounted');
+            hashHistory.push('/login');
+        }
+
         return Promise.reject(error);
     }
 );
@@ -74,9 +82,13 @@ export async function post(url, params, config) {
     }
 
     try {
+        axiosInstance.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
         const response = await axiosInstance.post(url, params.data, { ...config });
         console.log(response);
-        return response.data;
+
+        if (response.status === 200) {
+            return response.data;
+        }
     } catch (error) {
         console.error(error);
         return error.response.data;
@@ -88,12 +100,4 @@ export async function get(url, para, config = {}) {
         console.log(response); // Add this line to log the response
         return response.data;
     });
-}
-
-export async function put(url, para, config = {}) {
-    return axiosInstance.put(url, { ...para }, { ...config }).then((response) => response.data);
-}
-
-export async function del(url, config = {}) {
-    return await axiosInstance.delete(url, { ...config }).then((response) => response.data);
 }
