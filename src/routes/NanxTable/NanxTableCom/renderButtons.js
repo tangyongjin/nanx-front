@@ -21,6 +21,7 @@ const renderButtons = (tableStore) => {
                 htmlType="button"
                 onClick={(event) => getButtonHandler(event, item, tableStore)}
                 size="small"
+                className="round-button"
                 style={{ margin: 8 }}>
                 {item.title}
             </Button>

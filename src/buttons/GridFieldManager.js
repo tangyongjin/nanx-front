@@ -1,5 +1,7 @@
 import React from 'react';
-import { Form, Input, Card, Select, Divider, Button, Row, Col, Checkbox } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Card, Select, Divider, Button, Row, Col, Checkbox } from 'antd';
 import { toJS } from 'mobx';
 import { observer, inject } from 'mobx-react';
 

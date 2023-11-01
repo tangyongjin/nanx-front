@@ -1,54 +1,41 @@
 import React from 'react';
+import { Table } from 'antd';
 
 export default class home extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            stepsEnabled: true,
-            hintsEnabled: true,
-            hints: [
-                {
-                    element: '.hello',
-                    hint: 'Hello hint',
-                    hintPosition: 'middle-right'
-                }
-            ]
-        };
-    }
-
-    onExit = () => {
-        this.setState(() => ({ stepsEnabled: false }));
-    };
-
-    toggleSteps = () => {
-        this.setState((prevState) => ({ stepsEnabled: !prevState.stepsEnabled }));
-    };
-
-    addStep = () => {
-        const newStep = {
-            element: '.alive',
-            intro: 'Alive step'
-        };
-
-        this.setState((prevState) => ({ steps: [...prevState.steps, newStep] }));
-    };
-
-    toggleHints = () => {
-        this.setState((prevState) => ({ hintsEnabled: !prevState.hintsEnabled }));
-    };
-
-    addHint = () => {
-        const newHint = {
-            element: '.alive',
-            hint: 'Alive hint',
-            hintPosition: 'middle-right'
-        };
-
-        this.setState((prevState) => ({ hints: [...prevState.hints, newHint] }));
-    };
-
     render() {
-        return <div style={{ height: '100%' }}></div>;
+        const dataSource = [
+            {
+                key: '1',
+                name: '胡彦斌',
+                age: 32,
+                address: '西湖区湖底公园1号'
+            },
+            {
+                key: '2',
+                name: '胡彦祖',
+                age: 42,
+                address: '西湖区湖底公园1号'
+            }
+        ];
+
+        const columns = [
+            {
+                title: '姓名',
+                dataIndex: 'name',
+                key: 'name'
+            },
+            {
+                title: '年龄',
+                dataIndex: 'age',
+                key: 'age'
+            },
+            {
+                title: '住址',
+                dataIndex: 'address',
+                key: 'address'
+            }
+        ];
+
+        return <Table dataSource={dataSource} columns={columns} />;
     }
 }

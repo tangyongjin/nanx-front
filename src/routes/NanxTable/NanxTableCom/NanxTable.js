@@ -1,11 +1,11 @@
-// import '../commonTable.scss';
+import '../commonTable.scss';
+import React from 'react';
 import { Table } from 'antd';
 import { observer, inject } from 'mobx-react';
 import { toJS } from 'mobx';
 import fetchDataGridCfg from './fetchDataGridCfg';
 import listDataParams from './listDataParams';
 import renderButtons from './renderButtons';
-import React from 'react';
 // import ResizeableTitle from './resizeableTitle';
 
 @inject('NanxTableStore')
@@ -74,10 +74,6 @@ export default class NanxTable extends React.Component {
                     this.tbStore.rowSelectChange(selectedRowKeys, selectedRows)
             },
 
-            scroll: {
-                x: parseInt(this.tbStore.table_width)
-            },
-            pagination2: this.tbStore.getPageNation(),
             pagination: {
                 showSizeChanger: true,
                 onShowSizeChange: this.tbStore.onShowSizeChange,
@@ -104,7 +100,6 @@ export default class NanxTable extends React.Component {
                 {this.RenderBthHolder()}
                 <div>{renderButtons(this.tbStore)}</div>
                 <Table
-                    size={this.props.size ? 'small' : 'default'}
                     columns={this.tbStore.tableColumns}
                     key={this.props.datagrid_code}
                     className="commonTable"

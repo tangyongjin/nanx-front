@@ -112,29 +112,10 @@ q {
   quotes: none;
 }
 
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: '';
-  content: none;
-}
 
 /* start editing from here */
 
-a {
-  text-decoration: none;
-}
 
-.txt-rt {
-  text-align: right;
-}
-
-/* text align right */
-
-.txt-lt {
-  text-align: left;
-}
 
 /* text align left */
 
@@ -149,13 +130,7 @@ a {
 }
 
 
-nav.vertical ul li {
-  display: block;
-}
 
-nav.horizontal ul li {
-  display: inline-block;
-}
 
 /* horizontal menu */
 
@@ -166,69 +141,24 @@ body {
   padding: 0;
   margin: 0;
   background: #f1f1f1;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-body a {
-  transition: 0.5s all;
-  -webkit-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-  -ms-transition: 0.5s all;
-  text-decoration: none;
-}
 
-body a:hover {
-  text-decoration: none;
-}
 
-body a:focus,
-a:hover {
-  text-decoration: none;
-}
-
-select,
-input[type='mobile'],
-input[type='text'],
-input[type='password'],
-input[type='button'],
-input[type='submit'],
-textarea {
-  font-family: 'Open Sans', sans-serif;
-  transition: 0.5s all;
-  -webkit-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-  -ms-transition: 0.5s all;
-}
 
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
+h6, p {
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 1px;
 }
 
-p {
-  margin: 0;
-  padding: 0;
-  letter-spacing: 1px;
-  font-family: 'Open Sans', sans-serif;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-/*-- //Reset-Code --*/
-
-/*--background --*/
 
 body {
   box-sizing: border-box;
@@ -243,75 +173,56 @@ body {
 .auth-bg {
   height: 100%;
   width: 100%;
-  background-image: url("../../../styles//auth-bg.jpg");
+  background-image: url("../../../styles/download.jpeg");
   border: 1px solid white;
-  background-position: center;
   background-repeat: no-repeat;
-
-
+  background-position: 360px center;
 }
 
 
 .w3layouts-two-grids2 {
   width: 400px;
-  height: 640px;
-  margin-top: 100px;
+  height: 700px;
+  margin-top: 80px;
   margin-left: 100px;
   -webkit-box-shadow: -2px 7px 37px 8px rgba(167, 167, 167, 0.52);
   -moz-box-shadow: -2px 7px 37px 8px rgba(167, 167, 167, 0.52);
   box-shadow: -2px 7px 37px 8px rgba(167, 167, 167, 0.52);
   background-color: white;
-  ;
 }
 
 
-h1.error {
-  text-align: center;
-  color: #000;
-  text-transform: uppercase;
-}
 
-.img-right-side,
+
 .txt-left-side {
   flex: 1;
+  width: 380px;
+  margin-left: 10px;
   box-sizing: border-box;
   text-align: center;
+  background: rgba(250, 250, 250, 0.999);
+  -webkit-box-shadow: -2px 7px 37px 8px rgba(167, 167, 167, 0.52);
+  -moz-box-shadow: -2px 7px 37px 8px rgba(167, 167, 167, 0.52);
+  box-shadow: -2px 7px 37px 8px rgba(167, 167, 167, 0.52);
 }
 
 
-.txt-left-side {
-  background: white;
-}
-
-.img-right-side h3,
-.txt-left-side h2 {
-  color: #000;
-  letter-spacing: 0px;
-}
 
 .txt-left-side h2 {
-  color: white;
+  color: black;
   font-size: 18px;
 }
 
-.img-right-side p,
-.txt-left-side p {
-  color: #908c8c;
-  letter-spacing: 0.3px;
-}
 
-.txt-left-side p {
-  color: #bdbdbd;
-}
 
-.txt-left-side {
-  background: #4d4d57;
-}
 
 .form-left-to-w3l {
   display: flex;
+  flex-direction: column;
   display: -webkit-flex;
-  /* border: none; */
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
   border: 1px solid #fff;
   transition: 0.5s all;
   -webkit-transition: 0.5s all;
@@ -320,43 +231,7 @@ h1.error {
   -ms-transition: 0.5s all;
 }
 
-.form-left-to-w3l input[type='mobile'],
-.form-left-to-w3l input[type='password'] {
-  -webkit-flex-basis: 90%;
-  flex-basis: 90%;
-  width: 100%;
-  color: #fff;
-  font-size: 14px;
-  border: none;
-  outline: none;
-  padding: 0.6em 0.6em;
-  background: transparent;
-  transition: 0.5s all;
-  -webkit-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-  -ms-transition: 0.5s all;
-  box-sizing: border-box;
-}
 
-.form-left-to-w3l span {
-  -webkit-flex-basis: 15%;
-  flex-basis: 15%;
-  border: none;
-  text-align: center;
-  color: #ffffff;
-  line-height: 35px;
-  transition: 0.5s all;
-  -webkit-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-  -ms-transition: 0.5s all;
-}
-
-.btnn {
-  position: relative;
-  top: -25px;
-}
 
 #loginbtn {
   background: #000000;
@@ -374,37 +249,17 @@ h1.error {
   -o-transition: 0.5s all;
   -moz-transition: 0.5s all;
   -ms-transition: 0.5s all;
+  position: relative;
+  top: -25px;
+  border-radius: 4px;
 }
 
 button[id='loginbtn']:hover,
 a.for:hover,
 .w3layouts_more-buttn a:hover {
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
-::-webkit-input-placeholder {
-  /* Chrome/Opera/Safari */
-  color: #fff;
-  background: transparent;
-}
-
-::-moz-placeholder {
-  /* Firefox 19+ */
-  color: #fff;
-  background: transparent;
-}
-
-:-ms-input-placeholder {
-  /* IE 10+ */
-  color: #fff;
-  background: transparent;
-}
-
-:-moz-placeholder {
-  /* Firefox 18- */
-  color: #fff;
-  background: transparent;
-}
 
 input.checked {
   position: absolute;
@@ -413,66 +268,16 @@ input.checked {
   cursor: pointer;
 }
 
-.left-side-forget {
-  float: left;
-  position: relative;
-}
 
-.right-side-forget {
-  float: right;
-}
-
-.remenber-me {
-  margin-left: 17px;
-}
-
-.remenber-me,
-a.for {
-  font-size: 12px;
-  color: #fff;
-  text-transform: uppercase;
-}
-
-.left-side-forget,
-.right-side-forget {
-  flex-basis: 50%;
-  -webkit-flex-basis: 50%;
-  box-sizing: border-box;
-}
 
 .w3layouts_more-buttn h3 {
   font-size: 15px;
-  color: #fff;
+  color: black;
   margin-top: 43px;
   font-weight: 400;
 }
 
-.w3layouts_more-buttn a {
-  font-size: 15px;
-  color: #60baaf;
-  font-weight: 500;
-  text-decoration: none;
-  text-transform: capitalize;
-  display: inline-block;
-  letter-spacing: 0px;
-  outline: none;
-}
 
-.copyrigh-wthree {
-  text-align: center;
-}
-
-.copyrigh-wthree p {
-  font-size: 14px;
-  color: #000;
-  letter-spacing: 3px;
-}
-
-.copyrigh-wthree p a {
-  color: #60baaf;
-  font-size: 14px;
-  font-weight: 800;
-}
 
 /*--responsive--*/
 
@@ -484,7 +289,6 @@ a.for {
     font-size: 49px;
   }
 
-  .img-right-side,
   .txt-left-side {
     padding: 3.5em 4em 3em;
   }
@@ -493,17 +297,14 @@ a.for {
     padding: 3em 0em 4.5em;
   }
 
-  #app>div>div.text-left-side>h3 {
+  div.text-left-side>h3 {
     font-size: 14px;
   }
 
 
 
-  .form-left-to-w3l span {
-    font-size: 20px;
-  }
 
-  .img-right-side p,
+
   .txt-left-side p {
     font-size: 13.5px;
     line-height: 24px;

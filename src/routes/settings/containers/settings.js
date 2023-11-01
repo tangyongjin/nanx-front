@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { message, Form, Input } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+
+import { message, Input } from 'antd';
 import 'antd/dist/antd.css';
 import api from '../../../api/api';
 

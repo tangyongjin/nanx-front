@@ -28,18 +28,14 @@ export default class ExportExcel extends React.Component {
     }
 
     async init() {
+        await this.props.NanxTableStore.showButtonModal();
         let _para = await this.getExportExcelPara();
         let res = await api.curd.exportExcel(_para);
         if (res.code == 200) {
             this.setState({
                 excelMsg: res.data
             });
-            this.refs.commonModalRef.showModal();
         }
-    }
-
-    hideModal() {
-        this.refs.commonModalRef.onCancelHandle();
     }
 
     render() {
@@ -48,7 +44,6 @@ export default class ExportExcel extends React.Component {
                 height="500px"
                 cancel={this.hideModal}
                 title="导出excel(点击下载)"
-                ref="commonModalRef"
                 layoutcfg={this.props.NanxTableStore.layoutcfg}>
                 <a href={this.state.excelMsg.url}>{this.state.excelMsg.name}</a>
             </CommonModal>

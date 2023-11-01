@@ -16,12 +16,6 @@ export default class ReferpluginCom extends React.Component {
 
     state = {
         visible: true,
-        DataGridCode: null,
-        bigtitle: '',
-        column: '',
-        querycfg: '',
-        service: '',
-        btntext: '',
         combinedRef: []
     };
 
@@ -37,8 +31,6 @@ export default class ReferpluginCom extends React.Component {
             );
         }
     }
-
-    hideModal() {}
 
     referHandler = async () => {
         this.setState({ visible: true });
@@ -74,10 +66,6 @@ export default class ReferpluginCom extends React.Component {
         }
     };
 
-    callService() {
-        this.setState({ visible: true });
-    }
-
     render() {
         let layoutcfg = this.props.layoutcfg;
 
@@ -89,7 +77,11 @@ export default class ReferpluginCom extends React.Component {
 
                 <SchemaForm>
                     <div style={{ textAlign: 'center' }}>
-                        <Button type="primary" htmlType="button" onClick={this.referHandler} className="marginRihgt10">
+                        <Button
+                            type="primary"
+                            htmlType="button"
+                            onClick={this.referHandler}
+                            className="round-button marginRihgt10">
                             {this.state.visible ? '查看详情' : this.props.btntext}
                         </Button>
                     </div>

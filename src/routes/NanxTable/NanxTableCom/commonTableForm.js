@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'antd';
 import '@/components/UformExtends';
 import { toJS } from 'mobx';
-// import '../commonTable.scss';
+import '../commonTable.scss';
 import { SchemaForm, createFormActions } from '@uform/antd';
 
 const actions = createFormActions();
@@ -59,7 +59,7 @@ const CommonTableForm = (props) => {
                     <Button
                         type="primary"
                         htmlType="button"
-                        className="marginRihgt10"
+                        className="round-button  marginRihgt10"
                         onClick={async () => {
                             await actions.validate();
                             await props.saveFormData(actions.getFormState().values);

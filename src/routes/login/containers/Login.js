@@ -1,7 +1,8 @@
 import React from 'react';
+import { Input } from 'antd';
 import { randomString } from '../../../utils/tools';
 import LoginService from '../LoginService';
-import NanxArt from './login.jpeg';
+// import NanxArt from './login.jpeg';
 import { inject, observer } from 'mobx-react';
 import './login.css';
 
@@ -60,34 +61,31 @@ export default class Login extends React.Component {
                         <br />
                     </div>
                     <div style={{ height: '440px' }} className="txt-left-side">
-                        <h2> Nanx System</h2>
                         <form action="#" method="post">
                             <div className="form-left-to-w3l">
-                                <span className="fa fa-envelope-o" aria-hidden="true"></span>
-                                <input
-                                    type="mobile"
+                                <div className="clear">用户名</div>
+                                <Input
+                                    style={{ width: '252px', height: '40px' }}
                                     id="boss_mobile"
                                     name="mobile"
+                                    onChange={this.handleChange}
                                     placeholder="手机号"
-                                    onChange={this.handleChange}
-                                    required=""
                                 />
-                                <div className="clear"></div>
-                            </div>
-                            <div className="form-left-to-w3l ">
-                                <span className="fa fa-lock" aria-hidden="true"></span>
-                                <input
-                                    type="password"
-                                    id="boss_pwd"
-                                    name="password"
-                                    placeholder="密码"
-                                    onChange={this.handleChange}
-                                    required=""
-                                />
-                                <div className="clear"></div>
                             </div>
 
-                            <div className="btnn">
+                            <div className="form-left-to-w3l">
+                                <div className="clear">用户名</div>
+                                <Input
+                                    style={{ width: '252px', height: '40px' }}
+                                    id="boss_pwd"
+                                    type="password"
+                                    onChange={this.handleChange}
+                                    name="password"
+                                    placeholder="密码"
+                                />
+                            </div>
+
+                            <div className="loginbtn">
                                 <button id="loginbtn" onClick={this.handleFormSubmitMobile} type="submit">
                                     Login/登录
                                 </button>

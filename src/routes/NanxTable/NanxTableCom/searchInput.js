@@ -69,7 +69,7 @@ export class SearchInput extends React.Component {
                     style={{ width: '288px' }}
                 />
                 <Button
-                    className="search_btn"
+                    className="round-button search_btn"
                     type="primary"
                     htmlType="button"
                     onClick={(e) => this._searchCustomer(e)}>

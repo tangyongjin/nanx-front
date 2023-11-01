@@ -10,7 +10,6 @@ import { hashHistory } from 'react-router';
 export default class Sidebar extends React.Component {
     constructor(props) {
         super();
-
         this.state = {
             menulist: []
         };
@@ -65,7 +64,7 @@ export default class Sidebar extends React.Component {
                 key={menuitem.key}
                 title={
                     <span>
-                        <div> {one.icon ? <Icon icon={one.icon} /> : null} </div>
+                        {one.icon ? <Icon icon={one.icon} /> : null}
                         <span id={one.menu_uuid}>{one.text}</span>
                     </span>
                 }>
@@ -80,6 +79,7 @@ export default class Sidebar extends React.Component {
 
     render() {
         const defaultProps = this.NavigationStore.isCollapse ? {} : { openKeys: this.NavigationStore.openKeys };
+
         return (
             <div>
                 <div
@@ -89,7 +89,7 @@ export default class Sidebar extends React.Component {
                         height: '80px',
                         color: 'white',
                         marginTop: '-12px',
-                        fontSize: '21px',
+                        fontSize: '18px',
                         fontWeight: 'bold',
                         justifyContent: 'center',
                         alignItems: 'center'
@@ -107,7 +107,7 @@ export default class Sidebar extends React.Component {
                             {this.state.menulist.map((menuitem, index) => this.getChildren(menuitem, index))}
                         </Menu>
                     ) : (
-                        <div>222</div>
+                        <div></div>
                     )}
                 </div>
             </div>

@@ -1,4 +1,6 @@
-import { Form, Input, message, Modal } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, message, Modal } from 'antd';
 import React from 'react';
 import api from '@/api/api';
 export default class EditPassword extends React.Component {

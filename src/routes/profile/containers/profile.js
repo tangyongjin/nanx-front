@@ -1,4 +1,6 @@
-import { Button, Form, Input, message, Radio, Select, Upload } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Button, Input, message, Radio, Select, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 import 'antd/dist/antd.css';

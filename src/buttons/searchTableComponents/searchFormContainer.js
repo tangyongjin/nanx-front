@@ -101,13 +101,19 @@ export default class SearchFormContainer extends React.Component {
                 <div style={{ marginBottom: '15px' }}>
                     <Button
                         type="primary"
+                        className="round-button"
                         htmlType="button"
                         size="small"
                         onClick={this.addLine}
                         style={{ marginRight: '10px' }}>
                         增加
                     </Button>
-                    <Button type="danger" htmlType="button" size="small" onClick={this.deleteLine}>
+                    <Button
+                        className="round-button"
+                        type="danger"
+                        htmlType="button"
+                        size="small"
+                        onClick={this.deleteLine}>
                         删除
                     </Button>
                 </div>

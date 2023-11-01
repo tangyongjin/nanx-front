@@ -1,5 +1,7 @@
 import React from 'react';
-import { Form, Select, Row, Col, Button } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Select, Row, Col, Button } from 'antd';
 import { inject, observer } from 'mobx-react';
 
 const { Option } = Select;
