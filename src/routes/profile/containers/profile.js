@@ -1,4 +1,6 @@
-import { Button, Form, Icon, Input, message, Radio, Select, Upload } from 'antd';
+import { Button, Form, Input, message, Radio, Select, Upload } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+
 import 'antd/dist/antd.css';
 import React from 'react';
 import api from '../../../api/api';
@@ -137,11 +139,7 @@ class Profile extends React.Component {
         }
     }
     render() {
-        const uploadButton = (
-            <div>
-                <Icon type={this.state.loading ? 'loading' : 'plus'} />
-            </div>
-        );
+        const uploadButton = <div>{this.state.loading ? <PlusOutlined /> : null}</div>;
         const { imageUrl } = this.state;
         const { getFieldDecorator } = this.props.form;
         return (

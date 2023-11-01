@@ -1,5 +1,7 @@
 import React from 'react';
-import { Upload, Button, Icon, message } from 'antd';
+import { Upload, Button, message } from 'antd';
+import { CloudUploadOutlined } from '@ant-design/icons';
+
 import api from '../../api/api';
 import reqwest from 'reqwest';
 
@@ -154,7 +156,7 @@ export default class Fileuploader extends React.Component {
            */}
 
                     <Button>
-                        <Icon type="upload" /> 选择文件
+                        <CloudUploadOutlined />
                     </Button>
                 </Upload>
             </div>

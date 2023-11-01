@@ -1,4 +1,6 @@
-import { Dropdown, Icon, Menu, Modal } from 'antd';
+import { Dropdown, Menu, Modal } from 'antd';
+import { DownCircleOutlined } from '@ant-design/icons';
+
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
@@ -93,7 +95,7 @@ export default class Navbar extends React.Component {
                             src={JSON.parse(sessionStorage.getItem('userInfo')).head_portrait}
                             className="user-avatar"
                         />
-                        <Icon type="down" />
+                        <DownCircleOutlined />
                     </div>
                 </Dropdown>
                 <div

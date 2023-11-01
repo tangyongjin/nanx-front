@@ -1,4 +1,4 @@
-import '../commonTable.scss';
+// import '../commonTable.scss';
 import { Table } from 'antd';
 import { observer, inject } from 'mobx-react';
 import { toJS } from 'mobx';
@@ -6,7 +6,7 @@ import fetchDataGridCfg from './fetchDataGridCfg';
 import listDataParams from './listDataParams';
 import renderButtons from './renderButtons';
 import React from 'react';
-import ResizeableTitle from './resizeableTitle';
+// import ResizeableTitle from './resizeableTitle';
 
 @inject('NanxTableStore')
 @observer
@@ -108,11 +108,6 @@ export default class NanxTable extends React.Component {
                     columns={this.tbStore.tableColumns}
                     key={this.props.datagrid_code}
                     className="commonTable"
-                    components={{
-                        header: {
-                            cell: ResizeableTitle
-                        }
-                    }}
                     {...tableProps}
                 />
             </div>

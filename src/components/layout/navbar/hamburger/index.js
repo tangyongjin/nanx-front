@@ -1,6 +1,5 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import { Icon } from 'antd';
 
 @inject('NavigationStore')
 @observer

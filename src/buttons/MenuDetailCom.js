@@ -1,6 +1,8 @@
 import { observable, action } from 'mobx';
 import React from 'react';
-import { Card, Icon, Tabs } from 'antd';
+import { Card, Tabs } from 'antd';
+import { AndroidOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+
 import { observer } from 'mobx-react';
 import api from '@/api/api';
 
@@ -111,7 +113,7 @@ export default class MenuDetailCom extends React.Component {
                 <TabPane
                     tab={
                         <span>
-                            <Icon type="android" /> 涉及角色
+                            <AndroidOutlined type="android" /> 涉及角色
                         </span>
                     }
                     key="1">
@@ -120,7 +122,7 @@ export default class MenuDetailCom extends React.Component {
                 <TabPane
                     tab={
                         <span>
-                            <Icon type="user" />
+                            <UsergroupAddOutlined />
                             涉及人员
                         </span>
                     }

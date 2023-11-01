@@ -46,11 +46,11 @@ export default class SearchTree extends React.Component {
         let parentKey;
         for (let i = 0; i < tree.length; i++) {
             const node = tree[i];
-            if (node.children) {
-                if (node.children.some((item) => item.key === key)) {
+            if (node.treeData) {
+                if (node.treeData.some((item) => item.key === key)) {
                     parentKey = node.key;
-                } else if (this.getParentKey(key, node.children)) {
-                    parentKey = this.getParentKey(key, node.children);
+                } else if (this.getParentKey(key, node.treeData)) {
+                    parentKey = this.getParentKey(key, node.treeData);
                 }
             }
         }
@@ -76,10 +76,10 @@ export default class SearchTree extends React.Component {
                 ) : (
                     <span>{item[this.props.treeTitle]}</span>
                 );
-            if (item.children) {
+            if (item.treeData) {
                 return (
                     <TreeNode key={item[this.props.treeKey]} title={title} onClick={this.nodeClick}>
-                        {this.renderTreeNodes(item.children)}
+                        {this.renderTreeNodes(item.treeData)}
                     </TreeNode>
                 );
             }

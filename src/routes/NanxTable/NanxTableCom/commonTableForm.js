@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'antd';
 import '@/components/UformExtends';
 import { toJS } from 'mobx';
-import '../commonTable.scss';
+// import '../commonTable.scss';
 import { SchemaForm, createFormActions } from '@uform/antd';
 
 const actions = createFormActions();

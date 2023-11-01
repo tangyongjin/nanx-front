@@ -1,4 +1,5 @@
-import { Icon, Menu } from 'antd';
+import { Menu } from 'antd';
+import Icon from '@/utils/icon';
 import { toJS } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
@@ -20,10 +21,6 @@ export default class Sidebar extends React.Component {
         await this.NavigationStore.getMenuTreeByRoleCode();
         let { menuList } = this.NavigationStore;
         this.setState({ menulist: menuList });
-    }
-
-    async componentWillUnmount() {
-        // cancel all axios request
     }
 
     menuclickHandler(menuItem, item) {
@@ -60,8 +57,7 @@ export default class Sidebar extends React.Component {
 
         return one.children.length === 0 ? (
             <Menu.Item key={menuitem.key} onClick={this.menuclickHandler.bind(this, one)}>
-                {one.icon ? <Icon type={one.icon} /> : null}
-
+                {one.icon ? <Icon icon={one.icon} /> : null}
                 <span id={one.menu_uuid}>{one.text}</span>
             </Menu.Item>
         ) : (
@@ -69,7 +65,7 @@ export default class Sidebar extends React.Component {
                 key={menuitem.key}
                 title={
                     <span>
-                        <Icon type={one.icon} />
+                        <div> {one.icon ? <Icon icon={one.icon} /> : null} </div>
                         <span id={one.menu_uuid}>{one.text}</span>
                     </span>
                 }>
