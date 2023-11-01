@@ -1,5 +1,5 @@
 import { observable, action, autorun } from 'mobx';
-import columnsRender from '@/routes/NanxTable/NanxTableCom/columnsRender';
+import CellRender from '@/routes/NanxTable/NanxTableCom/cellRender';
 import getTextWidth from '@/routes/NanxTable/NanxTableCom/commonTableTextTool';
 import sorter from '@/routes/NanxTable/NanxTableCom//sorter';
 import listDataParams from '@/routes/NanxTable/NanxTableCom/listDataParams';
@@ -130,7 +130,7 @@ class _NanxTableStore {
                 width: item.width && item.width != null && item.width != '' ? parseFloat(item.width) : 200,
                 sorter: (a, b) => sorter(a[item.key], b[item.key]),
                 render: (text, record) => {
-                    return columnsRender(text, record, item, this);
+                    return CellRender(text, record, item, this);
                 }
             };
 

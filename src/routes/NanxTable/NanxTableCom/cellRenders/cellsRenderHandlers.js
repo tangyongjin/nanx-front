@@ -1,7 +1,8 @@
 import React from 'react';
 import { Tag } from 'antd';
 import IconRender from './IconRender';
-class ColumnsHandle {
+
+class CellsRenderHandlers {
     splitDate(text) {
         if (!text) {
             return text;
@@ -26,6 +27,6 @@ class ColumnsHandle {
     }
 }
 
-ColumnsHandle.prototype.IconRender = IconRender;
+CellsRenderHandlers.prototype.IconRender = IconRender;
 
-export default new ColumnsHandle();
+export default new CellsRenderHandlers();
