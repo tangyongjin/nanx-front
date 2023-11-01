@@ -147,14 +147,6 @@ export default class Fileuploader extends React.Component {
         return (
             <div>
                 <Upload {...props}>
-                    {/* 
-           由于上传组件在参考区直接使用普通渲染,因此永远不会disdabled
-          <Button disabled={this.props.uform_para&&this.props.uform_para=='true'?false:true}>
-            <Icon type="upload" /> 选择文件
-           </Button> 
-           
-           */}
-
                     <Button>
                         <CloudUploadOutlined />
                     </Button>

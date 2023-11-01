@@ -2,17 +2,15 @@ import '../commonTable.scss';
 import React from 'react';
 import { Table } from 'antd';
 import { observer, inject } from 'mobx-react';
-import { toJS } from 'mobx';
 import fetchDataGridCfg from './fetchDataGridCfg';
-import listDataParams from './listDataParams';
 import renderButtons from './renderButtons';
-// import ResizeableTitle from './resizeableTitle';
 
 @inject('NanxTableStore')
 @observer
 export default class NanxTable extends React.Component {
     constructor(props) {
         super(props);
+        console.log('props: ', props);
         this.tbStore = props.NanxTableStore;
     }
 
@@ -22,18 +20,6 @@ export default class NanxTable extends React.Component {
         await this.tbStore.setDataGridCode(this.props.datagrid_code);
         await this.refreshTable();
     }
-
-    getExportExcelPara = async () => {
-        await fetchDataGridCfg(this.tbStore);
-        let paradata = listDataParams(this.tbStore);
-        let params = {
-            data: paradata,
-            method: 'POST'
-        };
-
-        params.geturl = toJS(this.tbStore.curd).geturl;
-        return params;
-    };
 
     refreshTable = async () => {
         await fetchDataGridCfg(this.tbStore);

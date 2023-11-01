@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tag } from 'antd';
-
+import IconRender from './IconRender';
 class ColumnsHandle {
     splitDate(text) {
         if (!text) {
@@ -25,5 +25,7 @@ class ColumnsHandle {
         return text === 'y' ? '是' : '否';
     }
 }
+
+ColumnsHandle.prototype.IconRender = IconRender;
 
 export default new ColumnsHandle();

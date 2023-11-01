@@ -42,13 +42,12 @@ class GridFieldManager extends React.Component {
     };
 
     setFieldAttr = (field, attr, value) => {
-        let { ColsDbInfo } = this.props;
-        ColsDbInfo.map((element) => {
+        this.props.DataGridStore.ColsDbInfo.map((element) => {
             if (element.Field === field) {
                 element[attr] = value;
             }
         });
-        this.props.DataGridStore.setColsDbInfo(ColsDbInfo);
+        // this.props.DataGridStore.setColsDbInfo(ColsDbInfo);
     };
 
     render() {
