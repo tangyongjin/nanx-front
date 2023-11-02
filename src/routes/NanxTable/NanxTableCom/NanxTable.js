@@ -2,7 +2,6 @@ import '../commonTable.scss';
 import React from 'react';
 import { Table } from 'antd';
 import { observer, inject } from 'mobx-react';
-import fetchDataGridCfg from './fetchDataGridCfg';
 import renderButtons from './renderButtons';
 
 @inject('NanxTableStore')
@@ -15,14 +14,15 @@ export default class NanxTable extends React.Component {
     }
 
     async componentDidMount() {
-        this.tbStore.resetTableStore();
-        this.tbStore.clearPaginationStore();
+        await this.tbStore.resetTableStore();
+        await this.tbStore.clearPaginationStore();
         await this.tbStore.setDataGridCode(this.props.datagrid_code);
         await this.refreshTable();
     }
 
     refreshTable = async () => {
-        await fetchDataGridCfg(this.tbStore);
+        await this.tbStore.resetTableStore();
+        await this.tbStore.fetchDataGridCfg();
         await this.tbStore.setSearchQueryConfig([]);
         await this.tbStore.listData();
     };

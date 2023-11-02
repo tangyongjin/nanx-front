@@ -49,7 +49,7 @@ export default class SearchTableModal extends React.Component {
     }
 
     getFieldList = () => {
-        return this.props.NanxTableStore.rawTableColumns.map(({ title, key }) => ({ label: title, value: key }));
+        return this.props.NanxTableStore.tableColumnConfig.map(({ title, key }) => ({ label: title, value: key }));
     };
 
     render() {

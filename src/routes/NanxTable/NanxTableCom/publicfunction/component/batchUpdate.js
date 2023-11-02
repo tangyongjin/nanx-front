@@ -27,7 +27,7 @@ export default class BatchUpdate extends React.Component {
     }
     componentDidMount() {
         var columns = [];
-        this.NanxTableStore.rawTableColumns.map((item, index) => {
+        this.NanxTableStore.tableColumnConfig.map((item, index) => {
             columns.push(<Select.Option key={item.key}>{item.title}</Select.Option>);
         });
         this.setState({

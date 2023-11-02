@@ -60,7 +60,7 @@ class _NanxTableStore {
         this.formCfg = null;
         this.layoutcfg = null;
         this.curd = {};
-        this.rawTableColumns = [];
+        this.tableColumnConfig = [];
         this.query_cfg = null;
     };
 
@@ -95,7 +95,7 @@ class _NanxTableStore {
     @action setDataSource = (dataSource) => (this.dataSource = dataSource);
     @action setTotal = (total) => (this.total = total);
 
-    @action setRawTableColumns = (rawCols) => (this.rawTableColumns = rawCols);
+    @action setTableColumnConfig = (rawCols) => (this.tableColumnConfig = rawCols);
     @action setTableColumns = (cols) => (this.tableColumns = cols);
 
     @action setFormCfg = (formCfg) => (this.formCfg = formCfg);
@@ -118,11 +118,35 @@ class _NanxTableStore {
         this.ButtonUsedCom = com;
     };
 
+    @action fetchDataGridCfg = async () => {
+        let params = {
+            data: {
+                DataGridCode: this.datagrid_code,
+                role: sessionStorage.getItem('role_code'),
+                user: sessionStorage.getItem('user')
+            },
+            method: 'POST'
+        };
+
+        let res = await api.dataGrid.fetchDataGridCfg(params);
+        if (res.code == 200) {
+            this.setTableColumnConfig(toJS(res.data.tableColumnConfig));
+            this.setFormCfg(res.data.formcfg);
+            this.setReferinfo(res.data.referinfo);
+            this.setlayoutCfg(res.data.layoutcfg);
+            this.setTips(res.data.tips);
+            this.setTableButtons(res.data.buttons);
+            this.setCurd(res.data.curd);
+            this.setTableWidth(res.data.table_width);
+            this.setFixedQueryCfg(res.data.fixed_query_cfg);
+        }
+    };
+
     @action getTableColumns = () => {
         let hideColumns = [];
         let columns = [];
 
-        this.rawTableColumns.map((item) => {
+        this.tableColumnConfig.map((item) => {
             let column = {
                 title: item.title,
                 dataIndex: item.key,
@@ -175,9 +199,9 @@ class _NanxTableStore {
 
         let json = await api.curd.listData(params);
         if (json.code == 200) {
+            this.getTableColumns();
             this.setDataSource(json.data);
             this.setTotal(json.total);
-            this.getTableColumns();
             this.rowSelectChange([], []);
         }
     };
@@ -188,7 +212,6 @@ class _NanxTableStore {
         await this.listData();
     };
 
-    // bug ?
     getPageNation = async () => {
         let pg = {
             showSizeChanger: true,

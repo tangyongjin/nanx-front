@@ -15,18 +15,13 @@ export default class PortalLayout extends React.Component {
     }
 
     render() {
-        let flowremark = window.location.href.indexOf('remark');
         return (
             <Layout style={{ height: '100vh' }}>
                 <Sider
                     collapsed={this.store.isCollapse}
                     className="portal_menu"
-                    style={
-                        flowremark != -1
-                            ? { padding: 0, height: '100vh', overflowY: 'scroll', display: 'none' }
-                            : { padding: 0, height: '100vh', overflowY: 'scroll' }
-                    }
-                    width={300}>
+                    style={{ padding: 0, height: '100vh', overflowY: 'scroll' }}
+                    width={200}>
                     <Sidebar />
                 </Sider>
                 <Layout>

@@ -1,3 +1,16 @@
+@import '~antd/dist/antd.css';
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
 // hide scrollbar of menu and content
 .portal_menu::-webkit-scrollbar {
     width: 0 !important;
@@ -33,12 +46,10 @@
 }
 
 .portal_menu {
-    -ms-overflow-style: none;
-}
-
-.portal_menu {
+    -ms-overflow-style: none; 
     overflow: -moz-scrollbars-none;
 }
+ 
 
 .portal_content::-webkit-scrollbar {
     width: 0 !important;
@@ -46,11 +57,9 @@
 
 .portal_content {
     -ms-overflow-style: none;
-}
-
-.portal_content {
     overflow: -moz-scrollbars-none;
 }
+
 
 // antd table 默认不换行
 .commonTable .ant-table-bordered .ant-table-thead > tr > th,
@@ -149,14 +158,12 @@ header.ant-layout-header {
 .menuWrapper {
     background: #2c302e !important;
     background-color: #2c302e !important;
-    color: red;
 }
 
 .menuWrapper_inner {
     margin: 40px;
     width: 600px;
     height: 1000px;
-    color: red;
 }
 
 .ant-menu-item-selected {
@@ -214,10 +221,6 @@ header.ant-layout-header {
     float: left;
 }
 
-.form_group_detail.oppDesc {
-    width: 100%;
-    align-items: start;
-}
 
 .form_text_info {
     flex: 0 0 120px;
@@ -262,7 +265,6 @@ header.ant-layout-header {
     border-top-right-radius: 0;
 }
 
-// 一键启动高度样式自适应
 .addmodal .ant-row {
     height: auto !important;
     min-height: 53px;

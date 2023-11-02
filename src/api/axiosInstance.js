@@ -2,6 +2,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { hashHistory } from 'react-router';
 import AuthStore from '@/store/AuthStore';
+import { message } from 'antd';
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -42,7 +43,7 @@ axiosInstance.interceptors.request.use(
     function (error) {
         // 对请求错误做些什么
         AuthStore.delRunnitem(error.config.requestId);
-        console.log(error);
+        console.log('发起请求的错误:', error);
         return Promise.reject(error);
     }
 );
@@ -57,10 +58,14 @@ axiosInstance.interceptors.response.use(
         return response;
     },
     (error) => {
-        console.log('Error:', error);
-
         AuthStore.delRunnitem(error.config.requestId);
         AuthStore.setLoading(false);
+
+        if (error.code == 'ERR_NETWORK') {
+            console.log('API异常,请检查后台系统', error);
+            message.error('API异常,请检查后台系统');
+            return Promise.reject(error);
+        }
 
         if (error.response.status === 401) {
             console.log('Session过期等各种情况,route to /login');
@@ -74,9 +79,6 @@ axiosInstance.interceptors.response.use(
 
 // this is good
 export async function post(url, params, config) {
-    console.log('url: ', url);
-    console.log('config: ', config);
-    console.log('params: ', params);
     if (!params) {
         params = { data: {} };
     }
@@ -84,14 +86,17 @@ export async function post(url, params, config) {
     try {
         axiosInstance.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
         const response = await axiosInstance.post(url, params.data, { ...config });
-        console.log(response);
-
         if (response.status === 200) {
+            if (response.data) {
+                if (response.data.message) {
+                    message.info(response.data.message);
+                }
+            }
             return response.data;
         }
     } catch (error) {
-        console.error(error);
-        return error.response.data;
+        message.error('POST发生错误,', error);
+        source.cancel('Landing Component got unmounted');
     }
 }
 

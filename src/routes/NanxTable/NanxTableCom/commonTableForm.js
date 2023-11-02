@@ -63,7 +63,7 @@ const CommonTableForm = (props) => {
                         onClick={async () => {
                             await actions.validate();
                             await props.saveFormData(actions.getFormState().values);
-                            // props.hideModal();
+                            props.NanxTableStore.hideButtonModal();
                         }}>
                         保存
                     </Button>

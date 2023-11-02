@@ -14,7 +14,7 @@ const fetchDataGridCfg = async (tableStore) => {
 
     let res = await api.dataGrid.fetchDataGridCfg(params);
     if (res.code == 200) {
-        tableStore.setRawTableColumns(toJS(res.data.tableColumnConfig));
+        tableStore.setTableColumnConfig(toJS(res.data.tableColumnConfig));
         tableStore.setFormCfg(res.data.formcfg);
         tableStore.setReferinfo(res.data.referinfo);
         tableStore.setlayoutCfg(res.data.layoutcfg);
