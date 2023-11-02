@@ -21,7 +21,7 @@ export default class PortalLayout extends React.Component {
                     collapsed={this.store.isCollapse}
                     className="portal_menu"
                     style={{ padding: 0, height: '100vh', overflowY: 'scroll' }}
-                    width={200}>
+                    width={300}>
                     <Sidebar />
                 </Sider>
                 <Layout>

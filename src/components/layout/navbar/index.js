@@ -1,11 +1,8 @@
 import { Dropdown, Menu, Modal } from 'antd';
-import { DownCircleOutlined } from '@ant-design/icons';
-
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
 import LoginService from '@/routes/login/LoginService';
-import EditPassword from '@/routes/login/containers/editPassword';
 import PortalBreadcrumb from './breadcrumb/PortalBreadcrumb';
 import Hamburger from './hamburger';
 import LoadingGif from './loading.gif';
@@ -17,9 +14,6 @@ const { confirm } = Modal;
 export default class Navbar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            visible: false
-        };
         this.NavigationStore = props.NavigationStore;
         this.LoginService = new LoginService();
     }
@@ -40,51 +34,31 @@ export default class Navbar extends React.Component {
                 </div>
             ),
             okText: '确定',
-            okButtonProps: { style: { backgroundColor: '#343c41', color: '#fff', borderColor: '#343c41' } },
-            onCancel() {
-                console.log('Cancel');
-            }
+            okButtonProps: { style: { backgroundColor: '#343c41', color: '#fff', borderColor: '#343c41' } }
         });
     }
 
-    showmodal() {
-        this.setState({
-            visible: true
-        });
-    }
-
-    handleCancel = () => {
-        this.setState({
-            visible: false
-        });
-    };
-
-    getUserBox = () => {
-        return (
+    render() {
+        const dropDownItems = (
             <Menu className="dropdownMenu">
-                <Menu.Item key="setting:2" onClick={() => hashHistory.push('/profile')}>
+                <Menu.Item key="setting:1" onClick={() => hashHistory.push('/profile')}>
                     个人中心
                 </Menu.Item>
-                <Menu.Item key="setting:1" onClick={() => this.showmodal()}>
-                    修改密码
-                </Menu.Item>
                 <Menu.Divider />
-                <Menu.Item key="setting:5" onClick={() => this.showConfirm()}>
+                <Menu.Item key="setting:2" onClick={() => this.showConfirm()}>
                     退出登录
                 </Menu.Item>
             </Menu>
         );
-    };
 
-    render() {
         return (
-            <div className="hamburger_box">
+            <div className="hamburger_box" style={{ cursor: 'pointer' }}>
                 <Hamburger className="hamburger-container" />
                 <PortalBreadcrumb />
                 <div id="preloader" style={{ marginLeft: '30%', width: '125px', display: 'none' }}>
                     <img style={{ marginLeft: '30%', width: '125px' }} src={LoadingGif} alt="loading" />
                 </div>
-                <Dropdown overlay={this.getUserBox()} trigger={['click']} className="dropdown">
+                <Dropdown overlay={dropDownItems} trigger={['click']} className="dropdown">
                     <div className="ant-dropdown-link" href="#">
                         <span style={{ paddingRight: '5px', color: '#97a8be', fontSize: '14px' }}>
                             {sessionStorage.getItem('staff_name') + ' / ' + sessionStorage.getItem('role_name')}
@@ -95,13 +69,8 @@ export default class Navbar extends React.Component {
                             src={JSON.parse(sessionStorage.getItem('userInfo')).head_portrait}
                             className="user-avatar"
                         />
-                        <DownCircleOutlined />
                     </div>
                 </Dropdown>
-                <div
-                    className="dropdown"
-                    style={{ marginRight: '15px', color: 'rgb(151, 168, 190)', cursor: 'pointer' }}></div>
-                <EditPassword visible={this.state.visible} onchanged={this.handleCancel} />
             </div>
         );
     }

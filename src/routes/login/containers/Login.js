@@ -19,13 +19,10 @@ export default class Login extends React.Component {
         this.NavigationStore = props.NavigationStore;
     }
 
-    componentWillMount() {
+    componentDidMount() {
         let transaction_id = randomString(20);
         this.setState({ transaction_id });
         sessionStorage.setItem('session_id', transaction_id);
-    }
-
-    componentDidMount() {
         this.NavigationStore.setBossTitle(null);
     }
 

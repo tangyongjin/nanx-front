@@ -1,6 +1,6 @@
 import React from 'react';
-import {} from 'antd';
 import { message, Upload } from 'antd';
+import EditPassword from './editPassword';
 
 import api from '@/api/api';
 
@@ -18,6 +18,8 @@ export default class Profile extends React.Component {
     };
 
     handleChange = (info) => {
+        console.log('info: ', info);
+
         if (info.file.status === 'uploading') {
             return;
         }
@@ -46,6 +48,7 @@ export default class Profile extends React.Component {
                     onChange={this.handleChange}>
                     AAA
                 </Upload>
+                <EditPassword />
             </div>
         );
     }

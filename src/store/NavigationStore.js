@@ -104,16 +104,10 @@ class NavigationStore {
         sessionStorage.setItem('badge', JSON.stringify(data));
     };
 
-    @action setBadge = () => {
-        // this.message_count = data.unreadnumber ? data.unreadnumber : 0;
-        // this.affair_count = data.pendingnumber ? data.pendingnumber : 0;
-    };
-
     @action getSessionBadge = () => {
         let badge_data = sessionStorage.getItem('badge');
         if (badge_data && badge_data != 'undefined') {
             badge_data = JSON.parse(badge_data);
-            badge_data && this.setBadge(badge_data);
         }
     };
 
@@ -130,7 +124,6 @@ class NavigationStore {
         paths.reverse();
         paths.push(item);
         this.breadcrumb = paths;
-
         this.setComputedOpenKeys();
         this.setBreadcrumbSessionStorage();
     }
