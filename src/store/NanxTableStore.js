@@ -150,9 +150,8 @@ class _NanxTableStore {
             let column = {
                 title: item.title,
                 dataIndex: item.key,
-                key: item.key,
                 width: item.width && item.width != null && item.width != '' ? parseFloat(item.width) : 200,
-                sorter: (a, b) => sorter(a[item.key], b[item.key]),
+                // sorter: (a, b) => sorter(a[item.key], b[item.key]),
                 render: (text, record) => {
                     return CellRender(text, record, item, this);
                 }

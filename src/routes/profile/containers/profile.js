@@ -5,13 +5,6 @@ import { message, Upload } from 'antd';
 import api from '@/api/api';
 
 export default class Profile extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            fileList: []
-        };
-    }
-
     beforeUpload = (file) => {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
@@ -48,10 +41,10 @@ export default class Profile extends React.Component {
                     className="avatar-uploader"
                     showUploadList={false}
                     action={api.file.upload}
-                    headers={{ Authorization: this.state.authorization }}
+                    headers={{ Authorization: sessionStorage.getItem('token') }}
                     beforeUpload={this.beforeUpload}
                     onChange={this.handleChange}>
-                    aaa
+                    AAA
                 </Upload>
             </div>
         );

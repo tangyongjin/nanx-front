@@ -291,3 +291,22 @@ button.ant-btn-danger{
   border-color: rgb(211, 91, 22);
   background-color: rgb(211, 91, 22);
 }
+
+.ant-table tbody > tr.ant-table-row-selected > td{
+    background:  rgb(63, 62, 62) !important;
+    color:white;
+  }
+  
+  
+  tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected > td.ant-table-cell.ant-table-selection-column > label > span > span {
+    border-bottom: white  !important;
+    border-top: white  !important;
+    border-left: white  !important;
+    border-right: white  !important;
+    background: white;
+    background-color: rgb(63, 62, 62);
+  }
+  
+  .ant-radio-input{
+    color: white !important;
+  }
