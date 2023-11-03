@@ -94,6 +94,7 @@ class GridFieldManager extends React.Component {
                     <Col span={5}></Col>
                     <Col span={2}>
                         <Button
+                            className=" round-button "
                             type="primary"
                             htmlType="button"
                             onClick={() => this.props.DataGridStore.batchUpdateFieldCfg()}>
@@ -208,7 +209,12 @@ class GridFieldManager extends React.Component {
                             </Select>
                         </Col>
                         <Col span={2}>
-                            <Button type="primary" onClick={this.saveCfg.bind(this, col.Field)}>
+                            <Button
+                                className="round-button"
+                                type="primary"
+                                size="small"
+                                style={{ backgroundColor: '#312C2C', borderColor: '#312C2C', color: 'white' }}
+                                onClick={this.saveCfg.bind(this, col.Field)}>
                                 保存
                             </Button>
                         </Col>

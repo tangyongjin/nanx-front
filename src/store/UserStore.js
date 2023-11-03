@@ -12,6 +12,7 @@ class UserStore {
         sessionStorage.setItem('role_code', userInfo.role_code);
         sessionStorage.setItem('role_name', userInfo.role_name);
         sessionStorage.setItem('staff_name', userInfo.staff_name);
+        this.userInfo = userInfo;
     }
 
     @action

@@ -4,8 +4,7 @@ import { Router, hashHistory } from 'react-router';
 import store from './store';
 
 import 'normalize.css/normalize.css'; // a modern alternative to CSS resets
-import './styles/variables.scss';
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 
 import { ConfigProvider, message } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';

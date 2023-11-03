@@ -5,6 +5,8 @@ import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
 
+import '@/styles/sidebar.scss';
+
 @inject('NavigationStore')
 @observer
 export default class Sidebar extends React.Component {

@@ -1,6 +1,5 @@
 import { observable, action, toJS } from 'mobx';
 import api from '../api/api';
-import { hashHistory } from 'react-router';
 import { randomString } from '@/utils/tools';
 
 class NavigationStore {
@@ -27,8 +26,8 @@ class NavigationStore {
 
         // 浏览器刷新
         window.onload = () => {
+            console.log('刷新>>>>>>>>>>>');
             this.getBreadcrumbSessionStorage();
-            this.getSessionBadge();
             this.setCurrentMenu(this.breadcrumb[this.breadcrumb.length - 1]);
         };
     }
@@ -104,13 +103,6 @@ class NavigationStore {
         sessionStorage.setItem('badge', JSON.stringify(data));
     };
 
-    @action getSessionBadge = () => {
-        let badge_data = sessionStorage.getItem('badge');
-        if (badge_data && badge_data != 'undefined') {
-            badge_data = JSON.parse(badge_data);
-        }
-    };
-
     @action setBreadcrumb(item) {
         let paths = [];
         this.xloop(toJS(this.menuList), item.parent_id, paths);
@@ -182,15 +174,6 @@ class NavigationStore {
             }
         }
     }
-
-    @action switchRouter = (params) => {
-        // 更新设置面包屑
-        let next_menu_cfg = this.deepQuery(params.datagrid_code, this.menuList, 'datagrid_code');
-        this.setBreadcrumb(next_menu_cfg);
-        this.setCurrentMenu(next_menu_cfg);
-
-        hashHistory.push({ pathname: '/table/commonXTable', state: params });
-    };
 
     @action deepQuery(value, menuList, key) {
         var isGet = false;

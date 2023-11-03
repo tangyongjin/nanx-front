@@ -173,8 +173,9 @@ body {
 .auth-bg {
   height: 100%;
   width: 100%;
+  background-color: #9EAEC2;
   background-image: url("../../../styles/download.jpeg");
-  border: 1px solid white;
+  border: 1px solid #9EAEC2;
   background-repeat: no-repeat;
   background-position: 360px center;
 }
@@ -189,6 +190,7 @@ body {
   -moz-box-shadow: -2px 7px 37px 8px rgba(167, 167, 167, 0.52);
   box-shadow: -2px 7px 37px 8px rgba(167, 167, 167, 0.52);
   background-color: white;
+  border-radius: 10px;
 }
 
 

@@ -7,6 +7,10 @@ import PortalBreadcrumb from './breadcrumb/PortalBreadcrumb';
 import Hamburger from './hamburger';
 import LoadingGif from './loading.gif';
 
+import { port, root_url } from '@/api/api_config/base_config';
+
+const avatarRoot = `${root_url}:${port}/`;
+
 const { confirm } = Modal;
 
 @inject('NavigationStore')
@@ -66,7 +70,7 @@ export default class Navbar extends React.Component {
                         <img
                             alt="head"
                             style={{ width: '36px', height: '36px', verticalAlign: 'middle' }}
-                            src={JSON.parse(sessionStorage.getItem('userInfo')).head_portrait}
+                            src={avatarRoot + JSON.parse(sessionStorage.getItem('userInfo')).head_portrait}
                             className="user-avatar"
                         />
                     </div>
