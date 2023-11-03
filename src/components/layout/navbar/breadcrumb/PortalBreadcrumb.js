@@ -10,7 +10,6 @@ export default class PortalBreadcrumb extends React.Component {
             return null;
         }
 
-        console.log(this.props.NavigationStore);
         return (
             <Breadcrumb
                 key={this.props.NavigationStore.animationKey + 'breadcrumb'}

@@ -412,46 +412,48 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected>td.ant-table-cell.
 
 .ant-pagination-prev:focus-visible .ant-pagination-item-link,
 .ant-pagination-next:focus-visible .ant-pagination-item-link {
-  color: #222223;
-  border-color: #222223;
+    color       : #222223;
+    border-color: #222223;
 }
+
 .ant-pagination-prev:hover .ant-pagination-item-link,
 .ant-pagination-next:hover .ant-pagination-item-link {
-  color: #222223;
-  border-color: #222223;
+    color       : #222223;
+    border-color: #222223;
 }
 
 
 
 
 a {
-    color: #222223;
-    text-decoration: none;
-    background-color: transparent;
-    outline: none;
-    cursor: pointer;
-    transition: color 0.3s;
+    color                       : #222223;
+    text-decoration             : none;
+    background-color            : transparent;
+    outline                     : none;
+    cursor                      : pointer;
+    transition                  : color 0.3s;
     -webkit-text-decoration-skip: objects;
-  }
-  
-  a:hover {
+}
+
+a:hover {
     color: #222223;
-  }
-  
-  .ant-input-number-affix-wrapper:hover {
-    border-color: #ff9040;
+}
+
+.ant-input-number-affix-wrapper:hover {
+    border-color      : #ff9040;
     border-right-width: 1px;
-  }
-  .ant-input-number-affix-wrapper:focus,
-  .ant-input-number-affix-wrapper-focused {
-    border-color: #ff9040;
-    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.ant-input-number-affix-wrapper:focus,
+.ant-input-number-affix-wrapper-focused {
+    border-color      : #ff9040;
+    box-shadow        : 0 0 0 2px rgba(24, 144, 255, 0.2);
     border-right-width: 1px;
-    outline: 0;
-  }
-  
-  
-  .ant-col-12 {
+    outline           : 0;
+}
+
+
+.ant-col-12 {
     height: auto
 }
 
@@ -468,38 +470,41 @@ a {
 }
 
 .ant-btn-primary {
-    background  : #101316;
-    border-color: #101316
+    background  : #163419;
+    border-color: #163419
 }
 
 .ant-btn-primary:hover {
-    background: #101316;
+    background: #163419;
 }
 
 .ant-btn-primary:hover {
-    background: #101316;
+    background: #163419;
 }
 
 .ant-btn-primary:focus {
-    background: #101316;
+    background: #163419;
 }
 
 .ant-btn-primary:active {
-    background: #101316;
+    background: #163419;
 }
 
 .ant-modal-close {
     color: #fff
 }
 
-.ant-modal-title {
-    color    : #fff;
-    font-size: 20px
+.ant-modal-title,
+.ant-modal-close-x {
+    color     : #fff;
+    font-size : 16px;
+    margin-top: -4px;
 }
 
 .ant-modal-header {
     background   : #163419;
-    border-radius: 8px 8px 0 0
+    height       : 42px;
+    border-radius: 2px 2px 0 0
 }
 
 .inquiremodal .ant-card-bordered {
@@ -542,6 +547,7 @@ a {
 
 /* 统一的边框半径和颜色 */
 .ant-input,
+.ant-select,
 .ant-checkbox-input,
 .ant-checkbox-checked .ant-checkbox-inner,
 .ant-checkbox-wrapper:hover .ant-checkbox-inner,
@@ -556,20 +562,33 @@ a {
 .ant-checkbox-input:hover,
 .ant-input:hover,
 .ant-input:focus,
+.ant-select:focus,
+.ant-select:hover,
 .ant-input-number-input.focus,
 .ant-input-number-input.hover {
     border-color: #163419 !important;
 }
 
 /* 选中状态的背景颜色和边框颜色 */
-.ant-checkbox-checked .ant-checkbox-inner,
+.ant-checkbox-checked,
+.ant-checkbox-inner,
 .ant-input-affix-wrapper,
 .ant-input-number-input {
-    border-color    : #163419 !important;
+    border-color: #163419 !important;
 }
 
-textarea,textarea.ant-input:hover,textarea:focus{
-    border: 1px solid #DAE2F3 !important;
+textarea,
+textarea.ant-input:hover,
+textarea:focus {
+    border            : 1px solid #DAE2F3 !important;
     -webkit-box-shadow: none !important;
-    box-shadow: none !important;
+    box-shadow        : none !important;
+}
+
+.ant-modal-title > div > span {
+    margin-right: 4px;
+}
+
+.feather-align-justify{
+    color:#163419;
 }

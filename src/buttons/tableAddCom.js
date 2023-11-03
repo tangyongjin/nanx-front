@@ -3,6 +3,7 @@ import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import api from '@/api/api';
+import { FileAddOutlined } from '@ant-design/icons';
 
 @inject('NanxTableStore') //
 @observer
@@ -43,7 +44,16 @@ export default class TableAddCom extends React.Component {
 
     render() {
         return (
-            <CommonModal height="500px" footer={null} title="新增记录" layoutcfg={this.props.NanxTableStore.layoutcfg}>
+            <CommonModal
+                height="500px"
+                footer={null}
+                title={
+                    <div>
+                        <FileAddOutlined />
+                        添加数据
+                    </div>
+                }
+                layoutcfg={this.props.NanxTableStore.layoutcfg}>
                 <CommonTableForm
                     as_virtual={this.props.as_virtual}
                     editable={true}

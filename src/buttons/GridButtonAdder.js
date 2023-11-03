@@ -1,6 +1,7 @@
 import React from 'react';
 import { message, Popconfirm, Button, Select, Table, Modal } from 'antd';
 import api from '@/api/api';
+import { BorderOutlined } from '@ant-design/icons';
 const { Option } = Select;
 
 export default class GridButtonAdder extends React.Component {
@@ -134,7 +135,12 @@ export default class GridButtonAdder extends React.Component {
             <div>
                 {this.state.record ? (
                     <Modal
-                        title="分配按钮"
+                        title={
+                            <div>
+                                <BorderOutlined />
+                                分配按钮
+                            </div>
+                        }
                         onOk={this.handleOk}
                         onCancel={this.handleCancel}
                         okText="确认"

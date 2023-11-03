@@ -4,6 +4,7 @@ import fetchDataGridCfg from '@/routes/NanxTable/NanxTableCom/fetchDataGridCfg';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import listDataParams from '@/routes/NanxTable/NanxTableCom/listDataParams';
 import { toJS } from 'mobx';
+import { TableOutlined } from '@ant-design/icons';
 
 export default class ExportExcel extends React.Component {
     constructor(props) {
@@ -43,7 +44,12 @@ export default class ExportExcel extends React.Component {
             <CommonModal
                 height="500px"
                 cancel={this.hideModal}
-                title="导出excel(点击下载)"
+                title={
+                    <div>
+                        <TableOutlined />
+                        导出excel(点击下载)
+                    </div>
+                }
                 layoutcfg={this.props.NanxTableStore.layoutcfg}>
                 <a href={this.state.excelMsg.url}>{this.state.excelMsg.name}</a>
             </CommonModal>

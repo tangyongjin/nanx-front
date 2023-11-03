@@ -3,6 +3,7 @@ import { Modal, message } from 'antd';
 import { observer, inject } from 'mobx-react';
 import TableSortCom from './TableSort/TableSortCom';
 import { toJS } from 'mobx';
+import { BarsOutlined } from '@ant-design/icons';
 
 @inject('DataGridStore')
 @observer
@@ -48,7 +49,12 @@ export default class TableSort extends React.Component {
                 onCancel={() => this.onCancel()}
                 onOk={() => this.onCancel()}
                 width={'1300px'}
-                title="字段排序/BUG">
+                title={
+                    <div>
+                        <BarsOutlined />
+                        字段排序
+                    </div>
+                }>
                 {this.props.DataGridStore.ColsDbInfo.length == 0 ? null : (
                     <TableSortCom DataGridCode={this.props.DataGridStore.DataGridCode} />
                 )}

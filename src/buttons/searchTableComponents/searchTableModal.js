@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal } from 'antd';
 import SearchFormContainer from './searchFormContainer';
+import { SearchOutlined } from '@ant-design/icons';
 
 export default class SearchTableModal extends React.Component {
     constructor(props) {
@@ -34,7 +35,12 @@ export default class SearchTableModal extends React.Component {
     getModalProps() {
         return {
             destroyOnClose: true,
-            title: '数据检索',
+            title: (
+                <div>
+                    <SearchOutlined />
+                    数据检索
+                </div>
+            ),
             bodyStyle: {
                 height: 'auto',
                 overflow: 'auto',

@@ -3,6 +3,7 @@ import { Modal, message } from 'antd';
 import { observer, inject } from 'mobx-react';
 import TriggerListCom from './trigger/TriggerListCom';
 import { toJS } from 'mobx';
+import { FormatPainterOutlined } from '@ant-design/icons';
 
 @inject('DataGridStore')
 @observer
@@ -48,7 +49,12 @@ export default class TriggerList extends React.Component {
                 onCancel={() => this.onCancel()}
                 onOk={() => this.onCancel()}
                 width={'1300px'}
-                title="管理联动">
+                title={
+                    <div>
+                        <FormatPainterOutlined />
+                        管理联动
+                    </div>
+                }>
                 {this.props.DataGridStore.ColsDbInfo.length == 0 ? null : <TriggerListCom />}
             </Modal>
         ) : null;

@@ -3,6 +3,7 @@ import { Modal, message } from 'antd';
 import { observer, inject } from 'mobx-react';
 import TriggerAddCom from './trigger/TriggerAddCom';
 import { toJS } from 'mobx';
+import { AppstoreAddOutlined } from '@ant-design/icons';
 
 @inject('DataGridStore')
 @observer
@@ -48,7 +49,12 @@ export default class TriggerAdder extends React.Component {
                 onCancel={() => this.onCancel()}
                 onOk={() => this.onCancel()}
                 width={'1300px'}
-                title="添加联动">
+                title={
+                    <div>
+                        <AppstoreAddOutlined />
+                        添加联动
+                    </div>
+                }>
                 {this.props.DataGridStore.ColsDbInfo.length == 0 ? null : <TriggerAddCom />}
             </Modal>
         ) : null;

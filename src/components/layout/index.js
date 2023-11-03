@@ -2,8 +2,7 @@ import React from 'react';
 import Sidebar from './sidebar/Sidebar';
 import Navbar from './navbar//Navbar';
 import { Layout } from 'antd';
-import { inject, observer, useStore } from 'mobx-react';
-
+import { inject, observer } from 'mobx-react';
 const { Header, Sider, Content } = Layout;
 
 @inject('NavigationStore')

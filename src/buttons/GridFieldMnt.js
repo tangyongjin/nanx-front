@@ -3,6 +3,7 @@ import { Modal, message } from 'antd';
 import { observer, inject } from 'mobx-react';
 import GridFieldManager from './GridFieldManager';
 import { toJS } from 'mobx';
+import { SlidersOutlined } from '@ant-design/icons';
 
 @inject('DataGridStore')
 @observer
@@ -48,7 +49,12 @@ export default class GridFieldMnt extends React.Component {
                 onCancel={() => this.onCancel()}
                 onOk={() => this.onCancel()}
                 width={'1600px'}
-                title="字段管理面板">
+                title={
+                    <div>
+                        <SlidersOutlined />
+                        字段管理
+                    </div>
+                }>
                 {this.props.DataGridStore.ColsDbInfo.length == 0 ? null : <GridFieldManager />}
             </Modal>
         ) : null;
