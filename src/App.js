@@ -4,13 +4,12 @@ import { Router, hashHistory } from 'react-router';
 import store from './store';
 
 import 'normalize.css/normalize.css'; // a modern alternative to CSS resets
-// import 'antd/dist/antd.css';
 
 import { ConfigProvider, message } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-
+// import './App.less';
 import { routes } from './routes/routes.js';
 moment.locale('zh-cn');
 

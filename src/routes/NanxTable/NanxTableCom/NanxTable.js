@@ -1,4 +1,3 @@
-import '../commonTable.scss';
 import React from 'react';
 import { Table } from 'antd';
 import { observer, inject } from 'mobx-react';
