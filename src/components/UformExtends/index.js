@@ -1,21 +1,21 @@
-import React from 'react';
-import { registerFormFields, connect } from '@uform/react';
 import { Input } from 'antd';
-import Fileuploader from './fileuploader';
+import { registerFormFields, connect } from '@uform/react';
 import Assocselect from './assocSelect';
-import GetLander from './getLander';
-import GetDepart from './getDepart';
-import GetLoginuser from './getLoginuser';
-import YesOrNo from './yesOrNo';
-import Dropdownlist from './dropdownList';
-import GetDate from './getDate';
-import GetActionCode from './getActionCode.js';
-import CheckBox from './checkbox';
-import GetRadio from './getRadio';
-import Wangeditor from './wangeditor';
-import CommonTable from '@/routes/NanxTable/NanxTableCom/NanxTable';
-import EditgetDate from './editgetDate';
 import CategoryDropDown from './categoryDropDown';
+import CheckBox from './checkbox';
+import CommonTable from '@/routes/NanxTable/NanxTableCom/NanxTable';
+import Dropdownlist from './dropdownList';
+import EditgetDate from './editgetDate';
+import Fileuploader from './fileuploader';
+import GetActionCode from './getActionCode.js';
+import GetDate from './getDate';
+import GetDepart from './getDepart';
+import GetLander from './getLander';
+import GetLoginuser from './getLoginuser';
+import GetRadio from './getRadio';
+import React from 'react';
+import Wangeditor from './wangeditor';
+import YesOrNo from './yesOrNo';
 
 registerFormFields({
     YesOrNo: connect()((props) => <YesOrNo {...props} getComponentValue={props.onChange} value={props.value || ''} />),

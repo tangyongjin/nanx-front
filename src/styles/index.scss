@@ -494,18 +494,6 @@ a:hover {
     color: #fff
 }
 
-.ant-modal-title,
-.ant-modal-close-x {
-    color     : #fff;
-    font-size : 16px;
-    margin-top: -4px;
-}
-
-.ant-modal-header {
-    background   : #163419;
-    height       : 42px;
-    border-radius: 2px 2px 0 0
-}
 
 .inquiremodal .ant-card-bordered {
     border: 0px
@@ -585,10 +573,36 @@ textarea:focus {
     box-shadow        : none !important;
 }
 
-.ant-modal-title > div > span {
+
+.ant-modal-header {
+    background: hsl(126, 41%, 15%);
+    height: 42px;
+    border-radius: 2px 2px 0 0;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); /* 添加阴影效果 */
+    border-bottom: 0.5px solid #0f2512; /* 添加底部边框 */
+}
+
+
+
+.ant-modal-title,
+.ant-modal-close-x {
+    color     : #fff;
+    font-size : 16px;
+    margin-top: -4px;
+}
+
+
+
+.ant-modal-title>div>span {
     margin-right: 4px;
 }
 
-.feather-align-justify{
-    color:#163419;
+
+
+
+
+
+.feather-align-justify {
+    color: #163419;
 }
