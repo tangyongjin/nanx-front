@@ -1,20 +1,6 @@
 import { observable, action } from 'mobx';
 
 class _AuthStore {
-    // constructor() {
-    //     makeAutoObservable(this, {
-    //         _value: observable,
-    //         _loading: observable,
-    //         _timeStamp: observable,
-    //         _runningStacks: observable,
-    //         set2029: action,
-    //         setLoading: action,
-    //         setTimeStamp: action,
-    //         addRunnitem: action,
-    //         delRunnitem: action
-    //     });
-    // }
-
     @observable _value = null;
     @observable _loading = false;
     @observable _timeStamp = '00:00:00';
@@ -52,12 +38,6 @@ class _AuthStore {
     @action setValue = async (neweValue) => {
         this._value = neweValue;
     };
-
-    // sysLogin = async (values) => {
-    //   let loginresult = await api.sysLogin(values);
-    //   console.log(loginresult);
-    //   return loginresult;
-    // };
 }
 
 const AuthStore = new _AuthStore();

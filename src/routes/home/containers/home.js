@@ -36,6 +36,10 @@ export default class home extends React.Component {
             }
         ];
 
-        return <Table dataSource={dataSource} columns={columns} />;
+        return (
+            <div style={{ margin: '90px' }}>
+                <Table dataSource={dataSource} columns={columns} />
+            </div>
+        );
     }
 }

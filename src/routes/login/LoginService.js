@@ -11,6 +11,8 @@ export default class LoginService {
     }
 
     async loginMobile(mobile, password, transaction_id) {
+        document.getElementById('login_loading').style.display = 'block';
+
         sessionStorage.removeItem('id_token');
         sessionStorage.removeItem('mobile');
         let params = {
@@ -22,6 +24,7 @@ export default class LoginService {
         console.log('res: ', res);
 
         if (res.code == 401) {
+            document.getElementById('login_loading').style.display = 'none';
             message.error('登陆失败，请检查手机号和密码！', 2.5);
             return;
         }
@@ -35,9 +38,8 @@ export default class LoginService {
     }
 
     afterLoginSuccess = async () => {
-        message.loading('登录成功,准备工作环境 ', 1.1, async () => {
-            hashHistory.push('/home');
-        });
+        document.getElementById('login_loading').style.display = 'none';
+        hashHistory.push('/home');
     };
 
     loggedIn() {

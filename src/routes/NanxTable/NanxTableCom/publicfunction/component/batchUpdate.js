@@ -11,12 +11,9 @@ export default class BatchUpdate extends React.Component {
         this.NanxTableStore = props.NanxTableStore;
         this.state = {
             visible: false,
-            editvisible: false,
             columnsdata: [],
             batchId: [],
             selectData: '',
-            newValueData: [],
-            selectValueType: null,
             newValue: '',
             formConfigData: {}
         };
@@ -24,16 +21,19 @@ export default class BatchUpdate extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.showModal = this.showModal.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
+        this.init = this.init.bind(this);
     }
+
     componentDidMount() {
         var columns = [];
-        this.NanxTableStore.tableColumnConfig.map((item, index) => {
+        this.NanxTableStore.tableColumnConfig.map((item) => {
             columns.push(<Select.Option key={item.key}>{item.title}</Select.Option>);
         });
         this.setState({
             columnsdata: columns
         });
     }
+
     async handleOk() {
         if (this.state.selectData == '') {
             message.error('请选择需要修改字段');
@@ -55,13 +55,13 @@ export default class BatchUpdate extends React.Component {
         params.data.rawdata[this.state.selectData] = this.state.newValue;
         let res = await api.curd.batchUpdate(params);
         if (res.success == true) {
-            message.success('修改成功');
             this.setState({
                 visible: false
             });
             this.props.refreshTable();
         }
     }
+
     init() {
         if (this.NanxTableStore.selectedRowKeys.length == 0) {
             message.error('您还没有选择需要修改的数据，请选择');
@@ -69,6 +69,7 @@ export default class BatchUpdate extends React.Component {
             this.showModal();
         }
     }
+
     showModal() {
         var obj = {};
         var objarr = Object.keys(this.NanxTableStore.formCfg.properties);
@@ -83,7 +84,7 @@ export default class BatchUpdate extends React.Component {
         });
     }
 
-    async onChange(event, data) {
+    async onChange(event) {
         console.log(this.state.formConfigData, event);
 
         let newValuearr = [];
@@ -94,38 +95,19 @@ export default class BatchUpdate extends React.Component {
             };
             let res = await api.curd.getTableData(params);
 
-            res.data.map((item, index) => {
+            res.data.map((item) => {
                 newValuearr.push(<Select.Option key={item.value}>{item.display_text}</Select.Option>);
             });
         }
-        this.setState(
-            {
-                selectData: event,
-                selectValueType: this.state.formConfigData[event].type,
-                newValueData: newValuearr
-            },
-            () => {}
-        );
-    }
-
-    selectNewValue(event, data) {
-        if (data == 'newValue') {
-            this.setState({
-                newValue: event.target.value
-            });
-        } else {
-            this.setState({
-                newValue: event
-            });
-        }
+        this.setState({ selectData: event }, () => {});
     }
 
     handleCancel() {
         this.setState({
-            visible: false,
-            selectedRows: []
+            visible: false
         });
     }
+
     render() {
         const children = this.state.columnsdata;
 
@@ -138,7 +120,7 @@ export default class BatchUpdate extends React.Component {
                     okText="确认"
                     cancelText="取消"
                     width="500px"
-                    visible={this.state.visible}>
+                    open={this.state.visible}>
                     <Form labelCol={{ span: 5 }} wrapperCol={{ span: 19 }}>
                         <Form.Item label="选择修改字段：">
                             <Select onChange={(event) => this.onChange(event, 'selectData')}>{children}</Select>

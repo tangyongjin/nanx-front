@@ -13,18 +13,33 @@ const renderButtons = (tableStore) => {
         return null;
     }
     return tableStore.tableButtons.map((item, index) => {
-        return (
-            <Button
-                key={index}
-                type={item.ui_type}
-                htmlType="button"
-                icon={item.icon ? <Icon icon={item.icon} /> : null}
-                onClick={(event) => getButtonHandler(event, item, tableStore)}
-                className="round-button"
-                style={{ margin: 8 }}>
-                {item.title}
-            </Button>
-        );
+        if (item.ui_type == 'danger') {
+            return (
+                <Button
+                    danger
+                    key={index}
+                    htmlType="button"
+                    icon={item.icon ? <Icon icon={item.icon} /> : null}
+                    onClick={(event) => getButtonHandler(event, item, tableStore)}
+                    className="round-button"
+                    style={{ margin: 8 }}>
+                    {item.title}
+                </Button>
+            );
+        } else {
+            return (
+                <Button
+                    key={index}
+                    type={item.ui_type}
+                    htmlType="button"
+                    icon={item.icon ? <Icon icon={item.icon} /> : null}
+                    onClick={(event) => getButtonHandler(event, item, tableStore)}
+                    className="round-button"
+                    style={{ margin: 8 }}>
+                    {item.title}
+                </Button>
+            );
+        }
     });
 };
 

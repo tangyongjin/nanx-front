@@ -8,7 +8,7 @@ export default class MenuDetail extends React.Component {
         this.NanxTableStore = props.NanxTableStore;
         this.state = {
             record: null,
-            visible: false
+            open: false
         };
     }
 
@@ -22,16 +22,14 @@ export default class MenuDetail extends React.Component {
         let currentrow = this.props.NanxTableStore.selectedRows[0];
         console.log(currentrow);
         this.setState({
-            visible: true,
+            open: true,
             record: currentrow
         });
     }
 
-    handleOk = async () => {};
-
     handleCancel = () => {
         this.setState({
-            visible: false
+            open: false
         });
     };
 
@@ -41,12 +39,11 @@ export default class MenuDetail extends React.Component {
                 {this.state.record ? (
                     <Modal
                         title="菜单分配情况"
-                        onOk={this.handleOk}
                         onCancel={this.handleCancel}
                         okText="确认"
                         cancelText="取消"
                         width="1200px"
-                        visible={this.state.visible}
+                        open={this.state.open}
                         destroyOnClose={true}>
                         <MenuDetailCom menuID={this.state.record.id} />
                     </Modal>

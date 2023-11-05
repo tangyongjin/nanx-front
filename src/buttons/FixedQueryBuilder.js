@@ -8,7 +8,7 @@ export default class FixedQueryBuilder extends React.Component {
         super(props);
         this.init = this.init.bind(this);
         this.state = {
-            visible: false,
+            open: false,
             fieldsList: []
         };
     }
@@ -24,13 +24,13 @@ export default class FixedQueryBuilder extends React.Component {
 
     onCancelHandle = () => {
         this.setState({
-            visible: false
+            open: false
         });
     };
 
     showModal() {
         this.setState({
-            visible: true
+            open: true
         });
     }
 
@@ -53,14 +53,14 @@ export default class FixedQueryBuilder extends React.Component {
         return {
             destroyOnClose: true,
             title: '固定QueryConfigure配置',
-            bodyStyle: {
+            styles: {
                 height: 'auto',
                 overflow: 'auto',
                 bottom: 0
             },
             cancelText: '取消',
             okText: '确定',
-            visible: this.state.visible,
+            open: this.state.open,
             onOk: this.saveFixedQueryConfigure,
             onCancel: () => this.onCancelHandle()
         };

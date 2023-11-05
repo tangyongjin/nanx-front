@@ -14,7 +14,6 @@ export default class PortalLayout extends React.Component {
         this.store.getMenuTreeByRoleCode();
     }
 
-    // onCollapse={(value) => setCollapsed(value)}
     render() {
         return (
             <Layout style={{ height: '100vh' }}>
@@ -34,12 +33,10 @@ export default class PortalLayout extends React.Component {
                     <Content
                         key={this.store.updateKey}
                         style={{
-                            background: '#fff',
                             minHeight: 280,
-                            height: '100vh',
-                            overflowY: 'scroll'
-                        }}
-                        className="portal_content">
+                            marginLeft: '4px',
+                            height: '100vh'
+                        }}>
                         {this.props.children}
                     </Content>
                 </Layout>

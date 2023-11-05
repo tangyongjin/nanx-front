@@ -12,7 +12,7 @@ export default class GridButtonAdder extends React.Component {
             record: null,
             allButtons: [],
             gridButtons: [],
-            visible: false,
+            open: false,
             btncode: null
         };
     }
@@ -25,7 +25,7 @@ export default class GridButtonAdder extends React.Component {
         let params = { data: { DataGridCode: this.state.record.datagrid_code }, method: 'POST' };
         let res = await api.button.getGridButtons(params);
         this.setState({
-            visible: true,
+            open: true,
             gridButtons: res.buttons
         });
     };
@@ -76,7 +76,7 @@ export default class GridButtonAdder extends React.Component {
         let params = { data: {}, method: 'POST' };
         let res = await api.button.getAllButtons(params);
         this.setState({
-            visible: true,
+            open: true,
             record: currentrow,
             allButtons: res.data
         });
@@ -84,14 +84,14 @@ export default class GridButtonAdder extends React.Component {
         params = { data: { DataGridCode: this.state.record.datagrid_code }, method: 'POST' };
         res = await api.button.getGridButtons(params);
         this.setState({
-            visible: true,
+            open: true,
             gridButtons: res.buttons
         });
     }
 
     handleCancel = () => {
         this.setState({
-            visible: false
+            open: false
         });
     };
 
@@ -146,7 +146,7 @@ export default class GridButtonAdder extends React.Component {
                         okText="确认"
                         cancelText="取消"
                         width="1200px"
-                        visible={this.state.visible}
+                        open={this.state.open}
                         destroyOnClose={true}>
                         {this.state.gridButtons.length == 0 ? null : (
                             <div>

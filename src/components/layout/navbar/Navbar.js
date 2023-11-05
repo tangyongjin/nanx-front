@@ -1,10 +1,9 @@
-import { Dropdown, Menu, Modal } from 'antd';
+import { Dropdown, Modal } from 'antd';
 import { inject, observer } from 'mobx-react';
+import { PicLeftOutlined } from '@ant-design/icons';
 import React from 'react';
 import { hashHistory } from 'react-router';
 import LoginService from '@/routes/login/LoginService';
-import PortalBreadcrumb from './breadcrumb/PortalBreadcrumb';
-import Hamburger from './hamburger';
 import LoadingGif from './loading.gif';
 
 import { port, root_url } from '@/api/api_config/base_config';
@@ -38,43 +37,93 @@ export default class Navbar extends React.Component {
                 </div>
             ),
             okText: '确定',
-            okButtonProps: { style: { backgroundColor: '#343c41', color: '#fff', borderColor: '#343c41' } }
+            okButtonProps: { style: { backgroundColor: '#343c41', color: '#fff', borderColor: '#343c41' } },
+            cancelButtonProps: { style: { color: '#174a02', borderColor: '#343c41' } }
         });
     }
 
     render() {
-        const dropDownItems = (
-            <Menu className="dropdownMenu">
-                <Menu.Item key="setting:1" onClick={() => hashHistory.push('/profile')}>
-                    个人中心
-                </Menu.Item>
-                <Menu.Divider />
-                <Menu.Item key="setting:2" onClick={() => this.showConfirm()}>
-                    退出登录
-                </Menu.Item>
-            </Menu>
-        );
+        const onClick = ({ key }) => {
+            if (key == 1) {
+                hashHistory.push('/profile');
+            }
+            if (key == 2) {
+                this.showConfirm();
+            }
+        };
+
+        const items = [
+            {
+                label: '个人中心',
+                key: '1'
+            },
+            {
+                type: 'divider'
+            },
+            {
+                label: '退出登录',
+                key: '2'
+            }
+        ];
 
         return (
-            <div className="hamburger_box" style={{ cursor: 'pointer' }}>
-                <Hamburger className="hamburger-container" />
-                <PortalBreadcrumb />
-                <div id="preloader" style={{ marginLeft: '30%', width: '125px', display: 'none' }}>
-                    <img style={{ marginLeft: '30%', width: '125px' }} src={LoadingGif} alt="loading" />
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div
+                    style={{
+                        flex: 1,
+                        width: '33.33%',
+                        textAlign: 'left'
+                    }}>
+                    <PicLeftOutlined
+                        onClick={this.NavigationStore.toggleCollapse}
+                        style={{ paddingLeft: '15px', fontSize: '16px', color: '#225e04' }}
+                    />
                 </div>
-                <Dropdown overlay={dropDownItems} trigger={['click']} className="dropdown">
-                    <div className="ant-dropdown-link" href="#">
-                        <span style={{ paddingRight: '5px', color: '#97a8be', fontSize: '14px' }}>
-                            {sessionStorage.getItem('staff_name') + ' / ' + sessionStorage.getItem('role_name')}
-                        </span>
-                        <img
-                            alt="head"
-                            style={{ width: '36px', height: '36px', verticalAlign: 'middle' }}
-                            src={avatarRoot + JSON.parse(sessionStorage.getItem('userInfo')).head_portrait}
-                            className="user-avatar"
-                        />
+                <div
+                    id="preloader"
+                    style={{
+                        flex: 1,
+                        width: '33.33%',
+                        display: 'none',
+                        textAlign: 'center'
+                    }}>
+                    <img src={LoadingGif} alt="loading" />
+                </div>
+                <div
+                    style={{
+                        flex: 1,
+                        width: '33.33%',
+                        textAlign: 'right',
+                        display: 'flex',
+                        paddingRight: '15px',
+                        justifyContent: 'flex-end'
+                    }}>
+                    <div style={{ width: '190px', cursor: 'pointer' }}>
+                        <Dropdown
+                            trigger={['click']}
+                            menu={{
+                                items,
+                                onClick
+                            }}>
+                            <div>
+                                <span style={{ paddingRight: '5px', color: '#97a8be', fontSize: '14px' }}>
+                                    {sessionStorage.getItem('staff_name') + ' / ' + sessionStorage.getItem('role_name')}
+                                </span>
+                                <img
+                                    alt="head"
+                                    style={{
+                                        width: '36px',
+                                        borderRadius: '5px',
+                                        height: '36px',
+                                        verticalAlign: 'middle'
+                                    }}
+                                    src={avatarRoot + JSON.parse(sessionStorage.getItem('userInfo')).head_portrait}
+                                    className="user-avatar"
+                                />
+                            </div>
+                        </Dropdown>
                     </div>
-                </Dropdown>
+                </div>
             </div>
         );
     }

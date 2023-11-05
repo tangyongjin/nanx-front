@@ -10,15 +10,19 @@ export default class PortalBreadcrumb extends React.Component {
             return null;
         }
 
+        let breadItems = [];
+
+        this.props.NavigationStore.breadcrumb.map((item) => {
+            breadItems.push({ title: item.text });
+        });
+
         return (
             <Breadcrumb
-                key={this.props.NavigationStore.animationKey + 'breadcrumb'}
-                separator=">"
-                className="portal_bread_crumb">
-                {this.props.NavigationStore.breadcrumb.map((item, index) => {
-                    return <Breadcrumb.Item key={index}>{item.text}</Breadcrumb.Item>;
-                })}
-            </Breadcrumb>
+                style={{
+                    margin: '16px 0'
+                }}
+                items={breadItems}
+                key={this.props.NavigationStore.animationKey + 'breadcrumb'}></Breadcrumb>
         );
     }
 }

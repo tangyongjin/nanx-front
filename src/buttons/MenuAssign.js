@@ -8,7 +8,7 @@ export default class MenuAssign extends React.Component {
         this.NanxTableStore = props.NanxTableStore;
         this.state = {
             record: null,
-            visible: false
+            open: false
         };
     }
 
@@ -22,7 +22,7 @@ export default class MenuAssign extends React.Component {
         let currentrow = this.props.NanxTableStore.selectedRows[0];
         console.log(currentrow);
         this.setState({
-            visible: true,
+            open: true,
             record: currentrow
         });
     }
@@ -31,7 +31,7 @@ export default class MenuAssign extends React.Component {
 
     handleCancel = () => {
         this.setState({
-            visible: false
+            open: false
         });
     };
 
@@ -46,7 +46,7 @@ export default class MenuAssign extends React.Component {
                         okText="确认"
                         cancelText="取消"
                         width="1200px"
-                        visible={this.state.visible}
+                        open={this.state.open}
                         destroyOnClose={true}>
                         <AllocationMenu />
                     </Modal>

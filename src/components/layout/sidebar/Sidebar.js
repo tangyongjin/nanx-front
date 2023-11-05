@@ -5,8 +5,6 @@ import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
 
-import '@/styles/sidebar.scss';
-
 @inject('NavigationStore')
 @observer
 export default class Sidebar extends React.Component {
@@ -90,7 +88,6 @@ export default class Sidebar extends React.Component {
                         display: 'flex',
                         height: '80px',
                         color: 'white',
-                        marginTop: '-12px',
                         fontSize: '18px',
                         fontWeight: 'bold',
                         justifyContent: 'center',
@@ -98,7 +95,7 @@ export default class Sidebar extends React.Component {
                     }}>
                     [Nanx+]
                 </div>
-                <div className="menuWrapper">
+                <div>
                     {this.state.menulist ? (
                         <Menu
                             mode="inline"

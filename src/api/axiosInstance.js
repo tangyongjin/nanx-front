@@ -45,6 +45,28 @@ axiosInstance.interceptors.request.use(
     }
 );
 
+export async function post(url, params, config) {
+    if (!params) {
+        params = { data: {} };
+    }
+
+    try {
+        axiosInstance.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
+        const response = await axiosInstance.post(url, params.data, { ...config });
+        if (response.status === 200) {
+            if (response.data) {
+                if (response.data.message) {
+                    message.info(response.data.message);
+                }
+            }
+            return response.data;
+        }
+    } catch (error) {
+        message.error('POST发生错误', error);
+        source.cancel('Landing Component got unmounted');
+    }
+}
+
 axiosInstance.interceptors.response.use(
     (response) => {
         // 打印响应日志
@@ -69,28 +91,6 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-
-export async function post(url, params, config) {
-    if (!params) {
-        params = { data: {} };
-    }
-
-    try {
-        axiosInstance.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
-        const response = await axiosInstance.post(url, params.data, { ...config });
-        if (response.status === 200) {
-            if (response.data) {
-                if (response.data.message) {
-                    message.info(response.data.message);
-                }
-            }
-            return response.data;
-        }
-    } catch (error) {
-        message.error('POST发生错误,', error);
-        source.cancel('Landing Component got unmounted');
-    }
-}
 
 export async function get(url, para, config = {}) {
     return axiosInstance.get(url, { ...para }, { ...config }).then((response) => {

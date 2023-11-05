@@ -136,11 +136,9 @@ q {
 
 /*end reset*/
 
-html,
-body {
+html {
   padding: 0;
   margin: 0;
-  background: #f1f1f1;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -152,7 +150,8 @@ h2,
 h3,
 h4,
 h5,
-h6, p {
+h6,
+p {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -162,7 +161,7 @@ h6, p {
 
 body {
   box-sizing: border-box;
-  background: #f1f1f1 !important;
+  background: #9EAEC2 !important;
   height: 100%;
 }
 
@@ -175,7 +174,6 @@ body {
   width: 100%;
   background-color: #9EAEC2;
   background-image: url("../../../styles/download.jpeg");
-  border: 1px solid #9EAEC2;
   background-repeat: no-repeat;
   background-position: 360px center;
 }
@@ -210,10 +208,6 @@ body {
 
 
 
-.txt-left-side h2 {
-  color: black;
-  font-size: 18px;
-}
 
 
 
@@ -257,27 +251,11 @@ body {
 }
 
 button[id='loginbtn']:hover,
-a.for:hover,
-.w3layouts_more-buttn a:hover {
-  opacity: 0.6;
+a.for:hover {
+  opacity: 0.85;
 }
 
 
-input.checked {
-  position: absolute;
-  top: 3px;
-  left: -5px;
-  cursor: pointer;
-}
-
-
-
-.w3layouts_more-buttn h3 {
-  font-size: 15px;
-  color: black;
-  margin-top: 43px;
-  font-weight: 400;
-}
 
 
 
@@ -304,8 +282,9 @@ input.checked {
   }
 
 
-
-
+  h2, h3 {
+    font-weight: normal;
+  }
 
   .txt-left-side p {
     font-size: 13.5px;
@@ -321,7 +300,4 @@ input.checked {
   .form-left-to-w3l {
     margin: 0px 0px 25px;
   }
-
-
-
 }

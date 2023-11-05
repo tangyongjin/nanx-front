@@ -11,7 +11,7 @@ export default class TableSort extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            visible: false
+            open: false
         };
         this.init = this.init.bind(this);
     }
@@ -29,13 +29,13 @@ export default class TableSort extends React.Component {
             this.props.DataGridStore.setCurrentActName(toJS(record).datagrid_title);
             this.props.DataGridStore.setCurrentBasetable(toJS(record).base_table);
             this.props.DataGridStore.prepareDataGirdEnv();
-            this.setState({ visible: true });
+            this.setState({ open: true });
         }
     }
 
     onCancel() {
         this.setState({
-            visible: false
+            open: false
         });
     }
 
@@ -44,7 +44,7 @@ export default class TableSort extends React.Component {
 
         return (
             <Modal
-                visible={this.state.visible}
+                open={this.state.open}
                 destroyOnClose={true}
                 onCancel={() => this.onCancel()}
                 onOk={() => this.onCancel()}

@@ -1,0 +1,608 @@
+@import 'antd/dist/reset.css';
+
+
+html {
+    --antd-wave-shadow-color: #6f7172;
+    --scroll-bar            : 0;
+}
+
+
+body {
+    margin                 : 0;
+    font-family            : Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing : antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+// hide scrollbar of menu and content
+.portal_menu::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+.ant-calendar-picker.ant-calendar-picker-default {
+    width: 100%;
+}
+
+.ant-input-number {
+    width: 100% !important;
+}
+
+.commonTable .react-resizable {
+    position       : relative;
+    background-clip: padding-box;
+}
+
+.commonTable .react-resizable-handle {
+    position: absolute;
+    width   : 20px;
+    height  : 100%;
+    bottom  : 0;
+    right   : -5px;
+    cursor  : col-resize;
+    z-index : 1;
+}
+
+.ant-table-cell {
+
+    font-size  : 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color      : rgb(79, 77, 77);
+}
+
+.portal_menu {
+    -ms-overflow-style: none;
+    overflow          : -moz-scrollbars-none;
+}
+
+
+.portal_content::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+.portal_content {
+    -ms-overflow-style: none;
+    overflow          : -moz-scrollbars-none;
+}
+
+
+// antd table 默认不换行
+.commonTable .ant-table-bordered .ant-table-thead>tr>th,
+.commonTable .ant-table-bordered .ant-table-tbody>tr>td {
+    border-right    : 1px solid #e8e8e8;
+    width           : auto;
+    white-space     : nowrap;
+    overflow        : hidden;
+    text-overflow   : ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
+.marginRihgt10 {
+    margin-right: 10px;
+}
+
+.flex_wrapper {
+    margin    : 10px 15px;
+    min-height: 600px;
+    border    : 1px solid #ccc;
+}
+
+.dropdown {
+    float        : right;
+    padding-right: 10px;
+
+    .user-avatar {
+        width        : 45px;
+        margin-right : 5px;
+        border-radius: 5px;
+    }
+}
+
+.dropdownMenu {
+    box-shadow: 0 5px 5px #ccc;
+    top       : 3px;
+    right     : 5px;
+}
+
+.trigger_box {
+    margin     : 0 10px;
+    float      : left;
+    line-height: 50px;
+}
+
+.portal_bread_crumb {
+    float: left;
+
+    span,
+    a {
+        display    : inline-block;
+        height     : 50px;
+        line-height: 50px;
+    }
+}
+
+// .hamburger_box {
+//     overflow   : hidden;
+//     line-height: 50px;
+//     height     : 50px;
+// }
+
+.portal_main {
+    background: '#fff';
+    min-height: 280;
+    height    : '100vh';
+    overflow-y: 'scroll';
+}
+
+.portal_header {
+    background : '#fff';
+    padding    : 0;
+    line-height: '50px';
+    height     : '50px';
+}
+
+.portal_silider {
+    padding      : 0;
+    height       : 100vh;
+    overflow-y   : scroll;
+    margin-bottom: 0;
+}
+
+header.ant-layout-header {
+    background        : #fff;
+    padding           : 0px;
+    line-height       : 50px;
+    height            : 50px;
+    z-index           : 1000;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+    box-shadow        : 0 1px 4px rgba(0, 21, 41, 0.08);
+}
+
+.ant-layout-sider-children {
+    background: #2c302e;
+}
+
+.menuWrapper {
+    background      : #2c302e !important;
+    background-color: #2c302e !important;
+}
+
+.menuWrapper_inner {
+    margin: 40px;
+    width : 600px;
+    height: 1000px;
+}
+
+.ant-menu-item-selected {
+    background-color: #2c302e !important;
+}
+
+.ant-menu-item-selected span {
+    color: white !important;
+}
+
+.ant-menu-dark,
+.ant-menu-dark .ant-menu-sub {
+    background: #2c302e !important;
+}
+
+.ant-menu-item,
+.ant-menu-submenu-title {
+    margin: 0 !important;
+}
+
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+    box-shadow: 0 0 0 0 !important;
+}
+
+.ant-layout-content {
+    padding: 7px 7px 0 1px !important;
+}
+
+.bordered {
+    padding-bottom: 10px;
+    padding-top   : 10px;
+    border-bottom : 1px solid rgb(228, 219, 219);
+}
+
+//流程表单,把descriptions-title 字体改小
+.ant-descriptions-title {
+    font-size  : 14px !important;
+    font-weight: 410 !important;
+}
+
+.form_group,
+.form_group_detail {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    padding        : 10px 0;
+}
+
+.form_group {
+    width: 100%;
+}
+
+.form_group_detail {
+    width: 50%;
+    float: left;
+}
+
+
+.form_text_info {
+    flex       : 0 0 120px;
+    line-height: 30rpx;
+    text-align : right;
+    color      : #485a6a;
+}
+
+.form_value_node {
+    flex    : 1 1 80%;
+    position: relative;
+}
+
+.errorMsg {
+    position   : absolute;
+    bottom     : -20px;
+    left       : 5px;
+    font-size  : 12px;
+    line-height: 20px;
+    color      : #e4393c;
+}
+
+.formIcon {
+    color: #e4393c;
+    flex : 1 1 10px;
+}
+
+.form_value_node input,
+.form_value_node select,
+.form_value_node .search_input {
+    width        : 100%;
+    outline      : none;
+    border       : 1px solid #ccc;
+    border-radius: 4px;
+    padding      : 0 10px;
+    line-height  : 30px;
+    margin       : 0;
+}
+
+.form_value_node .search_input {
+    border-bottom-right-radius: 0;
+    border-top-right-radius   : 0;
+}
+
+.addmodal .ant-row {
+    height    : auto !important;
+    min-height: 53px;
+}
+
+
+
+#preloading {
+    width       : 0;
+    height      : 0;
+    top         : 0;
+    right       : 0;
+    width       : 0;
+    height      : 0;
+    position    : absolute;
+    border-style: solid;
+    border-width: 0 50px 50px 0;
+    z-index     : 1000000000;
+    border-color: transparent #5d6063 transparent transparent;
+}
+
+
+button.ant-btn-danger {
+
+    border-color    : rgb(211, 91, 22);
+    background-color: rgb(211, 91, 22);
+}
+
+
+.ant-table tbody>tr.ant-table-row-selected>td {
+    background: rgba(63, 62, 62, 0.9) !important;
+    color     : white;
+}
+
+
+
+// 选中的行
+tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected>td.ant-table-cell.ant-table-selection-column>label>span>span {
+    border-bottom   : white !important;
+    border-top      : white !important;
+    border-left     : white !important;
+    border-right    : white !important;
+    background      : white;
+    background-color: rgba(63, 62, 62, 0.1);
+}
+
+.ant-radio-input {
+    color: white !important;
+}
+
+
+.ant-radio-inner::after {
+    background-color: white;
+}
+
+.ant-pagination-item a {
+    display   : block;
+    padding   : 0 6px;
+    color     : rgba(0, 0, 0, 0.85);
+    transition: none;
+}
+
+.ant-pagination-item a:hover {
+    text-decoration: none;
+}
+
+.ant-pagination-item:hover {
+    border-color: #2f3a44;
+    transition  : all 0.3s;
+}
+
+.ant-pagination-item:hover a {
+    color: #2f3a44;
+}
+
+.ant-pagination-item:focus-visible {
+    border-color: #2f3a44;
+    transition  : all 0.3s;
+}
+
+.ant-pagination-item:focus-visible a {
+    color: #2f3a44;
+}
+
+.ant-pagination-item-active {
+    font-weight : 500;
+    background  : #fff;
+    border-color: #2f3a44;
+}
+
+.ant-pagination-item-active a {
+    color: #2f3a44;
+}
+
+.ant-pagination-item-active:hover {
+    border-color: #2f3a44;
+}
+
+.ant-pagination-item-active:focus-visible {
+    border-color: #2f3a44;
+}
+
+.ant-pagination-item-active:hover a {
+    color: #2f3a44;
+}
+
+.ant-pagination-item-active:focus-visible a {
+    color: #2f3a44;
+}
+
+.ant-pagination-jump-prev,
+.ant-pagination-jump-next {
+    outline: 0;
+}
+
+.ant-pagination-jump-prev .ant-pagination-item-container,
+.ant-pagination-jump-next .ant-pagination-item-container {
+    position: relative;
+}
+
+.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon,
+.ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
+    color         : #2f3a44;
+    font-size     : 12px;
+    letter-spacing: -1px;
+    opacity       : 0;
+    transition    : all 0.2s;
+}
+
+
+.ant-pagination-prev:hover button,
+.ant-pagination-next:hover button {
+    border-color: #222223;
+}
+
+.ant-pagination-prev:focus-visible .ant-pagination-item-link,
+.ant-pagination-next:focus-visible .ant-pagination-item-link {
+    color       : #222223;
+    border-color: #222223;
+}
+
+.ant-pagination-prev:hover .ant-pagination-item-link,
+.ant-pagination-next:hover .ant-pagination-item-link {
+    color       : #222223;
+    border-color: #222223;
+}
+
+
+
+
+a {
+    color                       : #222223;
+    text-decoration             : none;
+    background-color            : transparent;
+    outline                     : none;
+    cursor                      : pointer;
+    transition                  : color 0.3s;
+    -webkit-text-decoration-skip: objects;
+}
+
+a:hover {
+    color: #222223;
+}
+
+.ant-input-number-affix-wrapper:hover {
+    border-color      : #ff9040;
+    border-right-width: 1px;
+}
+
+.ant-input-number-affix-wrapper:focus,
+.ant-input-number-affix-wrapper-focused {
+    border-color      : #ff9040;
+    box-shadow        : 0 0 0 2px rgba(24, 144, 255, 0.2);
+    border-right-width: 1px;
+    outline           : 0;
+}
+
+
+.ant-col-12 {
+    height: auto
+}
+
+.addmodal .ant-row {
+    width : 50%;
+    height: 65px;
+    float : left;
+}
+
+
+
+.ant-modal-content {
+    border-radius: 8px;
+}
+
+.ant-btn-primary {
+    background  : #163419;
+    border-color: #163419
+}
+
+.ant-btn-primary:hover {
+    background: #163419;
+}
+
+.ant-btn-primary:hover {
+    background: #163419;
+}
+
+.ant-btn-primary:focus {
+    background: #163419;
+}
+
+.ant-btn-primary:active {
+    background: #163419;
+}
+
+.ant-modal-close {
+    color: #fff
+}
+
+
+.inquiremodal .ant-card-bordered {
+    border: 0px
+}
+
+.inquiremodal .ant-row {
+    width       : 48%;
+    float       : left;
+    margin-right: 2%
+}
+
+.inquiremodal .ant-card-body {
+    padding: 0px
+}
+
+.table_wrapper {
+    padding: '10px'
+}
+
+.rs-uform-content {
+    border: 1px solid white;
+}
+
+.rs-uform-content>div {
+    border: 1px solid white;
+}
+
+.rs-uform-content>div>div {
+    border: 1px solid white;
+}
+
+.rs-uform-content>div>div>div {
+    border: 1px solid white;
+}
+
+.round-button {
+    border-radius: 5px;
+}
+
+/* 统一的边框半径和颜色 */
+.ant-input,
+.ant-select,
+.ant-checkbox-input,
+.ant-checkbox-checked .ant-checkbox-inner,
+.ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.ant-checkbox:hover .ant-checkbox-inner,
+.ant-checkbox-input:focus+.ant-checkbox-inner {
+    border-radius: 4px;
+    border-color : #163419 !important;
+}
+
+/* 鼠标悬停和焦点效果 */
+.ant-checkbox-input:focus,
+.ant-checkbox-input:hover,
+.ant-input:hover,
+.ant-input:focus,
+.ant-select:focus,
+.ant-select:hover,
+.ant-input-number-input.focus,
+.ant-input-number-input.hover {
+    border-color: #163419 !important;
+}
+
+/* 选中状态的背景颜色和边框颜色 */
+.ant-checkbox-checked,
+.ant-checkbox-inner,
+.ant-input-affix-wrapper,
+.ant-input-number-input {
+    border-color: #163419 !important;
+}
+
+textarea,
+textarea.ant-input:hover,
+textarea:focus {
+    border            : 1px solid #DAE2F3 !important;
+    -webkit-box-shadow: none !important;
+    box-shadow        : none !important;
+}
+
+
+.ant-modal-header {
+    background: hsl(126, 41%, 15%);
+    height: 42px;
+    border-radius: 2px 2px 0 0;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); /* 添加阴影效果 */
+    border-bottom: 0.5px solid #0f2512; /* 添加底部边框 */
+}
+
+
+
+.ant-modal-title,
+.ant-modal-close-x {
+    color     : #fff;
+    font-size : 16px;
+    margin-top: -4px;
+}
+
+
+
+.ant-modal-title>div>span {
+    margin-right: 4px;
+}
+
+
+
+
+
+
+.feather-align-justify {
+    color: #163419;
+}

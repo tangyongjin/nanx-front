@@ -1,9 +1,9 @@
 import React from 'react';
 import { Input } from 'antd';
-import { randomString } from '../../../utils/tools';
+import { randomString } from '@/utils/tools';
 import LoginService from '../LoginService';
-// import NanxArt from './login.jpeg';
 import { inject, observer } from 'mobx-react';
+import { LoadingOutlined } from '@ant-design/icons';
 import './login.css';
 
 @inject('NavigationStore')
@@ -57,6 +57,7 @@ export default class Login extends React.Component {
                         <h3>数据库:NANX(12345678/12345678)</h3>
                         <br />
                     </div>
+
                     <div style={{ height: '440px' }} className="txt-left-side">
                         <form action="#" method="post">
                             <div className="form-left-to-w3l">
@@ -88,9 +89,24 @@ export default class Login extends React.Component {
                                 </button>
                             </div>
                         </form>
-                        <div className="w3layouts_more-buttn">
-                            <h3>Low Code App Builder</h3>
+                        <LoadingOutlined
+                            id="login_loading"
+                            style={{ display: 'none', fontSize: '30px', color: '#225e04' }}
+                        />
+                        <div id="login_msg" style={{ marginTop: '4px', display: 'none' }}>
+                            登陆失败，请检查手机号和密码
                         </div>
+                    </div>
+
+                    <div
+                        style={{
+                            marginTop: '40px',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}>
+                        <h2>Low Code App Builder</h2>
                     </div>
                 </div>
             </div>

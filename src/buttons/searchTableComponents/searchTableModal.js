@@ -8,7 +8,7 @@ export default class SearchTableModal extends React.Component {
         super(props);
         this.init = this.init.bind(this);
         this.state = {
-            visible: false
+            open: false
         };
     }
 
@@ -18,13 +18,13 @@ export default class SearchTableModal extends React.Component {
 
     onCancelHandle = () => {
         this.setState({
-            visible: false
+            open: false
         });
     };
 
     showModal() {
         this.setState({
-            visible: true
+            open: true
         });
     }
 
@@ -41,14 +41,14 @@ export default class SearchTableModal extends React.Component {
                     数据检索
                 </div>
             ),
-            bodyStyle: {
+            styles: {
                 height: 'auto',
                 overflow: 'auto',
                 bottom: 0
             },
             cancelText: '取消',
             okText: '确定',
-            visible: this.state.visible,
+            open: this.state.open,
             onOk: this.searchQuery,
             onCancel: () => this.onCancelHandle()
         };
