@@ -20,21 +20,36 @@ export default class LoginService {
             method: 'POST'
         };
 
-        let res = await api.user.loginMobile(params);
-        console.log('res: ', res);
+        // let res = await api.user.loginMobile(params);
+        // .then(res => {
+        //     console.log(res)
+        //   }).catch(err => {
+        //     console.log(err)
+        //   });
 
-        if (res.code == 401) {
-            document.getElementById('login_loading').style.display = 'none';
-            message.error('登陆失败，请检查手机号和密码！', 2.5);
-            return;
-        }
+        await api.user
+            .loginMobile(params)
+            .then(async (res) => {
+                console.log(res);
 
-        if (res.code == 200) {
-            await UserStore.setToken(res.token);
-            await NavigationStore.saveSessionBadge(res.info);
-            await UserStore.setUserProfile(res.profile);
-            await this.afterLoginSuccess(res);
-        }
+                if (res.code == 401) {
+                    document.getElementById('login_loading').style.display = 'none';
+                    message.error('登陆失败，请检查手机号和密码！', 2.5);
+                    return;
+                }
+
+                if (res.code == 200) {
+                    await UserStore.setToken(res.token);
+                    await NavigationStore.saveSessionBadge(res.info);
+                    await UserStore.setUserProfile(res.profile);
+                    await this.afterLoginSuccess(res);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        // console.log('登录返回: ', res);
     }
 
     afterLoginSuccess = async () => {

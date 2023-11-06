@@ -2,17 +2,13 @@
 // colorInfo: '#225e04',
 
 const themeJson = {
-    hashed: false,
     token: {
-        // colorPrimary: '#225e04',
-        // colorInfo: '#225e04',
-
         colorPrimary: '#3B3B47',
         colorInfo: '#3B3B47',
-
         colorTextBase: '#000000ef',
         borderRadius: 3,
-        headerPadding: '150px'
+        headerPadding: '150px',
+        controlWidth: 312
     },
 
     components: {
@@ -24,6 +20,8 @@ const themeJson = {
         },
 
         InputNumber: {
+            controlWidth: 312,
+            algorithm: false,
             colorPrimaryHover: 'red',
             hoverBorderColor: 'rgb(82, 196, 26)',
             activeBorderColor: 'rgb(82, 196, 26)',

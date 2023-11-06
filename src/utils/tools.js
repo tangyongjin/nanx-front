@@ -116,22 +116,22 @@ export function color() {}
 
 export function shape() {}
 
-export function treeFunc(data) {
-    data.forEach(function (item) {
-        delete item.children;
-    });
-    var map = {};
-    data.forEach(function (item) {
-        map[item.key] = item;
-    });
-    var val = [];
-    data.forEach(function (item) {
-        var parent = map[item.parent_id];
-        if (parent) {
-            (parent.children || (parent.children = [])).push(item);
-        } else {
-            val.push(item);
-        }
-    });
-    return val;
-}
+// export function treeFunc(data) {
+//     data.forEach(function (item) {
+//         delete item.children;
+//     });
+//     var map = {};
+//     data.forEach(function (item) {
+//         map[item.key] = item;
+//     });
+//     var val = [];
+//     data.forEach(function (item) {
+//         var parent = map[item.parent_id];
+//         if (parent) {
+//             (parent.children || (parent.children = [])).push(item);
+//         } else {
+//             val.push(item);
+//         }
+//     });
+//     return val;
+// }

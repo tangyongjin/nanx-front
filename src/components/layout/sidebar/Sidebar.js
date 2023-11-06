@@ -36,7 +36,7 @@ export default class Sidebar extends React.Component {
             return;
         }
 
-        this.NavigationStore.setBreadcrumb(menuClicked);
+        // this.NavigationStore.setBreadcrumb(menuClicked);
         this.NavigationStore.setCurrentMenu(menuClicked);
         this.NavigationStore.setSelectedKeys(menuClicked.key);
         hashHistory.push({

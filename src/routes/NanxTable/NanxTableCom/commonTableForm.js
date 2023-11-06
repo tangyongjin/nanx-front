@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import '@/components/UformExtends';
 import { toJS } from 'mobx';
 import { SchemaForm, createFormActions } from '@uform/antd';
-
+import 'antd/dist/reset.css';
 const actions = createFormActions();
 
 const CommonTableForm = (props) => {
@@ -43,6 +43,10 @@ const CommonTableForm = (props) => {
 
                             for (let key in newitem.properties) {
                                 setFieldState(key, (item) => {
+                                    // item.style = { width: '1400' };
+                                    item['x-props'] = { style: { width: '480' } };
+
+                                    console.log(item.props);
                                     item.props['x-props'].nnstore = props.NanxTableStore;
                                     item.props['x-props'].datagrid_code = props.NanxTableStore.datagrid_code;
                                     item.props['x-props'].actions = actions;
