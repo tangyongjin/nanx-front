@@ -30,7 +30,6 @@ const CommonTableForm = (props) => {
 
                     $('onFormInit').subscribe(async () => {
                         hide('id');
-                        hide('transactid');
                         setRawData({
                             value:
                                 props.NanxTableStore.table_action == 'edit'
@@ -43,10 +42,6 @@ const CommonTableForm = (props) => {
 
                             for (let key in newitem.properties) {
                                 setFieldState(key, (item) => {
-                                    // item.style = { width: '1400' };
-                                    item['x-props'] = { style: { width: '480' } };
-
-                                    console.log(item.props);
                                     item.props['x-props'].nnstore = props.NanxTableStore;
                                     item.props['x-props'].datagrid_code = props.NanxTableStore.datagrid_code;
                                     item.props['x-props'].actions = actions;

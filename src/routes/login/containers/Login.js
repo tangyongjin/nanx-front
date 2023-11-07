@@ -4,7 +4,7 @@ import { randomString } from '@/utils/tools';
 import LoginService from '../LoginService';
 import { inject, observer } from 'mobx-react';
 import { LoadingOutlined } from '@ant-design/icons';
-import './login.css';
+import '@/styles/login.css';
 
 @inject('NavigationStore')
 @observer
@@ -44,21 +44,11 @@ export default class Login extends React.Component {
         return (
             <div className="auth-bg">
                 <div className="w3layouts-two-grids2">
-                    <div
-                        style={{
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            height: '140px'
-                        }}
-                        className="text-left-side">
+                    <div id="sys-hero1">
                         <h2>[Nanx+] AWS Management System</h2>
                         <h3>数据库:NANX(12345678/12345678)</h3>
-                        <br />
                     </div>
-
-                    <div style={{ height: '440px' }} className="txt-left-side">
+                    <div className="text-left-side">
                         <form action="#" method="post">
                             <div className="form-left-to-w3l">
                                 <div className="clear">用户名</div>
@@ -93,20 +83,13 @@ export default class Login extends React.Component {
                             id="login_loading"
                             style={{ display: 'none', fontSize: '30px', color: '#225e04' }}
                         />
-                        <div id="login_msg" style={{ marginTop: '4px', display: 'none' }}>
+                        <div id="login_msg" style={{ color: '#225e04', marginTop: '4px', display: 'none' }}>
                             登陆失败，请检查手机号和密码
                         </div>
                     </div>
 
-                    <div
-                        style={{
-                            marginTop: '40px',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            display: 'flex',
-                            flexDirection: 'column'
-                        }}>
-                        <h2>Low Code App Builder</h2>
+                    <div id="sys-hero2">
+                        <h3>Low Code App Builder</h3>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from './sidebar/Sidebar';
+import LeftMenu from './leftMenu/leftMenu';
 import Navbar from './navbar//Navbar';
 import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
@@ -16,9 +16,9 @@ export default class PortalLayout extends React.Component {
 
     render() {
         return (
-            <Layout style={{ height: '100vh' }}>
+            <Layout style={{ minHeight: '100vh', minWidth: '100vh' }}>
                 <Sider collapsed={this.store.isCollapse}>
-                    <Sidebar
+                    <LeftMenu
                         collapsed={this.store.isCollapse}
                         className="portal_menu"
                         menuList={this.store.menuList}
@@ -26,16 +26,14 @@ export default class PortalLayout extends React.Component {
                         width={300}
                     />
                 </Sider>
-                <Layout>
+                <Layout style={{ minHeight: '100vh', minWidth: '100vh' }}>
                     <Header>
                         <Navbar />
                     </Header>
                     <Content
                         key={this.store.updateKey}
                         style={{
-                            minHeight: 280,
-                            marginLeft: '4px',
-                            height: '100vh'
+                            marginLeft: '4px'
                         }}>
                         {this.props.children}
                     </Content>

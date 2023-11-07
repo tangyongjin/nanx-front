@@ -11,6 +11,7 @@ export default class LoginService {
     }
 
     async loginMobile(mobile, password, transaction_id) {
+        document.getElementById('login_msg').style.display = 'none';
         document.getElementById('login_loading').style.display = 'block';
 
         sessionStorage.removeItem('id_token');
@@ -20,13 +21,6 @@ export default class LoginService {
             method: 'POST'
         };
 
-        // let res = await api.user.loginMobile(params);
-        // .then(res => {
-        //     console.log(res)
-        //   }).catch(err => {
-        //     console.log(err)
-        //   });
-
         await api.user
             .loginMobile(params)
             .then(async (res) => {
@@ -34,7 +28,7 @@ export default class LoginService {
 
                 if (res.code == 401) {
                     document.getElementById('login_loading').style.display = 'none';
-                    message.error('登陆失败，请检查手机号和密码！', 2.5);
+                    document.getElementById('login_msg').style.display = 'block';
                     return;
                 }
 

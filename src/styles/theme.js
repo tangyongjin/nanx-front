@@ -68,7 +68,9 @@ const themeJson = {
             defaultShadow: '0px 0px 0px 0px #ffffff'
         },
         Table: {
-            borderColor: '#b3bab0'
+            borderColor: '#b3bab0',
+            rowSelectedBg: '#748A3D',
+            rowSelectedHoverBg: '#748A3D'
         }
     }
 };

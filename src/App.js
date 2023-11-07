@@ -8,6 +8,8 @@ import zhCN from 'antd/es/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import { routes } from './routes/routes.js';
+import '@/styles/index.scss';
+
 moment.locale('zh-cn');
 
 //检查网络是否链接

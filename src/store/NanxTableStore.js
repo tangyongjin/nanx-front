@@ -1,7 +1,6 @@
 import { observable, action, autorun } from 'mobx';
 import CellRender from '@/routes/NanxTable/NanxTableCom/cellRender';
 import getTextWidth from '@/routes/NanxTable/NanxTableCom/commonTableTextTool';
-import sorter from '@/routes/NanxTable/NanxTableCom//sorter';
 import listDataParams from '@/routes/NanxTable/NanxTableCom/listDataParams';
 import api from '@/api/api';
 import { toJS } from 'mobx';
@@ -29,8 +28,11 @@ class _NanxTableStore {
     @observable tips = null;
     @observable curd = {};
     @observable tableButtons = [];
+
+    // 原始配置的 clos
+    @observable tableColumnConfig = [];
+    // 给 Table用的 cols
     @observable tableColumns = [];
-    @observable rawTableColumns = [];
 
     @observable table_action = null;
     @observable fixed_query_cfg = null;
@@ -61,12 +63,7 @@ class _NanxTableStore {
         this.layoutcfg = null;
         this.curd = {};
         this.tableColumnConfig = [];
-        this.query_cfg = null;
-    };
-
-    @action clearPaginationStore = () => {
-        this.setTotal(0);
-        this.setCurrentPage(1);
+        this.search_query_cfg = [];
     };
 
     @action setDataGridCode = (DataGridCode) => (this.datagrid_code = DataGridCode);
@@ -95,54 +92,8 @@ class _NanxTableStore {
     @action setDataSource = (dataSource) => (this.dataSource = dataSource);
     @action setTotal = (total) => (this.total = total);
 
-    @action setTableColumnConfig = (rawCols) => (this.tableColumnConfig = rawCols);
-    @action setTableColumns = (cols) => (this.tableColumns = cols);
-
-    @action setFormCfg = (formCfg) => (this.formCfg = formCfg);
-    @action setReferinfo = (referinfo) => (this.referinfo = referinfo);
-    @action setlayoutCfg = (layoutcfg) => (this.layoutcfg = layoutcfg);
-    @action setTips = (tips) => (this.tips = tips);
-    @action setTableButtons = (json) => (this.tableButtons = json);
-    @action setCurd = (curd) => (this.curd = curd);
-    @action setTableWidth = (table_width) => (this.table_width = table_width);
-
-    @action setLazyButtonUsedCom = (com) => {
-        console.log('设置 lazyButtonUsedCom 组件................');
-        console.log(com);
-        this.lazyButtonUsedCom = com;
-    };
-
-    @action setButtonUsedCom = async (com) => {
-        console.log('设置 ButtonUsedCom 组件................');
-        console.log(com);
-        this.ButtonUsedCom = com;
-    };
-
-    @action fetchDataGridCfg = async () => {
-        let params = {
-            data: {
-                DataGridCode: this.datagrid_code,
-                role: sessionStorage.getItem('role_code'),
-                user: sessionStorage.getItem('user')
-            },
-            method: 'POST'
-        };
-
-        let res = await api.dataGrid.fetchDataGridCfg(params);
-        if (res.code == 200) {
-            this.setTableColumnConfig(toJS(res.data.tableColumnConfig));
-            this.setFormCfg(res.data.formcfg);
-            this.setReferinfo(res.data.referinfo);
-            this.setlayoutCfg(res.data.layoutcfg);
-            this.setTips(res.data.tips);
-            this.setTableButtons(res.data.buttons);
-            this.setCurd(res.data.curd);
-            this.setTableWidth(res.data.table_width);
-            this.setFixedQueryCfg(res.data.fixed_query_cfg);
-        }
-    };
-
-    @action getTableColumns = () => {
+    @action setTableColumnConfig = async (rawCols) => {
+        this.tableColumnConfig = rawCols;
         let hideColumns = [];
         let columns = [];
 
@@ -181,7 +132,57 @@ class _NanxTableStore {
         });
 
         this.setTableColumns(columns);
-        return columns;
+    };
+
+    @action getTableColumns = () => {};
+    @action setTableColumns = (cols) => (this.tableColumns = cols);
+
+    @action setFormCfg = (formCfg) => (this.formCfg = formCfg);
+
+    // @action setFormCfg = (formCfg) => (this.formCfg = formCfg.properties.dropdown_group_0);
+
+    @action setReferinfo = (referinfo) => (this.referinfo = referinfo);
+    @action setlayoutCfg = (layoutcfg) => (this.layoutcfg = layoutcfg);
+    @action setTips = (tips) => (this.tips = tips);
+    @action setTableButtons = (json) => (this.tableButtons = json);
+    @action setCurd = (curd) => (this.curd = curd);
+    @action setTableWidth = (table_width) => (this.table_width = table_width);
+
+    @action setLazyButtonUsedCom = (com) => {
+        console.log('设置 lazyButtonUsedCom 组件................');
+        console.log(com);
+        this.lazyButtonUsedCom = com;
+    };
+
+    @action setButtonUsedCom = async (com) => {
+        console.log('设置 ButtonUsedCom 组件................');
+        console.log(com);
+        this.ButtonUsedCom = com;
+    };
+
+    @action fetchDataGridCfg = async () => {
+        let params = {
+            data: {
+                DataGridCode: this.datagrid_code,
+                role: sessionStorage.getItem('role_code'),
+                user: sessionStorage.getItem('user')
+            },
+            method: 'POST'
+        };
+
+        let res = await api.dataGrid.fetchDataGridCfg(params);
+        if (res.code == 200) {
+            this.setTableColumnConfig(toJS(res.data.tableColumnConfig));
+
+            this.setFormCfg(res.data.formcfg);
+            this.setReferinfo(res.data.referinfo);
+            this.setlayoutCfg(res.data.layoutcfg);
+            this.setTips(res.data.tips);
+            this.setTableButtons(res.data.buttons);
+            this.setCurd(res.data.curd);
+            this.setTableWidth(res.data.table_width);
+            this.setFixedQueryCfg(res.data.fixed_query_cfg);
+        }
     };
 
     @action listData = async () => {
@@ -198,7 +199,6 @@ class _NanxTableStore {
 
         let json = await api.curd.listData(params);
         if (json.code == 200) {
-            this.getTableColumns();
             this.setDataSource(json.data);
             this.setTotal(json.total);
             this.rowSelectChange([], []);
@@ -206,28 +206,9 @@ class _NanxTableStore {
     };
 
     @action onShowSizeChange = async (current, pageSize) => {
-        await this.setCurrentPage(current);
+        await this.setCurrentPage(1);
         await this.setPageSize(pageSize);
         await this.listData();
-    };
-
-    getPageNation = async () => {
-        let pg = {
-            showSizeChanger: true,
-            onShowSizeChange: this.onShowSizeChange,
-            total: this.total,
-            showLessItems: true,
-            defaultCurrent: this.currentPage,
-            current: this.currentPage,
-            pageSize: this.pageSize,
-            showQuickJumper: true,
-            showTotal: (count) => {
-                let pageNum = Math.ceil(count / this.pageSize);
-                return `共${pageNum}页/${count}条数据`;
-            },
-            onChange: (currentPage) => this.setCurrentPage(currentPage)
-        };
-        return pg;
     };
 }
 const NanxTableStore = new _NanxTableStore();

@@ -1,3 +1,5 @@
+// import { SchemaForm, SchemaMarkupField as Field, useSchemaProps } from '@formily/antd' // 或者 @formily/next
+
 import { Input } from 'antd';
 import { registerFormFields, connect } from '@uform/react';
 import Assocselect from './assocSelect';
@@ -24,7 +26,7 @@ registerFormFields({
     Assocselect: connect()((props) => <Assocselect {...props} value={props.value || ''} />),
     text_area: connect()((props) => <Input.TextArea {...props} value={props.value || ''} />),
 
-    tableEditor: connect()((props) => <CommonTable {...props} value={''} />),
+    tableEditor: connect()((props) => <CommonTable {...props} value={'aaaa'} />),
 
     Dropdownlist: connect()((props) => (
         <Dropdownlist {...props} getComponentValue={props.onChange} value={props.value || ''} />

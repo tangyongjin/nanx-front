@@ -7,7 +7,7 @@ import { hashHistory } from 'react-router';
 
 @inject('NavigationStore')
 @observer
-export default class Sidebar extends React.Component {
+export default class LeftMenu extends React.Component {
     constructor(props) {
         super();
         this.state = {

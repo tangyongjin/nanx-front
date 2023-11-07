@@ -13,8 +13,6 @@ export default class NanxTable extends React.Component {
     }
 
     async componentDidMount() {
-        await this.tbStore.resetTableStore();
-        await this.tbStore.clearPaginationStore();
         await this.tbStore.setDataGridCode(this.props.datagrid_code);
         await this.refreshTable();
     }
@@ -22,7 +20,7 @@ export default class NanxTable extends React.Component {
     refreshTable = async () => {
         await this.tbStore.resetTableStore();
         await this.tbStore.fetchDataGridCfg();
-        await this.tbStore.setSearchQueryConfig([]);
+        // await this.tbStore.setSearchQueryConfig([]);
         await this.tbStore.listData();
     };
 
@@ -60,19 +58,18 @@ export default class NanxTable extends React.Component {
             },
 
             pagination: {
-                showSizeChanger: true,
-                onShowSizeChange: this.tbStore.onShowSizeChange,
                 total: this.tbStore.total,
-                showLessItems: true,
-                defaultCurrent: this.tbStore.currentPage,
+                defaultCurrent: 1,
                 current: this.tbStore.currentPage,
                 pageSize: this.tbStore.pageSize,
                 showQuickJumper: true,
-                showTotal: (count) => {
-                    let pageNum = Math.ceil(count / this.tbStore.pageSize);
-                    return `共${pageNum}页/${count}条数据`;
+                showTotal: () => {
+                    let pageNum = Math.ceil(this.tbStore.total / this.tbStore.pageSize);
+                    return `<共${pageNum}页/${this.tbStore.total}条数据`;
                 },
-                onChange: (currentPage) => this.tbStore.setCurrentPage(currentPage)
+                showSizeChanger: true,
+                onShowSizeChange: this.tbStore.onShowSizeChange,
+                onChange: this.tbStore.setCurrentPage
             }
         };
     }
