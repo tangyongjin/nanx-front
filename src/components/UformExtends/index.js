@@ -42,5 +42,10 @@ registerFormFields({
     Wangeditor: connect()((props) => <Wangeditor {...props} value={props.value || ''} />),
     GetRadio: connect()((props) => <GetRadio {...props} value={props.value || ''} />),
     Assocselect: connect()((props) => <Assocselect {...props} value={props.value || ''} />),
-    DateEditor: connect()((props) => <DateEditor {...props} value={props.value || '1999-11-11'} />)
+    // DateEditor: connect()((props) => <DateEditor {...props} value={props.value} />)
+
+    DateEditor: connect()((props) => {
+        console.log('插件:', props); // 在这里输出 props 的内容
+        return <DateEditor {...props} value={props.value} />;
+    })
 });

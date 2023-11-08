@@ -45,8 +45,8 @@ const CommonTableForm = (props) => {
                                 item.props['x-props'].datagrid_code = props.NanxTableStore.datagrid_code;
                                 item.props['x-props'].actions = actions;
                                 item.props['x-props'].props_tag = '💘💘';
-                                item.props['x-props'].value = '2023-12-11';
-                                item.props['x-props'].defaultValue = '2023-12-11';
+                                // 不知道为何无法取到日期型的数据的值
+                                item.props['x-props'].d_value = props.NanxTableStore.selectedRows[0][key];
                             });
                         }
                     });
