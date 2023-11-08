@@ -47,5 +47,11 @@ registerFormFields({
     DateEditor: connect()((props) => {
         console.log('插件:', props); // 在这里输出 props 的内容
         return <DateEditor {...props} value={props.value} />;
+    }),
+
+    // hack  数据库 date 型字段
+    date: connect()((props) => {
+        console.log('插件:', props); // 在这里输出 props 的内容
+        return <DateEditor {...props} value={props.value} />;
     })
 });

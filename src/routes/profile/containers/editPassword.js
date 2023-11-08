@@ -1,4 +1,3 @@
-import '@ant-design/compatible/assets/index.css';
 import { Input, message, Form, Button } from 'antd';
 import React from 'react';
 import api from '@/api/api';

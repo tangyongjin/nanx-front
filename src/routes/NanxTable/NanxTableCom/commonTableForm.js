@@ -4,7 +4,13 @@ import '@/components/UformExtends';
 import { toJS } from 'mobx';
 import { SchemaForm, createFormActions } from '@uform/antd';
 import 'antd/dist/reset.css';
+
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { DatePicker, Space } from 'antd';
+
 const actions = createFormActions();
+const dateFormat = 'YYYY-MM-DD';
 
 const CommonTableForm = (props) => {
     let formCfg = toJS(props.NanxTableStore.formCfg);
@@ -67,6 +73,9 @@ const CommonTableForm = (props) => {
                     </Button>
                 </div>
             </SchemaForm>
+             
+          
+            
         </div>
     );
 };

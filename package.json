@@ -3,7 +3,6 @@
     "version": "2.0.0",
     "private": true,
     "dependencies": {
-        "@ant-design/compatible": "1.0.0",
         "@ant-design/cssinjs": "^1.17.2",
         "@ant-design/icons": "^5.2.6",
         "@babel/core": "^7.16.0",

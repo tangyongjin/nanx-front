@@ -1,6 +1,4 @@
 import React from 'react';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
 import { Modal, message, Select } from 'antd';
 import api from '@/api/api';
 import '@/components/UformExtends';

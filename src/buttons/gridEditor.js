@@ -1,7 +1,5 @@
 import React from 'react';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
-import { Row, Col, Input, Card, Select, Button, message, AutoComplete, Switch } from 'antd';
+import { Row, Col, Input, Card, Select, Form, Button, message, AutoComplete, Switch } from 'antd';
 import api from '@/api/api';
 import { observer, inject } from 'mobx-react';
 
@@ -302,4 +300,4 @@ class GridEditor extends React.Component {
     }
 }
 
-export default Form.create()(GridEditor);
+export default GridEditor;

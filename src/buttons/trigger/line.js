@@ -1,6 +1,4 @@
 import React from 'react';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
 import { Select, Row, Col, Button } from 'antd';
 import { inject, observer } from 'mobx-react';
 
@@ -117,4 +115,4 @@ class Line extends React.Component {
     }
 }
 
-export default Form.create()(Line);
+export default Line;
