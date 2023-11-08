@@ -8,6 +8,7 @@ import { observer, inject } from 'mobx-react';
 export default class AssocSelect extends React.Component {
     constructor(props) {
         super(props);
+        console.log(' 💘AssocSelect💘', props);
         this.state = {
             optionList: [],
             loading: false
@@ -24,8 +25,7 @@ export default class AssocSelect extends React.Component {
         //把自己(AssosSelect注册到 triggers )
 
         this.props.TriggerStore.registerTrigger(this);
-        let groups = this.props.NanxTableStore.getDropdownGroups();
-        console.log('groups: ', groups);
+        let groups = this.props.NanxTableStore.getDropdownLevelInfo();
 
         if (this.props.query_cfg.level == 1 && this.props.NanxTableStore.table_action === 'add') {
             await this.getOptionList(this.props.query_cfg, null, this);

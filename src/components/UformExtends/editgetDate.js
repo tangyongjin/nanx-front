@@ -32,7 +32,6 @@ export default class GetDate extends React.Component {
     };
     render() {
         return (
-            // <div style={{width:'32%'}}>
             <DatePicker
                 style={{ width: '32%' }}
                 value={moment(this.state.datevalue)}
@@ -40,7 +39,6 @@ export default class GetDate extends React.Component {
                 onChange={this.formChange}
                 placeholder="请选择时间"
             />
-            // </div>
         );
     }
 }

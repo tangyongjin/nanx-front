@@ -7,8 +7,7 @@ const themeJson = {
         colorInfo: '#3B3B47',
         colorTextBase: '#000000ef',
         borderRadius: 3,
-        headerPadding: '150px',
-        controlWidth: 312
+        headerPadding: '150px'
     },
 
     components: {

@@ -1,45 +1,16 @@
+//
+
 import React from 'react';
-import { Table } from 'antd';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { DatePicker, Space } from 'antd';
+dayjs.extend(customParseFormat);
+const dateFormat = 'YYYY-MM-DD';
 
-export default class home extends React.Component {
-    render() {
-        const dataSource = [
-            {
-                key: '1',
-                name: '胡彦斌',
-                age: 32,
-                address: '西湖区湖底公园1号'
-            },
-            {
-                key: '2',
-                name: '胡彦祖',
-                age: 42,
-                address: '西湖区湖底公园1号'
-            }
-        ];
+const Home = () => (
+    <Space direction="vertical" size={12}>
+        <DatePicker defaultValue={dayjs('2015-12-12', dateFormat)} format={dateFormat} />
+    </Space>
+);
 
-        const columns = [
-            {
-                title: '姓名',
-                dataIndex: 'name',
-                key: 'name'
-            },
-            {
-                title: '年龄',
-                dataIndex: 'age',
-                key: 'age'
-            },
-            {
-                title: '住址',
-                dataIndex: 'address',
-                key: 'address'
-            }
-        ];
-
-        return (
-            <div style={{ margin: '90px' }}>
-                <Table dataSource={dataSource} columns={columns} />
-            </div>
-        );
-    }
-}
+export default Home;

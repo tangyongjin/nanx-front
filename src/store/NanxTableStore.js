@@ -137,12 +137,7 @@ class _NanxTableStore {
     @action getTableColumns = () => {};
     @action setTableColumns = (cols) => (this.tableColumns = cols);
 
-    // @action setFormCfg = (formCfg) => (this.formCfg = formCfg);
-
-    @action setFormCfg = (formCfg) => {
-        console.log('formCfg: ', formCfg);
-        this.formCfg = formCfg.properties.dropdown_group_0;
-    };
+    @action setFormCfg = (formCfg) => (this.formCfg = formCfg);
 
     @action setReferinfo = (referinfo) => (this.referinfo = referinfo);
     @action setlayoutCfg = (layoutcfg) => (this.layoutcfg = layoutcfg);
@@ -214,18 +209,23 @@ class _NanxTableStore {
         await this.listData();
     };
 
-    getDropdownGroups() {
-        console.log('schema: ', this.formCfg);
-
+    /**
+     * 返回某个下拉组的level级别,来控制
+     * 2级别联动,还是3级联动,还是4级联动,etc
+     *
+     * return :
+     *
+     * [ TriggerGrp1:1,  TriggerGrp2:3 ]
+     *
+     */
+    getDropdownLevelInfo() {
         let x_group = [];
-
         for (let key in this.formCfg.properties) {
             let item = this.formCfg.properties[key];
             x_group.push(item['x-props']?.query_cfg?.trigger_group_uuid);
         }
 
         let summary = {};
-
         x_group.forEach((item) => {
             if (summary[item]) {
                 summary[item] += 1; // Increment the count if the element already exists in the summary
@@ -233,11 +233,10 @@ class _NanxTableStore {
                 summary[item] = 1; // Initialize the count to 1 if it doesn't exist in the summary
             }
         });
-        console.log('x_group: ', x_group);
-        console.log('summary: ', summary);
         return summary;
     }
 }
+
 const NanxTableStore = new _NanxTableStore();
 
 export default NanxTableStore;

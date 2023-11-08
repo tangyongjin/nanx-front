@@ -5,12 +5,12 @@ import store from './store';
 import { ConfigProvider, message } from 'antd';
 import themeJson from '@/styles/theme';
 import zhCN from 'antd/es/locale/zh_CN';
-import moment from 'moment';
-import 'moment/locale/zh-cn';
+// import moment from 'moment';
+// import 'moment/locale/zh-cn';
 import { routes } from './routes/routes.js';
 import '@/styles/index.scss';
 
-moment.locale('zh-cn');
+// moment.locale('zh-cn');
 
 //检查网络是否链接
 if (navigator.onLine) {
@@ -21,7 +21,7 @@ if (navigator.onLine) {
 export default class App extends React.Component {
     render() {
         return (
-            <ConfigProvider locale={zhCN} theme={themeJson}>
+            <ConfigProvider theme={themeJson}>
                 <Provider {...store}>
                     <Router history={hashHistory} routes={routes} />
                 </Provider>

@@ -8,14 +8,14 @@ const actions = createFormActions();
 
 const CommonTableForm = (props) => {
     let formCfg = toJS(props.NanxTableStore.formCfg);
-    console.log('formCfg: ', formCfg);
-
-    let layoutcfg = props.layoutcfg;
     const [rawData, setRawData] = useState({ editable: props.editable });
 
     if (!formCfg) {
         return null;
     }
+
+    console.log('💚💚💚', props.NanxTableStore.selectedRows[0]);
+
     return (
         <div style={{ marginTop: '20px' }}>
             <SchemaForm
@@ -32,18 +32,21 @@ const CommonTableForm = (props) => {
 
                     $('onFormInit').subscribe(async () => {
                         hide('id');
-                        setRawData({
-                            value:
-                                props.NanxTableStore.table_action == 'edit'
-                                    ? { ...props.NanxTableStore.selectedRows[0] }
-                                    : {}
-                        });
+
+                        if (props.NanxTableStore.table_action == 'edit') {
+                            setRawData({ value: { ...props.NanxTableStore.selectedRows[0] } });
+                        } else {
+                            setRawData({ value: {} });
+                        }
 
                         for (let key in formCfg.properties) {
                             setFieldState(key, (item) => {
                                 item.props['x-props'].nnstore = props.NanxTableStore;
                                 item.props['x-props'].datagrid_code = props.NanxTableStore.datagrid_code;
                                 item.props['x-props'].actions = actions;
+                                item.props['x-props'].props_tag = '💘💘';
+                                item.props['x-props'].value = '2023-12-11';
+                                item.props['x-props'].defaultValue = '2023-12-11';
                             });
                         }
                     });

@@ -5,7 +5,6 @@ import CategoryDropDown from './categoryDropDown';
 import CheckBox from './checkbox';
 import CommonTable from '@/routes/NanxTable/NanxTableCom/NanxTable';
 import Dropdownlist from './dropdownList';
-import EditgetDate from './editgetDate';
 import Fileuploader from './fileuploader';
 import GetActionCode from './getActionCode.js';
 import GetDate from './getDate';
@@ -16,12 +15,12 @@ import GetRadio from './getRadio';
 import React from 'react';
 import Wangeditor from './wangeditor';
 import YesOrNo from './yesOrNo';
+import DateEditor from './DateEditor';
 
 registerFormFields({
     YesOrNo: connect()((props) => <YesOrNo {...props} getComponentValue={props.onChange} value={props.value || ''} />),
     fileuploader: connect()((props) => <Fileuploader {...props} value={props.value || ''} />),
 
-    Assocselect: connect()((props) => <Assocselect {...props} value={props.value || ''} />),
     text_area: connect()((props) => <Input.TextArea {...props} value={props.value || ''} />),
 
     tableEditor: connect()((props) => <CommonTable {...props} value={''} />),
@@ -42,5 +41,6 @@ registerFormFields({
     CheckBox: connect()((props) => <CheckBox {...props} value={props.value || ''} />),
     Wangeditor: connect()((props) => <Wangeditor {...props} value={props.value || ''} />),
     GetRadio: connect()((props) => <GetRadio {...props} value={props.value || ''} />),
-    EditgetDate: connect()((props) => <EditgetDate {...props} value={props.value || ''} />)
+    Assocselect: connect()((props) => <Assocselect {...props} value={props.value || ''} />),
+    DateEditor: connect()((props) => <DateEditor {...props} value={props.value || '1999-11-11'} />)
 });

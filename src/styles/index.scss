@@ -7,12 +7,12 @@ body {
 
 
 .ant-modal-title {
-    color: white !important;
+    color  : white !important;
     padding: 12px 0 0 12px !important;
 }
 
 .ant-modal-close-icon {
-    color: white;
+    color : white;
     margin: -10px -20px 0 0 !important;
 }
 
@@ -23,33 +23,38 @@ div.ant-modal-title>div>span {
 
 
 .ant-modal-header {
-    color: #fff !important;
-    background: hsl(126, 41%, 15%) !important;
-    height: 42px !important;
+    color        : #fff !important;
+    background   : hsl(126, 41%, 15%) !important;
+    height       : 42px !important;
     border-radius: 2px 2px 0 0;
-    margin: -20px -24px 0 -24px !important;
-    box-sizing: border-box;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    margin       : -20px -24px 0 -24px !important;
+    box-sizing   : border-box;
+    box-shadow   : 0px 3px 6px rgba(0, 0, 0, 0.16);
     /* 添加阴影效果 */
     border-bottom: 0.5px solid #0f2512;
     /* 添加底部边框 */
 }
 
 .table_wrapper {
-    padding: 4px;
+    padding         : 4px;
     background-color: white !important;
-    background:white !important;
-    height: auto !important;
+    background      : white !important;
+    height          : auto !important;
     // overflow: scroll;
-    min-width: 100vh
-
-
+    min-width       : 100vh
 }
 
 
 .ant-table-wrapper::after {
-    
-    color:red ;
+
+    color           : red;
     background-color: white;
-    background:white;
+    background      : white;
+}
+
+.ant-select,
+.ant-input-number-affix-wrapper,
+.ant-input-number,
+.ant-input-number-input-wrap {
+    width: 346px !important;
 }

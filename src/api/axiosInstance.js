@@ -21,7 +21,6 @@ let source = axios.CancelToken.source();
 function nowString() {
     const now = moment();
     const timeString = now.format('HH:mm:ss');
-    console.log(timeString);
     return timeString;
 }
 
