@@ -1,9 +1,9 @@
 import React from 'react';
 import { Modal } from 'antd';
-import SearchFormContainer from './searchFormContainer';
+import SearchFormContainer from './tableSearch/searchFormContainer';
 import { SearchOutlined } from '@ant-design/icons';
 
-export default class SearchTableModal extends React.Component {
+export default class TableSearch extends React.Component {
     constructor(props) {
         super(props);
         this.init = this.init.bind(this);

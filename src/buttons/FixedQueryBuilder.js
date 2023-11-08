@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, message } from 'antd';
-import SearchFormContainer from './searchTableComponents/searchFormContainer';
+import SearchFormContainer from './tableSearch/searchFormContainer';
 import api from '@/api/api';
 
 export default class FixedQueryBuilder extends React.Component {

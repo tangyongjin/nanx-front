@@ -137,9 +137,12 @@ class _NanxTableStore {
     @action getTableColumns = () => {};
     @action setTableColumns = (cols) => (this.tableColumns = cols);
 
-    @action setFormCfg = (formCfg) => (this.formCfg = formCfg);
+    // @action setFormCfg = (formCfg) => (this.formCfg = formCfg);
 
-    // @action setFormCfg = (formCfg) => (this.formCfg = formCfg.properties.dropdown_group_0);
+    @action setFormCfg = (formCfg) => {
+        console.log('formCfg: ', formCfg);
+        this.formCfg = formCfg.properties.dropdown_group_0;
+    };
 
     @action setReferinfo = (referinfo) => (this.referinfo = referinfo);
     @action setlayoutCfg = (layoutcfg) => (this.layoutcfg = layoutcfg);
@@ -149,14 +152,14 @@ class _NanxTableStore {
     @action setTableWidth = (table_width) => (this.table_width = table_width);
 
     @action setLazyButtonUsedCom = (com) => {
-        console.log('设置 lazyButtonUsedCom 组件................');
-        console.log(com);
+        // console.log('设置 lazyButtonUsedCom 组件................');
+        // console.log(com);
         this.lazyButtonUsedCom = com;
     };
 
     @action setButtonUsedCom = async (com) => {
-        console.log('设置 ButtonUsedCom 组件................');
-        console.log(com);
+        // console.log('设置 ButtonUsedCom 组件................');
+        // console.log(com);
         this.ButtonUsedCom = com;
     };
 
@@ -210,6 +213,30 @@ class _NanxTableStore {
         await this.setPageSize(pageSize);
         await this.listData();
     };
+
+    getDropdownGroups() {
+        console.log('schema: ', this.formCfg);
+
+        let x_group = [];
+
+        for (let key in this.formCfg.properties) {
+            let item = this.formCfg.properties[key];
+            x_group.push(item['x-props']?.query_cfg?.trigger_group_uuid);
+        }
+
+        let summary = {};
+
+        x_group.forEach((item) => {
+            if (summary[item]) {
+                summary[item] += 1; // Increment the count if the element already exists in the summary
+            } else {
+                summary[item] = 1; // Initialize the count to 1 if it doesn't exist in the summary
+            }
+        });
+        console.log('x_group: ', x_group);
+        console.log('summary: ', summary);
+        return summary;
+    }
 }
 const NanxTableStore = new _NanxTableStore();
 

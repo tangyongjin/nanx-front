@@ -65,7 +65,7 @@ export default class NanxTable extends React.Component {
                 showQuickJumper: true,
                 showTotal: () => {
                     let pageNum = Math.ceil(this.tbStore.total / this.tbStore.pageSize);
-                    return `<共${pageNum}页/${this.tbStore.total}条数据`;
+                    return `共${pageNum}页/${this.tbStore.total}条数据`;
                 },
                 showSizeChanger: true,
                 onShowSizeChange: this.tbStore.onShowSizeChange,

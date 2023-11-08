@@ -1,6 +1,6 @@
 import { observable, action, autorun } from 'mobx';
 import api from '@/api/api';
-import { toJS } from 'mobx';
+
 class _TriggerStore {
     constructor() {
         autorun(() => {
@@ -17,41 +17,6 @@ class _TriggerStore {
 
     @action clearTrigger() {
         this.triggers = [];
-    }
-
-    getDropdownGroups(schema) {
-        // 没有schema参数
-        if (!schema) {
-            return;
-        }
-        let group = [];
-
-        console.log('this.props.schema: ', toJS(schema));
-
-        // 循环 dropdown_group_XXXX :
-
-        Object.keys(schema.properties).map((gourp_key) => {
-            console.log(gourp_key + ': ');
-            let fields_group = schema.properties[gourp_key];
-            for (let key in fields_group.properties) {
-                let item = fields_group.properties[key];
-                if (item['x-props'] && item['x-props'].query_cfg && item['x-props'].query_cfg.level) {
-                    let query_cfg = item['x-props'].query_cfg;
-
-                    if (group[query_cfg.trigger_group_uuid] == undefined) {
-                        group[query_cfg.trigger_group_uuid] = 1;
-                        continue;
-                    }
-
-                    group[query_cfg.trigger_group_uuid] =
-                        query_cfg.level - group[query_cfg.trigger_group_uuid] > 0
-                            ? query_cfg.level
-                            : group[query_cfg.trigger_group_uuid];
-                }
-            }
-        });
-
-        return group;
     }
 
     getPrevSelValue(current_ele) {

@@ -97,7 +97,7 @@ export default class SearchFormContainer extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{ paddingTop: '20px' }}>
                 <div style={{ marginBottom: '15px' }}>
                     <Button
                         type="primary"

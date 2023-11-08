@@ -8,6 +8,8 @@ const actions = createFormActions();
 
 const CommonTableForm = (props) => {
     let formCfg = toJS(props.NanxTableStore.formCfg);
+    console.log('formCfg: ', formCfg);
+
     let layoutcfg = props.layoutcfg;
     const [rawData, setRawData] = useState({ editable: props.editable });
 
@@ -15,7 +17,7 @@ const CommonTableForm = (props) => {
         return null;
     }
     return (
-        <div className={layoutcfg == 2 ? 'addmodal' : layoutcfg == 3 ? 'addmodalt' : ''}>
+        <div style={{ marginTop: '20px' }}>
             <SchemaForm
                 initialValues={rawData.value}
                 actions={actions}
@@ -37,22 +39,17 @@ const CommonTableForm = (props) => {
                                     : {}
                         });
 
-                        for (let newkey in formCfg.properties) {
-                            let newitem = formCfg.properties[newkey];
-
-                            for (let key in newitem.properties) {
-                                setFieldState(key, (item) => {
-                                    item.props['x-props'].nnstore = props.NanxTableStore;
-                                    item.props['x-props'].datagrid_code = props.NanxTableStore.datagrid_code;
-                                    item.props['x-props'].actions = actions;
-                                    item.props['x-props'].schema = formCfg;
-                                });
-                            }
+                        for (let key in formCfg.properties) {
+                            setFieldState(key, (item) => {
+                                item.props['x-props'].nnstore = props.NanxTableStore;
+                                item.props['x-props'].datagrid_code = props.NanxTableStore.datagrid_code;
+                                item.props['x-props'].actions = actions;
+                            });
                         }
                     });
                 }}
-                labelCol={layoutcfg == '2' ? 9 : layoutcfg == '3' ? 9 : 8}
-                wrapperCol={layoutcfg == '2' ? 15 : layoutcfg == '3' ? 10 : 15}>
+                labelCol={4}
+                wrapperCol={15}>
                 <div style={{ textAlign: 'center' }}>
                     <Button
                         type="primary"

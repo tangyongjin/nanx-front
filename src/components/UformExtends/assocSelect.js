@@ -24,7 +24,8 @@ export default class AssocSelect extends React.Component {
         //把自己(AssosSelect注册到 triggers )
 
         this.props.TriggerStore.registerTrigger(this);
-        let groups = this.props.TriggerStore.getDropdownGroups(this.props.schema);
+        let groups = this.props.NanxTableStore.getDropdownGroups();
+        console.log('groups: ', groups);
 
         if (this.props.query_cfg.level == 1 && this.props.NanxTableStore.table_action === 'add') {
             await this.getOptionList(this.props.query_cfg, null, this);

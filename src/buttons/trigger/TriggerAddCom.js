@@ -67,7 +67,7 @@ export default class TriggerAddCom extends React.Component {
 
     render() {
         return (
-            <div style={{ marginLeft: '40px' }}>
+            <div style={{ marginLeft: '40px', marginTop: '30px' }}>
                 <div style={{ marginBottom: '10px' }}>联动组名称:</div>
                 <div style={{ marginBottom: '10px' }}>
                     {' '}

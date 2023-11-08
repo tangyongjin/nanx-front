@@ -16,7 +16,7 @@ export default class TriggerListCom extends React.Component {
         console.log(this.DataGridStore);
 
         return (
-            <div style={{ marginLeft: '5px' }}>
+            <div style={{ marginLeft: '5px', marginTop: '20px' }}>
                 <h3>
                     管理联动: {this.DataGridStore.DataGridCode}/{this.DataGridStore.DataGridTitle}
                 </h3>
