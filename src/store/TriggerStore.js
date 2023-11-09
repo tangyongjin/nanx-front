@@ -33,7 +33,7 @@ class _TriggerStore {
                 continue;
             }
 
-            let prev_value = element.props.nnstore.selectedRows[0]['ghost_' + element.props.ass_select_field_id];
+            let prev_value = element.props.nnstore.selectedRows[0]['ghost_' + element.props.as_select_field_id];
 
             if (prev_value) {
                 return prev_value;

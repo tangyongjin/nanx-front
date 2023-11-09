@@ -27,11 +27,11 @@ export default class AssocSelect extends React.Component {
         this.props.TriggerStore.registerTrigger(this);
         let groups = this.props.NanxTableStore.getDropdownLevelInfo();
 
-        if (this.props.query_cfg.level == 1 && this.props.NanxTableStore.table_action === 'add') {
-            await this.getOptionList(this.props.query_cfg, null, this);
+        if (this.props.trigger_cfg.level == 1 && this.props.NanxTableStore.table_action === 'add') {
+            await this.getOptionList(this.props.trigger_cfg, null, this);
         }
 
-        if (this.props.query_cfg.level == groups[this.props.query_cfg.trigger_group_uuid]) {
+        if (this.props.trigger_cfg.level == groups[this.props.trigger_cfg.trigger_group_uuid]) {
             //模拟用户点击下拉选择
             if (this.props.NanxTableStore.table_action === 'edit') {
                 await this.simulateClick();
@@ -43,9 +43,9 @@ export default class AssocSelect extends React.Component {
         for (let i = 0; i < this.props.TriggerStore.triggers.length; i++) {
             let element = this.props.TriggerStore.triggers[i];
 
-            if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {
+            if (element.props.trigger_cfg.trigger_group_uuid == this.props.trigger_cfg.trigger_group_uuid) {
                 let _tmp1_rows = element.props.nnstore.selectedRows;
-                let curren_value = _tmp1_rows[0]['ghost_' + element.props.ass_select_field_id];
+                let curren_value = _tmp1_rows[0]['ghost_' + element.props.as_select_field_id];
                 await element.getDefaultOptionList(element);
                 element.props.onChange(curren_value);
             }
@@ -55,14 +55,14 @@ export default class AssocSelect extends React.Component {
     // eslint-disable-next-line
     async getDefaultOptionList(current_ele) {
         let prev_sel_value = null;
-        if (current_ele.props.query_cfg.level == 1) {
+        if (current_ele.props.trigger_cfg.level == 1) {
             prev_sel_value = null;
         }
-        if (current_ele.props.query_cfg.level > 1) {
+        if (current_ele.props.trigger_cfg.level > 1) {
             prev_sel_value = current_ele.getPrevSelValue(current_ele);
         }
 
-        await current_ele.getOptionList(current_ele.props.query_cfg, prev_sel_value, current_ele);
+        await current_ele.getOptionList(current_ele.props.trigger_cfg, prev_sel_value, current_ele);
     }
 
     // 获取上一个级别的联动值
@@ -72,15 +72,15 @@ export default class AssocSelect extends React.Component {
             let element = this.props.TriggerStore.triggers[i];
 
             // 不同组结束本次循环
-            if (element.props.query_cfg.trigger_group_uuid != current_ele.props.query_cfg.trigger_group_uuid) {
+            if (element.props.trigger_cfg.trigger_group_uuid != current_ele.props.trigger_cfg.trigger_group_uuid) {
                 continue;
             }
             // 不是上一个联动的结束本次循环
-            if (current_ele.props.query_cfg.level - element.props.query_cfg.level != 1) {
+            if (current_ele.props.trigger_cfg.level - element.props.trigger_cfg.level != 1) {
                 continue;
             }
 
-            let prev_value = element.props.nnstore.selectedRows[0]['ghost_' + element.props.ass_select_field_id];
+            let prev_value = element.props.nnstore.selectedRows[0]['ghost_' + element.props.as_select_field_id];
             if (prev_value) {
                 return prev_value;
             }
@@ -95,13 +95,13 @@ export default class AssocSelect extends React.Component {
             let element = this.props.TriggerStore.triggers[i];
 
             // 2、同一组
-            if (element.props.query_cfg.trigger_group_uuid == this.props.query_cfg.trigger_group_uuid) {
-                if (element.props.query_cfg.level - this.props.query_cfg.level == 1) {
-                    await element.getOptionList(element.props.query_cfg, value, element);
+            if (element.props.trigger_cfg.trigger_group_uuid == this.props.trigger_cfg.trigger_group_uuid) {
+                if (element.props.trigger_cfg.level - this.props.trigger_cfg.level == 1) {
+                    await element.getOptionList(element.props.trigger_cfg, value, element);
                     element.props.value && element.props.onChange('');
                 }
                 // 4、清空level - 当前level >= 2 的字段的value和optionList
-                if (element.props.query_cfg.level - this.props.query_cfg.level >= 2) {
+                if (element.props.trigger_cfg.level - this.props.trigger_cfg.level >= 2) {
                     element.props.value && element.props.onChange('');
                 }
             }

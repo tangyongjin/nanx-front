@@ -27,7 +27,6 @@ export default class GetRadio extends React.Component {
         this.props.onChange(e);
     }
     render() {
-        console.log(4455, this.props);
         const selectedvalue = this.props.value;
         return (
             <div style={{ marginBottom: '10px' }}>
