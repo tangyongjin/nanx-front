@@ -21,7 +21,7 @@ if (navigator.onLine) {
 export default class App extends React.Component {
     render() {
         return (
-            <ConfigProvider theme={themeJson}>
+            <ConfigProvider locale={zhCN} theme={themeJson}>
                 <Provider {...store}>
                     <Router history={hashHistory} routes={routes} />
                 </Provider>
