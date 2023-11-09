@@ -17,7 +17,7 @@ export default class DateEditor extends React.Component {
         super(props);
         console.log('DateEditor💘💘', props);
         this.state = {
-            datevalue: props.d_value
+            datevalue: props.d_value ? props.d_value : null
         };
     }
 
@@ -33,20 +33,20 @@ export default class DateEditor extends React.Component {
     }
 
     render() {
-        const onChange = (date, dateString) => {
-            console.log(date);
-            console.log(dateString);
-        };
-
         return (
-            <DatePicker
-                onChange={(e, ds) => {
-                    this.props.onChange(ds);
-                }}
-                defaultValue={dayjs(this.state.datevalue, dateFormat)}
-                locale={locale}
-                format={dateFormat}
-            />
+            <div>
+                <DatePicker
+                    onChange={(e, ds) => {
+                        this.props.onChange(ds);
+                    }}
+                    defaultValue={this.state.datevalue ? dayjs(this.state.datevalue, dateFormat) : null}
+                    // defaultValue= { null }
+                    // value={dayjs(this.state.datevalue, dateFormat)}
+
+                    locale={locale}
+                    format={dateFormat}
+                />
+            </div>
         );
     }
 }

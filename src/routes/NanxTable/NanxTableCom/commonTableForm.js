@@ -52,7 +52,9 @@ const CommonTableForm = (props) => {
                                 item.props['x-props'].actions = actions;
                                 item.props['x-props'].props_tag = '💘💘';
                                 // 不知道为何无法取到日期型的数据的值
-                                item.props['x-props'].d_value = props.NanxTableStore.selectedRows[0][key];
+                                if (props.NanxTableStore.table_action == 'edit') {
+                                    item.props['x-props'].d_value = props.NanxTableStore.selectedRows[0][key];
+                                }
                             });
                         }
                     });
@@ -73,9 +75,6 @@ const CommonTableForm = (props) => {
                     </Button>
                 </div>
             </SchemaForm>
-             
-          
-            
         </div>
     );
 };

@@ -10,6 +10,7 @@ const dateFormat = 'YYYY-MM-DD';
 const Home = () => (
     <Space direction="vertical" size={12}>
         <DatePicker defaultValue={dayjs('2015-12-12', dateFormat)} format={dateFormat} />
+        <DatePicker defaultValue={null} format={dateFormat} />
     </Space>
 );
 
