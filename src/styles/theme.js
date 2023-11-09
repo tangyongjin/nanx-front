@@ -19,7 +19,7 @@ const themeJson = {
         },
 
         InputNumber: {
-            controlWidth: 312,
+            // controlWidth: 312,
             algorithm: false,
             colorPrimaryHover: 'red',
             hoverBorderColor: 'rgb(82, 196, 26)',
@@ -64,7 +64,9 @@ const themeJson = {
             controlHeight: '30px',
             defaultBorderColor: '#366503',
             primaryShadow: '0 10px 0px 0px #15ff000',
-            defaultShadow: '0px 0px 0px 0px #ffffff'
+            defaultShadow: '0px 0px 0px 0px #ffffff',
+            defaultColor: 'white',
+            colorBgContainer: '#3B3B47'
         },
         Table: {
             borderColor: '#b3bab0',

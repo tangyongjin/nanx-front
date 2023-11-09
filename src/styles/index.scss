@@ -24,7 +24,7 @@ div.ant-modal-title>div>span {
 
 .ant-modal-header {
     color        : #fff !important;
-    background   : hsl(126, 41%, 15%) !important;
+    background   : hwb(126 9% 79%) !important;
     height       : 42px !important;
     border-radius: 2px 2px 0 0;
     margin       : -20px -24px 0 -24px !important;
@@ -57,4 +57,10 @@ div.ant-modal-title>div>span {
 .ant-input-number,
 .ant-input-number-input-wrap {
     width: 346px !important;
+}
+
+
+.ant-btn-dangerous{
+    color: #2e940d !important;
+    border-color:#3b3b47 !important;
 }

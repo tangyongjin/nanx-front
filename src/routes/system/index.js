@@ -1,3 +1,4 @@
+import '@/styles/reset.scss';
 import win_requireAuth from '@/routes/urlProtect';
 
 export default {
