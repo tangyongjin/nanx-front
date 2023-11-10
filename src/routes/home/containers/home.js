@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '@/components/UformExtends';
 import { SchemaForm } from '@uform/antd';
 import 'antd/dist/reset.css';
 
-const Home = (props) => {
-    console.log('💚💚💚 ');
+const Home = () => {
     const formCfg = {
         type: 'object',
         'x-component': 'card',

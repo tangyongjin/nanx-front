@@ -42,7 +42,6 @@ export default class AssocSelect extends React.Component {
     async simulateClick() {
         for (let i = 0; i < this.props.TriggerStore.triggers.length; i++) {
             let element = this.props.TriggerStore.triggers[i];
-
             if (element.props.trigger_cfg.trigger_group_uuid == this.props.trigger_cfg.trigger_group_uuid) {
                 let _tmp1_rows = element.props.nnstore.selectedRows;
                 let curren_value = _tmp1_rows[0]['ghost_' + element.props.trigger_cfg.as_select_field_id];
