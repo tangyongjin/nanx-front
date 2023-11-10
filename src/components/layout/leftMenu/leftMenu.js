@@ -10,16 +10,11 @@ import { hashHistory } from 'react-router';
 export default class LeftMenu extends React.Component {
     constructor(props) {
         super();
-        this.state = {
-            menulist: []
-        };
         this.NavigationStore = props.NavigationStore;
     }
 
-    async componentDidMount() {
+    async componentWillMount() {
         await this.NavigationStore.getMenuTreeByRoleCode();
-        let { menuList } = this.NavigationStore;
-        this.setState({ menulist: menuList });
     }
 
     menuclickHandler(menuItem, item) {
@@ -95,14 +90,14 @@ export default class LeftMenu extends React.Component {
                     [Nanx+]
                 </div>
                 <div>
-                    {this.state.menulist ? (
+                    {this.NavigationStore.menuList.length > 0 ? (
                         <Menu
                             mode="inline"
                             theme="dark"
                             selectedKeys={this.NavigationStore.selectedKeys}
                             onOpenChange={(openKeys) => this.onOpenChange(openKeys)}
                             {...defaultProps}>
-                            {this.state.menulist.map((menuitem, index) => this.getChildren(menuitem, index))}
+                            {this.NavigationStore.menuList.map((menuitem, index) => this.getChildren(menuitem, index))}
                         </Menu>
                     ) : (
                         <div></div>
