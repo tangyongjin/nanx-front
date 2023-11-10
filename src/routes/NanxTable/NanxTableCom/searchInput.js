@@ -34,8 +34,7 @@ export class SearchInput extends React.Component {
         this.setState({ isShowSelect: false });
         await this.props.change('customerName', item.name);
         let params = {
-            data: { companyKey: item.name },
-            method: 'POST'
+            data: { companyKey: item.name }
         };
         let res = await api.customer.inquiryCompanyMsg(params);
         this.props.addressHandle(res.data.data.address);
@@ -43,8 +42,7 @@ export class SearchInput extends React.Component {
 
     async _searchCustomer(e) {
         let params = {
-            data: { companyKey: this.searchInput.value },
-            method: 'POST'
+            data: { companyKey: this.searchInput.value }
         };
         let res = await api.customer.inquiryCompanyList(params);
         this.setState({

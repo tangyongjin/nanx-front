@@ -47,7 +47,7 @@ class DataGridStore {
             this.relatedtableColumns = [];
         } else {
             console.log('getRelatedTableCols');
-            let params = { method: 'POST', data: { table: this.relatedtable } };
+            let params = { data: { table: this.relatedtable } };
             let json = await api.processmanager.getTableCols(params);
             this.relatedtableColumns = json.data;
         }
@@ -82,8 +82,7 @@ class DataGridStore {
             data: {
                 submitData: this.ColsDbInfo,
                 datagrid_code: this.DataGridCode
-            },
-            method: 'POST'
+            }
         };
         let json = await api.dataGrid.batchUpdateFieldCfg(params);
         if (json.code == 200) {
@@ -101,7 +100,7 @@ class DataGridStore {
         if (this.DataGridCode === null) {
             this.setColsDbInfo([]);
         } else {
-            let params = { method: 'POST', data: { DataGridCode: this.DataGridCode } };
+            let params = { data: { DataGridCode: this.DataGridCode } };
             let json = await api.dataGrid.getColsDbInfo(params);
             this.setColsDbInfo(json.data);
         }
@@ -122,13 +121,13 @@ class DataGridStore {
     };
 
     @action getTriggerGroups = async () => {
-        let params = { method: 'POST', data: { DataGridCode: this.DataGridCode } };
+        let params = { data: { DataGridCode: this.DataGridCode } };
         let json = await api.dataGrid.getTriggerGroups(params);
         this.trigger_groups = json.data;
     };
 
     @action saveTriggerGroup = async (obj) => {
-        let params = { data: obj, method: 'POST' };
+        let params = { data: obj };
         console.log(obj);
         let json = await api.dataGrid.saveTriggerGroup(params);
         message.info(json.message);
@@ -136,7 +135,7 @@ class DataGridStore {
     };
 
     @action deleteTriggerGroup = async (gpid) => {
-        let params = { data: { groupid: gpid }, method: 'POST' };
+        let params = { data: { groupid: gpid } };
         let json = await api.dataGrid.deleteTriggerGroup(params);
         message.info(json.message);
         this.getTriggerGroups();
@@ -162,7 +161,7 @@ class DataGridStore {
         let obj = this.ColsDbInfo[indicator];
         obj.DataGridCode = this.DataGridCode;
 
-        let params = { data: obj, method: 'POST' };
+        let params = { data: obj };
         let json = await api.dataGrid.saveFieldCfg(params);
         message.info(json.message);
         this.getColsDbInfo();

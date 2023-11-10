@@ -33,8 +33,7 @@ export default class GridButtonAdder extends React.Component {
     addGridButton = async () => {
         console.log(this.state);
         let params = {
-            data: { btncode: this.state.btncode, DataGridCode: this.state.record.datagrid_code },
-            method: 'POST'
+            data: { btncode: this.state.btncode, DataGridCode: this.state.record.datagrid_code }
         };
         await api.button.addGridButton(params);
         await this.getDataGridButtons();
@@ -73,7 +72,7 @@ export default class GridButtonAdder extends React.Component {
 
         let currentrow = this.props.NanxTableStore.selectedRows[0];
         console.log(currentrow);
-        let params = { data: {}, method: 'POST' };
+        let params = {};
         let res = await api.button.getAllButtons(params);
         this.setState({
             open: true,
@@ -81,7 +80,7 @@ export default class GridButtonAdder extends React.Component {
             allButtons: res.data
         });
 
-        params = { data: { DataGridCode: this.state.record.datagrid_code }, method: 'POST' };
+        params = { data: { DataGridCode: this.state.record.datagrid_code } };
         res = await api.button.getGridButtons(params);
         this.setState({
             open: true,

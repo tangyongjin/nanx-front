@@ -63,8 +63,7 @@ export default class DeleteData extends React.Component {
                 DataGridCode: this.props.NanxTableStore.datagrid_code,
                 selectedRowKeys: this.props.NanxTableStore.selectedRowKeys
             },
-            delurl: this.props.NanxTableStore.curd.delurl,
-            method: 'POST'
+            delurl: this.props.NanxTableStore.curd.delurl
         };
         let json = await api.curd.deleteData(params);
 

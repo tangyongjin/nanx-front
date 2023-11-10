@@ -17,8 +17,7 @@ export default class CategoryDropDown extends React.Component {
         let params = {
             data: {
                 category: this.props.uform_para
-            },
-            method: 'POST'
+            }
         };
 
         let json = await api.bpm.getNanxCodeTableByCategory(params);

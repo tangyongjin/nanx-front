@@ -4,18 +4,10 @@ import { Transfer, Tree } from 'antd';
 const { TreeNode } = Tree;
 export default class PriviligeTransfer extends React.Component {
     render() {
-        let {
-            dataSource,
-            titles,
-            targetKeys,
-            selectedKeys,
-            onChange,
-            onSelectChange,
-            onScroll,
-            operations,
-            listStyle
-        } = this.props;
-        console.log(this.props);
+        let { dataSource, titles, targetKeys, selectedKeys, onChange, onSelectChange, operations, listStyle } =
+            this.props;
+        console.log(' 💓💓💓💓💓💓💓💓💓💓', selectedKeys);
+        console.log(' 💌 💌 💌 💌 💌 💌 ', targetKeys);
         return (
             <Transfer
                 dataSource={dataSource}
@@ -24,13 +16,13 @@ export default class PriviligeTransfer extends React.Component {
                 selectedKeys={selectedKeys}
                 onChange={onChange}
                 onSelectChange={onSelectChange}
-                onScroll={onScroll}
                 operations={operations}
                 listStyle={listStyle}
                 render={(item) => item.text}>
                 {({ direction, onItemSelect, selectedKeys }) => {
                     if (direction === 'left') {
                         const leftCheckedKeys = [...selectedKeys];
+
                         return (
                             <Tree
                                 blockNode
@@ -45,6 +37,8 @@ export default class PriviligeTransfer extends React.Component {
                                         }
                                     }
                                 ) => {
+                                    console.log('leftCheckedKeys:', leftCheckedKeys);
+                                    console.log('eventKey:', eventKey);
                                     onItemSelect(eventKey, !isChecked(leftCheckedKeys, eventKey));
                                 }}
                                 onSelect={(
@@ -77,7 +71,7 @@ export default class PriviligeTransfer extends React.Component {
                                         }
                                     }
                                 ) => {
-                                    onItemSelect(eventKey, !leftIsChecked(rightCheckedKeys, eventKey));
+                                    onItemSelect(eventKey, !isChecked(rightCheckedKeys, eventKey));
                                 }}
                                 onSelect={(
                                     _,
@@ -87,7 +81,7 @@ export default class PriviligeTransfer extends React.Component {
                                         }
                                     }
                                 ) => {
-                                    onItemSelect(eventKey, !leftIsChecked(rightCheckedKeys, eventKey));
+                                    onItemSelect(eventKey, !isChecked(rightCheckedKeys, eventKey));
                                 }}>
                                 {rightGenerateTree(dataSource, targetKeys)}
                             </Tree>
@@ -106,17 +100,15 @@ const leftGenerateTree = (treeNodes = [], checkedKeys = []) => {
         </TreeNode>
     ));
 };
+
 const rightGenerateTree = (treeNodes = [], checkedKeys = []) => {
     return treeNodes.map(({ children, ...props }) => (
-        <TreeNode disabled={checkedKeys.includes(props.key) ? false : true} {...props} key={props.key}>
+        <TreeNode {...props} disabled={!checkedKeys.includes(props.key)} key={props.key}>
             {rightGenerateTree(children, checkedKeys)}
         </TreeNode>
     ));
 };
 
 const isChecked = (selectedKeys, eventKey) => {
-    return selectedKeys.indexOf(eventKey) !== -1;
-};
-const leftIsChecked = (selectedKeys, eventKey) => {
     return selectedKeys.indexOf(eventKey) !== -1;
 };

@@ -1,8 +1,7 @@
-import win_requireAuth from '@/routes/urlProtect';
+import UrlProtect from '@/routes/urlProtect';
 
 export default {
-    onEnter: win_requireAuth, // add this 判断是否登录
-    component: require('../../components/layout').default,
+    onEnter: UrlProtect, // add this 判断是否登录
     childRoutes: [
         {
             path: 'home',

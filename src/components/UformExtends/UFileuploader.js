@@ -83,7 +83,6 @@ export default class Fileuploader extends React.Component {
         this.props.onChange(newarrstr);
 
         let params = {
-            method: 'POST',
             data: {
                 file: fileurl
             }

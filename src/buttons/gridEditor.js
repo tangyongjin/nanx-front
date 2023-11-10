@@ -56,7 +56,6 @@ class GridEditor extends React.Component {
             return;
         }
         let params = {
-            method: 'POST',
             data: {
                 actcode: this.DataGridStore.current_actcode,
                 query_cfg_field: this.state.query_cfg_field,
@@ -74,8 +73,7 @@ class GridEditor extends React.Component {
                 values.portaluse = 'y';
                 values.multiple = values.multiple === true ? '' : 'n';
                 let params = {
-                    data: values,
-                    method: 'POST'
+                    data: values
                 };
                 console.log(values);
 

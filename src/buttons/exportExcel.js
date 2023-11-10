@@ -20,8 +20,7 @@ export default class ExportExcel extends React.Component {
         await fetchDataGridCfg(this.props.NanxTableStore);
         let paradata = listDataParams(this.props.NanxTableStore);
         let params = {
-            data: paradata,
-            method: 'POST'
+            data: paradata
         };
 
         params.geturl = toJS(this.props.NanxTableStore.curd).geturl;

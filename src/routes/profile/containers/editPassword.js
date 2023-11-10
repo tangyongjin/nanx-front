@@ -19,7 +19,7 @@ export default class EditPassword extends React.Component {
         } else if (this.state.new_pwd != this.state.confirm_pwd) {
             message.error('两次输入密码不同');
         } else {
-            let params = { method: 'POST', data: { new_pwd: this.state.new_pwd } };
+            let params = { data: { new_pwd: this.state.new_pwd } };
             await api.user.edit_password(params);
         }
     }

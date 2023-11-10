@@ -13,10 +13,6 @@ export default class LeftMenu extends React.Component {
         this.NavigationStore = props.NavigationStore;
     }
 
-    async componentWillMount() {
-        await this.NavigationStore.getMenuTreeByRoleCode();
-    }
-
     menuclickHandler(menuItem, item) {
         item.domEvent.preventDefault();
         item.domEvent.stopPropagation();
@@ -90,18 +86,14 @@ export default class LeftMenu extends React.Component {
                     [Nanx+]
                 </div>
                 <div>
-                    {this.NavigationStore.menuList.length > 0 ? (
-                        <Menu
-                            mode="inline"
-                            theme="dark"
-                            selectedKeys={this.NavigationStore.selectedKeys}
-                            onOpenChange={(openKeys) => this.onOpenChange(openKeys)}
-                            {...defaultProps}>
-                            {this.NavigationStore.menuList.map((menuitem, index) => this.getChildren(menuitem, index))}
-                        </Menu>
-                    ) : (
-                        <div></div>
-                    )}
+                    <Menu
+                        mode="inline"
+                        theme="dark"
+                        selectedKeys={this.NavigationStore.selectedKeys}
+                        onOpenChange={(openKeys) => this.onOpenChange(openKeys)}
+                        {...defaultProps}>
+                        {this.props.menuList.map((menuitem, index) => this.getChildren(menuitem, index))}
+                    </Menu>
                 </div>
             </div>
         );

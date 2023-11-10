@@ -1,8 +1,8 @@
-import win_requireAuth from '@/routes/urlProtect';
+import UrlProtect from '@/routes/urlProtect';
 export default {
-    onEnter: win_requireAuth, // add this
+    onEnter: UrlProtect, // add this
     path: 'table',
-    component: require('../../components/layout').default,
+    component: require('@/components/layout/PortalLayout').default,
     childRoutes: [
         {
             path: 'commonXTable',

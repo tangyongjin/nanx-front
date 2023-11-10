@@ -1,9 +1,9 @@
-import win_requireAuth from '@/routes/urlProtect';
+import UrlProtect from '@/routes/urlProtect';
 
 export default {
-    onEnter: win_requireAuth,
+    onEnter: UrlProtect,
     path: 'blank',
-    component: require('../../components/layout').default,
+    component: require('@/components/layout/PortalLayout').default,
     childRoutes: [
         {
             path: 'blank',

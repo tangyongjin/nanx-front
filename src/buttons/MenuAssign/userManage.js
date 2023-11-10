@@ -19,8 +19,7 @@ export default class UserManage extends React.Component {
                 category_to_use: 'sinnet',
                 value: 'sinnet',
                 node: '1'
-            },
-            method: 'POST'
+            }
         };
         const res = await api.cabinet_api.getCabinetData(params);
 
@@ -40,8 +39,7 @@ export default class UserManage extends React.Component {
                 category_to_use: treeNode.props.dataRef.category,
                 value: treeNode.props.dataRef.value,
                 node: 'node-' + treeNode.props.dataRef.value
-            },
-            method: 'POST'
+            }
         };
         const res = await api.cabinet_api.getCabinetData(params);
         treeNode.props.dataRef.children = [...res.server_resp];

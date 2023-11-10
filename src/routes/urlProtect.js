@@ -1,6 +1,6 @@
 import LoginService from './login/LoginService';
 
-function win_requireAuth(nextState, replace, callback) {
+function UrlProtect(nextState, replace, callback) {
     // 判断是否登录
     const Auth = new LoginService();
     if (!Auth.loggedIn()) {
@@ -10,4 +10,4 @@ function win_requireAuth(nextState, replace, callback) {
     return callback();
 }
 
-export default win_requireAuth;
+export default UrlProtect;

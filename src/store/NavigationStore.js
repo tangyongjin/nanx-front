@@ -141,8 +141,7 @@ class NavigationStore {
         let params = {
             data: {
                 role_code: sessionStorage.getItem('role_code')
-            },
-            method: 'POST'
+            }
         };
         let res = await api.permission.getMenuTreeByRoleCode(params);
         if (res.code == 200) {

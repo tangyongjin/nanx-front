@@ -44,8 +44,7 @@ export default class MenuDetailCom extends React.Component {
         let params = {
             data: {
                 menu_id: this.props.menuID
-            },
-            method: 'POST'
+            }
         };
         this.store.clearRole();
         let res = await api.permission.getRolesByMenuId(params);
@@ -56,8 +55,7 @@ export default class MenuDetailCom extends React.Component {
         let params = {
             data: {
                 menu_id: this.props.menuID
-            },
-            method: 'POST'
+            }
         };
         this.store.clearUser();
         let res = await api.permission.getUsersByMenuId(params);
@@ -65,7 +63,6 @@ export default class MenuDetailCom extends React.Component {
     };
 
     renderRole() {
-        console.log('>>>>>>>>>>>>>>>');
         console.log(this.store.activeKey);
         return this.store.roleList.map((role) => {
             return (

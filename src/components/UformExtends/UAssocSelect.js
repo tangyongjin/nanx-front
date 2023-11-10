@@ -113,8 +113,7 @@ export default class AssocSelect extends React.Component {
             loading: true
         });
         let params = {
-            data: { ...trigger_cfg, value_field: searchValue },
-            method: 'POST'
+            data: { ...trigger_cfg, value_field: searchValue }
         };
 
         let res = await api.dataGrid.getAssociateData(params);

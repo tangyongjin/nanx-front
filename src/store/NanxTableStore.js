@@ -189,8 +189,7 @@ class _NanxTableStore {
                 DataGridCode: this.datagrid_code,
                 role: sessionStorage.getItem('role_code'),
                 user: sessionStorage.getItem('user')
-            },
-            method: 'POST'
+            }
         };
 
         let res = await api.dataGrid.fetchDataGridCfg(params);
@@ -212,8 +211,7 @@ class _NanxTableStore {
         console.log('来源:::: ', scense);
         let data = listDataParams(this);
         let params = {
-            data: data,
-            method: 'POST'
+            data: data
         };
 
         params.geturl = toJS(this.curd).geturl;

@@ -2,7 +2,6 @@ import axios from 'axios';
 import moment from 'moment';
 import { hashHistory } from 'react-router';
 import AuthStore from '@/store/AuthStore';
-import { message } from 'antd';
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -46,7 +45,7 @@ export function post(url, params, config) {
 
     return new Promise((resolve, reject) => {
         axiosInstance
-            .post(url, params.data, { ...config })
+            .post(url, params?.data || {}, { ...config })
             .then((res) => {
                 resolve(res.data);
             })

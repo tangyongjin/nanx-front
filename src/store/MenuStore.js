@@ -20,8 +20,7 @@ class MenuStore {
                 role_code: this.currentRole.role_code,
                 menu_id_list: moveKeys,
                 state: direction == 'right' ? 'insert' : 'delete'
-            },
-            method: 'POST'
+            }
         };
         let res = await api.permission.saveMenuPermission(params);
         if (res.code == 200) {
@@ -30,32 +29,21 @@ class MenuStore {
             await this.getRoleMenuList();
             return;
         }
-        message.success('菜单分配失败！');
     };
 
     @action getRoleMenuList = async () => {
-        let params = {
-            data: {
-                role_code: this.currentRole.role_code
-            },
-            method: 'POST'
-        };
+        let params = { data: { role_code: this.currentRole.role_code } };
         let res = await api.permission.getRoleMenuList(params);
         if (res.code == 200) {
             this.selectTartgetMenukeys = res.data.map((item) => item.key);
             return;
         }
-        message.success('获取角色已分配的菜单失败');
     };
 
     @action getTreeMenuList = async () => {
-        let params = {
-            data: {},
-            method: 'POST'
-        };
+        let params = {};
 
         let res = await api.permission.getTreeMenuList(params);
-
         if (res.code == 200) {
             this.selectTartgetMenukeys.map((key) => {
                 res.data.filter((item) => item.key == key);
@@ -64,11 +52,9 @@ class MenuStore {
             this.treeMenuList = res.data;
             return;
         }
-        message.success('获取菜单失败');
     };
 
     @action menuSelectChange = (sourceSelectedKeys, targetSelectedKeys) => {
-        console.log(sourceSelectedKeys, targetSelectedKeys);
         this.selectMenukeys = [...sourceSelectedKeys, ...targetSelectedKeys];
     };
 }

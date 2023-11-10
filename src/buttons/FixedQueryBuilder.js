@@ -42,8 +42,7 @@ export default class FixedQueryBuilder extends React.Component {
             data: {
                 datagrid_code: dataGridCode,
                 fixedQueryLiens: _searchLines
-            },
-            method: 'POST'
+            }
         };
         await api.dataGrid.saveFixedQueryConfigure(params);
         this.props.refreshTable();
@@ -76,8 +75,7 @@ export default class FixedQueryBuilder extends React.Component {
                 DataGridCode: dataGridCode,
                 role: sessionStorage.getItem('role_code'),
                 user: sessionStorage.getItem('user')
-            },
-            method: 'POST'
+            }
         };
 
         let res = await api.dataGrid.fetchDataGridCfg(params);

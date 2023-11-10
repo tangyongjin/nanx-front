@@ -1,10 +1,10 @@
 import '@/styles/reset.scss';
-import win_requireAuth from '@/routes/urlProtect';
+import UrlProtect from '@/routes/urlProtect';
 
 export default {
-    onEnter: win_requireAuth, // add this 判断是否登录
+    onEnter: UrlProtect, // add this 判断是否登录
     path: 'system',
-    component: require('../../components/layout').default,
+    component: require('@/components/layout/PortalLayout').default,
     childRoutes: [
         {
             path: 'departmentManage',

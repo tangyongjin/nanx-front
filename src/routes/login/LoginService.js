@@ -17,8 +17,7 @@ export default class LoginService {
         sessionStorage.removeItem('id_token');
         sessionStorage.removeItem('mobile');
         let params = {
-            data: { mobile, password, transaction_id },
-            method: 'POST'
+            data: { mobile, password, transaction_id }
         };
 
         await api.user

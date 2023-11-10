@@ -47,8 +47,7 @@ export default class BatchUpdate extends React.Component {
                 DataGridCode: this.NanxTableStore.datagrid_code,
                 batch_ids: this.state.batchId,
                 rawdata: {}
-            },
-            method: 'POST'
+            }
         };
         params.data.rawdata[this.state.selectData] = this.state.newValue;
         let res = await api.curd.batchUpdate(params);
@@ -88,7 +87,6 @@ export default class BatchUpdate extends React.Component {
         let newValuearr = [];
         if (this.state.formConfigData[event].type == 'assocselect') {
             let params = {
-                method: 'post',
                 data: this.state.formConfigData[event]['x-props']
             };
             let res = await api.curd.getTableData(params);

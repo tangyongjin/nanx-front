@@ -27,8 +27,7 @@ export default class DepartmentManage extends React.Component {
         let params = {
             data: {
                 deptid: dept_ids[0]
-            },
-            method: 'POST'
+            }
         };
         let res = await api.organization.getDeptMembers(params);
 

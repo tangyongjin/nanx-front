@@ -8,8 +8,7 @@ const fetchDataGridCfg = async (tableStore) => {
             DataGridCode: tableStore.datagrid_code,
             role: sessionStorage.getItem('role_code'),
             user: sessionStorage.getItem('user')
-        },
-        method: 'POST'
+        }
     };
 
     let res = await api.dataGrid.fetchDataGridCfg(params);
