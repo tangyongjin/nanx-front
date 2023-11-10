@@ -17,7 +17,6 @@ class NavigationStore {
 
                 if (actionMsg && actionMsg.menu_code) {
                     let next_menu_cfg = this.deepQuery(actionMsg.menu_code, this.menuList, 'menu');
-                    // this.setBreadcrumb(next_menu_cfg);
                     this.setCurrentMenu(next_menu_cfg);
                 }
             },
@@ -59,7 +58,9 @@ class NavigationStore {
 
     @action changeUpdateKey = () => {
         setTimeout(() => {
-            this.updateKey = randomString(5);
+            let _randKey = randomString(10);
+            console.log('_randKey: ', _randKey);
+            this.updateKey = _randKey;
         }, 0);
     };
 
@@ -103,23 +104,6 @@ class NavigationStore {
         sessionStorage.setItem('badge', JSON.stringify(data));
     };
 
-    // @action setBreadcrumb(item) {
-    //     let paths = [];
-    //     this.xloop(toJS(this.menuList), item.parent_id, paths);
-
-    //     if (paths[0]) {
-    //         if (!paths[0].parent_id == '') {
-    //             this.xloop(toJS(this.menuList), paths[0].parent_id, paths);
-    //         }
-    //     }
-
-    //     paths.reverse();
-    //     paths.push(item);
-    //     this.breadcrumb = paths;
-    //     this.setComputedOpenKeys();
-    //     this.setBreadcrumbSessionStorage();
-    // }
-
     @action setOpenKeys = (openKeys) => (this.openKeys = openKeys);
 
     @action setComputedOpenKeys = () => {
@@ -138,10 +122,6 @@ class NavigationStore {
             return;
         }
     };
-
-    // @action setBreadcrumbSessionStorage = () => {
-    //     sessionStorage.setItem('breadcrumb', JSON.stringify(this.breadcrumb));
-    // };
 
     xloop(menu, pid, breadcrumbs) {
         menu.forEach((k) => {
@@ -169,7 +149,6 @@ class NavigationStore {
             this.menuList = res.data.menuList;
             // 登录后首页面包屑展示
             if (!sessionStorage.getItem('breadcrumb')) {
-                // this.setBreadcrumb(this.menuList[0]);
                 this.setCurrentMenu(this.menuList[0]);
             }
         }

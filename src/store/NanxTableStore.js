@@ -16,6 +16,8 @@ class _NanxTableStore {
     @observable SERIALNO = null;
     @observable buttonModalVisuble = false;
     @observable datagrid_code = null;
+    @observable datagrid_title = '';
+
     @observable selectedRowKeys = [];
     @observable selectedRows = [];
     @observable dataSource = [];
@@ -47,6 +49,8 @@ class _NanxTableStore {
     @action setPageSize = (pageSize) => (this.pageSize = pageSize);
 
     @action setFixedQueryCfg = (fx) => (this.fixed_query_cfg = fx);
+
+    @action setGridTitle = (title) => (this.datagrid_title = title);
 
     @action setSearchQueryConfig = async (cfg) => {
         this.search_query_cfg = cfg;
@@ -84,9 +88,30 @@ class _NanxTableStore {
         this.table_action = table_action;
     };
 
-    @action setCurrentPage = (currentPage) => {
-        this.currentPage = currentPage;
-        this.listData();
+    // @action onShowSizeChange = async (current, pageSize) => {
+    //     await this.setDestPageNoRetrieveData(1);
+    //     await this.setPageSize(pageSize);
+    //     await this.listData('onShowSizeChange');
+    // };
+
+    @action setCurrentPage = async (current) => {
+        this.currentPage = current;
+    };
+
+    @action TableOnChange = async (pagination) => {
+        if (pagination.pageSize == this.pageSize) {
+            console.log('没有改变 pageSize');
+            console.log(pagination.current);
+            await this.setCurrentPage(pagination.current);
+            await this.listData('setCurrentPage');
+
+            // 没有改变 pageSize
+        } else {
+            console.log('改变 pageSize !!! ');
+            await this.setCurrentPage(1);
+            await this.setPageSize(pagination.pageSize);
+            await this.listData('onShowSizeChange');
+        }
     };
 
     @action setDataSource = (dataSource) => (this.dataSource = dataSource);
@@ -183,7 +208,8 @@ class _NanxTableStore {
         }
     };
 
-    @action listData = async () => {
+    @action listData = async (scense) => {
+        console.log('来源:::: ', scense);
         let data = listDataParams(this);
         let params = {
             data: data,
@@ -197,16 +223,10 @@ class _NanxTableStore {
 
         let json = await api.curd.listData(params);
         if (json.code == 200) {
-            this.setDataSource(json.data);
-            this.setTotal(json.total);
-            this.rowSelectChange([], []);
+            await this.setDataSource(json.data);
+            await this.setTotal(json.total);
+            await this.rowSelectChange([], []);
         }
-    };
-
-    @action onShowSizeChange = async (current, pageSize) => {
-        await this.setCurrentPage(1);
-        await this.setPageSize(pageSize);
-        await this.listData();
     };
 
     /**
@@ -222,7 +242,7 @@ class _NanxTableStore {
         let x_group = [];
         for (let key in this.formCfg.properties) {
             let item = this.formCfg.properties[key];
-            x_group.push(item['x-props']?.query_cfg?.trigger_group_uuid);
+            x_group.push(item['x-props']?.trigger_cfg?.trigger_group_uuid);
         }
 
         let summary = {};

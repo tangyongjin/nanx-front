@@ -54,7 +54,7 @@ export default class Login extends React.Component {
                                 <div className="clear">用户名</div>
                                 <Input
                                     style={{ width: '252px', height: '40px' }}
-                                    id="boss_mobile"
+                                    id="mobile"
                                     name="mobile"
                                     onChange={this.handleChange}
                                     placeholder="手机号"
@@ -62,10 +62,10 @@ export default class Login extends React.Component {
                             </div>
 
                             <div className="form-left-to-w3l">
-                                <div className="clear">用户名</div>
+                                <div className="clear">密码</div>
                                 <Input
                                     style={{ width: '252px', height: '40px' }}
-                                    id="boss_pwd"
+                                    id="password"
                                     type="password"
                                     onChange={this.handleChange}
                                     name="password"

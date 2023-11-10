@@ -102,121 +102,124 @@ class GridFieldManager extends React.Component {
                 </Row>
                 <Divider />
                 {allcols.map((col, idx) => (
-                    <Row style={{ height: '40px', maxHeight: 40 }} key={idx}>
-                        <Col
-                            style={{
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis ellipsis',
-                                height: '40px',
-                                maxHeight: 40
-                            }}
-                            span={2}>
-                            {col.Comment.length == 0 ? col.Field : col.Field + '/' + col.Comment}
-                        </Col>
-                        <Col span={2}>
-                            <Input
-                                value={col.label}
-                                onChange={(e) => {
-                                    this.changeCfg_input(e, 'label', col.Field);
+                    <div>
+                        <Row style={{ height: '40px', maxHeight: 40 }} key={idx}>
+                            <Col
+                                style={{
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis ellipsis',
+                                    height: '40px',
+                                    maxHeight: 40
                                 }}
-                            />
-                        </Col>
-                        <Col span={3}>
-                            <Select
-                                value={col.pluginname}
-                                key={col.pluginname}
-                                style={{ marginLeft: '10px', width: '140px' }}
-                                onChange={(e) => {
-                                    this.changeCfg_dropdown(e, 'pluginname', col.Field);
-                                }}
-                                disabled={col.Field == 'id'}
-                                placeholder="UForm字段类型"
-                                name="plugin">
-                                {this.props.DataGridStore.plugins.length &&
-                                    this.props.DataGridStore.plugins.map((item, index) => (
-                                        <Option key={index} value={item.plugid}>
-                                            {item.plugname}
-                                        </Option>
-                                    ))}
-                            </Select>
-                        </Col>
-                        <Col span={2}>
-                            <Input
-                                disabled={col.Field == 'id'}
-                                value={col.uform_para}
-                                onChange={(e) => {
-                                    this.changeCfg_input(e, 'uform_para', col.Field);
-                                }}
-                            />
-                        </Col>
-                        <Col span={2}>
-                            <Checkbox
-                                style={{ marginLeft: '8px' }}
-                                checked={col.column_hidden}
-                                onChange={(e) => {
-                                    this.changeCfg_cbx(e, 'column_hidden', col.Field);
-                                }}>
-                                隐藏
-                            </Checkbox>
-                        </Col>
-                        <Col span={2}>
-                            <Checkbox
-                                checked={col.form_hidden}
-                                onChange={(e) => {
-                                    this.changeCfg_cbx(e, 'form_hidden', col.Field);
-                                }}>
-                                隐藏
-                            </Checkbox>
-                        </Col>
-                        <Col span={2}>
-                            <Checkbox
-                                checked={col.readonly}
-                                onChange={(e) => {
-                                    this.changeCfg_cbx(e, 'readonly', col.Field);
-                                }}>
-                                只读
-                            </Checkbox>
-                        </Col>
-                        <Col span={2}>
-                            <Input
-                                disabled={col.Field == 'id'}
-                                value={col.handler}
-                                onChange={(e) => {
-                                    this.changeCfg_input(e, 'handler', col.Field);
-                                }}
-                            />
-                        </Col>
-                        <Col span={5}>
-                            <Select
-                                style={{ paddingLeft: '10px', width: '200px' }}
-                                value={col.category}
-                                onChange={(e) => {
-                                    this.changeCfg_dropdown(e, 'category', col.Field);
-                                }}
-                                showSearch
-                                allowClear
-                                disabled={col.Field == 'id'}
-                                placeholder="字典表"
-                                name="category">
-                                {this.props.DataGridStore.Categories.length &&
-                                    this.props.DataGridStore.Categories.map((item, index) => (
-                                        <Option key={index} value={item.catid}>
-                                            {item.catname}
-                                        </Option>
-                                    ))}
-                            </Select>
-                        </Col>
-                        <Col span={2}>
-                            <Button
-                                className="round-button"
-                                type="primary"
-                                size="small"
-                                style={{ backgroundColor: '#312C2C', borderColor: '#312C2C', color: 'white' }}
-                                onClick={this.saveCfg.bind(this, col.Field)}>
-                                保存
-                            </Button>
-                        </Col>
-                    </Row>
+                                span={2}>
+                                {col.Comment.length == 0 ? col.Field : col.Field + '/' + col.Comment}
+                            </Col>
+                            <Col span={2}>
+                                <Input
+                                    value={col.label}
+                                    onChange={(e) => {
+                                        this.changeCfg_input(e, 'label', col.Field);
+                                    }}
+                                />
+                            </Col>
+                            <Col span={3}>
+                                <Select
+                                    value={col.pluginname}
+                                    key={col.pluginname}
+                                    style={{ marginLeft: '10px', width: '140px' }}
+                                    onChange={(e) => {
+                                        this.changeCfg_dropdown(e, 'pluginname', col.Field);
+                                    }}
+                                    disabled={col.Field == 'id'}
+                                    placeholder="UForm字段类型"
+                                    name="plugin">
+                                    {this.props.DataGridStore.plugins.length &&
+                                        this.props.DataGridStore.plugins.map((item, index) => (
+                                            <Option key={index} value={item.plugid}>
+                                                {item.plugname}
+                                            </Option>
+                                        ))}
+                                </Select>
+                            </Col>
+                            <Col span={2}>
+                                <Input
+                                    disabled={col.Field == 'id'}
+                                    value={col.uform_para}
+                                    onChange={(e) => {
+                                        this.changeCfg_input(e, 'uform_para', col.Field);
+                                    }}
+                                />
+                            </Col>
+                            <Col span={2}>
+                                <Checkbox
+                                    style={{ marginLeft: '8px' }}
+                                    checked={col.column_hidden}
+                                    onChange={(e) => {
+                                        this.changeCfg_cbx(e, 'column_hidden', col.Field);
+                                    }}>
+                                    隐藏
+                                </Checkbox>
+                            </Col>
+                            <Col span={2}>
+                                <Checkbox
+                                    checked={col.form_hidden}
+                                    onChange={(e) => {
+                                        this.changeCfg_cbx(e, 'form_hidden', col.Field);
+                                    }}>
+                                    隐藏
+                                </Checkbox>
+                            </Col>
+                            <Col span={2}>
+                                <Checkbox
+                                    checked={col.readonly}
+                                    onChange={(e) => {
+                                        this.changeCfg_cbx(e, 'readonly', col.Field);
+                                    }}>
+                                    只读
+                                </Checkbox>
+                            </Col>
+                            <Col span={2}>
+                                <Input
+                                    disabled={col.Field == 'id'}
+                                    value={col.handler}
+                                    onChange={(e) => {
+                                        this.changeCfg_input(e, 'handler', col.Field);
+                                    }}
+                                />
+                            </Col>
+                            <Col span={5}>
+                                <Select
+                                    style={{ paddingLeft: '10px', width: '200px' }}
+                                    value={col.category}
+                                    onChange={(e) => {
+                                        this.changeCfg_dropdown(e, 'category', col.Field);
+                                    }}
+                                    showSearch
+                                    allowClear
+                                    disabled={col.Field == 'id'}
+                                    placeholder="字典表"
+                                    name="category">
+                                    {this.props.DataGridStore.Categories.length &&
+                                        this.props.DataGridStore.Categories.map((item, index) => (
+                                            <Option key={index} value={item.catid}>
+                                                {item.catname}
+                                            </Option>
+                                        ))}
+                                </Select>
+                            </Col>
+                            <Col span={2}>
+                                <Button
+                                    className="round-button"
+                                    type="primary"
+                                    size="small"
+                                    style={{ backgroundColor: '#312C2C', borderColor: '#312C2C', color: 'white' }}
+                                    onClick={this.saveCfg.bind(this, col.Field)}>
+                                    保存
+                                </Button>
+                            </Col>
+                        </Row>
+                        <hr style={{ border: '0.5px dashed #dad8d8' }} />
+                    </div>
                 ))}
             </Card>
         );

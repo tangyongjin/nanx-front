@@ -20,8 +20,7 @@ export default class NanxTable extends React.Component {
     refreshTable = async () => {
         await this.tbStore.resetTableStore();
         await this.tbStore.fetchDataGridCfg();
-        // await this.tbStore.setSearchQueryConfig([]);
-        await this.tbStore.listData();
+        await this.tbStore.listData('from refreshTable');
     };
 
     RenderBthHolder() {
@@ -49,7 +48,6 @@ export default class NanxTable extends React.Component {
             },
             rowKey: (record) => record.id,
             bordered: true,
-            dataSource: this.tbStore.dataSource,
             rowSelection: {
                 type: 'radio',
                 selectedRowKeys: this.tbStore.selectedRowKeys,
@@ -67,9 +65,7 @@ export default class NanxTable extends React.Component {
                     let pageNum = Math.ceil(this.tbStore.total / this.tbStore.pageSize);
                     return `共${pageNum}页/${this.tbStore.total}条数据`;
                 },
-                showSizeChanger: true,
-                onShowSizeChange: this.tbStore.onShowSizeChange,
-                onChange: this.tbStore.setCurrentPage
+                showSizeChanger: true
             }
         };
     }
@@ -85,6 +81,8 @@ export default class NanxTable extends React.Component {
                     columns={this.tbStore.tableColumns}
                     key={this.props.datagrid_code}
                     className="commonTable"
+                    dataSource={this.tbStore.dataSource}
+                    onChange={this.tbStore.TableOnChange}
                     {...tableProps}
                 />
             </div>

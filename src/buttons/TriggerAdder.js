@@ -25,7 +25,7 @@ export default class TriggerAdder extends React.Component {
             let record = selectedRows[0];
             console.log(record);
             this.props.DataGridStore.setCurrentActcode(toJS(record).datagrid_code);
-            this.props.DataGridStore.setCurrentActName(toJS(record).datagrid_title);
+            this.props.DataGridStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
             this.props.DataGridStore.setCurrentBasetable(toJS(record).base_table);
             this.props.DataGridStore.prepareDataGirdEnv();
             this.setState({ open: true });

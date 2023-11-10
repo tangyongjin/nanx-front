@@ -10,18 +10,18 @@ const { Header, Sider, Content } = Layout;
 export default class PortalLayout extends React.Component {
     constructor(props) {
         super();
-        this.store = props.NavigationStore;
-        this.store.getMenuTreeByRoleCode();
+        this.NavigationStore = props.NavigationStore;
+        this.NavigationStore.getMenuTreeByRoleCode();
     }
 
     render() {
         return (
             <Layout style={{ minHeight: '100vh', minWidth: '100vh' }}>
-                <Sider collapsed={this.store.isCollapse}>
+                <Sider collapsed={this.NavigationStore.isCollapse}>
                     <LeftMenu
-                        collapsed={this.store.isCollapse}
+                        collapsed={this.NavigationStore.isCollapse}
                         className="portal_menu"
-                        menuList={this.store.menuList}
+                        menuList={this.NavigationStore.menuList}
                         style={{ padding: 0, height: '100vh', overflowY: 'scroll' }}
                         width={300}
                     />
@@ -31,7 +31,7 @@ export default class PortalLayout extends React.Component {
                         <Navbar />
                     </Header>
                     <Content
-                        key={this.store.updateKey}
+                        key={this.NavigationStore.updateKey}
                         style={{
                             marginLeft: '4px'
                         }}>

@@ -10,7 +10,7 @@ class DataGridStore {
 
     // 单个DataGrid相关
     @observable DataGridCode = null;
-    @observable DataGridTitle = '';
+    @observable DataGridTitle = '---';
     @observable BaseTable = '';
     @observable ColsDbInfo = [];
     @observable trigger_groups = [];
@@ -66,7 +66,7 @@ class DataGridStore {
         this.BaseTable = table;
     };
 
-    @action setCurrentActName = (name) => {
+    @action setCurrentDatagridTitle = (name) => {
         this.DataGridTitle = name;
     };
 

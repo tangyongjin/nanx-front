@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, message } from 'antd';
-import SearchTableForm from './searchTableForm';
+import TableSearchForm from './TableSearchForm';
 import { observer, inject } from 'mobx-react';
 
 @inject('NanxTableStore')
@@ -119,12 +119,12 @@ export default class SearchFormContainer extends React.Component {
                 </div>
                 {this.state.field_group.map((item, index) => {
                     return (
-                        <SearchTableForm
+                        <TableSearchForm
                             key={index}
                             fieldsList={this.props.fieldsList}
                             saveActions={this.saveActions}
                             onOk={this.props.onOk}
-                            form_index={item.inner_order}></SearchTableForm>
+                            form_index={item.inner_order}></TableSearchForm>
                     );
                 })}
             </div>

@@ -5,8 +5,6 @@ const IconRender = (text) => {
     if (text == '' || text == null || text == undefined) {
         return '';
     }
-
     return <Icon icon={text} />;
 };
-
 export default IconRender;

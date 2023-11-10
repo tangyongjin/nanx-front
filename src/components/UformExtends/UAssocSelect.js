@@ -45,7 +45,7 @@ export default class AssocSelect extends React.Component {
 
             if (element.props.trigger_cfg.trigger_group_uuid == this.props.trigger_cfg.trigger_group_uuid) {
                 let _tmp1_rows = element.props.nnstore.selectedRows;
-                let curren_value = _tmp1_rows[0]['ghost_' + element.props.as_select_field_id];
+                let curren_value = _tmp1_rows[0]['ghost_' + element.props.trigger_cfg.as_select_field_id];
                 await element.getDefaultOptionList(element);
                 element.props.onChange(curren_value);
             }
@@ -80,7 +80,8 @@ export default class AssocSelect extends React.Component {
                 continue;
             }
 
-            let prev_value = element.props.nnstore.selectedRows[0]['ghost_' + element.props.as_select_field_id];
+            let prev_value =
+                element.props.nnstore.selectedRows[0]['ghost_' + element.props.trigger_cfg.as_select_field_id];
             if (prev_value) {
                 return prev_value;
             }
@@ -108,12 +109,12 @@ export default class AssocSelect extends React.Component {
         }
     }
 
-    getOptionList = async (query_cfg, searchValue, element) => {
+    getOptionList = async (trigger_cfg, searchValue, element) => {
         this.setState({
             loading: true
         });
         let params = {
-            data: { ...query_cfg, value_field: searchValue },
+            data: { ...trigger_cfg, value_field: searchValue },
             method: 'POST'
         };
 
@@ -121,8 +122,8 @@ export default class AssocSelect extends React.Component {
         if (res.code == 200) {
             let optionList = this.props.TriggerStore.formatOptionList(
                 res.data,
-                query_cfg.label_field,
-                query_cfg.value_field
+                trigger_cfg.label_field,
+                trigger_cfg.value_field
             );
             element.setState({ optionList: optionList, loading: false });
         }

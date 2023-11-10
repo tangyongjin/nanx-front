@@ -6,7 +6,7 @@ import { observer, inject } from 'mobx-react';
 
 @inject('NanxTableStore')
 @observer
-export default class SearchTableForm extends React.Component {
+export default class TableSearchForm extends React.Component {
     constructor(props) {
         super(props);
         let actions = createAsyncFormActions();
@@ -22,11 +22,11 @@ export default class SearchTableForm extends React.Component {
                 value: 'like'
             },
             {
-                label: '字符串包含',
+                label: '字符串相等',
                 value: '='
             },
             {
-                label: '字符串包含',
+                label: '字符串不包含',
                 value: '!='
             }
         ],
@@ -135,18 +135,20 @@ export default class SearchTableForm extends React.Component {
                             )
 
                             .subscribe(async ({ state }) => {
+                                console.log('state: ', state);
                                 let formCfg = toJS(this.props.NanxTableStore.formCfg.properties);
+                                console.log('formCfg: ', formCfg);
+
                                 let operator = 'operator_' + this.props.form_index;
 
-                                let keys = Object.keys(formCfg);
+                                // let keys = Object.keys(formCfg);
                                 let type = '';
-                                for (let i = 0; i < keys.length; i++) {
-                                    let field_group_key = keys[i];
-                                    if (formCfg[field_group_key].properties[state.value]) {
-                                        type = formCfg[field_group_key].properties[state.value].type;
-                                        console.log('type: ', type);
-                                        break;
-                                    }
+
+                                // let field_group_key = keys[i];
+                                if (formCfg[state.value]) {
+                                    type = formCfg[state.value].type;
+                                    console.log('type: ', type);
+                                    // break;
                                 }
 
                                 switch (type) {
@@ -169,6 +171,12 @@ export default class SearchTableForm extends React.Component {
                                         setEnum(operator, this.operation_list.date);
                                         setType('vset_' + this.props.form_index, 'date');
                                         break;
+
+                                    case 'UDateEditor':
+                                        setEnum(operator, this.operation_list.date);
+                                        setType('vset_' + this.props.form_index, 'UDateEditor');
+                                        break;
+
                                     default:
                                         console.log();
                                         setEnum(operator, this.operation_list.other);

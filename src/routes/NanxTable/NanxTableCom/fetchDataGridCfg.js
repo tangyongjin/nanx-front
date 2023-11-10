@@ -14,15 +14,16 @@ const fetchDataGridCfg = async (tableStore) => {
 
     let res = await api.dataGrid.fetchDataGridCfg(params);
     if (res.code == 200) {
-        tableStore.setTableColumnConfig(toJS(res.data.tableColumnConfig));
-        tableStore.setFormCfg(res.data.formcfg);
-        tableStore.setReferinfo(res.data.referinfo);
-        tableStore.setlayoutCfg(res.data.layoutcfg);
-        tableStore.setTips(res.data.tips);
-        tableStore.setTableButtons(res.data.buttons);
-        tableStore.setCurd(res.data.curd);
-        tableStore.setTableWidth(res.data.table_width);
-        tableStore.setFixedQueryCfg(res.data.fixed_query_cfg);
+        await tableStore.setTableColumnConfig(toJS(res.data.tableColumnConfig));
+        await tableStore.setFormCfg(res.data.formcfg);
+        await tableStore.setReferinfo(res.data.referinfo);
+        await tableStore.setlayoutCfg(res.data.layoutcfg);
+        await tableStore.setTips(res.data.tips);
+        await tableStore.setTableButtons(res.data.buttons);
+        await tableStore.setCurd(res.data.curd);
+        await tableStore.setTableWidth(res.data.table_width);
+        await tableStore.setFixedQueryCfg(res.data.fixed_query_cfg);
+        await tableStore.setGridTitle(res.data.datagrid_title);
 
         return;
     } else {

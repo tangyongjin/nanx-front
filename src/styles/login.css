@@ -129,6 +129,9 @@ div.text-left-side>h3 {
   -ms-transition: 0.5s all;
 }
 
+#mobile, #password {
+  color: rgb(27, 103, 4) !important;
+}
 
 
 #loginbtn {

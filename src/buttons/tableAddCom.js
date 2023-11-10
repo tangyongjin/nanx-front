@@ -16,11 +16,12 @@ export default class TableAddCom extends React.Component {
 
     getGhostData = (formData) => {
         this.props.NanxTableStore.triggers.foreach((item) => {
-            formData['ghost_' + item.props.as_select_field_id] = formData[item.props.as_select_field_id];
+            formData['ghost_' + item.props.trigger_cfg.as_select_field_id] =
+                formData[item.props.trigger_cfg.as_select_field_id];
             let option_obj = item.state.optionList.find(
-                (optionItem) => optionItem.value == formData[item.props.as_select_field_id]
+                (optionItem) => optionItem.value == formData[item.props.trigger_cfg.as_select_field_id]
             );
-            formData[item.props.as_select_field_id] = option_obj.label;
+            formData[item.props.trigger_cfg.as_select_field_id] = option_obj.label;
         });
         return formData;
     };
