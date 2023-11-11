@@ -1,36 +1,8 @@
-import { observable, action, toJS } from 'mobx';
+import { observable, action } from 'mobx';
 import api from '../api/api';
 import { randomString } from '@/utils/tools';
 
 class NavigationStore {
-    constructor() {
-        // // 浏览器回退
-        window.addEventListener(
-            'popstate',
-            async () => {
-                this.getBreadcrumbSessionStorage();
-                let url = window.location.href;
-                let actionIndex = url.indexOf('_k');
-                let end_string = url.slice(actionIndex + 3);
-                let sessionKey = '@@History/' + end_string;
-                let actionMsg = JSON.parse(sessionStorage.getItem(sessionKey));
-
-                if (actionMsg && actionMsg.menu_code) {
-                    let next_menu_cfg = this.deepQuery(actionMsg.menu_code, this.menuList, 'menu');
-                    this.setCurrentMenu(next_menu_cfg);
-                }
-            },
-            false
-        );
-
-        // 浏览器刷新
-        window.onload = () => {
-            console.log('刷新>>>>>>>>>>>');
-            this.getBreadcrumbSessionStorage();
-            this.setCurrentMenu(this.breadcrumb[this.breadcrumb.length - 1]);
-        };
-    }
-
     @observable updateKey = randomString(5);
     @observable breadcrumb = [];
     @observable isCollapse = false;
@@ -41,12 +13,6 @@ class NavigationStore {
     @observable address_count = 0;
     @observable message_count = 0;
     @observable affair_count = 0;
-
-    // 菜单列表
-    @observable menuList = [];
-
-    // button权限
-    @observable buttonRights = {};
 
     @action clear = () => {
         this.currentMenu = {};
@@ -134,23 +100,6 @@ class NavigationStore {
                 }
             }
         });
-    }
-
-    @action
-    async getMenuTreeByRoleCode() {
-        let params = {
-            data: {
-                role_code: sessionStorage.getItem('role_code')
-            }
-        };
-        let res = await api.permission.getMenuTreeByRoleCode(params);
-        if (res.code == 200) {
-            this.menuList = res.data.menuList;
-            // 登录后首页面包屑展示
-            if (!sessionStorage.getItem('breadcrumb')) {
-                this.setCurrentMenu(this.menuList[0]);
-            }
-        }
     }
 
     @action deepQuery(value, menuList, key) {

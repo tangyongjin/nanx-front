@@ -12,10 +12,8 @@ const CellRender = (text, record, column_cfg, store) => {
     }
 
     if (column_cfg.handler) {
-        console.log(column_cfg.handler);
         return CellsRenderHandlers[column_cfg.handler](text, record, store);
     }
-
     return text;
 };
 

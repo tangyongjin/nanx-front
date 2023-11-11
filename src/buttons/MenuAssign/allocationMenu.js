@@ -12,7 +12,7 @@ export default class AllocationMenu extends React.Component {
 
     async componentDidMount() {
         await this.MenuStore.getTreeMenuList();
-        await this.MenuStore.getRoleMenuList();
+        // await this.MenuStore.getRoleMenuList();
     }
 
     render() {

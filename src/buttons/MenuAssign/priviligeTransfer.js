@@ -37,8 +37,6 @@ export default class PriviligeTransfer extends React.Component {
                                         }
                                     }
                                 ) => {
-                                    console.log('leftCheckedKeys:', leftCheckedKeys);
-                                    console.log('eventKey:', eventKey);
                                     onItemSelect(eventKey, !isChecked(leftCheckedKeys, eventKey));
                                 }}
                                 onSelect={(
@@ -49,6 +47,8 @@ export default class PriviligeTransfer extends React.Component {
                                         }
                                     }
                                 ) => {
+                                    console.log('onSelect>leftCheckedKeys:', leftCheckedKeys);
+                                    console.log('onSelect>eventKey:', eventKey);
                                     onItemSelect(eventKey, !isChecked(leftCheckedKeys, eventKey));
                                 }}>
                                 {leftGenerateTree(dataSource, targetKeys)}

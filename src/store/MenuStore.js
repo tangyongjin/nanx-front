@@ -4,7 +4,6 @@ import { message } from 'antd';
 
 class MenuStore {
     @observable selectButtonkeys = [];
-    @observable menuList = [];
     @observable currentRole = {
         role_code: sessionStorage.getItem('role_code'),
         role_name: sessionStorage.getItem('role_name')
@@ -13,6 +12,7 @@ class MenuStore {
     @observable selectMenukeys = [];
     @observable selectTartgetMenukeys = [];
     @observable treeMenuList = [];
+    @observable RoleBasedMenuList = [];
 
     @action saveMenuPermission = async (nextTargetKeys, direction, moveKeys) => {
         let params = {
@@ -30,6 +30,19 @@ class MenuStore {
             return;
         }
     };
+
+    @action
+    async getMenuTreeByRoleCode() {
+        let params = {
+            data: {
+                role_code: sessionStorage.getItem('role_code')
+            }
+        };
+        let res = await api.permission.getMenuTreeByRoleCode(params);
+        if (res.code == 200) {
+            this.RoleBasedMenuList = res.data.menuList;
+        }
+    }
 
     @action getRoleMenuList = async () => {
         let params = { data: { role_code: this.currentRole.role_code } };
