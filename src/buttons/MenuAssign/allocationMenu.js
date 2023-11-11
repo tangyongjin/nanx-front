@@ -1,10 +1,9 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import PriviligeTransfer from './priviligeTransfer';
+import TreeMenuEditer from './treeMenuEditer';
 import { RedoOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
-import { toJS } from 'mobx';
 @inject('MenuStore')
 @observer
 export default class AllocationMenu extends React.Component {
@@ -25,7 +24,7 @@ export default class AllocationMenu extends React.Component {
         return (
             <div style={{ marginTop: '20px', height: '500px' }}>
                 <div>
-                    当前角色：{this.MenuStore.currentRole.role_name}{' '}
+                    当前角色：{this.MenuStore.currentRole.role_name}
                     <Button
                         onClick={this.refreshMenuAssociated}
                         size="small"
@@ -35,12 +34,10 @@ export default class AllocationMenu extends React.Component {
                     />
                 </div>
                 <br />
-
                 {this.MenuStore.AllMenuList.length > 0 && (
-                    <PriviligeTransfer
+                    <TreeMenuEditer
+                        refreshMenuAssociated={this.refreshMenuAssociated}
                         role_code={this.MenuStore.currentRole.role_code}
-                        dataSource={toJS(this.MenuStore.AllMenuList)}
-                        AllMenuKeys={this.MenuStore.AllMenuKeys}
                     />
                 )}
             </div>

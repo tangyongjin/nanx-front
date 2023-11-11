@@ -19,19 +19,34 @@ class MenuStore {
     @observable selectMenukeys = [];
     @observable selectTartgetMenukeys = [];
 
-    @action saveMenuPermission = async (nextTargetKeys, direction, moveKeys) => {
+    @action saveMenuPermission = async (rolecode, menu_level, menuid, parentid) => {
         let params = {
             data: {
-                role_code: this.currentRole.role_code,
-                menu_id_list: moveKeys,
-                state: direction == 'right' ? 'insert' : 'delete'
+                rolecode: rolecode,
+                menu_level: menu_level,
+                menuid: menuid,
+                parentid: parentid
             }
         };
         let res = await api.permission.saveMenuPermission(params);
         if (res.code == 200) {
-            this.selectTartgetMenukeys = nextTargetKeys;
             message.success('菜单分配成功！');
-            // await this.getRoleMenuList();
+            return;
+        }
+    };
+
+    @action deleteMenuPermission = async (rolecode, menu_level, menuid, parentid) => {
+        let params = {
+            data: {
+                rolecode: rolecode,
+                menu_level: menu_level,
+                menuid: menuid,
+                parentid: parentid
+            }
+        };
+        let res = await api.permission.deleteMenuPermission(params);
+        if (res.code == 200) {
+            message.success('菜单分配成功！');
             return;
         }
     };

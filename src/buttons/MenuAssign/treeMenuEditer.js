@@ -1,25 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Tree } from 'antd';
+import { toJS } from 'mobx';
 import { inject, observer } from 'mobx-react';
 const { TreeNode } = Tree;
 
-const PriviligeTransfer = inject('MenuStore')(
+const TreeMenuEditer = inject('MenuStore')(
     observer((props) => {
-        const [expandedKeys] = useState(props.AllMenuKeys);
-
-        const AssingMenu = (e, menu) => {
+        const AssingMenu = async (e, menu) => {
             e.preventDefault();
+
+            await props.MenuStore.saveMenuPermission(props.role_code, menu.menu_level, menu.key, menu.parent_id);
+            await props.MenuStore.getMenuTreeByRoleCode();
             console.log('props: ', props.role_code, menu);
         };
 
-        const DisAssingMenu = (e, menu) => {
+        const DisAssingMenu = async (e, menu) => {
             e.preventDefault();
+            await props.MenuStore.deleteMenuPermission(props.role_code, menu.menu_level, menu.key, menu.parent_id);
+            await props.MenuStore.getMenuTreeByRoleCode();
             console.log('props: ', props.role_code, menu);
         };
 
         const TitleMessage = (menu) => {
-            console.log('menuProps: ', menu);
-
             if (menu.nodeKeys.menu_level == 1 && menu.nodeKeys.children && menu.nodeKeys.children.length > 0) {
                 return (
                     <div
@@ -43,12 +45,12 @@ const PriviligeTransfer = inject('MenuStore')(
                         }}>
                         <div>{menu.title}</div>
                         <button
-                            onClick={(e) => AssingMenu(e, menu.nodeKeys)}
+                            onClick={(e) => AssingMenu(e, toJS(menu.nodeKeys))}
                             className="btn-assign-menu"
                             style={{ marginLeft: 'auto', marginRight: '5px' }}>
                             分配
                         </button>
-                        <button onClick={(e) => DisAssingMenu(e, menu.nodeKeys)} className="btn-cancel-menu">
+                        <button onClick={(e) => DisAssingMenu(e, toJS(menu.nodeKeys))} className="btn-cancel-menu">
                             取消
                         </button>
                     </div>
@@ -92,14 +94,14 @@ const PriviligeTransfer = inject('MenuStore')(
                     checkable
                     selectable={false}
                     showLine={true}
-                    expandedKeys={expandedKeys}
+                    expandedKeys={props.MenuStore.AllMenuKeys}
                     autoExpandParent={true}
                     checkedKeys={props.MenuStore.RoleUsedKeys}>
-                    {getTreeNode(props.dataSource)}
+                    {getTreeNode(props.MenuStore.AllMenuList)}
                 </Tree>
             </div>
         );
     })
 );
 
-export default PriviligeTransfer;
+export default TreeMenuEditer;

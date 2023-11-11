@@ -8,6 +8,7 @@ export default class permission {
         getRoleMenuList: (params) => post(`${api_root}/Permission/getRoleMenuList`, params),
         getTreeMenuList: (params) => post(`${api_root}/Permission/getTreeMenuList`, params),
         saveMenuPermission: (params) => post(`${api_root}/Permission/saveMenuPermission`, params),
+        deleteMenuPermission: (params) => post(`${api_root}/Permission/deleteMenuPermission`, params),
         getRoleList: (params) => post(`${api_root}/Permission/getRoleList`, params),
         getUsersByMenuId: (params) => post(`${api_root}/Permission/getUsersByMenuId`, params),
         getMenuTreeByRoleCode: (params) => post(`${api_root}/Permission/getMenuTreeByRoleCode`, params),
