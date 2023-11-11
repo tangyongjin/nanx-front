@@ -47,7 +47,7 @@ export default class LeftMenu extends React.Component {
         return one.children.length === 0 ? (
             <Menu.Item key={menuitem.key} onClick={this.menuclickHandler.bind(this, one)}>
                 {one.icon ? <Icon icon={one.icon} /> : null}
-                <span id={one.menu_uuid}>{one.text}</span>
+                <span id={one.menu_uuid}>{one.title}</span>
             </Menu.Item>
         ) : (
             <Menu.SubMenu
@@ -55,7 +55,7 @@ export default class LeftMenu extends React.Component {
                 title={
                     <span>
                         {one.icon ? <Icon icon={one.icon} /> : null}
-                        <span id={one.menu_uuid}>{one.text}</span>
+                        <span id={one.menu_uuid}>{one.title}</span>
                     </span>
                 }>
                 {one.children.map((xitem, itemIndex) => this.getChildren(xitem, itemIndex))}

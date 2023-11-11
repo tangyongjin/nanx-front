@@ -13,6 +13,8 @@ class _NanxTableStore {
         });
     }
 
+    @observable DefaultPageSize = 20;
+
     @observable SERIALNO = null;
     @observable buttonModalVisuble = false;
     @observable datagrid_code = null;
@@ -23,7 +25,7 @@ class _NanxTableStore {
     @observable dataSource = [];
     @observable total = 0;
     @observable currentPage = 1;
-    @observable pageSize = 10;
+    @observable pageSize = this.DefaultPageSize;
     @observable formCfg = null;
     @observable referinfo = null;
     @observable layoutcfg = null;
@@ -62,7 +64,7 @@ class _NanxTableStore {
         this.dataSource = [];
         this.total = 0;
         this.currentPage = 1;
-        this.pageSize = 10;
+        this.pageSize = this.DefaultPageSize;
         this.formCfg = null;
         this.layoutcfg = null;
         this.curd = {};
@@ -87,12 +89,6 @@ class _NanxTableStore {
     @action setTableAction = async (table_action) => {
         this.table_action = table_action;
     };
-
-    // @action onShowSizeChange = async (current, pageSize) => {
-    //     await this.setDestPageNoRetrieveData(1);
-    //     await this.setPageSize(pageSize);
-    //     await this.listData('onShowSizeChange');
-    // };
 
     @action setCurrentPage = async (current) => {
         this.currentPage = current;

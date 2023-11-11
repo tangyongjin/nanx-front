@@ -7,12 +7,12 @@ body {
 
 
 .ant-modal-title {
-    color  : white !important;
+    color: white !important;
     padding: 12px 0 0 12px !important;
 }
 
 .ant-modal-close-icon {
-    color : white;
+    color: white;
     margin: -10px -20px 0 0 !important;
 }
 
@@ -23,33 +23,33 @@ div.ant-modal-title>div>span {
 
 
 .ant-modal-header {
-    color        : #fff !important;
-    background   : hwb(126 9% 79%) !important;
-    height       : 42px !important;
+    color: #fff !important;
+    background: hwb(126 9% 79%) !important;
+    height: 42px !important;
     border-radius: 2px 2px 0 0;
-    margin       : -20px -24px 0 -24px !important;
-    box-sizing   : border-box;
-    box-shadow   : 0px 3px 6px rgba(0, 0, 0, 0.16);
+    margin: -20px -24px 0 -24px !important;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     /* 添加阴影效果 */
     border-bottom: 0.5px solid #0f2512;
     /* 添加底部边框 */
 }
 
 .table_wrapper {
-    padding         : 4px;
+    padding: 4px;
     background-color: white !important;
-    background      : white !important;
-    height          : auto !important;
+    background: white !important;
+    height: auto !important;
     // overflow: scroll;
-    min-width       : 100vh
+    min-width: 100vh
 }
 
 
 .ant-table-wrapper::after {
 
-    color           : red;
+    color: red;
     background-color: white;
-    background      : white;
+    background: white;
 }
 
 .ant-select,
@@ -60,11 +60,61 @@ div.ant-modal-title>div>span {
 }
 
 
-.ant-btn-dangerous{
+.ant-btn-dangerous {
     color: #2e940d !important;
-    border-color:#3b3b47 !important;
+    border-color: #3b3b47 !important;
 }
+
+
+/*滚动条样式*/
+::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 4px;
+    /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset005pxrgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    -webkit-box-shadow: inset005pxrgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
 
 #webpack-dev-server-client-overlay {
     display: none !important;
-  }
+}
+
+
+.btn-assign-menu {
+    color: white;
+    cursor: pointer;
+    background-color: rgb(5, 82, 9);
+    border: #fff;
+    border-radius: 8px;
+}
+
+.btn-cancel-menu {
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: rgb(5, 82, 9);
+    border: #fff;
+
+}
+
+.ant-tree-checkbox-disabled>span {
+    border-color: rgb(5, 82, 9) !important;
+}
+
+.ant-tree-checkbox-disabled>span::after {
+    border-color: rgb(5, 82, 9) !important;
+}

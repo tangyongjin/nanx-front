@@ -1,114 +1,103 @@
-import React from 'react';
-import { Transfer, Tree } from 'antd';
+import React, { useState } from 'react';
+import { Tree } from 'antd';
 
 const { TreeNode } = Tree;
-export default class PriviligeTransfer extends React.Component {
-    render() {
-        let { dataSource, titles, targetKeys, selectedKeys, onChange, onSelectChange, operations, listStyle } =
-            this.props;
-        console.log(' 💓💓💓💓💓💓💓💓💓💓', selectedKeys);
-        console.log(' 💌 💌 💌 💌 💌 💌 ', targetKeys);
-        return (
-            <Transfer
-                dataSource={dataSource}
-                titles={titles}
-                targetKeys={targetKeys}
-                selectedKeys={selectedKeys}
-                onChange={onChange}
-                onSelectChange={onSelectChange}
-                operations={operations}
-                listStyle={listStyle}
-                render={(item) => item.text}>
-                {({ direction, onItemSelect, selectedKeys }) => {
-                    if (direction === 'left') {
-                        const leftCheckedKeys = [...selectedKeys];
 
-                        return (
-                            <Tree
-                                blockNode
-                                checkable
-                                checkStrictly
-                                checkedKeys={leftCheckedKeys}
-                                onCheck={(
-                                    _,
-                                    {
-                                        node: {
-                                            props: { eventKey }
-                                        }
-                                    }
-                                ) => {
-                                    onItemSelect(eventKey, !isChecked(leftCheckedKeys, eventKey));
-                                }}
-                                onSelect={(
-                                    _,
-                                    {
-                                        node: {
-                                            props: { eventKey }
-                                        }
-                                    }
-                                ) => {
-                                    console.log('onSelect>leftCheckedKeys:', leftCheckedKeys);
-                                    console.log('onSelect>eventKey:', eventKey);
-                                    onItemSelect(eventKey, !isChecked(leftCheckedKeys, eventKey));
-                                }}>
-                                {leftGenerateTree(dataSource, targetKeys)}
-                            </Tree>
-                        );
-                    }
-                    if (direction === 'right') {
-                        const rightCheckedKeys = [...selectedKeys];
-                        return (
-                            <Tree
-                                blockNode
-                                checkable
-                                checkStrictly
-                                checkedKeys={rightCheckedKeys}
-                                onCheck={(
-                                    _,
-                                    {
-                                        node: {
-                                            props: { eventKey }
-                                        }
-                                    }
-                                ) => {
-                                    onItemSelect(eventKey, !isChecked(rightCheckedKeys, eventKey));
-                                }}
-                                onSelect={(
-                                    _,
-                                    {
-                                        node: {
-                                            props: { eventKey }
-                                        }
-                                    }
-                                ) => {
-                                    onItemSelect(eventKey, !isChecked(rightCheckedKeys, eventKey));
-                                }}>
-                                {rightGenerateTree(dataSource, targetKeys)}
-                            </Tree>
-                        );
-                    }
-                }}
-            </Transfer>
-        );
-    }
-}
+const PriviligeTransfer = (props) => {
+    const [expandedKeys] = useState(props.AllMenuKeys);
+    const [RoleUsedKeys] = useState(props.RoleUsedKeys);
 
-const leftGenerateTree = (treeNodes = [], checkedKeys = []) => {
-    return treeNodes.map(({ children, ...props }) => (
-        <TreeNode {...props} disabled={checkedKeys.includes(props.key)} key={props.key}>
-            {leftGenerateTree(children, checkedKeys)}
-        </TreeNode>
-    ));
+    const AssingMenu = (e, menu) => {
+        e.preventDefault();
+        console.log('props: ', props.role_code, menu);
+    };
+
+    const DisAssingMenu = (e, menu) => {
+        e.preventDefault();
+        console.log('props: ', props.role_code, menu);
+    };
+
+    const TitleMessage = (menu) => {
+        console.log('menuProps: ', menu);
+
+        if (menu.nodeKeys.menu_level == 1 && menu.nodeKeys.children && menu.nodeKeys.children.length > 0) {
+            return (
+                <div
+                    style={{
+                        width: '300px',
+                        height: '30px',
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                    }}>
+                    <div> {menu.title}</div>
+                </div>
+            );
+        } else {
+            return (
+                <div
+                    style={{
+                        width: '300px',
+                        height: '30px',
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                    }}>
+                    <div>{menu.title}</div>
+                    <button
+                        onClick={(e) => AssingMenu(e, menu.nodeKeys)}
+                        className="btn-assign-menu"
+                        style={{ marginLeft: 'auto', marginRight: '5px' }}>
+                        分配
+                    </button>
+                    <button onClick={(e) => DisAssingMenu(e, menu.nodeKeys)} className="btn-cancel-menu">
+                        取消
+                    </button>
+                </div>
+            );
+        }
+    };
+
+    const getTreeNode = (data) => {
+        if (data && data.length > 0) {
+            return data.map((item) => {
+                if (item.children) {
+                    return (
+                        <TreeNode
+                            disableCheckbox={true}
+                            title={<TitleMessage title={item.title} nodeKeys={item} btnTxt={'bt'} />}
+                            key={item.key}>
+                            {getTreeNode(item.children)}
+                        </TreeNode>
+                    );
+                }
+                return (
+                    <TreeNode
+                        disableCheckbox={true}
+                        title={<TitleMessage title={item.title} nodeKeys={item} btnTxt={'bt'} />}
+                        key={item.key}
+                    />
+                );
+            });
+        }
+        return [];
+    };
+
+    return (
+        <div
+            style={{
+                overflowY: 'scroll',
+                paddingBottom: '6px',
+                height: '440px'
+            }}>
+            <Tree
+                checkable
+                selectable={false}
+                showLine={true}
+                expandedKeys={expandedKeys}
+                autoExpandParent={true}
+                checkedKeys={RoleUsedKeys}>
+                {getTreeNode(props.dataSource)}
+            </Tree>
+        </div>
+    );
 };
-
-const rightGenerateTree = (treeNodes = [], checkedKeys = []) => {
-    return treeNodes.map(({ children, ...props }) => (
-        <TreeNode {...props} disabled={!checkedKeys.includes(props.key)} key={props.key}>
-            {rightGenerateTree(children, checkedKeys)}
-        </TreeNode>
-    ));
-};
-
-const isChecked = (selectedKeys, eventKey) => {
-    return selectedKeys.indexOf(eventKey) !== -1;
-};
+export default PriviligeTransfer;

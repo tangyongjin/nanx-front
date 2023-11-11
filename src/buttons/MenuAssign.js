@@ -1,5 +1,5 @@
 import React from 'react';
-import { message, Modal } from 'antd';
+import { message, Modal, Button } from 'antd';
 import AllocationMenu from './MenuAssign/allocationMenu';
 
 export default class MenuAssign extends React.Component {
@@ -46,8 +46,14 @@ export default class MenuAssign extends React.Component {
                         okText="确认"
                         cancelText="取消"
                         width="1200px"
+                        height="500px"
                         open={this.state.open}
-                        destroyOnClose={true}>
+                        destroyOnClose={true}
+                        footer={[
+                            <Button key="submit" onClick={this.handleCancel}>
+                                关闭
+                            </Button>
+                        ]}>
                         <AllocationMenu />
                     </Modal>
                 ) : null}

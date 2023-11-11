@@ -1,5 +1,4 @@
 import { observable, action } from 'mobx';
-import api from '../api/api';
 import { randomString } from '@/utils/tools';
 
 class NavigationStore {
@@ -100,28 +99,6 @@ class NavigationStore {
                 }
             }
         });
-    }
-
-    @action deepQuery(value, menuList, key) {
-        var isGet = false;
-        var retNode = null;
-
-        function deepSearch(value, menuList) {
-            for (var i = 0; i < menuList.length; i++) {
-                let menu = menuList[i];
-                if (value == menu[key] || isGet) {
-                    isGet || (retNode = menu);
-                    isGet = true;
-                    break;
-                }
-                if (menu.children && menu.children.length > 0) {
-                    deepSearch(value, menu.children);
-                }
-            }
-        }
-
-        deepSearch(value, menuList);
-        return retNode;
     }
 }
 
