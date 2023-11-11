@@ -41,12 +41,6 @@ export default class AllocationMenu extends React.Component {
                         role_code={this.MenuStore.currentRole.role_code}
                         dataSource={toJS(this.MenuStore.AllMenuList)}
                         AllMenuKeys={this.MenuStore.AllMenuKeys}
-                        titles={['菜单', '已分配菜单']}
-                        targetKeys={this.MenuStore.selectTartgetMenukeys}
-                        RoleUsedKeys={this.MenuStore.RoleUsedKeys}
-                        onChange={this.MenuStore.saveMenuPermission}
-                        onSelectChange={this.MenuStore.menuSelectChange}
-                        operations={['确认', '取消']}
                     />
                 )}
             </div>
