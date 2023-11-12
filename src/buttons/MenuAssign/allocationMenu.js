@@ -26,12 +26,13 @@ export default class AllocationMenu extends React.Component {
                 <div>
                     当前角色：{this.MenuStore.currentRole.role_name}
                     <Button
+                        style={{ marginLeft: '10px' }}
                         onClick={this.refreshMenuAssociated}
                         size="small"
                         type="primary"
-                        shape="circle"
-                        icon={<RedoOutlined />}
-                    />
+                        icon={<RedoOutlined style={{ color: '#08a742' }} />}>
+                        刷新
+                    </Button>
                 </div>
                 <br />
                 {this.MenuStore.AllMenuList.length > 0 && (

@@ -3,7 +3,9 @@ import { toJS } from 'mobx';
 import { PicLeftOutlined } from '@ant-design/icons';
 import React from 'react';
 import LoginService from '@/routes/login/LoginService';
-import LoadingGif from './loading.gif';
+import LoadingGif from '@/styles/loading.gif';
+// import LoadingGif from '@/styles/icons8-spinning-circle.gif';
+
 import NavDropDown from './NavDropDown';
 
 @inject('NavigationStore', 'NanxTableStore')
