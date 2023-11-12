@@ -2,10 +2,10 @@ import { observable, action } from 'mobx';
 import React from 'react';
 import { Card, Tabs } from 'antd';
 import { AndroidOutlined, UsergroupAddOutlined } from '@ant-design/icons';
-
+import { port, root_url } from '@/api/api_config/base_config';
 import { observer } from 'mobx-react';
 import api from '@/api/api';
-
+const avatarRoot = `${root_url}:${port}/`;
 class MenuRelatedStore {
     @observable userList = [];
     @observable roleList = [];
@@ -78,9 +78,14 @@ export default class MenuDetailCom extends React.Component {
             return (
                 <Card
                     key={user.id}
-                    hoverable
-                    style={{ width: 190, float: 'left', padding: '10px' }}
-                    cover={<img style={{ width: '30px', height: '30px' }} alt="example" src={user.head_portrait} />}>
+                    style={{ width: 180, float: 'left', padding: '10px' }}
+                    cover={
+                        <img
+                            style={{ marginLeft: '30px', width: '30px', height: '30px' }}
+                            alt="useravatar"
+                            src={avatarRoot + user.head_portrait}
+                        />
+                    }>
                     <Meta title={user.staff_name} description={user.dept_name} />
                     <div>{user.role_name}</div>
                 </Card>

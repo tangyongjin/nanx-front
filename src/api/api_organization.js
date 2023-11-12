@@ -1,7 +1,7 @@
-import { root_url, port, version_2 } from './api_config/base_config';
+import { root_url, port, version } from './api_config/base_config';
 import { post } from './axiosInstance';
 
-const api_root = `${root_url}:${port}/${version_2}`;
+const api_root = `${root_url}:${port}/${version}`;
 
 export default class organization {
     static apis = {

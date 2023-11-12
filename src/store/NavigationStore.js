@@ -6,26 +6,19 @@ class NavigationStore {
     @observable breadcrumb = [];
     @observable isCollapse = false;
     @observable openKeys = [];
-    @observable selectedKeys = [];
     @observable currentMenu = {};
-    @observable badge_sum = 0;
-    @observable address_count = 0;
-    @observable message_count = 0;
-    @observable affair_count = 0;
 
     @action clear = () => {
-        this.currentMenu = {};
         this.breadcrumb = [];
-        sessionStorage.clear();
-        this.selectedKeys = [];
+        this.isCollapse = false;
         this.openKeys = [];
+        this.currentMenu = {};
+        sessionStorage.clear();
     };
 
-    @action changeUpdateKey = () => {
+    @action freshCurrentMenuItem = () => {
         setTimeout(() => {
-            let _randKey = randomString(10);
-            console.log('_randKey: ', _randKey);
-            this.updateKey = _randKey;
+            this.updateKey = randomString(10);
         }, 0);
     };
 
@@ -54,19 +47,12 @@ class NavigationStore {
         ele.innerHTML = 'NaNX';
     };
 
-    @action setCurrentMenu = (nav_row) => {
+    @action setCurrentMenu = (menu) => {
         // 没有菜单列表时，菜单配置为空处理
-        if (nav_row == undefined) {
+        if (menu == undefined) {
             return;
         }
-        this.setSelectedKeys([nav_row.key]);
-        this.currentMenu = nav_row;
-    };
-
-    @action setSelectedKeys = (selectedKeys) => (this.selectedKeys = selectedKeys);
-
-    @action saveSessionBadge = (data) => {
-        sessionStorage.setItem('badge', JSON.stringify(data));
+        this.currentMenu = menu;
     };
 
     @action setOpenKeys = (openKeys) => (this.openKeys = openKeys);

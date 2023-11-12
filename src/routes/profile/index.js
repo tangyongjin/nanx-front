@@ -6,7 +6,7 @@ export default {
         {
             path: 'profile',
             getComponent(nextState, cb) {
-                import('./containers/profile').then((m) => {
+                import('./profile').then((m) => {
                     cb(null, m.default);
                 });
             }

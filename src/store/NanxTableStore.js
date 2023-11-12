@@ -40,7 +40,6 @@ class _NanxTableStore {
 
     @observable table_action = null;
     @observable fixed_query_cfg = null;
-    @observable table_width = 2000;
     @observable lazyButtonUsedCom = null;
     @observable ButtonUsedCom = null;
     @observable search_query_cfg = [];
@@ -165,7 +164,6 @@ class _NanxTableStore {
     @action setTips = (tips) => (this.tips = tips);
     @action setTableButtons = (json) => (this.tableButtons = json);
     @action setCurd = (curd) => (this.curd = curd);
-    @action setTableWidth = (table_width) => (this.table_width = table_width);
 
     @action setLazyButtonUsedCom = (com) => {
         // console.log('设置 lazyButtonUsedCom 组件................');
@@ -198,7 +196,7 @@ class _NanxTableStore {
             this.setTips(res.data.tips);
             this.setTableButtons(res.data.buttons);
             this.setCurd(res.data.curd);
-            this.setTableWidth(res.data.table_width);
+
             this.setFixedQueryCfg(res.data.fixed_query_cfg);
         }
     };

@@ -1,6 +1,6 @@
-import { port, root_url, version_2 } from './api_config/base_config';
+import { port, root_url, version } from './api_config/base_config';
 import { post } from './axiosInstance';
-const api_root = `${root_url}:${port}/${version_2}`;
+const api_root = `${root_url}:${port}/${version}`;
 
 export default class dataGrid {
     static apis = {

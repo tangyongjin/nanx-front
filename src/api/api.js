@@ -1,4 +1,4 @@
-import { port, root_url, version_2 } from './api_config/base_config';
+import { port, root_url, version } from './api_config/base_config';
 import dataGrid from './api_dataGrid';
 import auth from './api_auth';
 import button from './api_button';
@@ -9,7 +9,7 @@ import processmanager from './api_processmanager';
 import user from './api_user';
 import organization from './api_organization';
 
-const api_root = `${root_url}:${port}/${version_2}`;
+const api_root = `${root_url}:${port}/${version}`;
 export { api_root };
 
 export default class api {}

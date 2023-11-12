@@ -16,9 +16,6 @@ class MenuStore {
     @observable RoleBasedMenuList = [];
     @observable RoleUsedKeys = [];
 
-    @observable selectMenukeys = [];
-    @observable selectTartgetMenukeys = [];
-
     @action saveMenuPermission = async (rolecode, menu_level, menuid, parentid) => {
         let params = {
             data: {
@@ -100,10 +97,6 @@ class MenuStore {
             this.RoleUsedKeys = this.getAllKeys(res.data.menuList);
         }
     }
-
-    @action menuSelectChange = (sourceSelectedKeys, targetSelectedKeys) => {
-        this.selectMenukeys = [...sourceSelectedKeys, ...targetSelectedKeys];
-    };
 }
 
 export default new MenuStore();

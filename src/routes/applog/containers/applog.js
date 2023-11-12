@@ -1,6 +1,6 @@
 import React from 'react';
-import { root_url, port, version_2 } from '@/api/api_config/base_config';
-const api_root = `${root_url}:${port}/${version_2}`;
+import { root_url, port, version } from '@/api/api_config/base_config';
+const api_root = `${root_url}:${port}/${version}`;
 export { api_root };
 export default class applog extends React.Component {
     render() {

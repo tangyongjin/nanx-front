@@ -10,7 +10,6 @@ export default class ExportExcel extends React.Component {
     constructor(props) {
         super(props);
         this.init = this.init.bind(this);
-        // document.getElementById('excel_prepare').style.display = 'block';
     }
 
     state = {

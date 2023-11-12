@@ -45,6 +45,7 @@ export default class MenuDetail extends React.Component {
                         width="1200px"
                         open={this.state.open}
                         destroyOnClose={true}>
+                        <br />
                         <MenuDetailCom menuID={this.state.record.id} />
                     </Modal>
                 ) : null}

@@ -20,7 +20,6 @@ const fetchDataGridCfg = async (tableStore) => {
         await tableStore.setTips(res.data.tips);
         await tableStore.setTableButtons(res.data.buttons);
         await tableStore.setCurd(res.data.curd);
-        await tableStore.setTableWidth(res.data.table_width);
         await tableStore.setFixedQueryCfg(res.data.fixed_query_cfg);
         await tableStore.setGridTitle(res.data.datagrid_title);
 

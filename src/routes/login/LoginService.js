@@ -33,7 +33,6 @@ export default class LoginService {
 
                 if (res.code == 200) {
                     await UserStore.setToken(res.token);
-                    await NavigationStore.saveSessionBadge(res.info);
                     await UserStore.setUserProfile(res.profile);
                     await this.afterLoginSuccess(res);
                 }

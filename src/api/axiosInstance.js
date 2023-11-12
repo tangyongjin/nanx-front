@@ -5,11 +5,8 @@ import AuthStore from '@/store/AuthStore';
 
 const { v4: uuidv4 } = require('uuid');
 
-const API_URL = 'http://127.0.0.1:8502/v2';
-
 const axiosInstance = axios.create({
     method: 'post',
-    baseURL: API_URL,
     headers: {
         'Content-Type': 'text/plain'
     }
