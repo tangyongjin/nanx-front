@@ -2,7 +2,7 @@ import React from 'react';
 import { root_url, port, version } from '@/api/api_config/base_config';
 const api_root = `${root_url}:${port}/${version}`;
 export { api_root };
-export default class applog extends React.Component {
+export default class AppBackUp extends React.Component {
     render() {
         console.log(api_root);
         const logurl = api_root + '/log';

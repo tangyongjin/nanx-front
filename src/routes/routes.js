@@ -11,8 +11,7 @@ const routes = {
         require('./login').default,
         require('./NanxTable').default,
         require('./profile').default,
-        require('./system').default,
-        require('./applog').default
+        require('./system').default
     ]
 };
 

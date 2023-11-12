@@ -1,9 +1,9 @@
 import React from 'react';
 import { List, Card } from 'antd';
 import api from '@/api/api';
-import SearchTree from '@/routes/system/containers/searchTree';
+import SearchTree from '@/routes/system/org/searchTree';
 
-export default class DepartmentManage extends React.Component {
+export default class OrgManage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

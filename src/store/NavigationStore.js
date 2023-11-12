@@ -2,17 +2,20 @@ import { observable, action } from 'mobx';
 import { randomString } from '@/utils/tools';
 
 class NavigationStore {
-    @observable updateKey = randomString(5);
+    @observable updateKey = randomString(10);
     @observable breadcrumb = [];
     @observable isCollapse = false;
     @observable openKeys = [];
     @observable currentMenu = {};
+    @observable selectedKeys = [];
 
     @action clear = () => {
         this.breadcrumb = [];
         this.isCollapse = false;
         this.openKeys = [];
         this.currentMenu = {};
+        this.selectedKeys = [];
+
         sessionStorage.clear();
     };
 
@@ -47,11 +50,16 @@ class NavigationStore {
         ele.innerHTML = 'NaNX';
     };
 
+    @action setSelectedKeys = (key) => {
+        this.selectedKeys = key;
+    };
+
     @action setCurrentMenu = (menu) => {
         // 没有菜单列表时，菜单配置为空处理
         if (menu == undefined) {
             return;
         }
+        this.setSelectedKeys([menu.key]);
         this.currentMenu = menu;
     };
 

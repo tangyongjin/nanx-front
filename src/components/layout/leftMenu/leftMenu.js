@@ -28,6 +28,7 @@ export default class LeftMenu extends React.Component {
         }
 
         this.NavigationStore.setCurrentMenu(menuClicked);
+        this.NavigationStore.setSelectedKeys(menuClicked.key);
         hashHistory.push({
             pathname: menuClicked.router,
             state: {
@@ -88,6 +89,7 @@ export default class LeftMenu extends React.Component {
                     <Menu
                         mode="inline"
                         theme="dark"
+                        selectedKeys={this.NavigationStore.selectedKeys}
                         onOpenChange={(openKeys) => this.onOpenChange(openKeys)}
                         {...defaultProps}>
                         {this.props.menuList.map((menuitem, index) => this.getChildren(menuitem, index))}

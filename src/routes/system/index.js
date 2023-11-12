@@ -7,17 +7,17 @@ export default {
     component: require('@/components/layout/PortalLayout').default,
     childRoutes: [
         {
-            path: 'departmentManage',
+            path: 'orgManage',
             getComponent(nextState, cb) {
-                import('./containers/departmentManage').then((m) => {
+                import('./org/orgManage').then((m) => {
                     cb(null, m.default);
                 });
             }
         },
         {
-            path: 'userManage',
+            path: 'appbackup',
             getComponent(nextState, cb) {
-                import('./containers/userManage').then((m) => {
+                import('./appbackup/index').then((m) => {
                     cb(null, m.default);
                 });
             }

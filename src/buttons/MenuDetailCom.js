@@ -9,7 +9,6 @@ const avatarRoot = `${root_url}:${port}/`;
 class MenuRelatedStore {
     @observable userList = [];
     @observable roleList = [];
-
     @observable activeKey = '1';
     @action clearUser = () => (this.userList = []);
     @action clearRole = () => (this.roleList = []);
@@ -19,7 +18,6 @@ class MenuRelatedStore {
 }
 
 const { Meta } = Card;
-const { TabPane } = Tabs;
 @observer
 export default class MenuDetailCom extends React.Component {
     constructor(props) {
@@ -110,28 +108,29 @@ export default class MenuDetailCom extends React.Component {
     };
 
     render() {
-        return (
-            <Tabs activeKey={this.store.activeKey} onChange={this.onChangeTabPane}>
-                <TabPane
-                    tab={
-                        <span>
-                            <AndroidOutlined type="android" /> 涉及角色
-                        </span>
-                    }
-                    key="1">
-                    {this.getTabContentRole()}
-                </TabPane>
-                <TabPane
-                    tab={
-                        <span>
-                            <UsergroupAddOutlined />
-                            涉及人员
-                        </span>
-                    }
-                    key="2">
-                    {this.getTabContentUser()}
-                </TabPane>
-            </Tabs>
-        );
+        const items = [
+            {
+                key: '1',
+                label: (
+                    <span>
+                        <AndroidOutlined type="android" />
+                        分配的角色
+                    </span>
+                ),
+                children: this.getTabContentRole()
+            },
+            {
+                key: '2',
+                label: (
+                    <span>
+                        {' '}
+                        <UsergroupAddOutlined /> 涉及人员
+                    </span>
+                ),
+                children: this.getTabContentUser()
+            }
+        ];
+
+        return <Tabs activeKey={this.store.activeKey} items={items} onChange={this.onChangeTabPane} />;
     }
 }
