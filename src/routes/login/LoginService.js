@@ -40,8 +40,6 @@ export default class LoginService {
             .catch((err) => {
                 console.log(err);
             });
-
-        // console.log('登录返回: ', res);
     }
 
     afterLoginSuccess = async () => {

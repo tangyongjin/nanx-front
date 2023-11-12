@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import { randomString } from '@/utils/tools';
 
 class NavigationStore {
@@ -22,7 +22,14 @@ class NavigationStore {
         this.menuPath = path;
     };
 
-    @action buildBreadcrumb = () => {};
+    @computed get breadcrumb() {
+        let bread = '';
+        this.menuPath.forEach((menu) => {
+            bread += menu.title + '/';
+        });
+
+        return bread.slice(0, -1);
+    }
 
     @action freshCurrentMenuItem = () => {
         setTimeout(() => {

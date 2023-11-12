@@ -15,33 +15,30 @@ export default class LeftMenu extends React.Component {
         this.MenuStore = props.MenuStore;
     }
 
-    menuclickHandler(menuItem, item) {
+    async menuclickHandler(menuItem, item) {
         item.domEvent.preventDefault();
         item.domEvent.stopPropagation();
         let menuClicked = toJS(menuItem);
+        console.log('menuClicked: ', menuClicked);
 
-        // // 点击菜单刷新右侧功能
-        // if (item.key == this.NavigationStore.currentMenu.key) {
-        //     this.NavigationStore.freshCurrentMenuItem();
-        //     return;
-        // }
-
-        this.NavigationStore.setCurrentMenu(menuClicked);
-        this.NavigationStore.setSelectedKeys(menuClicked.key);
-
-        // 路径:
+        await this.NavigationStore.setCurrentMenu(menuClicked);
+        await this.NavigationStore.setSelectedKeys(menuClicked.key);
 
         let path = this.NavigationStore.findMenuPath(this.MenuStore.RoleBasedMenuList, menuClicked.key);
-        console.log('path: ', path);
-        this.NavigationStore.setMenuPath(path);
+        await this.NavigationStore.setMenuPath(path);
 
-        hashHistory.push({
-            pathname: menuClicked.router,
-            state: {
-                datagrid_code: menuClicked?.datagrid_code,
-                menu_code: menuClicked.menu
-            }
-        });
+        if (item.key == this.NavigationStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
+            this.NavigationStore.freshCurrentMenuItem();
+            return;
+        } else {
+            hashHistory.push({
+                pathname: menuClicked.router,
+                state: {
+                    datagrid_code: menuClicked?.datagrid_code,
+                    menu_code: menuClicked.menu
+                }
+            });
+        }
     }
 
     getChildren(menuitem) {

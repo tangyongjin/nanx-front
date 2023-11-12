@@ -15,14 +15,6 @@ export default class Navbar extends React.Component {
     }
 
     render() {
-        const buildBreadcrumb = () => {
-            let bread = '';
-            this.NavigationStore.menuPath.forEach((menu) => {
-                bread += menu.title + '/';
-            });
-            return bread.slice(0, -1);
-        };
-
         return (
             <div style={{ display: 'flex', flexDirection: 'row', height: '80px' }}>
                 <div id="navbar_collapse_bread">
@@ -33,7 +25,7 @@ export default class Navbar extends React.Component {
                         />
                     </div>
                     <div style={{ flex: '90%', textAlign: 'left', color: '#1c4308' }}>
-                        <span>{buildBreadcrumb()}</span>
+                        <span>{this.NavigationStore.breadcrumb}</span>
                     </div>
                 </div>
                 <div id="navbar_preloader">
