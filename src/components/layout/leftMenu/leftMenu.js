@@ -6,11 +6,13 @@ import React from 'react';
 import { hashHistory } from 'react-router';
 
 @inject('NavigationStore')
+@inject('MenuStore')
 @observer
 export default class LeftMenu extends React.Component {
     constructor(props) {
         super();
         this.NavigationStore = props.NavigationStore;
+        this.MenuStore = props.MenuStore;
     }
 
     menuclickHandler(menuItem, item) {
@@ -18,21 +20,25 @@ export default class LeftMenu extends React.Component {
         item.domEvent.stopPropagation();
         let menuClicked = toJS(menuItem);
 
-        // 点击菜单刷新右侧功能
-        if (
-            JSON.stringify(menuClicked) == JSON.stringify(this.NavigationStore.currentMenu) &&
-            window.location.href.indexOf(menuClicked.router) != -1
-        ) {
-            this.NavigationStore.freshCurrentMenuItem();
-            return;
-        }
+        // // 点击菜单刷新右侧功能
+        // if (item.key == this.NavigationStore.currentMenu.key) {
+        //     this.NavigationStore.freshCurrentMenuItem();
+        //     return;
+        // }
 
         this.NavigationStore.setCurrentMenu(menuClicked);
         this.NavigationStore.setSelectedKeys(menuClicked.key);
+
+        // 路径:
+
+        let path = this.NavigationStore.findMenuPath(this.MenuStore.RoleBasedMenuList, menuClicked.key);
+        console.log('path: ', path);
+        this.NavigationStore.setMenuPath(path);
+
         hashHistory.push({
             pathname: menuClicked.router,
             state: {
-                datagrid_code: menuClicked.datagrid_code,
+                datagrid_code: menuClicked?.datagrid_code,
                 menu_code: menuClicked.menu
             }
         });
@@ -58,18 +64,12 @@ export default class LeftMenu extends React.Component {
                         <span id={one.menu_uuid}>{one.title}</span>
                     </span>
                 }>
-                {one.children.map((xitem, itemIndex) => this.getChildren(xitem, itemIndex))}
+                {one.children.map((xitem) => this.getChildren(xitem))}
             </Menu.SubMenu>
         );
     }
 
-    onOpenChange(openKeys) {
-        this.NavigationStore.setOpenKeys(openKeys);
-    }
-
     render() {
-        const defaultProps = this.NavigationStore.isCollapse ? {} : { openKeys: this.NavigationStore.openKeys };
-
         return (
             <div>
                 <div
@@ -86,12 +86,7 @@ export default class LeftMenu extends React.Component {
                     [Nanx+]
                 </div>
                 <div>
-                    <Menu
-                        mode="inline"
-                        theme="dark"
-                        selectedKeys={this.NavigationStore.selectedKeys}
-                        onOpenChange={(openKeys) => this.onOpenChange(openKeys)}
-                        {...defaultProps}>
+                    <Menu mode="inline" theme="dark" selectedKeys={this.NavigationStore.selectedKeys}>
                         {this.props.menuList.map((menuitem, index) => this.getChildren(menuitem, index))}
                     </Menu>
                 </div>

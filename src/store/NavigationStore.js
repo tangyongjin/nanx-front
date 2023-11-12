@@ -2,26 +2,31 @@ import { observable, action } from 'mobx';
 import { randomString } from '@/utils/tools';
 
 class NavigationStore {
-    @observable updateKey = randomString(10);
-    @observable breadcrumb = [];
+    @observable randomKey = randomString(10);
     @observable isCollapse = false;
     @observable openKeys = [];
     @observable currentMenu = {};
     @observable selectedKeys = [];
+    @observable menuPath = [];
 
     @action clear = () => {
-        this.breadcrumb = [];
         this.isCollapse = false;
         this.openKeys = [];
         this.currentMenu = {};
         this.selectedKeys = [];
-
+        this.menuPath = []; // 面包屑用
         sessionStorage.clear();
     };
 
+    @action setMenuPath = (path) => {
+        this.menuPath = path;
+    };
+
+    @action buildBreadcrumb = () => {};
+
     @action freshCurrentMenuItem = () => {
         setTimeout(() => {
-            this.updateKey = randomString(10);
+            this.randomKey = randomString(10);
         }, 0);
     };
 
@@ -29,7 +34,6 @@ class NavigationStore {
         console.log('侧边栏收齐/展开');
         this.isCollapse = !this.isCollapse;
 
-        // set id =logo text :
         let ele = document.getElementById('logo');
         ele.style['font-size'] = '16px';
 
@@ -55,44 +59,58 @@ class NavigationStore {
     };
 
     @action setCurrentMenu = (menu) => {
+        console.log('当前菜单', menu);
         // 没有菜单列表时，菜单配置为空处理
-        if (menu == undefined) {
+        if (menu == [] || menu == undefined) {
             return;
         }
+
         this.setSelectedKeys([menu.key]);
         this.currentMenu = menu;
+        // 保存当前菜单到 sessionStorage
+        sessionStorage.setItem('currentMenu', JSON.stringify(menu));
     };
 
-    @action setOpenKeys = (openKeys) => (this.openKeys = openKeys);
+    @action onOpenChange = (openKeys) => {
+        console.log('openKeys>>💥💥💥💥💥💥💥💥>路径 ', openKeys);
+        // this.openKeys = openKeys;
+    };
 
-    @action setComputedOpenKeys = () => {
-        let openKeys = this.breadcrumb.map((item) => {
-            if (item.children) {
-                return item.key;
-            }
-        });
-        this.setOpenKeys(openKeys);
+    @action setOpenKeys = (path) => {
+        this.openKeys = path;
     };
 
     @action getBreadcrumbSessionStorage = () => {
-        if (sessionStorage.getItem('breadcrumb')) {
-            this.breadcrumb = JSON.parse(sessionStorage.getItem('breadcrumb'));
-            this.setComputedOpenKeys();
+        if (sessionStorage.getItem('currentMenu')) {
+            this.currentMenu = JSON.parse(sessionStorage.getItem('currentMenu'));
             return;
         }
     };
 
-    xloop(menu, pid, breadcrumbs) {
-        menu.forEach((k) => {
-            if (k.key == pid) {
-                breadcrumbs.push(k);
-                return k;
-            } else {
-                if (k.children) {
-                    this.xloop(k.children, pid, breadcrumbs);
+    findMenuPath(menu, key) {
+        console.log('👹👹👹👹👹menu: ', menu);
+        console.log('👹👹👹key: ', key);
+
+        const findPath = (menu, key, path) => {
+            for (let i = 0; i < menu.length; i++) {
+                const item = menu[i];
+                path.push({ key: item.key, title: item.title });
+                if (item.key === key) {
+                    return path;
                 }
+                if (item.children) {
+                    const foundPath = findPath(item.children, key, path);
+                    if (foundPath) {
+                        return foundPath;
+                    }
+                }
+                path.pop();
             }
-        });
+        };
+
+        const path = [];
+        const result = findPath(menu, key, path);
+        return result;
     }
 }
 

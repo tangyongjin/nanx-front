@@ -10,8 +10,6 @@ const PortalLayout = inject(
     'MenuStore'
 )(
     observer((props) => {
-        console.log('props: ', props);
-
         const deepQuery = (value, menuList, key) => {
             var isGet = false;
             var retNode = null;
@@ -55,15 +53,15 @@ const PortalLayout = inject(
         window.onload = () => {
             console.log('刷新>>>>>>>>>>>');
             props.NavigationStore.getBreadcrumbSessionStorage();
-            props.NavigationStore.setCurrentMenu(
-                props.NavigationStore.breadcrumb[props.NavigationStore.breadcrumb.length - 1]
-            );
+            // props.NavigationStore.setCurrentMenu(
+            //     props.NavigationStore.breadcrumb[props.NavigationStore.breadcrumb.length - 1]
+            // );
         };
 
         useEffect(() => {
             props.MenuStore.getMenuTreeByRoleCode();
 
-            if (!sessionStorage.getItem('breadcrumb')) {
+            if (!sessionStorage.getItem('currentMenu')) {
                 props.NavigationStore.setCurrentMenu(props.MenuStore.RoleBasedMenuList[0]);
             }
         }, [props.MenuStore, props.NavigationStore]);
@@ -84,7 +82,7 @@ const PortalLayout = inject(
                         <Navbar />
                     </Header>
                     <Content
-                        key={props.NavigationStore.updateKey}
+                        key={props.NavigationStore.randomKey}
                         style={{
                             marginLeft: '4px'
                         }}>

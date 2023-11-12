@@ -201,8 +201,7 @@ class _NanxTableStore {
         }
     };
 
-    @action listData = async (scense) => {
-        console.log('来源:::: ', scense);
+    @action listData = async () => {
         let data = listDataParams(this);
         let params = {
             data: data

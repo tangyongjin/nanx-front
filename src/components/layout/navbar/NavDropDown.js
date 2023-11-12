@@ -65,29 +65,31 @@ export default class NavDropDown extends React.Component {
         ];
 
         return (
-            <Dropdown
-                trigger={['click']}
-                menu={{
-                    items,
-                    onClick
-                }}>
-                <div>
-                    <span style={{ paddingRight: '5px', color: '#97a8be', fontSize: '14px' }}>
-                        {sessionStorage.getItem('staff_name') + ' / ' + sessionStorage.getItem('role_name')}
-                    </span>
-                    <img
-                        alt="head"
-                        style={{
-                            width: '36px',
-                            borderRadius: '5px',
-                            height: '36px',
-                            verticalAlign: 'middle'
-                        }}
-                        src={avatarRoot + JSON.parse(sessionStorage.getItem('userInfo')).head_portrait}
-                        className="user-avatar"
-                    />
-                </div>
-            </Dropdown>
+            <div style={{ width: '190px', cursor: 'pointer' }}>
+                <Dropdown
+                    trigger={['click']}
+                    menu={{
+                        items,
+                        onClick
+                    }}>
+                    <div>
+                        <span style={{ paddingRight: '5px', color: '#97a8be', fontSize: '14px' }}>
+                            {sessionStorage.getItem('staff_name') + ' / ' + sessionStorage.getItem('role_name')}
+                        </span>
+                        <img
+                            alt="head"
+                            style={{
+                                width: '36px',
+                                borderRadius: '5px',
+                                height: '36px',
+                                verticalAlign: 'middle'
+                            }}
+                            src={avatarRoot + JSON.parse(sessionStorage.getItem('userInfo')).head_portrait}
+                            className="user-avatar"
+                        />
+                    </div>
+                </Dropdown>
+            </div>
         );
     }
 }

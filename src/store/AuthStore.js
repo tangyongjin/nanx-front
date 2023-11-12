@@ -7,8 +7,8 @@ class _AuthStore {
     @observable _runningStacks = [];
 
     @action addRunnitem = (uuid) => {
-        if (document.getElementById('preloader')) {
-            document.getElementById('preloader').style.display = 'block';
+        if (document.getElementById('navbar_preloader')) {
+            document.getElementById('navbar_preloader').style.display = 'block';
         }
 
         this._runningStacks.push(uuid);
@@ -19,8 +19,8 @@ class _AuthStore {
         // 根据 uuid删除数组中一项
         this._runningStacks = this._runningStacks.filter((item) => item !== uuid);
         if (this._runningStacks.length == 0) {
-            if (document.getElementById('preloader')) {
-                document.getElementById('preloader').style.display = 'none';
+            if (document.getElementById('navbar_preloader')) {
+                document.getElementById('navbar_preloader').style.display = 'none';
             }
 
             this.setLoading(false);

@@ -1,6 +1,4 @@
 const listDataParams = (tableStore) => {
-    console.log('tableStore: ', tableStore);
-
     let joined_querycfg = [];
 
     if (Array.isArray(tableStore.search_query_cfg) && Array.isArray(tableStore.fixed_query_cfg)) {
@@ -17,7 +15,6 @@ const listDataParams = (tableStore) => {
         currentPage: tableStore.currentPage
     };
 
-    console.log(_listParameters);
     return _listParameters;
 };
 

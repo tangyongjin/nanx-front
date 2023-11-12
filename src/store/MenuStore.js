@@ -74,13 +74,17 @@ class MenuStore {
         return keys;
     }
 
+    @action setAllMenuList = (menus) => {
+        this.AllMenuList = menus;
+    };
+
     @action getTreeMenuList = async () => {
         let params = {};
 
         let res = await api.permission.getTreeMenuList(params);
         if (res.code == 200) {
             this.AllMenuKeys = this.getAllKeys(res.data);
-            this.AllMenuList = res.data;
+            this.setAllMenuList(res.data);
         }
     };
 

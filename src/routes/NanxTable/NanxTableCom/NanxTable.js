@@ -8,7 +8,6 @@ import renderButtons from './renderButtons';
 export default class NanxTable extends React.Component {
     constructor(props) {
         super(props);
-        console.log('props: ', props);
         this.tbStore = props.NanxTableStore;
     }
 

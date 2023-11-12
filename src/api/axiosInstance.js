@@ -53,7 +53,6 @@ export function post(url, params, config) {
 }
 
 const responseSuccess = (response) => {
-    console.log('进入响应拦截器');
     //接收到响应数据并成功后的一些共有的处理，关闭loading等
     AuthStore.setLoading(false);
     AuthStore.delRunnitem(response.config.requestId);
