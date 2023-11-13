@@ -3,6 +3,8 @@ import LeftMenu from './leftMenu/leftMenu';
 import Navbar from './navbar//Navbar';
 import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
+import { getTargetMenuKey } from '@/utils/tools';
+import { toJS } from 'mobx';
 const { Header, Sider, Content } = Layout;
 
 const PortalLayout = inject(
@@ -10,60 +12,39 @@ const PortalLayout = inject(
     'MenuStore'
 )(
     observer((props) => {
-        const deepQuery = (value, menuList, key) => {
-            var isGet = false;
-            var retNode = null;
-
-            function deepSearch(value, menuList) {
-                for (var i = 0; i < menuList.length; i++) {
-                    let menu = menuList[i];
-                    if (value == menu[key] || isGet) {
-                        isGet || (retNode = menu);
-                        isGet = true;
-                        break;
-                    }
-                    if (menu.children && menu.children.length > 0) {
-                        deepSearch(value, menu.children);
-                    }
-                }
-            }
-
-            deepSearch(value, menuList);
-            return retNode;
-        };
-
-        window.addEventListener(
-            'popstate',
-            async () => {
-                props.NavigationStore.getBreadcrumbSessionStorage();
-                let url = window.location.href;
-                let actionIndex = url.indexOf('_k');
-                let end_string = url.slice(actionIndex + 3);
-                let sessionKey = '@@History/' + end_string;
-                let actionMsg = JSON.parse(sessionStorage.getItem(sessionKey));
-
-                if (actionMsg && actionMsg.menu_code) {
-                    let next_menu_cfg = deepQuery(actionMsg.menu_code, props.MenuStore.RoleBasedMenuList, 'menu');
-                    props.NavigationStore.setCurrentMenu(next_menu_cfg);
-                }
-            },
-            false
-        );
-
-        window.onload = () => {
-            console.log('刷新>>>>>>>>>>>');
-            props.NavigationStore.getBreadcrumbSessionStorage();
-            // props.NavigationStore.setCurrentMenu(
-            //     props.NavigationStore.breadcrumb[props.NavigationStore.breadcrumb.length - 1]
-            // );
-        };
-
         useEffect(() => {
-            props.MenuStore.getMenuTreeByRoleCode();
+            const onPrev = (ev) => {
+                console.log('ev: ', ev);
+                let goHref = window.location.href;
+                console.log('即将跳转目标路径为：', goHref);
+                let targetMenuKey = getTargetMenuKey(goHref);
+                console.log('Key ', targetMenuKey);
+                console.log('后退:当前菜单集合');
+                console.log(toJS(props.MenuStore.RoleBasedMenuList));
+                let path = props.NavigationStore.findMenuPath(props.MenuStore.RoleBasedMenuList, targetMenuKey);
+                props.NavigationStore.setMenuPath(path);
+            };
 
-            if (!sessionStorage.getItem('currentMenu')) {
-                props.NavigationStore.setCurrentMenu(props.MenuStore.RoleBasedMenuList[0]);
-            }
+            const onReload = () => {
+                console.log('刷新');
+                let key = props.NavigationStore.getCurrentMenuKeyFromSessionStorage();
+                console.log('刷新>>>>>>>>当前菜单集合');
+                console.log('key', key);
+                console.log(toJS(props.MenuStore.RoleBasedMenuList));
+                let path = props.NavigationStore.findMenuPath(props.MenuStore.RoleBasedMenuList, key);
+                props.NavigationStore.setMenuPath(path);
+            };
+
+            const asyncFun = async () => {
+                await props.MenuStore.getMenuTreeByRoleCode();
+                window.addEventListener('popstate', onPrev, false);
+                window.onbeforeunload = onReload;
+                return () => {
+                    window.removeEventListener('popstate');
+                    window.onbeforeunload = null;
+                };
+            };
+            asyncFun();
         }, [props.MenuStore, props.NavigationStore]);
 
         return (

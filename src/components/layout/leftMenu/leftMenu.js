@@ -21,24 +21,27 @@ export default class LeftMenu extends React.Component {
         let menuClicked = toJS(menuItem);
         console.log('menuClicked: ', menuClicked);
 
+        // 重复点击相同菜单,刷新内容
+
+        if (item.key == this.NavigationStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
+            console.log('重复点击相同菜单,刷新内容');
+            this.NavigationStore.freshCurrentMenuItem();
+            return;
+        }
+
         await this.NavigationStore.setCurrentMenu(menuClicked);
         await this.NavigationStore.setSelectedKeys(menuClicked.key);
-
         let path = this.NavigationStore.findMenuPath(this.MenuStore.RoleBasedMenuList, menuClicked.key);
         await this.NavigationStore.setMenuPath(path);
 
-        if (item.key == this.NavigationStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
-            this.NavigationStore.freshCurrentMenuItem();
-            return;
-        } else {
-            hashHistory.push({
-                pathname: menuClicked.router,
-                state: {
-                    datagrid_code: menuClicked?.datagrid_code,
-                    menu_code: menuClicked.menu
-                }
-            });
-        }
+        hashHistory.push({
+            pathname: menuClicked.router,
+            state: {
+                datagrid_code: menuClicked?.datagrid_code,
+                menu: menuClicked.menu,
+                key: menuClicked.key
+            }
+        });
     }
 
     getChildren(menuitem) {

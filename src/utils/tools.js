@@ -64,23 +64,6 @@ export function getMaxRowKey(data) {
           ) + 1;
 }
 
-/**
- *  data structure
- * validateFields: is Array
- * [
- *  	{
- * 			key: 'ethernet_port_type',
- * 			title: '客户名称',
- * 			reg: /^[0-9]{2}[a-z]{2}$/,
- * 			errorText: '客户必须包含两个数字两个小写字母',
- *          require: true,
- *          emptyText: '请输入客户名称'
- * 		}
- * ]
- * data: Object
- * message: notify component
- **/
-
 export function validate(validateFields, data, message) {
     for (let i = 0; i < validateFields.length; i++) {
         let item = validateFields[i];
@@ -116,22 +99,14 @@ export function color() {}
 
 export function shape() {}
 
-// export function treeFunc(data) {
-//     data.forEach(function (item) {
-//         delete item.children;
-//     });
-//     var map = {};
-//     data.forEach(function (item) {
-//         map[item.key] = item;
-//     });
-//     var val = [];
-//     data.forEach(function (item) {
-//         var parent = map[item.parent_id];
-//         if (parent) {
-//             (parent.children || (parent.children = [])).push(item);
-//         } else {
-//             val.push(item);
-//         }
-//     });
-//     return val;
-// }
+export function getTargetMenuKey(url) {
+    let hashLocation = url.indexOf('?_k=');
+    let end_string = url.slice(hashLocation + 4);
+    let sessionKey = '@@History/' + end_string;
+    let sessionValue = JSON.parse(sessionStorage.getItem(sessionKey));
+    if (sessionValue) {
+        return sessionValue.key;
+    } else {
+        return null;
+    }
+}

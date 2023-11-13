@@ -1,4 +1,5 @@
-import { observable, action, computed } from 'mobx';
+import { toJS } from 'mobx';
+import { observable, action } from 'mobx';
 import { randomString } from '@/utils/tools';
 
 class NavigationStore {
@@ -8,6 +9,7 @@ class NavigationStore {
     @observable currentMenu = {};
     @observable selectedKeys = [];
     @observable menuPath = [];
+    @observable breadcrumb = 'AAA';
 
     @action clear = () => {
         this.isCollapse = false;
@@ -15,21 +17,21 @@ class NavigationStore {
         this.currentMenu = {};
         this.selectedKeys = [];
         this.menuPath = []; // 面包屑用
+        this.breadcrumb = 'AAA';
         sessionStorage.clear();
     };
 
-    @action setMenuPath = (path) => {
+    @action setMenuPath = async (path) => {
         this.menuPath = path;
-    };
 
-    @computed get breadcrumb() {
         let bread = '';
-        this.menuPath.forEach((menu) => {
-            bread += menu.title + '/';
-        });
+        path &&
+            path.forEach((menu) => {
+                bread += menu.title + '/';
+            });
 
-        return bread.slice(0, -1);
-    }
+        this.breadcrumb = bread.slice(0, -1);
+    };
 
     @action freshCurrentMenuItem = () => {
         setTimeout(() => {
@@ -87,21 +89,28 @@ class NavigationStore {
         this.openKeys = path;
     };
 
-    @action getBreadcrumbSessionStorage = () => {
+    @action setCurrentMenuFromSessionStorage = () => {
         if (sessionStorage.getItem('currentMenu')) {
-            this.currentMenu = JSON.parse(sessionStorage.getItem('currentMenu'));
-            return;
+            let tmp = JSON.parse(sessionStorage.getItem('currentMenu'));
+            this.currentMenu = tmp;
+            console.log('从Session获取的menu', tmp);
+        }
+    };
+
+    @action getCurrentMenuKeyFromSessionStorage = () => {
+        if (sessionStorage.getItem('currentMenu')) {
+            let tmp = JSON.parse(sessionStorage.getItem('currentMenu'));
+            return tmp.key;
+        } else {
+            return null;
         }
     };
 
     findMenuPath(menu, key) {
-        console.log('👹👹👹👹👹menu: ', menu);
-        console.log('👹👹👹key: ', key);
-
         const findPath = (menu, key, path) => {
             for (let i = 0; i < menu.length; i++) {
                 const item = menu[i];
-                path.push({ key: item.key, title: item.title });
+                path.push(item);
                 if (item.key === key) {
                     return path;
                 }
@@ -117,6 +126,9 @@ class NavigationStore {
 
         const path = [];
         const result = findPath(menu, key, path);
+        console.log('路径>>>>>>>>');
+
+        console.log(toJS(result));
         return result;
     }
 }
