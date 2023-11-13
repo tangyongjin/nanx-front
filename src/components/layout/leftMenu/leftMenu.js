@@ -4,6 +4,7 @@ import { toJS } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
+import { findMenuPath } from '@/utils/tools';
 
 @inject('MenuStore')
 @observer
@@ -17,19 +18,17 @@ export default class LeftMenu extends React.Component {
         item.domEvent.preventDefault();
         item.domEvent.stopPropagation();
         let menuClicked = toJS(menuItem);
-        console.log('menuClicked: ', menuClicked);
 
         // 重复点击相同菜单,刷新内容
 
         if (item.key == this.MenuStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
-            console.log('重复点击相同菜单,刷新内容');
             this.MenuStore.freshCurrentMenuItem();
             return;
         }
 
         await this.MenuStore.setCurrentMenu(menuClicked);
         await this.MenuStore.setSelectedKeys(menuClicked.key);
-        let path = this.MenuStore.findMenuPath(this.MenuStore.RoleBasedMenuList, menuClicked.key);
+        let path = findMenuPath(this.MenuStore.RoleBasedMenuList, menuClicked.key);
         await this.MenuStore.setMenuPath(path);
 
         hashHistory.push({

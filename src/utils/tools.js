@@ -110,3 +110,52 @@ export function getTargetMenuKey(url) {
         return null;
     }
 }
+
+export function getAllKeys(menuData) {
+    let keys = [];
+
+    function extractKeys(menuItem) {
+        if (menuItem.children && menuItem.children.length == 0) {
+            keys.push(menuItem.key);
+        }
+
+        if (!menuItem.children) {
+            keys.push(menuItem.key);
+        }
+
+        if (menuItem.children && menuItem.children.length > 0) {
+            menuItem.children.forEach((child) => {
+                extractKeys(child);
+            });
+        }
+    }
+
+    menuData.forEach((item) => {
+        extractKeys(item);
+    });
+
+    return keys;
+}
+
+export function findMenuPath(menu, key) {
+    const findPath = (menu, key, path) => {
+        for (let i = 0; i < menu.length; i++) {
+            const item = menu[i];
+            path.push(item);
+            if (item.key === key) {
+                return path;
+            }
+            if (item.children) {
+                const foundPath = findPath(item.children, key, path);
+                if (foundPath) {
+                    return foundPath;
+                }
+            }
+            path.pop();
+        }
+    };
+
+    const path = [];
+    const result = findPath(menu, key, path);
+    return result;
+}

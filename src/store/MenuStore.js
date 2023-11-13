@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 import api from '../api/api';
-import { randomString } from '@/utils/tools';
+import { randomString, getAllKeys, findMenuPath } from '@/utils/tools';
 import { message } from 'antd';
 
 class _MenuStore {
@@ -9,11 +9,6 @@ class _MenuStore {
     @observable openKeys = [];
     @observable currentMenu = {};
     @observable selectedKeys = [];
-
-    @observable currentRole = {
-        role_code: sessionStorage.getItem('role_code'),
-        role_name: sessionStorage.getItem('role_name')
-    };
 
     // 系统所有菜单
     @observable AllMenuList = [];
@@ -24,6 +19,11 @@ class _MenuStore {
     // 基于角色的菜单
     @observable RoleBasedMenuList = [];
     @observable RoleUsedKeys = [];
+
+    @observable currentRole = {
+        role_code: sessionStorage.getItem('role_code'),
+        role_name: sessionStorage.getItem('role_name')
+    };
 
     @action setMenuPath = (path) => {
         this.menuPath = path;
@@ -71,32 +71,6 @@ class _MenuStore {
         }
     };
 
-    getAllKeys(menuData) {
-        let keys = [];
-
-        function extractKeys(menuItem) {
-            if (menuItem.children && menuItem.children.length == 0) {
-                keys.push(menuItem.key);
-            }
-
-            if (!menuItem.children) {
-                keys.push(menuItem.key);
-            }
-
-            if (menuItem.children && menuItem.children.length > 0) {
-                menuItem.children.forEach((child) => {
-                    extractKeys(child);
-                });
-            }
-        }
-
-        menuData.forEach((item) => {
-            extractKeys(item);
-        });
-
-        return keys;
-    }
-
     @action setAllMenuList = (menus) => {
         this.AllMenuList = menus;
     };
@@ -106,7 +80,7 @@ class _MenuStore {
 
         let res = await api.permission.getTreeMenuList(params);
         if (res.code == 200) {
-            this.AllMenuKeys = this.getAllKeys(res.data);
+            this.AllMenuKeys = getAllKeys(res.data);
             this.setAllMenuList(res.data);
         }
     };
@@ -121,42 +95,16 @@ class _MenuStore {
         let res = await api.permission.getMenuTreeByRoleCode(params);
         if (res.code == 200) {
             this.RoleBasedMenuList = res.data.menuList;
-            this.RoleUsedKeys = this.getAllKeys(res.data.menuList);
+            this.RoleUsedKeys = getAllKeys(res.data.menuList);
             this.refreshBreadcrumbs();
         }
     }
 
     @action refreshBreadcrumbs = () => {
         let key = this.getCurrentMenuKeyFromSessionStorage();
-        console.log('刷新>>>>>>>>当前菜单集合');
-        console.log('this.RoleBasedMenuList: ', this.RoleBasedMenuList);
-        console.log('key', key);
-        let path = this.findMenuPath(this.RoleBasedMenuList, key);
+        let path = findMenuPath(this.RoleBasedMenuList, key);
         this.setMenuPath(path);
     };
-
-    findMenuPath(menu, key) {
-        const findPath = (menu, key, path) => {
-            for (let i = 0; i < menu.length; i++) {
-                const item = menu[i];
-                path.push(item);
-                if (item.key === key) {
-                    return path;
-                }
-                if (item.children) {
-                    const foundPath = findPath(item.children, key, path);
-                    if (foundPath) {
-                        return foundPath;
-                    }
-                }
-                path.pop();
-            }
-        };
-
-        const path = [];
-        const result = findPath(menu, key, path);
-        return result;
-    }
 
     @action getCurrentMenuKeyFromSessionStorage = () => {
         if (sessionStorage.getItem('currentMenu')) {
@@ -168,7 +116,6 @@ class _MenuStore {
     };
 
     @action onOpenChange = (openKeys) => {
-        console.log('openKeys>>💥💥💥💥💥💥💥💥>路径 ', openKeys);
         this.openKeys = openKeys;
     };
 
@@ -191,7 +138,6 @@ class _MenuStore {
     };
 
     @action toggleCollapse = () => {
-        console.log('侧边栏收齐/展开');
         this.isCollapse = !this.isCollapse;
 
         let ele = document.getElementById('logo');
@@ -219,7 +165,6 @@ class _MenuStore {
     };
 
     @action setCurrentMenu = (menu) => {
-        console.log('当前菜单', menu);
         // 没有菜单列表时，菜单配置为空处理
         if (menu == [] || menu == undefined) {
             return;

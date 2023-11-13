@@ -4,6 +4,8 @@ import Navbar from './navbar//Navbar';
 import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
 import { getTargetMenuKey } from '@/utils/tools';
+import { findMenuPath } from '@/utils/tools';
+
 const { Header, Sider, Content } = Layout;
 
 const PortalLayout = inject('MenuStore')(
@@ -12,8 +14,7 @@ const PortalLayout = inject('MenuStore')(
             const onPrev = () => {
                 let goHref = window.location.href;
                 let targetMenuKey = getTargetMenuKey(goHref);
-                console.log('Key ', targetMenuKey);
-                let path = props.MenuStore.findMenuPath(props.MenuStore.RoleBasedMenuList, targetMenuKey);
+                let path = findMenuPath(props.MenuStore.RoleBasedMenuList, targetMenuKey);
                 if (path.length > 0) {
                     props.MenuStore.setCurrentMenu(path[path.length - 1]);
                     props.MenuStore.refreshBreadcrumbs();
