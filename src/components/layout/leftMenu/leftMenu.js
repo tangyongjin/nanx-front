@@ -86,7 +86,12 @@ export default class LeftMenu extends React.Component {
                     [Nanx+]
                 </div>
                 <div>
-                    <Menu mode="inline" theme="dark" selectedKeys={this.NavigationStore.selectedKeys}>
+                    <Menu
+                        mode="inline"
+                        openKeys={this.MenuStore.openKeys}
+                        theme="dark"
+                        onOpenChange={(openKeys) => this.MenuStore.onOpenChange(openKeys)}
+                        selectedKeys={this.NavigationStore.selectedKeys}>
                         {this.props.menuList.map((menuitem, index) => this.getChildren(menuitem, index))}
                     </Menu>
                 </div>

@@ -12,6 +12,7 @@ class _MenuStore {
     @observable AllMenuList = [];
     @observable AllMenuKeys = [];
     @observable breadcrumb = '';
+    @observable openKeys = [];
     @observable menuPath = [];
 
     // 基于角色的菜单
@@ -20,15 +21,16 @@ class _MenuStore {
 
     @action setMenuPath = (path) => {
         this.menuPath = path;
-
+        let opkeys = [];
         let bread = '';
         path &&
             path.forEach((menu) => {
                 bread += menu.title + '/';
+                opkeys.push(menu.key);
             });
 
-        console.log('面包學====>' + bread);
         this.breadcrumb = bread.slice(0, -1);
+        this.setOpenKeys(opkeys);
     };
 
     @action saveMenuPermission = async (rolecode, menu_level, menuid, parentid) => {
@@ -157,6 +159,15 @@ class _MenuStore {
         } else {
             return null;
         }
+    };
+
+    @action onOpenChange = (openKeys) => {
+        console.log('openKeys>>💥💥💥💥💥💥💥💥>路径 ', openKeys);
+        this.openKeys = openKeys;
+    };
+
+    @action setOpenKeys = (path) => {
+        this.openKeys = path;
     };
 }
 

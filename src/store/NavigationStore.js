@@ -56,20 +56,9 @@ class _NavigationStore {
         if (menu == [] || menu == undefined) {
             return;
         }
-
         this.setSelectedKeys([menu.key]);
         this.currentMenu = menu;
-        // 保存当前菜单到 sessionStorage
         sessionStorage.setItem('currentMenu', JSON.stringify(menu));
-    };
-
-    @action onOpenChange = (openKeys) => {
-        console.log('openKeys>>💥💥💥💥💥💥💥💥>路径 ', openKeys);
-        // this.openKeys = openKeys;
-    };
-
-    @action setOpenKeys = (path) => {
-        this.openKeys = path;
     };
 }
 
