@@ -2,7 +2,7 @@ import { observable, action } from 'mobx';
 import api from '../api/api';
 import { message } from 'antd';
 
-class MenuStore {
+class _MenuStore {
     @observable currentRole = {
         role_code: sessionStorage.getItem('role_code'),
         role_name: sessionStorage.getItem('role_name')
@@ -11,10 +11,25 @@ class MenuStore {
     // 系统所有菜单
     @observable AllMenuList = [];
     @observable AllMenuKeys = [];
+    @observable breadcrumb = '';
+    @observable menuPath = [];
 
     // 基于角色的菜单
     @observable RoleBasedMenuList = [];
     @observable RoleUsedKeys = [];
+
+    @action setMenuPath = (path) => {
+        this.menuPath = path;
+
+        let bread = '';
+        path &&
+            path.forEach((menu) => {
+                bread += menu.title + '/';
+            });
+
+        console.log('面包學====>' + bread);
+        this.breadcrumb = bread.slice(0, -1);
+    };
 
     @action saveMenuPermission = async (rolecode, menu_level, menuid, parentid) => {
         let params = {
@@ -99,8 +114,51 @@ class MenuStore {
         if (res.code == 200) {
             this.RoleBasedMenuList = res.data.menuList;
             this.RoleUsedKeys = this.getAllKeys(res.data.menuList);
+            this.refreshBreadcrumbs();
         }
     }
+
+    @action refreshBreadcrumbs = () => {
+        let key = this.getCurrentMenuKeyFromSessionStorage();
+        console.log('刷新>>>>>>>>当前菜单集合');
+        console.log('this.RoleBasedMenuList: ', this.RoleBasedMenuList);
+        console.log('key', key);
+        let path = this.findMenuPath(this.RoleBasedMenuList, key);
+        this.setMenuPath(path);
+    };
+
+    findMenuPath(menu, key) {
+        const findPath = (menu, key, path) => {
+            for (let i = 0; i < menu.length; i++) {
+                const item = menu[i];
+                path.push(item);
+                if (item.key === key) {
+                    return path;
+                }
+                if (item.children) {
+                    const foundPath = findPath(item.children, key, path);
+                    if (foundPath) {
+                        return foundPath;
+                    }
+                }
+                path.pop();
+            }
+        };
+
+        const path = [];
+        const result = findPath(menu, key, path);
+        return result;
+    }
+
+    @action getCurrentMenuKeyFromSessionStorage = () => {
+        if (sessionStorage.getItem('currentMenu')) {
+            let tmp = JSON.parse(sessionStorage.getItem('currentMenu'));
+            return tmp.key;
+        } else {
+            return null;
+        }
+    };
 }
 
-export default new MenuStore();
+const MenuStore = new _MenuStore();
+export default MenuStore;

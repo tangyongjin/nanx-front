@@ -5,7 +5,7 @@ import MenuStore from './MenuStore';
 import UserStore from './UserStore';
 import TriggerStore from './TriggerStore';
 
-const store = {
+const RootStore = {
     NavigationStore,
     UserStore,
     NanxTableStore,
@@ -14,4 +14,15 @@ const store = {
     TriggerStore
 };
 
-export default store;
+// class RootStore {
+//     constructor() {
+//         this.NavigationStore = new NavigationStore(this);
+//         this.UserStore = new UserStore(this);
+//         this.NanxTableStore = new NanxTableStore(this);
+//         this.MenuStore = new MenuStore(this);
+//         this.DataGridStore = new DataGridStore(this);
+//         this.TriggerStore = new TriggerStore(this);
+//     }
+// }
+
+export default RootStore;

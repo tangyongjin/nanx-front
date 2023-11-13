@@ -4,7 +4,6 @@ import Navbar from './navbar//Navbar';
 import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
 import { getTargetMenuKey } from '@/utils/tools';
-import { toJS } from 'mobx';
 const { Header, Sider, Content } = Layout;
 
 const PortalLayout = inject(
@@ -13,35 +12,22 @@ const PortalLayout = inject(
 )(
     observer((props) => {
         useEffect(() => {
-            const onPrev = (ev) => {
-                console.log('ev: ', ev);
+            const onPrev = () => {
                 let goHref = window.location.href;
-                console.log('即将跳转目标路径为：', goHref);
                 let targetMenuKey = getTargetMenuKey(goHref);
                 console.log('Key ', targetMenuKey);
-                console.log('后退:当前菜单集合');
-                console.log(toJS(props.MenuStore.RoleBasedMenuList));
-                let path = props.NavigationStore.findMenuPath(props.MenuStore.RoleBasedMenuList, targetMenuKey);
-                props.NavigationStore.setMenuPath(path);
-            };
-
-            const onReload = () => {
-                console.log('刷新');
-                let key = props.NavigationStore.getCurrentMenuKeyFromSessionStorage();
-                console.log('刷新>>>>>>>>当前菜单集合');
-                console.log('key', key);
-                console.log(toJS(props.MenuStore.RoleBasedMenuList));
-                let path = props.NavigationStore.findMenuPath(props.MenuStore.RoleBasedMenuList, key);
-                props.NavigationStore.setMenuPath(path);
+                let path = props.MenuStore.findMenuPath(props.MenuStore.RoleBasedMenuList, targetMenuKey);
+                if (path.length > 0) {
+                    props.NavigationStore.setCurrentMenu(path[path.length - 1]);
+                    props.MenuStore.refreshBreadcrumbs();
+                }
             };
 
             const asyncFun = async () => {
                 await props.MenuStore.getMenuTreeByRoleCode();
                 window.addEventListener('popstate', onPrev, false);
-                window.onbeforeunload = onReload;
                 return () => {
                     window.removeEventListener('popstate');
-                    window.onbeforeunload = null;
                 };
             };
             asyncFun();
@@ -60,7 +46,7 @@ const PortalLayout = inject(
                 </Sider>
                 <Layout style={{ minHeight: '100vh', minWidth: '100vh' }}>
                     <Header>
-                        <Navbar />
+                        <Navbar bread={props.MenuStore.breadcrumb} />
                     </Header>
                     <Content
                         key={props.NavigationStore.randomKey}

@@ -31,8 +31,8 @@ export default class LeftMenu extends React.Component {
 
         await this.NavigationStore.setCurrentMenu(menuClicked);
         await this.NavigationStore.setSelectedKeys(menuClicked.key);
-        let path = this.NavigationStore.findMenuPath(this.MenuStore.RoleBasedMenuList, menuClicked.key);
-        await this.NavigationStore.setMenuPath(path);
+        let path = this.MenuStore.findMenuPath(this.MenuStore.RoleBasedMenuList, menuClicked.key);
+        await this.MenuStore.setMenuPath(path);
 
         hashHistory.push({
             pathname: menuClicked.router,

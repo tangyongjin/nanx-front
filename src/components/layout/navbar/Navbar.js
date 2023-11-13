@@ -25,7 +25,7 @@ export default class Navbar extends React.Component {
                         />
                     </div>
                     <div style={{ flex: '90%', textAlign: 'left', color: '#1c4308' }}>
-                        <span>{this.NavigationStore.breadcrumb}</span>
+                        <span>{this.props.bread}</span>
                     </div>
                 </div>
                 <div id="navbar_preloader">

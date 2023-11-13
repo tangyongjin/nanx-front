@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'mobx-react';
 import { Router, hashHistory } from 'react-router';
-import store from './store';
+import RootStore from './store';
 import { ConfigProvider } from 'antd';
 import themeJson from '@/styles/theme';
 import zhCN from 'antd/es/locale/zh_CN';
@@ -12,7 +12,7 @@ export default class App extends React.Component {
     render() {
         return (
             <ConfigProvider locale={zhCN} theme={themeJson}>
-                <Provider {...store}>
+                <Provider {...RootStore}>
                     <Router history={hashHistory} routes={routes} />
                 </Provider>
             </ConfigProvider>
