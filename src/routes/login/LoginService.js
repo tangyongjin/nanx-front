@@ -1,7 +1,7 @@
 import decode from 'jwt-decode';
 import { hashHistory } from 'react-router';
 import api from '../../api/api';
-import NavigationStore from '@/store/NavigationStore';
+import MenuStore from '@/store/MenuStore';
 import UserStore from '@/store/UserStore';
 import { message } from 'antd';
 
@@ -79,7 +79,7 @@ export default class LoginService {
     logout() {
         UserStore.clearToken();
         sessionStorage.clear();
-        NavigationStore.clear();
+        MenuStore.clear();
         hashHistory.push('/login');
     }
 }

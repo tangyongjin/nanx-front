@@ -10,17 +10,17 @@ const avatarRoot = `${root_url}:${port}/`;
 
 const { confirm } = Modal;
 
-@inject('NavigationStore')
+@inject('MenuStore')
 @observer
 export default class NavDropDown extends React.Component {
     constructor(props) {
         super(props);
-        this.NavigationStore = props.NavigationStore;
+        this.MenuStore = props.MenuStore;
         this.LoginService = new LoginService();
     }
 
     logout = () => {
-        this.NavigationStore.setBossTitle(null);
+        this.MenuStore.setBossTitle(null);
         this.LoginService.logout();
     };
 

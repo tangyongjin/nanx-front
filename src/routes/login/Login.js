@@ -6,7 +6,7 @@ import { inject, observer } from 'mobx-react';
 import { LoadingOutlined } from '@ant-design/icons';
 import '@/styles/login.css';
 
-@inject('NavigationStore')
+@inject('MenuStore')
 @observer
 export default class Login extends React.Component {
     constructor(props) {
@@ -16,14 +16,14 @@ export default class Login extends React.Component {
         this.handleFormSubmitMobile = this.handleFormSubmitMobile.bind(this);
         this.changeValue = this.changeValue.bind(this);
         this.Auth = new LoginService();
-        this.NavigationStore = props.NavigationStore;
+        this.MenuStore = props.MenuStore;
     }
 
     componentDidMount() {
         let transaction_id = randomString(20);
         this.setState({ transaction_id });
         sessionStorage.setItem('session_id', transaction_id);
-        this.NavigationStore.setBossTitle(null);
+        this.MenuStore.setBossTitle(null);
     }
 
     handleFormSubmitMobile(e) {

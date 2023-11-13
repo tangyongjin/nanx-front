@@ -1,8 +1,15 @@
 import { observable, action } from 'mobx';
 import api from '../api/api';
+import { randomString } from '@/utils/tools';
 import { message } from 'antd';
 
 class _MenuStore {
+    @observable randomKey = randomString(10);
+    @observable isCollapse = false;
+    @observable openKeys = [];
+    @observable currentMenu = {};
+    @observable selectedKeys = [];
+
     @observable currentRole = {
         role_code: sessionStorage.getItem('role_code'),
         role_name: sessionStorage.getItem('role_name')
@@ -12,7 +19,6 @@ class _MenuStore {
     @observable AllMenuList = [];
     @observable AllMenuKeys = [];
     @observable breadcrumb = '';
-    @observable openKeys = [];
     @observable menuPath = [];
 
     // 基于角色的菜单
@@ -168,6 +174,59 @@ class _MenuStore {
 
     @action setOpenKeys = (path) => {
         this.openKeys = path;
+    };
+
+    @action clear = () => {
+        this.isCollapse = false;
+        this.openKeys = [];
+        this.currentMenu = {};
+        this.selectedKeys = [];
+        sessionStorage.clear();
+    };
+
+    @action freshCurrentMenuItem = () => {
+        setTimeout(() => {
+            this.randomKey = randomString(10);
+        }, 0);
+    };
+
+    @action toggleCollapse = () => {
+        console.log('侧边栏收齐/展开');
+        this.isCollapse = !this.isCollapse;
+
+        let ele = document.getElementById('logo');
+        ele.style['font-size'] = '16px';
+
+        if (this.isCollapse) {
+            ele.innerHTML = 'Nanx+';
+        } else {
+            ele.innerHTML = '[Nanx+]';
+            ele.style['font-size'] = '21px';
+        }
+    };
+
+    @action setBossTitle = (staff_name) => {
+        let ele = document.getElementById('bossTitle');
+        if (staff_name) {
+            ele.innerHTML = 'NaNX/' + staff_name;
+            return;
+        }
+        ele.innerHTML = 'NaNX';
+    };
+
+    @action setSelectedKeys = (key) => {
+        this.selectedKeys = key;
+    };
+
+    @action setCurrentMenu = (menu) => {
+        console.log('当前菜单', menu);
+        // 没有菜单列表时，菜单配置为空处理
+        if (menu == [] || menu == undefined) {
+            return;
+        }
+        this.setSelectedKeys([menu.key]);
+        this.currentMenu = menu;
+        sessionStorage.setItem('currentMenu', JSON.stringify(menu));
     };
 }
 

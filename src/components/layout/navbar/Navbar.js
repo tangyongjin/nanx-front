@@ -6,12 +6,12 @@ import LoadingGif from '@/styles/loading.gif';
 
 import NavDropDown from './NavDropDown';
 
-@inject('NavigationStore', 'NanxTableStore')
+@inject('MenuStore', 'NanxTableStore')
 @observer
 export default class Navbar extends React.Component {
     constructor(props) {
         super(props);
-        this.NavigationStore = props.NavigationStore;
+        this.MenuStore = props.MenuStore;
     }
 
     render() {
@@ -20,7 +20,7 @@ export default class Navbar extends React.Component {
                 <div id="navbar_collapse_bread">
                     <div style={{ flex: '10%', width: '40px' }}>
                         <PicLeftOutlined
-                            onClick={this.NavigationStore.toggleCollapse}
+                            onClick={this.MenuStore.toggleCollapse}
                             style={{ paddingLeft: '15px', fontSize: '16px', color: '#225e04' }}
                         />
                     </div>

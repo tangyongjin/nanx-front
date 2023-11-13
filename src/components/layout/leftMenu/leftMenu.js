@@ -5,13 +5,11 @@ import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
 
-@inject('NavigationStore')
 @inject('MenuStore')
 @observer
 export default class LeftMenu extends React.Component {
     constructor(props) {
         super();
-        this.NavigationStore = props.NavigationStore;
         this.MenuStore = props.MenuStore;
     }
 
@@ -23,14 +21,14 @@ export default class LeftMenu extends React.Component {
 
         // 重复点击相同菜单,刷新内容
 
-        if (item.key == this.NavigationStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
+        if (item.key == this.MenuStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
             console.log('重复点击相同菜单,刷新内容');
-            this.NavigationStore.freshCurrentMenuItem();
+            this.MenuStore.freshCurrentMenuItem();
             return;
         }
 
-        await this.NavigationStore.setCurrentMenu(menuClicked);
-        await this.NavigationStore.setSelectedKeys(menuClicked.key);
+        await this.MenuStore.setCurrentMenu(menuClicked);
+        await this.MenuStore.setSelectedKeys(menuClicked.key);
         let path = this.MenuStore.findMenuPath(this.MenuStore.RoleBasedMenuList, menuClicked.key);
         await this.MenuStore.setMenuPath(path);
 
@@ -91,7 +89,7 @@ export default class LeftMenu extends React.Component {
                         openKeys={this.MenuStore.openKeys}
                         theme="dark"
                         onOpenChange={(openKeys) => this.MenuStore.onOpenChange(openKeys)}
-                        selectedKeys={this.NavigationStore.selectedKeys}>
+                        selectedKeys={this.MenuStore.selectedKeys}>
                         {this.props.menuList.map((menuitem, index) => this.getChildren(menuitem, index))}
                     </Menu>
                 </div>

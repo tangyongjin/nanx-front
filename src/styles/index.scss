@@ -1,10 +1,8 @@
 @import 'antd/dist/reset.css';
 
 body {
-    font-family: Arial, "Microsoft YaHei", "微软雅黑" !important;
+    font-family: Arial, 'Microsoft YaHei', '微软雅黑' !important;
 }
-
-
 
 .ant-modal-title {
     color: white !important;
@@ -16,11 +14,9 @@ body {
     margin: -10px -20px 0 0 !important;
 }
 
-
-div.ant-modal-title>div>span {
+div.ant-modal-title > div > span {
     margin-right: 10px !important;
 }
-
 
 .ant-modal-header {
     color: #fff !important;
@@ -41,12 +37,10 @@ div.ant-modal-title>div>span {
     background: white !important;
     height: auto !important;
     // overflow: scroll;
-    min-width: 100vh
+    min-width: 100vh;
 }
 
-
 .ant-table-wrapper::after {
-
     color: red;
     background-color: white;
     background: white;
@@ -59,12 +53,10 @@ div.ant-modal-title>div>span {
     width: 346px !important;
 }
 
-
 .ant-btn-dangerous {
     color: #2e940d !important;
     border-color: #3b3b47 !important;
 }
-
 
 /*滚动条样式*/
 ::-webkit-scrollbar {
@@ -88,11 +80,9 @@ div.ant-modal-title>div>span {
     background: rgba(0, 0, 0, 0.1);
 }
 
-
 #webpack-dev-server-client-overlay {
     display: none !important;
 }
-
 
 .btn-assign-menu {
     color: white;
@@ -108,35 +98,31 @@ div.ant-modal-title>div>span {
     border-radius: 8px;
     background-color: rgb(5, 82, 9);
     border: #fff;
-
 }
 
-.ant-tree-checkbox-disabled>span {
+.ant-tree-checkbox-disabled > span {
     border-color: rgb(5, 82, 9) !important;
 }
 
-.ant-tree-checkbox-disabled>span::after {
+.ant-tree-checkbox-disabled > span::after {
     border-color: rgb(5, 82, 9) !important;
 }
-
 
 // 顶部菜单
 
-#navbar_collapse_bread{
+#navbar_collapse_bread {
     width: 33.33%;
     text-align: left;
     display: flex;
     flex-direction: row;
 }
 
-#navbar_preloader{
-    
-    flex: 1 ;
+#navbar_preloader {
+    flex: 1;
     width: 33.33%;
     display: none;
     text-align: center;
 }
- 
 
 #navbar_dropdown {
     flex: 1;
@@ -146,49 +132,3 @@ div.ant-modal-title>div>span {
     padding-right: 15px;
     justify-content: flex-end;
 }
-
-
-// <div style={{ display: 'flex', flexDirection: 'row', height: '80px' }}>
-// <div
-//     id="navbar_collapse_bread"
-//     style={{
-//         width: '33.33%',
-//         textAlign: 'left',
-//         display: 'flex',
-//         flexDirection: 'row'
-//     }}>
-//     <div style={{ flex: '10%', width: '40px' }}>
-//         <PicLeftOutlined
-//             onClick={this.NavigationStore.toggleCollapse}
-//             style={{ paddingLeft: '15px', fontSize: '16px', color: '#225e04' }}
-//         />
-//     </div>
-//     <div style={{ flex: '90%', textAlign: 'left' }}>
-//         <span>{this.NavigationStore.currentMenu.title}</span>
-//     </div>
-// </div>
-// <div
-//     id="navbar_preloader"
-//     style={{
-//         flex: 1,
-//         width: '33.33%',
-//         display: 'none',
-//         textAlign: 'center'
-//     }}>
-//     <img src={LoadingGif} alt="loading" />
-// </div>
-// <div
-//     id="navbar_dropdown"
-//     style={{
-//         flex: 1,
-//         width: '33.33%',
-//         textAlign: 'right',
-//         display: 'flex',
-//         paddingRight: '15px',
-//         justifyContent: 'flex-end'
-//     }}>
-//     <div style={{ width: '190px', cursor: 'pointer' }}>
-//         <NavDropDown />
-//     </div>
-// </div>
-// </div>

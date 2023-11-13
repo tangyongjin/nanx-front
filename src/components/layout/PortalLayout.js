@@ -6,10 +6,7 @@ import { inject, observer } from 'mobx-react';
 import { getTargetMenuKey } from '@/utils/tools';
 const { Header, Sider, Content } = Layout;
 
-const PortalLayout = inject(
-    'NavigationStore',
-    'MenuStore'
-)(
+const PortalLayout = inject('MenuStore')(
     observer((props) => {
         useEffect(() => {
             const onPrev = () => {
@@ -18,7 +15,7 @@ const PortalLayout = inject(
                 console.log('Key ', targetMenuKey);
                 let path = props.MenuStore.findMenuPath(props.MenuStore.RoleBasedMenuList, targetMenuKey);
                 if (path.length > 0) {
-                    props.NavigationStore.setCurrentMenu(path[path.length - 1]);
+                    props.MenuStore.setCurrentMenu(path[path.length - 1]);
                     props.MenuStore.refreshBreadcrumbs();
                 }
             };
@@ -31,13 +28,13 @@ const PortalLayout = inject(
                 };
             };
             asyncFun();
-        }, [props.MenuStore, props.NavigationStore]);
+        }, [props.MenuStore]);
 
         return (
             <Layout style={{ minHeight: '100vh', minWidth: '100vh' }}>
-                <Sider collapsed={props.NavigationStore.isCollapse}>
+                <Sider collapsed={props.MenuStore.isCollapse}>
                     <LeftMenu
-                        collapsed={props.NavigationStore.isCollapse}
+                        collapsed={props.MenuStore.isCollapse}
                         className="portal_menu"
                         menuList={props.MenuStore.RoleBasedMenuList}
                         style={{ padding: 0, height: '100vh', overflowY: 'scroll' }}
@@ -49,7 +46,7 @@ const PortalLayout = inject(
                         <Navbar bread={props.MenuStore.breadcrumb} />
                     </Header>
                     <Content
-                        key={props.NavigationStore.randomKey}
+                        key={props.MenuStore.randomKey}
                         style={{
                             marginLeft: '4px'
                         }}>
