@@ -22,6 +22,14 @@ export default class NanxTable extends React.Component {
         await this.tbStore.listData('from refreshTable');
     };
 
+    afterEditRefresh = async () => {
+        await this.tbStore.listData('edit');
+    };
+
+    afterDelteRefresh = async () => {
+        await this.tbStore.listData('delete');
+    };
+
     RenderBthHolder() {
         let LazyModalContainer = this.tbStore.ButtonUsedCom;
         if (this.tbStore.ButtonUsedCom) {
@@ -33,6 +41,8 @@ export default class NanxTable extends React.Component {
                     parentTable={this}
                     NanxTableStore={this.tbStore}
                     refreshTable={this.refreshTable}
+                    afterEditRefresh={this.afterEditRefresh}
+                    afterDelteRefresh={this.afterEditRefresh}
                 />
             );
         }
@@ -40,11 +50,14 @@ export default class NanxTable extends React.Component {
 
     getTableProps() {
         return {
+            // 点击行选中,不必须点击 radiobutton
+
             onRow: (record) => {
                 return {
-                    onClick: async () => this.tbStore.rowSelectChange([record.id], [record]) // 点击行选中
+                    onClick: async () => this.tbStore.rowSelectChange([record.id], [record])
                 };
             },
+
             rowKey: (record) => record.id,
             bordered: true,
             rowSelection: {

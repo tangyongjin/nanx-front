@@ -166,14 +166,10 @@ class _NanxTableStore {
     @action setCurd = (curd) => (this.curd = curd);
 
     @action setLazyButtonUsedCom = (com) => {
-        // console.log('设置 lazyButtonUsedCom 组件................');
-        // console.log(com);
         this.lazyButtonUsedCom = com;
     };
 
     @action setButtonUsedCom = async (com) => {
-        // console.log('设置 ButtonUsedCom 组件................');
-        // console.log(com);
         this.ButtonUsedCom = com;
     };
 
@@ -201,7 +197,7 @@ class _NanxTableStore {
         }
     };
 
-    @action listData = async () => {
+    @action listData = async (scense) => {
         let data = listDataParams(this);
         let params = {
             data: data
@@ -216,7 +212,10 @@ class _NanxTableStore {
         if (json.code == 200) {
             await this.setDataSource(json.data);
             await this.setTotal(json.total);
-            await this.rowSelectChange([], []);
+            // 如果是编辑后刷新,则不清空已经选中的数据,防止变回第一页
+            if (!scense == 'edit') {
+                await this.rowSelectChange([], []);
+            }
         }
     };
 

@@ -37,30 +37,18 @@ export default class TableEditCom extends React.Component {
             rawdata: fmdata
         };
 
-        this.updateDateApi(data);
+        this.updateGridData(data);
     };
 
-    updateDateApi = async (fmdata) => {
+    updateGridData = async (fmdata) => {
         let id = this.props.NanxTableStore.selectedRowKeys[0];
         fmdata.rawdata.id = id;
         let params = { data: fmdata, method: 'POST' };
         params.updateurl = this.props.NanxTableStore.curd.updateurl;
         let json = await api.curd.updateData(params);
         if (json.code == 200) {
-            this.props.refreshTable();
+            this.props.afterEditRefresh();
         }
-    };
-
-    getGhostData = (formData) => {
-        this.props.NanxTableStore.triggers.map((item) => {
-            formData['ghost_' + item.props.trigger_cfg.as_select_field_id] =
-                formData[item.props.trigger_cfg.as_select_field_id];
-            let option_obj = item.state.optionList.find(
-                (optionItem) => optionItem.value == formData[item.props.trigger_cfg.as_select_field_id]
-            );
-            formData[item.props.trigger_cfg.as_select_field_id] = option_obj.label;
-        });
-        return formData;
     };
 
     render() {
