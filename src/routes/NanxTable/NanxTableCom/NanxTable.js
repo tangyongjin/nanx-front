@@ -38,7 +38,6 @@ export default class NanxTable extends React.Component {
                     ref={async (item) => {
                         await this.tbStore.setLazyButtonUsedCom(item);
                     }}
-                    parentTable={this}
                     NanxTableStore={this.tbStore}
                     refreshTable={this.refreshTable}
                     afterEditRefresh={this.afterEditRefresh}
@@ -90,9 +89,9 @@ export default class NanxTable extends React.Component {
                 {this.RenderBthHolder()}
                 <div>{renderButtons(this.tbStore)}</div>
                 <Table
+                    size="small"
                     columns={this.tbStore.tableColumns}
                     key={this.props.datagrid_code}
-                    className="commonTable"
                     dataSource={this.tbStore.dataSource}
                     onChange={this.tbStore.TableOnChange}
                     {...tableProps}

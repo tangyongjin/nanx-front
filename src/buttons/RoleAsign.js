@@ -55,8 +55,7 @@ export default class RoleAsign extends React.Component {
                         <EditOutlined />
                         编辑
                     </div>
-                }
-                layoutcfg={this.props.NanxTableStore.layoutcfg}>
+                }>
                 <CommonTableForm
                     as_virtual={this.props.as_virtual}
                     onChange={this.props.onChange}

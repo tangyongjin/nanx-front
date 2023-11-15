@@ -5,7 +5,7 @@ import listDataParams from '@/routes/NanxTable/NanxTableCom/listDataParams';
 import api from '@/api/api';
 import { toJS } from 'mobx';
 
-class _TableStore {
+class _TableAsEditorStore {
     constructor() {
         autorun(() => {
             if (this.SERIALNO == null) {
@@ -28,7 +28,6 @@ class _TableStore {
     @observable pageSize = this.DefaultPageSize;
     @observable formCfg = null;
     @observable referinfo = null;
-    @observable layoutcfg = null;
     @observable tips = null;
     @observable curd = {};
     @observable tableButtons = [];
@@ -65,7 +64,6 @@ class _TableStore {
         this.currentPage = 1;
         this.pageSize = this.DefaultPageSize;
         this.formCfg = null;
-        this.layoutcfg = null;
         this.curd = {};
         this.tableColumnConfig = [];
         this.search_query_cfg = [];
@@ -122,7 +120,6 @@ class _TableStore {
                 title: item.title,
                 dataIndex: item.key,
                 width: item.width && item.width != null && item.width != '' ? parseFloat(item.width) : 200,
-                // sorter: (a, b) => sorter(a[item.key], b[item.key]),
                 render: (text, record) => {
                     return CellRender(text, record, item, this);
                 }
@@ -160,7 +157,6 @@ class _TableStore {
     @action setFormCfg = (formCfg) => (this.formCfg = formCfg);
 
     @action setReferinfo = (referinfo) => (this.referinfo = referinfo);
-    @action setlayoutCfg = (layoutcfg) => (this.layoutcfg = layoutcfg);
     @action setTips = (tips) => (this.tips = tips);
     @action setTableButtons = (json) => (this.tableButtons = json);
     @action setCurd = (curd) => (this.curd = curd);
@@ -188,7 +184,6 @@ class _TableStore {
 
             this.setFormCfg(res.data.formcfg);
             this.setReferinfo(res.data.referinfo);
-            this.setlayoutCfg(res.data.layoutcfg);
             this.setTips(res.data.tips);
             this.setTableButtons(res.data.buttons);
             this.setCurd(res.data.curd);
@@ -247,6 +242,5 @@ class _TableStore {
     }
 }
 
-const TableStore = new _TableStore();
-
-export default TableStore;
+const TableAsEditorStore = new _TableAsEditorStore();
+export default TableAsEditorStore;

@@ -1,14 +1,17 @@
 import React from 'react';
-import { Modal, message } from 'antd';
+import { message } from 'antd';
 import SearchFormContainer from './tableSearch/searchFormContainer';
+import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
+import { SearchOutlined } from '@ant-design/icons';
+
 import api from '@/api/api';
 
 export default class FixedQueryBuilder extends React.Component {
     constructor(props) {
         super(props);
+        console.log('props: ', props);
         this.init = this.init.bind(this);
         this.state = {
-            open: false,
             fieldsList: []
         };
     }
@@ -18,51 +21,13 @@ export default class FixedQueryBuilder extends React.Component {
             message.error('请选择1个DataGrid.');
             return;
         }
+        await this.props.NanxTableStore.showButtonModal();
         await this.getFieldList();
-        this.showModal();
     }
 
-    onCancelHandle = () => {
-        this.setState({
-            open: false
-        });
-    };
-
-    showModal() {
-        this.setState({
-            open: true
-        });
-    }
-
-    saveFixedQueryConfigure = async () => {
-        let _searchLines = await this.refs.fixedBuilderRef.returnQueryLines();
+    targetDataGrid() {
         let _tmprec = this.props.NanxTableStore.selectedRows[0];
-        let dataGridCode = _tmprec.datagrid_code;
-        let params = {
-            data: {
-                datagrid_code: dataGridCode,
-                fixedQueryLiens: _searchLines
-            }
-        };
-        await api.dataGrid.saveFixedQueryConfigure(params);
-        this.props.refreshTable();
-    };
-
-    getModalProps() {
-        return {
-            destroyOnClose: true,
-            title: '固定QueryConfigure配置',
-            styles: {
-                height: 'auto',
-                overflow: 'auto',
-                bottom: 0
-            },
-            cancelText: '取消',
-            okText: '确定',
-            open: this.state.open,
-            onOk: this.saveFixedQueryConfigure,
-            onCancel: () => this.onCancelHandle()
-        };
+        return _tmprec.datagrid_code;
     }
 
     // 选中的 Datagrid 的列,不是 DataGridMNT 的 列
@@ -86,16 +51,22 @@ export default class FixedQueryBuilder extends React.Component {
     };
 
     render() {
-        let modalProps = this.getModalProps();
         return (
-            <Modal width={800} {...modalProps}>
+            <CommonModal
+                width="700px"
+                title={
+                    <div>
+                        <SearchOutlined />
+                        固定QueryConfigure配置
+                    </div>
+                }>
                 <SearchFormContainer
-                    ref="fixedBuilderRef"
-                    hideModal={this.onCancelHandle}
+                    HostedTableStore={this.props.NanxTableStore}
+                    targetDataGrid={this.targetDataGrid()}
                     fieldsList={this.state.fieldsList}
-                    onOk={this.saveFixedQueryConfigure}
+                    afterEditRefresh={this.props.afterEditRefresh}
                 />
-            </Modal>
+            </CommonModal>
         );
     }
 }

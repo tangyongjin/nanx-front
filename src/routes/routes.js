@@ -1,4 +1,4 @@
-const PortalLayout = require('@/components/layout/PortalLayout/').default;
+const PortalLayout = require('@/layout/PortalLayout/').default;
 
 const routes = {
     path: '/',

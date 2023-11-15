@@ -148,7 +148,7 @@ export default class GridButtonAdder extends React.Component {
                         open={this.state.open}
                         destroyOnClose={true}>
                         {this.state.gridButtons.length == 0 ? null : (
-                            <div>
+                            <div style={{ marginTop: '10px' }}>
                                 <h3>已分配的按钮:</h3>
                                 <Table
                                     dataSource={this.state.gridButtons}

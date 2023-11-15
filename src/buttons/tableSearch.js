@@ -1,74 +1,31 @@
 import React from 'react';
-import { Modal } from 'antd';
 import SearchFormContainer from './tableSearch/searchFormContainer';
 import { SearchOutlined } from '@ant-design/icons';
+import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 
 export default class TableSearch extends React.Component {
     constructor(props) {
         super(props);
         this.init = this.init.bind(this);
-        this.state = {
-            open: false
-        };
     }
 
-    init() {
-        this.showModal();
-    }
-
-    onCancelHandle = () => {
-        this.setState({
-            open: false
-        });
-    };
-
-    showModal() {
-        this.setState({
-            open: true
-        });
-    }
-
-    searchQuery = () => {
-        this.refs.searchFormContainerRef.searchHandler();
-    };
-
-    getModalProps() {
-        return {
-            destroyOnClose: true,
-            title: (
-                <div>
-                    <SearchOutlined />
-                    数据检索
-                </div>
-            ),
-            styles: {
-                height: 'auto',
-                overflow: 'auto',
-                bottom: 0
-            },
-            cancelText: '取消',
-            okText: '确定',
-            open: this.state.open,
-            onOk: this.searchQuery,
-            onCancel: () => this.onCancelHandle()
-        };
-    }
-
-    getFieldList = () => {
-        return this.props.NanxTableStore.tableColumnConfig.map(({ title, key }) => ({ label: title, value: key }));
+    init = async () => {
+        await this.props.NanxTableStore.showButtonModal();
     };
 
     render() {
-        let modalProps = this.getModalProps();
         return (
-            <Modal width={800} {...modalProps}>
-                <SearchFormContainer
-                    ref="searchFormContainerRef"
-                    hideModal={this.onCancelHandle}
-                    fieldsList={this.getFieldList()}
-                    onOk={this.searchQuery}
-                />
-            </Modal>
+            <CommonModal
+                width="700px"
+                title={
+                    <div>
+                        <SearchOutlined />
+                        数据检索
+                    </div>
+                }>
+                {/* HostedTableStore 指定为 NanxTableStore  或者作为插件时候的 TableAsEditorStore */}
+                <SearchFormContainer HostedTableStore={this.props.NanxTableStore} />
+            </CommonModal>
         );
     }
 }

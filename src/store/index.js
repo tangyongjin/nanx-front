@@ -3,14 +3,14 @@ import DataGridStore from './DataGridStore';
 import MenuStore from './MenuStore';
 import UserStore from './UserStore';
 import TriggerStore from './TriggerStore';
-import TableStore from './TableStore';
+import TableAsEditorStore from './TableAsEditorStore';
 
 const RootStore = {
     UserStore,
     NanxTableStore,
     MenuStore,
     DataGridStore,
-    TableStore,
+    TableAsEditorStore,
     TriggerStore
 };
 

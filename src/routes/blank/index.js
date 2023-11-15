@@ -3,7 +3,7 @@ import UrlProtect from '@/routes/urlProtect';
 export default {
     onEnter: UrlProtect,
     path: 'blank',
-    component: require('@/components/layout/PortalLayout').default,
+    component: require('@/layout/PortalLayout').default,
     childRoutes: [
         {
             path: 'blank',

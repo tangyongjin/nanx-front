@@ -36,9 +36,18 @@ div.ant-modal-title > div > span {
     background-color: white !important;
     background: white !important;
     height: auto !important;
-    // overflow: scroll;
     min-width: 100vh;
 }
+
+.editor_table_wrapper {
+    padding: 4px;
+    border: 0.5px dashed #2e940d;
+    background-color: white !important;
+    background: white !important;
+    height: auto !important;
+    min-width: 100vh;
+}
+
 
 .ant-table-wrapper::after {
     color: red;

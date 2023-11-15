@@ -102,7 +102,7 @@ class GridFieldManager extends React.Component {
                 </Row>
                 <Divider />
                 {allcols.map((col, idx) => (
-                    <div>
+                    <div key={idx}>
                         <Row style={{ height: '40px', maxHeight: 40 }} key={idx}>
                             <Col
                                 style={{

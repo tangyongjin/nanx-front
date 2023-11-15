@@ -1,7 +1,7 @@
 import UrlProtect from '@/routes/urlProtect';
 export default {
     onEnter: UrlProtect, // add this 判断是否登录
-    component: require('@/components/layout/PortalLayout').default,
+    component: require('@/layout/PortalLayout').default,
     childRoutes: [
         {
             path: 'profile',

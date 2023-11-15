@@ -49,7 +49,6 @@ const CommonTableForm = (props) => {
                                 item.props['x-props'].nnstore = props.NanxTableStore;
                                 item.props['x-props'].datagrid_code = props.NanxTableStore.datagrid_code;
                                 item.props['x-props'].actions = actions;
-                                item.props['x-props'].props_tag = '💘💘';
                                 // 不知道为何无法取到日期型的数据的值
                                 if (props.NanxTableStore.table_action == 'edit') {
                                     item.props['x-props'].d_value = props.NanxTableStore.selectedRows[0][key];

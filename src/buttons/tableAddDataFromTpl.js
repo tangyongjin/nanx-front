@@ -47,8 +47,7 @@ export default class TableAddFromTplCom extends React.Component {
                         <PlusSquareOutlined />
                         添加(从模版)
                     </div>
-                }
-                layoutcfg={this.props.NanxTableStore.layoutcfg}>
+                }>
                 <CommonTableForm
                     as_virtual={this.props.as_virtual}
                     onChange={this.props.onChange}

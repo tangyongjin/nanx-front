@@ -16,7 +16,6 @@ const fetchDataGridCfg = async (tableStore) => {
         await tableStore.setTableColumnConfig(toJS(res.data.tableColumnConfig));
         await tableStore.setFormCfg(res.data.formcfg);
         await tableStore.setReferinfo(res.data.referinfo);
-        await tableStore.setlayoutCfg(res.data.layoutcfg);
         await tableStore.setTips(res.data.tips);
         await tableStore.setTableButtons(res.data.buttons);
         await tableStore.setCurd(res.data.curd);

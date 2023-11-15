@@ -32,17 +32,21 @@ export default class TableAddCom extends React.Component {
     };
 
     render() {
+        let _width = '650px';
+        if (this.props.NanxTableStore.hasTableEditor()) {
+            _width = '1150px';
+        }
         return (
             <CommonModal
                 height="500px"
+                width={_width}
                 footer={null}
                 title={
                     <div>
                         <FileAddOutlined />
                         添加数据
                     </div>
-                }
-                layoutcfg={this.props.NanxTableStore.layoutcfg}>
+                }>
                 <CommonTableForm
                     as_virtual={this.props.as_virtual}
                     onChange={this.props.onChange}

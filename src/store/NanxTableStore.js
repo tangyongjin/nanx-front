@@ -28,7 +28,6 @@ class _NanxTableStore {
     @observable pageSize = this.DefaultPageSize;
     @observable formCfg = null;
     @observable referinfo = null;
-    @observable layoutcfg = null;
     @observable tips = null;
     @observable curd = {};
     @observable tableButtons = [];
@@ -65,7 +64,6 @@ class _NanxTableStore {
         this.currentPage = 1;
         this.pageSize = this.DefaultPageSize;
         this.formCfg = null;
-        this.layoutcfg = null;
         this.curd = {};
         this.tableColumnConfig = [];
         this.search_query_cfg = [];
@@ -157,10 +155,20 @@ class _NanxTableStore {
     @action getTableColumns = () => {};
     @action setTableColumns = (cols) => (this.tableColumns = cols);
 
-    @action setFormCfg = (formCfg) => (this.formCfg = formCfg);
+    @action hasTableEditor() {
+        for (let key in this.formCfg.properties) {
+            if (this.formCfg.properties[key].type === 'TableEditor') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @action setFormCfg = (formCfg) => {
+        this.formCfg = formCfg;
+    };
 
     @action setReferinfo = (referinfo) => (this.referinfo = referinfo);
-    @action setlayoutCfg = (layoutcfg) => (this.layoutcfg = layoutcfg);
     @action setTips = (tips) => (this.tips = tips);
     @action setTableButtons = (json) => (this.tableButtons = json);
     @action setCurd = (curd) => (this.curd = curd);
@@ -188,7 +196,6 @@ class _NanxTableStore {
 
             this.setFormCfg(res.data.formcfg);
             this.setReferinfo(res.data.referinfo);
-            this.setlayoutCfg(res.data.layoutcfg);
             this.setTips(res.data.tips);
             this.setTableButtons(res.data.buttons);
             this.setCurd(res.data.curd);

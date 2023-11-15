@@ -1,17 +1,43 @@
 import React from 'react';
 import { Button, message } from 'antd';
 import TableSearchForm from './TableSearchForm';
-import { observer, inject } from 'mobx-react';
+import { observer } from 'mobx-react';
+import api from '@/api/api';
 
-@inject('NanxTableStore')
 @observer
 export default class SearchFormContainer extends React.Component {
     constructor(props) {
         super(props);
+        console.log('props: ', props);
+
         this.state = {
             field_group: [{ inner_order: 0 }]
         };
     }
+
+    saveFixedQueryConfigure = async () => {
+        let _searchLines = await this.returnQueryLines();
+        let params = {
+            data: {
+                datagrid_code: this.props.targetDataGrid,
+                fixedQueryLiens: _searchLines
+            }
+        };
+        await api.dataGrid.saveFixedQueryConfigure(params);
+        this.props.afterEditRefresh();
+        // this.props.refreshTable();
+    };
+
+    getFieldList = () => {
+        if (this.props.fieldsList) {
+            return this.props.fieldsList;
+        } else {
+            return this.props.HostedTableStore.tableColumnConfig.map(({ title, key }) => ({
+                label: title,
+                value: key
+            }));
+        }
+    };
 
     saveActions = (actions, index) => {
         let { field_group } = this.state;
@@ -40,11 +66,11 @@ export default class SearchFormContainer extends React.Component {
     // 执行带搜索条件的后台查询
     searchHandler = async () => {
         let queryLines = await this.returnQueryLines();
-        await this.props.NanxTableStore.setCurrentPage(1);
-        await this.props.NanxTableStore.setSearchQueryConfig(queryLines);
-        await this.props.NanxTableStore.rowSelectChange([], []);
-        await this.props.NanxTableStore.listData();
-        this.props.hideModal();
+        await this.props.HostedTableStore.setCurrentPage(1);
+        await this.props.HostedTableStore.setSearchQueryConfig(queryLines);
+        await this.props.HostedTableStore.rowSelectChange([], []);
+        await this.props.HostedTableStore.listData();
+        this.props.HostedTableStore.hideButtonModal();
     };
 
     //  回传搜索条件给上级组件 returnQueryLines
@@ -97,23 +123,17 @@ export default class SearchFormContainer extends React.Component {
 
     render() {
         return (
-            <div style={{ paddingTop: '20px' }}>
-                <div style={{ marginBottom: '15px' }}>
+            <div style={{ width: '658px', marginTop: '10px' }}>
+                <div style={{ marginBottom: '4px' }}>
                     <Button
                         type="primary"
                         className="round-button"
-                        htmlType="button"
                         size="small"
                         onClick={this.addLine}
                         style={{ marginRight: '10px' }}>
                         增加
                     </Button>
-                    <Button
-                        className="round-button"
-                        type="danger"
-                        htmlType="button"
-                        size="small"
-                        onClick={this.deleteLine}>
+                    <Button className="round-button" type="danger" size="small" onClick={this.deleteLine}>
                         删除
                     </Button>
                 </div>
@@ -121,12 +141,18 @@ export default class SearchFormContainer extends React.Component {
                     return (
                         <TableSearchForm
                             key={index}
-                            fieldsList={this.props.fieldsList}
+                            fieldsList={this.getFieldList()}
                             saveActions={this.saveActions}
                             onOk={this.props.onOk}
                             form_index={item.inner_order}></TableSearchForm>
                     );
                 })}
+
+                {this.props.fieldsList ? (
+                    <Button onClick={this.saveFixedQueryConfigure}>保存固定搜索条件</Button>
+                ) : (
+                    <Button onClick={this.searchHandler}>查询</Button>
+                )}
             </div>
         );
     }
