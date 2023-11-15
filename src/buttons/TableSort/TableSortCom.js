@@ -11,6 +11,13 @@ const type = 'DragableBodyRow';
 @inject('DataGridStore')
 @observer
 export default class TableSortCom extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log(props);
+    }
+
+    state = { maintableColumns: this.props.DataGridStore.ColsDbInfo };
+
     DragableBodyRow = ({ index, moveRow, className, style, ...restProps }) => {
         const ref = React.useRef();
         const [{ isOver, dropClassName }, drop] = useDrop({
@@ -29,13 +36,16 @@ export default class TableSortCom extends React.Component {
                 moveRow(item.index, index);
             }
         });
+
         const [, drag] = useDrag({
             item: { type, index },
             collect: (monitor) => ({
                 isDragging: monitor.isDragging()
             })
         });
+
         drop(drag(ref));
+
         return (
             <tr
                 ref={ref}
@@ -45,18 +55,16 @@ export default class TableSortCom extends React.Component {
             />
         );
     };
-    components = {
-        body: {
-            row: this.DragableBodyRow
-        }
-    };
+
+    BodyComponent = { body: { row: this.DragableBodyRow } };
+
     moveRow = (dragIndex, hoverIndex) => {
-        const { data } = this.state;
-        const dragRow = data[dragIndex];
+        const { maintableColumns } = this.state;
+        const dragRow = maintableColumns[dragIndex];
 
         this.setState(
             update(this.state, {
-                data: {
+                maintableColumns: {
                     $splice: [
                         [dragIndex, 1],
                         [hoverIndex, 0, dragRow]
@@ -65,12 +73,10 @@ export default class TableSortCom extends React.Component {
             })
         );
     };
+
     async savedata() {
-        let data = this.state.data;
-        let dataarr = [];
-        for (var i = 0; i < data.length; i++) {
-            dataarr.push(data[i].Field);
-        }
+        let maintableColumns = this.state.maintableColumns;
+        const dataarr = maintableColumns.map((col) => col.Field);
         let params = {
             data: {
                 datagrid_code: this.props.DataGridStore.DataGridCode,
@@ -81,6 +87,7 @@ export default class TableSortCom extends React.Component {
         if (res.code == 200) {
         }
     }
+
     render() {
         const columns = [
             {
@@ -94,14 +101,15 @@ export default class TableSortCom extends React.Component {
                 key: 'label'
             }
         ];
+
         return (
             <DndProvider backend={HTML5Backend}>
                 <Table
                     rowKey={(row) => row.Field}
                     columns={columns}
-                    dataSource={this.props.DataGridStore.ColsDbInfo}
+                    dataSource={this.state.maintableColumns}
                     pagination={false}
-                    components={this.components}
+                    components={this.BodyComponent}
                     onRow={(record, index) => ({
                         index,
                         moveRow: this.moveRow

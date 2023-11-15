@@ -8,21 +8,15 @@ import { EditOutlined } from '@ant-design/icons';
 import { observer, inject } from 'mobx-react';
 @inject('NanxTableStore')
 @observer
-export default class TableEditCom extends React.Component {
+export default class RoleAsign extends React.Component {
     init = async () => {
         await this.props.NanxTableStore.setTableAction('edit');
 
         if (this.props.NanxTableStore.selectedRows.length != 1) {
-            message.error('请选择1条数据.');
+            message.error('请选择1个用户.');
             return;
         }
 
-        let _tmprec = this.props.NanxTableStore.selectedRows[0];
-
-        if (_tmprec.hasOwnProperty('ghost_author') && _tmprec.ghost_author != sessionStorage.getItem('user')) {
-            message.error('不是自己的数据不能编辑');
-            return;
-        }
         await this.props.NanxTableStore.showButtonModal();
     };
 

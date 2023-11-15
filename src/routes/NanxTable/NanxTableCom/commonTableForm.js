@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
 import '@/components/UformExtends';
-import { toJS } from 'mobx';
 import { SchemaForm, createFormActions } from '@uform/antd';
 import 'antd/dist/reset.css';
 
@@ -9,21 +8,17 @@ const actions = createFormActions();
 
 const CommonTableForm = (props) => {
     let formCfg = props.NanxTableStore.formCfg;
-    const [rawData, setRawData] = useState({ editable: props.editable });
-    console.log('💚💔💚💔💚');
+    const [rawData, setRawData] = useState({ value: {} });
 
     if (!formCfg) {
         return null;
     }
-
-    // console.log('💚💚💚', props.NanxTableStore.selectedRows[0]);
 
     return (
         <div style={{ marginTop: '20px' }}>
             <SchemaForm
                 initialValues={rawData.value}
                 actions={actions}
-                editable={rawData.editable}
                 schema={formCfg}
                 effects={($, { setFieldState }) => {
                     const hide = (name) => {
@@ -37,7 +32,15 @@ const CommonTableForm = (props) => {
 
                         if (props.NanxTableStore.table_action == 'edit') {
                             setRawData({ value: { ...props.NanxTableStore.selectedRows[0] } });
-                        } else {
+                        }
+
+                        if (props.NanxTableStore.table_action == 'add_from_tpl') {
+                            //eslint-disable-next-line
+                            const { id, ...rest } = props.NanxTableStore.selectedRows[0];
+                            setRawData({ value: { ...rest } });
+                        }
+
+                        if (props.NanxTableStore.table_action == 'add') {
                             setRawData({ value: {} });
                         }
 

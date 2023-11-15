@@ -4,7 +4,7 @@ import { registerFormFields, connect } from '@uform/react';
 import Assocselect from './UAssocSelect';
 import CategoryDropDown from './UCategoryDropDown';
 import CheckBox from './UCheckbox';
-import CommonTable from '@/routes/NanxTable/NanxTableCom/NanxTable';
+import TableEditor from '@/routes/NanxTable/NanxTableCom/TableEditor';
 import Dropdownlist from './UDropdownList';
 import Fileuploader from './UFileuploader';
 import GetActionCode from './UGetActionCode';
@@ -20,8 +20,6 @@ registerFormFields({
     fileuploader: connect()((props) => <Fileuploader {...props} value={props.value || ''} />),
 
     text_area: connect()((props) => <Input.TextArea {...props} value={props.value || ''} />),
-
-    tableEditor: connect()((props) => <CommonTable {...props} value={''} />),
 
     Dropdownlist: connect()((props) => (
         <Dropdownlist {...props} getComponentValue={props.onChange} value={props.value || ''} />
@@ -41,5 +39,11 @@ registerFormFields({
     UDateEditor: connect()((props) => {
         console.log('插件:', props); // 在这里输出 props 的内容
         return <UDateEditor {...props} value={props.value} />;
+    }),
+
+    TableEditor: connect()((props) => {
+        console.log('TableEditor/插件:', props); // 在这里输出 props 的内容
+        // return <TableEditor {...props} value={props.value} />;
+        return <TableEditor {...props} value={props.value} />;
     })
 });

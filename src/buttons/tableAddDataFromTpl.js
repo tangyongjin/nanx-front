@@ -1,16 +1,22 @@
 import CommonTableForm from '@/routes/NanxTable/NanxTableCom/commonTableForm';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import React from 'react';
-import { observer, inject } from 'mobx-react';
+import { message } from 'antd';
 import api from '@/api/api';
-import { FileAddOutlined } from '@ant-design/icons';
+import { PlusSquareOutlined } from '@ant-design/icons';
 
-@inject('NanxTableStore') //
+import { observer, inject } from 'mobx-react';
+@inject('NanxTableStore')
 @observer
-export default class TableAddCom extends React.Component {
+export default class TableAddFromTplCom extends React.Component {
     init = async () => {
-        await this.props.NanxTableStore.setTableAction('add');
-        await this.props.NanxTableStore.rowSelectChange([], []);
+        await this.props.NanxTableStore.setTableAction('add_from_tpl');
+
+        if (this.props.NanxTableStore.selectedRows.length != 1) {
+            message.error('请选择1条数据作为添加的模板.');
+            return;
+        }
+
         await this.props.NanxTableStore.showButtonModal();
     };
 
@@ -38,8 +44,8 @@ export default class TableAddCom extends React.Component {
                 footer={null}
                 title={
                     <div>
-                        <FileAddOutlined />
-                        添加数据
+                        <PlusSquareOutlined />
+                        添加(从模版)
                     </div>
                 }
                 layoutcfg={this.props.NanxTableStore.layoutcfg}>

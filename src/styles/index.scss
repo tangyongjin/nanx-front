@@ -80,8 +80,10 @@ div.ant-modal-title > div > span {
     background:  rgb(207, 201, 207) ;
 }
 
+// 错误信息屏蔽
+
 #webpack-dev-server-client-overlay {
-    display: none !important;
+    display: none1 !important;
 }
 
 .btn-assign-menu {
