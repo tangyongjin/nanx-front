@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import SearchFormContainer from '@/buttons/tableSearch/searchFormContainer';
 import { observer, inject } from 'mobx-react';
 import { pagination, rowSelection } from '@/routes/NanxTable/NanxTableCom/tableUtils/tableUtil';
+import { Collapse } from 'antd';
 
 @inject('TableAsEditorStore')
 @observer
@@ -10,11 +11,13 @@ export default class UTableEditor extends React.Component {
     constructor(props) {
         super(props);
         console.log('TableEditor>>>>>>>>>>props: ', props);
+        // uform_para like {"gridcode":"nanx_user_role","field":"role_code"}
+        this.uformObj = JSON.parse(props.uform_para);
         this.tbStore = props.TableAsEditorStore;
     }
 
     async componentDidMount() {
-        await this.tbStore.setDataGridCode(this.props.uform_para);
+        await this.tbStore.setDataGridCode(this.uformObj.gridcode);
         await this.refreshTable();
     }
 
@@ -28,7 +31,7 @@ export default class UTableEditor extends React.Component {
         return {
             onClick: async () => {
                 // 因为是作为Ufrom插件的编辑器,所以调用 onChange 来提供 value
-                this.props.onChange(record.role_code);
+                this.props.onChange(record[this.uformObj.field]);
                 this.tbStore.rowSelectChange([record.id], [record]);
             }
         };
@@ -37,7 +40,15 @@ export default class UTableEditor extends React.Component {
     render() {
         return (
             <div className="editor_table_wrapper">
-                <SearchFormContainer HostedTableStore={this.tbStore} />
+                <Collapse
+                    items={[
+                        {
+                            key: '1',
+                            label: '搜索...',
+                            children: <SearchFormContainer HostedTableStore={this.tbStore} />
+                        }
+                    ]}
+                />
                 <Table
                     size="small"
                     bordered={true}

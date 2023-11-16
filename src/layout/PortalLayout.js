@@ -22,7 +22,7 @@ const PortalLayout = inject('MenuStore')(
             };
 
             const asyncFun = async () => {
-                await props.MenuStore.getMenuTreeByRoleCode();
+                await props.MenuStore.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
                 window.addEventListener('popstate', onPrev, false);
                 return () => {
                     window.removeEventListener('popstate');

@@ -49,7 +49,7 @@ export default class TriggerAdder extends React.Component {
                 onCancel={this.onCancel}
                 width={'1300px'}
                 footer={[
-                    <Button type="primary" onClick={this.onCancel}>
+                    <Button key="triggerAdd" type="primary" onClick={this.onCancel}>
                         关闭
                     </Button>
                 ]}

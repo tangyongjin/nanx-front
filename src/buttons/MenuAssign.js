@@ -50,11 +50,11 @@ export default class MenuAssign extends React.Component {
                         open={this.state.open}
                         destroyOnClose={true}
                         footer={[
-                            <Button key="submit" onClick={this.handleCancel}>
+                            <Button key="submit" type="primary" onClick={this.handleCancel}>
                                 关闭
                             </Button>
                         ]}>
-                        <AllocationMenu />
+                        <AllocationMenu roleCode={this.state.record.role_code} />
                     </Modal>
                 ) : null}
             </div>

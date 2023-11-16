@@ -3,7 +3,7 @@ import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import React from 'react';
 import { message } from 'antd';
 import api from '@/api/api';
-import { EditOutlined } from '@ant-design/icons';
+import { GithubOutlined } from '@ant-design/icons';
 
 import { observer, inject } from 'mobx-react';
 @inject('NanxTableStore')
@@ -49,11 +49,11 @@ export default class RoleAsign extends React.Component {
         return (
             <CommonModal
                 height="500px"
-                footer={null}
+                width="1150px"
                 title={
                     <div>
-                        <EditOutlined />
-                        编辑
+                        <GithubOutlined />
+                        分配角色
                     </div>
                 }>
                 <CommonTableForm

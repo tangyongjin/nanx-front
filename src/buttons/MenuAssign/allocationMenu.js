@@ -13,18 +13,19 @@ export default class AllocationMenu extends React.Component {
     }
 
     async componentDidMount() {
-        await this.MenuStore.getTreeMenuList();
+        await this.MenuStore.getAllTreeMenuList();
+        await this.MenuStore.getMenuTreeByTargetRoleCode(this.props.roleCode);
     }
 
     refreshMenuAssociated = async () => {
-        await this.MenuStore.getMenuTreeByRoleCode();
+        await this.MenuStore.getMenuTreeByTargetRoleCode(this.props.roleCode);
     };
 
     render() {
         return (
             <div style={{ marginTop: '20px', height: '500px' }}>
                 <div>
-                    当前角色：{this.MenuStore.currentRole.role_name}
+                    角色代码：{this.props.roleCode}
                     <Button
                         style={{ marginLeft: '10px' }}
                         onClick={this.refreshMenuAssociated}
@@ -38,7 +39,7 @@ export default class AllocationMenu extends React.Component {
                 {this.MenuStore.AllMenuList.length > 0 && (
                     <TreeMenuEditer
                         refreshMenuAssociated={this.refreshMenuAssociated}
-                        role_code={this.MenuStore.currentRole.role_code}
+                        role_code={this.props.roleCode}
                     />
                 )}
             </div>

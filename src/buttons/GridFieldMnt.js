@@ -46,10 +46,10 @@ export default class GridFieldMnt extends React.Component {
             <Modal
                 open={this.state.open}
                 destroyOnClose={true}
-                onOk={() => this.onCancel()}
+                onCancel={() => this.onCancel()}
                 width={'1600px'}
                 footer={[
-                    <Button type="primary" onClick={this.onCancel}>
+                    <Button key="gidmnt" type="primary" onClick={this.onCancel}>
                         关闭
                     </Button>
                 ]}

@@ -41,7 +41,6 @@ export default class TableAddFromTplCom extends React.Component {
         return (
             <CommonModal
                 height="500px"
-                footer={null}
                 title={
                     <div>
                         <PlusSquareOutlined />

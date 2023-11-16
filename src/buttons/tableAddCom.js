@@ -40,7 +40,6 @@ export default class TableAddCom extends React.Component {
             <CommonModal
                 height="500px"
                 width={_width}
-                footer={null}
                 title={
                     <div>
                         <FileAddOutlined />

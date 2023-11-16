@@ -10,14 +10,14 @@ const TreeMenuEditer = inject('MenuStore')(
             e.preventDefault();
 
             await props.MenuStore.saveMenuPermission(props.role_code, menu.menu_level, menu.key, menu.parent_id);
-            await props.MenuStore.getMenuTreeByRoleCode();
+            await props.MenuStore.getMenuTreeByTargetRoleCode(props.role_code);
             console.log('props: ', props.role_code, menu);
         };
 
         const DisAssingMenu = async (e, menu) => {
             e.preventDefault();
             await props.MenuStore.deleteMenuPermission(props.role_code, menu.menu_level, menu.key, menu.parent_id);
-            await props.MenuStore.getMenuTreeByRoleCode();
+            await props.MenuStore.getMenuTreeByTargetRoleCode(props.role_code);
             console.log('props: ', props.role_code, menu);
         };
 
@@ -96,7 +96,7 @@ const TreeMenuEditer = inject('MenuStore')(
                     showLine={true}
                     expandedKeys={props.MenuStore.AllMenuKeys}
                     autoExpandParent={true}
-                    checkedKeys={props.MenuStore.RoleUsedKeys}>
+                    checkedKeys={props.MenuStore.TargetRoleUsedKeys}>
                     {getTreeNode(props.MenuStore.AllMenuList)}
                 </Tree>
             </div>

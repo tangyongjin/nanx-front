@@ -16,9 +16,13 @@ class _MenuStore {
     @observable breadcrumb = '';
     @observable menuPath = [];
 
-    // 基于角色的菜单
+    // 基于当前登录的角色的菜单
     @observable RoleBasedMenuList = [];
     @observable RoleUsedKeys = [];
+
+    // 要设置的角色的信息
+    @observable TargetRoleBasedMenuList = [];
+    @observable TargetRoleUsedKeys = [];
 
     @observable currentRole = {
         role_code: sessionStorage.getItem('role_code'),
@@ -75,10 +79,8 @@ class _MenuStore {
         this.AllMenuList = menus;
     };
 
-    @action getTreeMenuList = async () => {
-        let params = {};
-
-        let res = await api.permission.getTreeMenuList(params);
+    @action getAllTreeMenuList = async () => {
+        let res = await api.permission.getAllTreeMenuList();
         if (res.code == 200) {
             this.AllMenuKeys = getAllKeys(res.data);
             this.setAllMenuList(res.data);
@@ -86,10 +88,10 @@ class _MenuStore {
     };
 
     @action
-    async getMenuTreeByRoleCode() {
+    async getMenuTreeByRoleCode(roleCode) {
         let params = {
             data: {
-                role_code: sessionStorage.getItem('role_code')
+                role_code: roleCode
             }
         };
         let res = await api.permission.getMenuTreeByRoleCode(params);
@@ -97,6 +99,20 @@ class _MenuStore {
             this.RoleBasedMenuList = res.data.menuList;
             this.RoleUsedKeys = getAllKeys(res.data.menuList);
             this.refreshBreadcrumbs();
+        }
+    }
+
+    @action
+    async getMenuTreeByTargetRoleCode(roleCode) {
+        let params = {
+            data: {
+                role_code: roleCode
+            }
+        };
+        let res = await api.permission.getMenuTreeByRoleCode(params);
+        if (res.code == 200) {
+            this.TargetRoleBasedMenuList = res.data.menuList;
+            this.TargetRoleUsedKeys = getAllKeys(res.data.menuList);
         }
     }
 

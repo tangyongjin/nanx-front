@@ -5,7 +5,7 @@ const api_root = `${root_url}:${port}/${version}`;
 
 export default class permission {
     static apis = {
-        getTreeMenuList: (params) => post(`${api_root}/Permission/getTreeMenuList`, params),
+        getAllTreeMenuList: (params) => post(`${api_root}/Permission/getAllTreeMenuList`, params),
         saveMenuPermission: (params) => post(`${api_root}/Permission/saveMenuPermission`, params),
         deleteMenuPermission: (params) => post(`${api_root}/Permission/deleteMenuPermission`, params),
         getUsersByMenuId: (params) => post(`${api_root}/Permission/getUsersByMenuId`, params),

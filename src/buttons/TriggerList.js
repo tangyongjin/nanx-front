@@ -49,7 +49,7 @@ export default class TriggerList extends React.Component {
                 width={'1300px'}
                 onCancel={this.onCancel}
                 footer={[
-                    <Button type="primary" onClick={this.onCancel}>
+                    <Button key="triggerList" type="primary" onClick={this.onCancel}>
                         关闭
                     </Button>
                 ]}
