@@ -4,7 +4,7 @@ import { registerFormFields, connect } from '@uform/react';
 import Assocselect from './UAssocSelect';
 import CategoryDropDown from './UCategoryDropDown';
 import CheckBox from './UCheckbox';
-import TableEditor from '@/routes/NanxTable/NanxTableCom/TableEditor';
+import TableEditor from './UTableEditor';
 import Dropdownlist from './UDropdownList';
 import Fileuploader from './UFileuploader';
 import GetActionCode from './UGetActionCode';

@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'antd';
 import { observer, inject } from 'mobx-react';
 import renderButtons from './renderButtons';
+import { pagination, rowSelection } from './tableUtils/tableUtil';
 
 @inject('NanxTableStore')
 @observer
@@ -47,54 +48,33 @@ export default class NanxTable extends React.Component {
         }
     }
 
-    getTableProps() {
+    onRowHandler = (record) => {
         return {
-            // 点击行选中,不必须点击 radiobutton
-
-            onRow: (record) => {
-                return {
-                    onClick: async () => this.tbStore.rowSelectChange([record.id], [record])
-                };
-            },
-
-            rowKey: (record) => record.id,
-            bordered: true,
-            rowSelection: {
-                type: 'radio',
-                selectedRowKeys: this.tbStore.selectedRowKeys,
-                onChange: async (selectedRowKeys, selectedRows) =>
-                    this.tbStore.rowSelectChange(selectedRowKeys, selectedRows)
-            },
-
-            pagination: {
-                total: this.tbStore.total,
-                defaultCurrent: 1,
-                current: this.tbStore.currentPage,
-                pageSize: this.tbStore.pageSize,
-                showQuickJumper: true,
-                showTotal: () => {
-                    let pageNum = Math.ceil(this.tbStore.total / this.tbStore.pageSize);
-                    return `共${pageNum}页/${this.tbStore.total}条数据`;
-                },
-                showSizeChanger: true
+            onClick: async () => {
+                console.log(record.role_code);
+                console.log(this.props);
+                this.tbStore.rowSelectChange([record.id], [record]);
             }
         };
-    }
+    };
 
     render() {
-        let tableProps = this.getTableProps();
-
         return (
             <div className="table_wrapper">
                 {this.RenderBthHolder()}
                 <div>{renderButtons(this.tbStore)}</div>
+
                 <Table
                     size="small"
+                    bordered={true}
+                    rowKey={(record) => record.id}
                     columns={this.tbStore.tableColumns}
                     key={this.props.datagrid_code}
                     dataSource={this.tbStore.dataSource}
                     onChange={this.tbStore.TableOnChange}
-                    {...tableProps}
+                    pagination={pagination(this.tbStore)}
+                    rowSelection={rowSelection(this.tbStore)}
+                    onRow={this.onRowHandler}
                 />
             </div>
         );

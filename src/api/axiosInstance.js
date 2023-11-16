@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { message } from 'antd';
+
 import moment from 'moment';
 import { hashHistory } from 'react-router';
 import AuthStore from '@/store/AuthStore';
@@ -25,7 +27,6 @@ axiosInstance.interceptors.request.use(
         const requestId = uuidv4();
         config.requestId = requestId + config.url;
         AuthStore.setLoading(true);
-        AuthStore.setValue(1997);
         AuthStore.setTimeStamp(nowString());
         AuthStore.addRunnitem(config.requestId);
         return config;
@@ -53,9 +54,19 @@ export function post(url, params, config) {
 }
 
 const responseSuccess = (response) => {
+    console.log('response: ', response);
     //接收到响应数据并成功后的一些共有的处理，关闭loading等
     AuthStore.setLoading(false);
     AuthStore.delRunnitem(response.config.requestId);
+
+    if (response && response.data && response.data.code === 200 && response.data.message) {
+        message.success(response.data.message);
+    }
+
+    if (response && response.data && response.data.code === 500 && response.data.message) {
+        message.error(response.data.message);
+    }
+
     return response;
 };
 
