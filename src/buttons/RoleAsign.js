@@ -57,7 +57,6 @@ export default class RoleAsign extends React.Component {
                     </div>
                 }>
                 <CommonTableForm
-                    as_virtual={this.props.as_virtual}
                     onChange={this.props.onChange}
                     NanxTableStore={this.props.NanxTableStore}
                     saveFormData={this.saveFormData.bind(this)}

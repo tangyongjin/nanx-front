@@ -8,6 +8,7 @@ export default class user {
         loginMobile: (params) => post(`${api_root}/Auth/loginMobile`, params),
         profile: (params) => post(`${api_root}/Auth/profile`, params),
         edit_password: (params) => post(`${api_root}/Auth/changepwd`, params),
+        resetPassword: (params) => post(`${api_root}/Auth/resetPassword`, params),
         updateUserInformation: (params) => post(`${api_root}/User/updateUserInformation`, params)
     };
 }

@@ -31,14 +31,6 @@ export default class DeleteData extends React.Component {
             okType: 'danger',
             cancelText: '取消',
             onOk: () => {
-                console.log(this.props);
-
-                if (this.props.as_virtual == 'y') {
-                    this.deleteVirtualData();
-                    this.props.changeValue && this.props.changeValue(this.props.NanxTableStore.dataSource);
-                    return;
-                }
-
                 this.deleteData();
             },
             onCancel: () => {
@@ -46,16 +38,6 @@ export default class DeleteData extends React.Component {
             }
         });
     }
-
-    deleteVirtualData = () => {
-        let tempArr = [];
-        this.props.NanxTableStore.dataSource.map((item) => {
-            if (item.id != this.props.NanxTableStore.selectedRowKeys[0]) {
-                tempArr.push(item);
-            }
-        });
-        this.props.NanxTableStore.setDataSource(tempArr);
-    };
 
     async deleteData() {
         let params = {
