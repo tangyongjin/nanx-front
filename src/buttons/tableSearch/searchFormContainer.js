@@ -123,8 +123,8 @@ export default class SearchFormContainer extends React.Component {
 
     render() {
         return (
-            <div style={{ width: '658px', marginTop: '10px' }}>
-                <div style={{ marginBottom: '4px' }}>
+            <div style={{ width: '658px', marginTop: '25px' }}>
+                <div style={{ marginBottom: '14px' }}>
                     <Button
                         type="primary"
                         className="round-button"
@@ -133,9 +133,29 @@ export default class SearchFormContainer extends React.Component {
                         style={{ marginRight: '10px' }}>
                         增加
                     </Button>
-                    <Button className="round-button" type="danger" size="small" onClick={this.deleteLine}>
+                    <Button type="primary" className="round-button" size="small" onClick={this.deleteLine}>
                         删除
                     </Button>
+
+                    {this.props.fieldsList ? (
+                        <Button
+                            type="primary"
+                            className="round-button"
+                            size="small"
+                            style={{ marginLeft: '400px' }}
+                            onClick={this.saveFixedQueryConfigure}>
+                            保存固定搜索条件
+                        </Button>
+                    ) : (
+                        <Button
+                            type="primary"
+                            style={{ marginLeft: '458px' }}
+                            className="round-button"
+                            size="small"
+                            onClick={this.searchHandler}>
+                            查询
+                        </Button>
+                    )}
                 </div>
                 {this.state.field_group.map((item, index) => {
                     return (
@@ -147,12 +167,6 @@ export default class SearchFormContainer extends React.Component {
                             form_index={item.inner_order}></TableSearchForm>
                     );
                 })}
-
-                {this.props.fieldsList ? (
-                    <Button onClick={this.saveFixedQueryConfigure}>保存固定搜索条件</Button>
-                ) : (
-                    <Button onClick={this.searchHandler}>查询</Button>
-                )}
             </div>
         );
     }

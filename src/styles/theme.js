@@ -67,7 +67,7 @@ const themeJson = {
         Button: {
             controlHeight: '30px',
             defaultBorderColor: '#366503',
-            primaryShadow: '0 10px 0px 0px #15ff000',
+            primaryShadow: '0 0 0 0 #15ff00',
             defaultShadow: '0px 0px 0px 0px #ffffff',
             defaultColor: 'white',
             colorBgContainer: '#3B3B47'

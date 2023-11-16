@@ -1,6 +1,9 @@
 import React from 'react';
-import { message, Popconfirm, Button, Select, Table, Modal } from 'antd';
+import { Input, message, Popconfirm, Button, Select, Table, Modal } from 'antd';
 import api from '@/api/api';
+import cloneDeep from 'lodash/cloneDeep';
+import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+
 import { BorderOutlined } from '@ant-design/icons';
 const { Option } = Select;
 
@@ -12,55 +15,10 @@ export default class GridButtonAdder extends React.Component {
             record: null,
             allButtons: [],
             gridButtons: [],
+            gridButtonOrders: [],
             open: false,
             btncode: null
         };
-    }
-
-    onChange(a) {
-        this.setState({ btncode: a });
-    }
-
-    getDataGridButtons = async () => {
-        let params = { data: { DataGridCode: this.state.record.datagrid_code }, method: 'POST' };
-        let res = await api.button.getGridButtons(params);
-        this.setState({
-            open: true,
-            gridButtons: res.buttons
-        });
-    };
-
-    addGridButton = async () => {
-        console.log(this.state);
-        let params = {
-            data: { btncode: this.state.btncode, DataGridCode: this.state.record.datagrid_code }
-        };
-        await api.button.addGridButton(params);
-        await this.getDataGridButtons();
-    };
-
-    deleteButtonRow = async (e, record) => {
-        console.log(record.button_code);
-        console.log(record.datagrid_code);
-        let params = { data: { button_code: record.button_code, datagrid_code: record.datagrid_code }, method: 'POST' };
-        await api.button.deleteGridButton(params);
-        await this.getDataGridButtons();
-    };
-
-    getOptionButtons(record) {
-        return (
-            <div className="options">
-                <Popconfirm
-                    title="您确定要删除么?"
-                    okText="删除"
-                    cancelText="取消"
-                    onConfirm={(event) => this.deleteButtonRow(event, record)}>
-                    <Button type="danger" size="small" htmlType="button">
-                        删除
-                    </Button>
-                </Popconfirm>
-            </div>
-        );
     }
 
     //eslint-disable-next-line
@@ -80,18 +38,86 @@ export default class GridButtonAdder extends React.Component {
             allButtons: res.data
         });
 
-        params = { data: { DataGridCode: this.state.record.datagrid_code } };
-        res = await api.button.getGridButtons(params);
+        this.getDataGridButtons();
+    }
+
+    onChange(a) {
+        this.setState({ btncode: a });
+    }
+
+    getDataGridButtons = async () => {
+        let params = { data: { DataGridCode: this.state.record.datagrid_code }, method: 'POST' };
+        let res = await api.button.getGridButtons(params);
+
+        let res2 = cloneDeep(res);
+
         this.setState({
             open: true,
+            gridButtonOrders: res2.buttons,
             gridButtons: res.buttons
         });
+    };
+
+    addGridButton = async () => {
+        let params = {
+            data: { btncode: this.state.btncode, DataGridCode: this.state.record.datagrid_code }
+        };
+        await api.button.addGridButton(params);
+        await this.getDataGridButtons();
+    };
+
+    deleteButtonRow = async (e, record) => {
+        let params = { data: { button_code: record.button_code, datagrid_code: record.datagrid_code }, method: 'POST' };
+        await api.button.deleteGridButton(params);
+        await this.getDataGridButtons();
+    };
+
+    saveBtnOrder = async (idx, record) => {
+        let params = { data: { assign_id: record.assign_id, btnorder: this.state.gridButtonOrders[idx].btnorder } };
+        await api.button.saveBtnOrder(params);
+        await this.getDataGridButtons();
+    };
+
+    getOptionButtons(record, rowIndex) {
+        console.log('record: ', record);
+        console.log('rowIndex: ', rowIndex);
+
+        return (
+            <div className="options">
+                <Popconfirm
+                    title="您确定要删除么?"
+                    okText="删除"
+                    cancelText="取消"
+                    onConfirm={(event) => this.deleteButtonRow(event, record)}>
+                    <Button type="danger" size="small" htmlType="button">
+                        删除
+                    </Button>
+                </Popconfirm>
+                <Input
+                    size="small"
+                    style={{ width: '50px' }}
+                    onChange={(e) => {
+                        const _gridButtonOrders = this.state.gridButtonOrders;
+                        _gridButtonOrders[rowIndex]['btnorder'] = e.target.value;
+                        this.setState({
+                            gridButtonOrders: _gridButtonOrders
+                        });
+                    }}
+                    value={this.state.gridButtonOrders[rowIndex]['btnorder']}
+                />
+                <Button
+                    type="danger"
+                    onClick={() => this.saveBtnOrder(rowIndex, record)}
+                    size="small"
+                    htmlType="button">
+                    保存按钮顺序
+                </Button>
+            </div>
+        );
     }
 
     handleCancel = () => {
-        this.setState({
-            open: false
-        });
+        this.setState({ open: false });
     };
 
     columns = [
@@ -100,7 +126,7 @@ export default class GridButtonAdder extends React.Component {
             dataIndex: 'action',
             key: 'action',
             width: 250,
-            render: (text, record) => this.getOptionButtons(record)
+            render: (text, record, rowIndex) => this.getOptionButtons(record, rowIndex)
         },
 
         {
@@ -110,6 +136,14 @@ export default class GridButtonAdder extends React.Component {
         {
             title: '按钮名称',
             dataIndex: 'title'
+        },
+        {
+            title: '图标',
+            dataIndex: 'icon',
+
+            render: (text) => {
+                return IconRender(text);
+            }
         },
         {
             title: '文件路径',
@@ -140,10 +174,13 @@ export default class GridButtonAdder extends React.Component {
                                 分配按钮
                             </div>
                         }
-                        onOk={this.handleOk}
-                        onCancel={this.handleCancel}
+                        footer={[
+                            <Button key="submit" onClick={this.handleCancel}>
+                                关闭
+                            </Button>
+                        ]}
                         okText="确认"
-                        cancelText="取消"
+                        onCancel={this.handleCancel}
                         width="1200px"
                         open={this.state.open}
                         destroyOnClose={true}>
@@ -151,6 +188,7 @@ export default class GridButtonAdder extends React.Component {
                             <div style={{ marginTop: '10px' }}>
                                 <h3>已分配的按钮:</h3>
                                 <Table
+                                    bordered={true}
                                     dataSource={this.state.gridButtons}
                                     size="small"
                                     rowKey={(obj) => obj.id}
@@ -160,7 +198,6 @@ export default class GridButtonAdder extends React.Component {
                                 />
                             </div>
                         )}
-
                         {this.state.allButtons.length == 0 ? null : (
                             <div>
                                 <h4>&nbsp;</h4>

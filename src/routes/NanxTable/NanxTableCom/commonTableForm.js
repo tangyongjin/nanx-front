@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
-import '@/components/UformExtends';
+import '@/UFormExtends';
 import { SchemaForm, createFormActions } from '@uform/antd';
 import 'antd/dist/reset.css';
 

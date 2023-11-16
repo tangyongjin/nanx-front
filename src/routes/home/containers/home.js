@@ -1,5 +1,5 @@
 import React from 'react';
-import '@/components/UformExtends';
+import '@/UFormExtends';
 import { SchemaForm } from '@uform/antd';
 import 'antd/dist/reset.css';
 

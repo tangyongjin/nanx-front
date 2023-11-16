@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, message } from 'antd';
+import { Modal, message, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
 import TableSortCom from './TableSort/TableSortCom';
 import { toJS } from 'mobx';
@@ -33,11 +33,11 @@ export default class TableSort extends React.Component {
         }
     }
 
-    onCancel() {
+    onCancel = () => {
         this.setState({
             open: false
         });
-    }
+    };
 
     render() {
         console.log(this.props.DataGridStore);
@@ -46,8 +46,13 @@ export default class TableSort extends React.Component {
             <Modal
                 open={this.state.open}
                 destroyOnClose={true}
-                onCancel={() => this.onCancel()}
-                onOk={() => this.onCancel()}
+                onCancel={this.onCancel}
+                onOk={this.onCancel}
+                footer={[
+                    <Button key="submit" onClick={this.onCancel}>
+                        关闭
+                    </Button>
+                ]}
                 width={'1300px'}
                 title={
                     <div>

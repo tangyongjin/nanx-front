@@ -25,7 +25,7 @@ export default class CommonModal extends React.Component {
                 open={this.props.NanxTableStore.buttonModalVisuble}
                 onCancel={this.props.NanxTableStore.hideButtonModal}
                 footer={[
-                    <Button key="submit" onClick={this.props.NanxTableStore.hideButtonModal}>
+                    <Button type="primary" key="submit" onClick={this.props.NanxTableStore.hideButtonModal}>
                         关闭
                     </Button>
                 ]}>
