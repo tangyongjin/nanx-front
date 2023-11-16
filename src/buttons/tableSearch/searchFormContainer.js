@@ -142,7 +142,7 @@ export default class SearchFormContainer extends React.Component {
                             type="primary"
                             className="round-button"
                             size="small"
-                            style={{ marginLeft: '400px' }}
+                            style={{ marginLeft: '378px' }}
                             onClick={this.saveFixedQueryConfigure}>
                             保存固定搜索条件
                         </Button>

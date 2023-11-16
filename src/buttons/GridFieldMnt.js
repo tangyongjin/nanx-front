@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, message } from 'antd';
+import { Modal, message, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
 import GridFieldManager from './GridFieldManager';
 import { toJS } from 'mobx';
@@ -32,11 +32,11 @@ export default class GridFieldMnt extends React.Component {
         }
     }
 
-    onCancel() {
+    onCancel = () => {
         this.setState({
             open: false
         });
-    }
+    };
 
     render() {
         console.log(this.props.DataGridStore);
@@ -46,9 +46,13 @@ export default class GridFieldMnt extends React.Component {
             <Modal
                 open={this.state.open}
                 destroyOnClose={true}
-                onCancel={() => this.onCancel()}
                 onOk={() => this.onCancel()}
                 width={'1600px'}
+                footer={[
+                    <Button type="primary" onClick={this.onCancel}>
+                        关闭
+                    </Button>
+                ]}
                 title={
                     <div>
                         <SlidersOutlined />

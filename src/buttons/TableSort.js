@@ -49,7 +49,7 @@ export default class TableSort extends React.Component {
                 onCancel={this.onCancel}
                 onOk={this.onCancel}
                 footer={[
-                    <Button key="submit" onClick={this.onCancel}>
+                    <Button key="submit" type="primary" onClick={this.onCancel}>
                         关闭
                     </Button>
                 ]}

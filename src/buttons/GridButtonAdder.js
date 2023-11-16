@@ -48,9 +48,7 @@ export default class GridButtonAdder extends React.Component {
     getDataGridButtons = async () => {
         let params = { data: { DataGridCode: this.state.record.datagrid_code }, method: 'POST' };
         let res = await api.button.getGridButtons(params);
-
         let res2 = cloneDeep(res);
-
         this.setState({
             open: true,
             gridButtonOrders: res2.buttons,
@@ -175,7 +173,7 @@ export default class GridButtonAdder extends React.Component {
                             </div>
                         }
                         footer={[
-                            <Button key="submit" onClick={this.handleCancel}>
+                            <Button key="submit" type="primary" onClick={this.handleCancel}>
                                 关闭
                             </Button>
                         ]}
