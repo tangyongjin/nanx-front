@@ -2,7 +2,6 @@ import { inject, observer } from 'mobx-react';
 import { PicLeftOutlined } from '@ant-design/icons';
 import React from 'react';
 import LoadingGif from '@/styles/loading.gif';
-// import LoadingGif from '@/styles/icons8-spinning-circle.gif';
 
 import NavDropDown from './NavDropDown';
 

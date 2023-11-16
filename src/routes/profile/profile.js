@@ -8,6 +8,7 @@ export default class Profile extends React.Component {
         return (
             <div style={{ paddingTop: '20px' }}>
                 <Form labelCol={{ span: 5 }} wrapperCol={{ span: 4 }}>
+                    <Form.Item label="用户">{JSON.parse(sessionStorage.getItem('userInfo')).staff_name}</Form.Item>
                     <Form.Item label="角色Code">{JSON.parse(sessionStorage.getItem('userInfo')).role_code}</Form.Item>
                     <Form.Item label="角色名称" hasFeedback>
                         {JSON.parse(sessionStorage.getItem('userInfo')).role_name}

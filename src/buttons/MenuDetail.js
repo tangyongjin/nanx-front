@@ -1,5 +1,5 @@
 import React from 'react';
-import { message, Modal } from 'antd';
+import { message, Modal, Button } from 'antd';
 import MenuDetailCom from './MenuDetailCom';
 
 export default class MenuDetail extends React.Component {
@@ -20,11 +20,7 @@ export default class MenuDetail extends React.Component {
         }
 
         let currentrow = this.props.NanxTableStore.selectedRows[0];
-        console.log(currentrow);
-        this.setState({
-            open: true,
-            record: currentrow
-        });
+        this.setState({ open: true, record: currentrow });
     }
 
     handleCancel = () => {
@@ -44,7 +40,12 @@ export default class MenuDetail extends React.Component {
                         cancelText="取消"
                         width="1200px"
                         open={this.state.open}
-                        destroyOnClose={true}>
+                        destroyOnClose={true}
+                        footer={[
+                            <Button key="submit" type="primary" onClick={this.handleCancel}>
+                                关闭
+                            </Button>
+                        ]}>
                         <br />
                         <MenuDetailCom menuID={this.state.record.id} />
                     </Modal>
