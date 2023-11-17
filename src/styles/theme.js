@@ -1,6 +1,3 @@
-// colorPrimary: '#225e04',
-// colorInfo: '#225e04',
-
 const themeJson = {
     token: {
         colorPrimary: '#3B3B47',
@@ -76,6 +73,10 @@ const themeJson = {
             borderColor: '#b3bab0',
             rowSelectedBg: '#748A3D',
             rowSelectedHoverBg: '#748A3D'
+        },
+        Tabs: {
+            colorPrimaryActive: 'white',
+            itemActiveColor: 'white'
         }
     }
 };

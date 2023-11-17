@@ -40,8 +40,6 @@ export default class TableSort extends React.Component {
     };
 
     render() {
-        console.log(this.props.DataGridStore);
-
         return (
             <Modal
                 open={this.state.open}

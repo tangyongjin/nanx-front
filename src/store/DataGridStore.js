@@ -162,8 +162,7 @@ class DataGridStore {
         obj.DataGridCode = this.DataGridCode;
 
         let params = { data: obj };
-        let json = await api.dataGrid.saveFieldCfg(params);
-        message.info(json.message);
+        await api.dataGrid.saveFieldCfg(params);
         this.getColsDbInfo();
     };
 }

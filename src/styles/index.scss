@@ -48,7 +48,6 @@ div.ant-modal-title > div > span {
     min-width: 100vh;
 }
 
-
 .ant-table-wrapper::after {
     color: red;
     background-color: white;
@@ -79,14 +78,14 @@ div.ant-modal-title > div > span {
     /*滚动条里面小方块*/
     border-radius: 5px;
     -webkit-box-shadow: inset 12px rgb(2, 78, 6) !important;
-    background:  rgb(2, 62, 5) ;
+    background: rgb(2, 62, 5);
 }
 
 ::-webkit-scrollbar-track {
     /*滚动条里面轨道*/
-    -webkit-box-shadow: inset 12px  rgb(185, 181, 186) !important;
+    -webkit-box-shadow: inset 12px rgb(185, 181, 186) !important;
     border-radius: 0;
-    background:  rgb(207, 201, 207) ;
+    background: rgb(207, 201, 207);
 }
 
 // 错误信息屏蔽
@@ -145,17 +144,53 @@ div.ant-modal-title > div > span {
 }
 
 // message
-span.anticon.anticon-info-circle{
+span.anticon.anticon-info-circle {
     color: #035017 !important;
 }
-span.anticon.anticon-check-circle{
+span.anticon.anticon-check-circle {
     color: #035017 !important;
 }
- 
-span.anticon.anticon-close-circle{
+
+span.anticon.anticon-close-circle {
     color: #191819 !important;
 }
 
-span.anticon.anticon-exclamation-circle{
+span.anticon.anticon-exclamation-circle {
     color: #191819 !important;
+}
+
+.fromBox {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start; // 靠左对齐
+    flex-wrap: wrap; // 换行
+}
+
+.formItem {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    height: 44px;
+    margin-right: 20px; // 增加边距
+    width: calc((100% - 20px) / 5); // 这个是公式，减去边距以后一行放多少个。
+}
+
+.formItem svg {
+      vertical-align: middle;
+}
+
+
+.ant-tabs-tab-active {
+    background: rgb(1, 63, 24) !important;
+}
+
+.ant-tabs-tab-active > div {
+    color: #d3e1d6 !important;
+}
+
+/** hero icons */
+
+.w-5 {
+    height: 20px;
+    width: 20px;
+    margin-right: 4px;
 }
