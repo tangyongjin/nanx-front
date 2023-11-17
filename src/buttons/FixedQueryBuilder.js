@@ -10,24 +10,29 @@ export default class FixedQueryBuilder extends React.Component {
     constructor(props) {
         super(props);
         console.log('props: ', props);
-        this.init = this.init.bind(this);
+        // this.init = this.init.bind(this);
         this.state = {
             fieldsList: []
         };
     }
 
+    //eslint-disable-next-line
     async init() {
-        if (this.props.NanxTableStore.selectedRows.length != 1) {
-            message.error('请选择1个DataGrid.');
+        if (this.props.NanxTableStore.selectedRows.length <= 0) {
+            message.error('请选择一条数据');
             return;
         }
+
         await this.props.NanxTableStore.showButtonModal();
         await this.getFieldList();
     }
 
     targetDataGrid() {
-        let _tmprec = this.props.NanxTableStore.selectedRows[0];
-        return _tmprec.datagrid_code;
+        if (this.props.NanxTableStore.selectedRows.length > 0) {
+            let _tmprec = this.props.NanxTableStore.selectedRows[0];
+            return _tmprec.datagrid_code;
+        }
+        return null;
     }
 
     // 选中的 Datagrid 的列,不是 DataGridMNT 的 列
