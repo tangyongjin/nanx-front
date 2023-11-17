@@ -84,7 +84,7 @@ export default class Login extends React.Component {
                             style={{ display: 'none', fontSize: '30px', color: '#225e04' }}
                         />
                         <div id="login_msg" style={{ color: '#225e04', marginTop: '4px', display: 'none' }}>
-                            登陆失败，请检查手机号和密码
+                            登陆失败,请检查手机号和密码/角色
                         </div>
                     </div>
 

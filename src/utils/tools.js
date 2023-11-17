@@ -138,9 +138,6 @@ export function getAllKeys(menuData) {
 }
 
 export function findMenuPath(menu, key) {
-    console.log('key: ', key);
-    console.log('menu: ', menu);
-
     const findPath = (menu, key, path) => {
         for (let i = 0; i < menu.length; i++) {
             const item = menu[i];
@@ -160,7 +157,6 @@ export function findMenuPath(menu, key) {
 
     const path = [];
     const result = findPath(menu, key, path);
-    console.log('result: ', result);
     if (typeof result === 'undefined') {
         return [];
     } else {

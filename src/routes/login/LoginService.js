@@ -31,6 +31,12 @@ export default class LoginService {
                     return;
                 }
 
+                if (res.code == 500) {
+                    document.getElementById('login_loading').style.display = 'none';
+                    document.getElementById('login_msg').style.display = 'block';
+                    return;
+                }
+
                 if (res.code == 200) {
                     await UserStore.setToken(res.token);
                     await UserStore.setUserProfile(res.profile);
