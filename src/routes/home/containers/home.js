@@ -30,11 +30,7 @@ const Home = () => {
             }
         }
     };
-    return (
-        <div style={{ marginTop: '20px' }}>
-            <SchemaForm schema={formCfg}></SchemaForm>
-        </div>
-    );
+    return <div style={{ marginTop: '20px', marginLeft: '100px' }}>欢迎页面</div>;
 };
 
 export default Home;
