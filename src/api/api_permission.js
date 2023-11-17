@@ -10,6 +10,10 @@ export default class permission {
         deleteMenuPermission: (params) => post(`${api_root}/Permission/deleteMenuPermission`, params),
         getUsersByMenuId: (params) => post(`${api_root}/Permission/getUsersByMenuId`, params),
         getMenuTreeByRoleCode: (params) => post(`${api_root}/Permission/getMenuTreeByRoleCode`, params),
-        getRolesByMenuId: (params) => post(`${api_root}/Permission/getRolesByMenuId`, params)
+        getRolesByMenuId: (params) => post(`${api_root}/Permission/getRolesByMenuId`, params),
+        getAllRoles: (params) => post(`${api_root}/Permission/getAllRoles`, params),
+        assignUserRole: (params) => post(`${api_root}/Permission/assignUserRole`, params),
+        deleteUserRole: (params) => post(`${api_root}/Permission/deleteUserRole`, params),
+        getUserRole: (params) => post(`${api_root}/Permission/getUserRole`, params)
     };
 }
