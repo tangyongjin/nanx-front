@@ -92,21 +92,21 @@ export default class TableSortCom extends React.Component {
         const columns = [
             {
                 title: 'Field',
-                dataIndex: 'Field',
-                key: 'Field'
+                dataIndex: 'Field'
             },
             {
-                title: '名称',
-                dataIndex: 'label',
-                key: 'label'
+                title: '名称/备注',
+                dataIndex: 'Comment'
             }
         ];
 
         return (
             <DndProvider backend={HTML5Backend}>
+                <br />
                 <Table
                     rowKey={(row) => row.Field}
                     columns={columns}
+                    size={'small'}
                     dataSource={this.state.maintableColumns}
                     pagination={false}
                     components={this.BodyComponent}
