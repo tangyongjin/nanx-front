@@ -149,7 +149,7 @@ export default class TableSearchForm extends React.Component {
                                     setType('vset_' + this.props.form_index, 'string');
                                     break;
 
-                                case 'Assocselect':
+                                case 'AssocSelect':
                                     setEnum(operator, this.operation_list.string);
                                     setType('vset_' + this.props.form_index, 'string');
                                     break;

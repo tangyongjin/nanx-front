@@ -4,11 +4,10 @@ import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import locale from 'antd/es/date-picker/locale/zh_CN';
-
 import 'dayjs/locale/zh-cn';
 
 dayjs.extend(customParseFormat);
-const dateFormat = 'YYYY-MM-DD hh:mm:ss';
+const dateFormat = 'YYYY-MM-DD HH:mm:ss';
 
 export default class UDateTimeEditor extends React.Component {
     constructor(props) {
@@ -36,6 +35,7 @@ export default class UDateTimeEditor extends React.Component {
                 <DatePicker
                     style={{ width: '258px' }}
                     showTime
+                    placeholder={'请输入时间222'}
                     onChange={(e, ds) => {
                         this.props.onChange(ds);
                     }}

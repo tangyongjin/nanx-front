@@ -69,6 +69,10 @@ class _NanxTableStore {
         this.search_query_cfg = [];
     };
 
+    @action clearSelectedRows = () => {
+        this.selectedRowKeys = [];
+    };
+
     @action setDataGridCode = (DataGridCode) => (this.datagrid_code = DataGridCode);
 
     @action rowSelectChange = async (selectedRowKeys, selectedRows) => {

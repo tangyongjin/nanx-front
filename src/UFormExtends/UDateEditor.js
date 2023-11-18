@@ -1,48 +1,40 @@
 import React from 'react';
-import { DatePicker } from 'antd';
-
 import dayjs from 'dayjs';
+import { DatePicker as AntDatePicker } from 'antd';
+import { compose, mapStyledProps } from './UFormUtils';
+import { registerFormField, connect } from '@uform/react';
+import { mapTextComponent } from '@uform/utils';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import locale from 'antd/es/date-picker/locale/zh_CN';
-
 import 'dayjs/locale/zh-cn';
-
+dayjs.locale('zh-cn'); // 全局使用简体中文
 dayjs.extend(customParseFormat);
 const dateFormat = 'YYYY-MM-DD';
 
-export default class DateEditor extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log('DateEditor💘💘', props);
-        this.state = {
-            datevalue: props.d_value ? props.d_value : null
-        };
-    }
+const WrapperAntComomnet = (TarGet) => {
+    return class Select extends React.Component {
+        render() {
+            return <TarGet placeholder={'请输入时间+++'} locale={locale} format={dateFormat} {...this.props} />;
+        }
+    };
+};
 
-    componentDidMount() {
-        this.setState(
-            {
-                datevalue: this.props.d_value
-            },
-            () => {
-                this.props.onChange(this.state.datevalue);
-            }
-        );
-    }
+const mapMomentValue = (props) => {
+    props.value = props.value ? dayjs(props.value, dateFormat) : null;
+    return props;
+};
 
-    render() {
-        return (
-            <div>
-                <DatePicker
-                    style={{ width: '172px' }}
-                    onChange={(e, ds) => {
-                        this.props.onChange(ds);
-                    }}
-                    defaultValue={this.state.datevalue ? dayjs(this.state.datevalue, dateFormat) : null}
-                    locale={locale}
-                    format={dateFormat}
-                />
-            </div>
-        );
-    }
-}
+const DatePicker = WrapperAntComomnet(AntDatePicker);
+
+const UDateEditor = connect({
+    getValueFromEvent(event, dateValue) {
+        console.log('日期值的:::::::', dateValue);
+        return dateValue;
+    },
+    getProps: compose(mapStyledProps, mapMomentValue),
+    getComponent: mapTextComponent
+})(DatePicker);
+
+registerFormField('UDateEditor', UDateEditor);
+
+export { UDateEditor };

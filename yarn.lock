@@ -2598,7 +2598,7 @@
   dependencies:
     rxjs "^6.3.3"
 
-"@uform/utils@^0.4.4":
+"@uform/utils@0.4.4", "@uform/utils@^0.4.4":
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/@uform/utils/-/utils-0.4.4.tgz#0daed417dddc6c8fdfb15f60c1905f92fc1551cd"
   integrity sha512-3XmicLZTwBVHdCX3ngDL8uoACSPQhqS+SF/998N07rQt2izmvz9F5ShmADeWjdrzDK4iWzrtvUQ7CSzI9tZ9yg==

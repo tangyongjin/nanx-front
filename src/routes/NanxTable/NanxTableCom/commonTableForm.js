@@ -51,7 +51,13 @@ const CommonTableForm = (props) => {
                                 item.props['x-props'].actions = actions;
                                 // 不知道为何无法取到日期型的数据的值
                                 if (props.NanxTableStore.table_action == 'edit') {
-                                    item.props['x-props'].d_value = props.NanxTableStore.selectedRows[0][key];
+                                    // console.log('编辑:', props.NanxTableStore.selectedRows[0][key]);
+                                    // item.props['x-props'].value = props.NanxTableStore.selectedRows[0][key];
+                                    // item.props['x-props'].d_value = props.NanxTableStore.selectedRows[0][key];
+                                }
+
+                                if (props.NanxTableStore.table_action == 'add') {
+                                    // console.log('残留:', props.NanxTableStore.selectedRows);
                                 }
                             });
                         }
@@ -63,7 +69,7 @@ const CommonTableForm = (props) => {
                     <Button
                         type="primary"
                         htmlType="button"
-                        className="round-button  marginRihgt10"
+                        className="round-button"
                         onClick={async () => {
                             await actions.validate();
                             await props.saveFormData(actions.getFormState().values);

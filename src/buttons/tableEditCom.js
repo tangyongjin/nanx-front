@@ -11,7 +11,6 @@ import { observer, inject } from 'mobx-react';
 export default class TableEditCom extends React.Component {
     init = async () => {
         await this.props.NanxTableStore.setTableAction('edit');
-
         if (this.props.NanxTableStore.selectedRows.length != 1) {
             message.error('请选择1条数据.');
             return;
@@ -53,6 +52,7 @@ export default class TableEditCom extends React.Component {
 
     render() {
         let _width = '650px';
+        // form 宽度,因为 hasTableEditor 太窄不好看
         if (this.props.NanxTableStore.hasTableEditor()) {
             _width = '1150px';
         }

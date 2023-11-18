@@ -10,6 +10,7 @@ import { FileAddOutlined } from '@ant-design/icons';
 export default class TableAddCom extends React.Component {
     init = async () => {
         await this.props.NanxTableStore.setTableAction('add');
+        await this.props.NanxTableStore.clearSelectedRows();
         await this.props.NanxTableStore.rowSelectChange([], []);
         await this.props.NanxTableStore.showButtonModal();
     };
