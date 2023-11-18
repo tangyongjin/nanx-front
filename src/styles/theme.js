@@ -6,22 +6,33 @@ const themeJson = {
         colorSuccess: '#225e04',
         colorWarning: '#225e04',
         colorTextBase: '#000000ef',
-        borderRadius: 3,
-        headerPadding: '150px'
+        borderRadius: 4,
+        headerPadding: '150px',
+        colorPrimaryHover: '#225e04',
+        controlOutlineWidth: 0.5
     },
 
     components: {
-        Input: {
+        Input22: {
+            algorithm: false,
             hoverBorderColor: 'rgb(82, 196, 26)',
             activeBorderColor: 'rgb(82, 196, 26)',
+            handleHoverColor: 'rgb(82, 196, 26)',
             colorError: 'rgb(82, 196, 26)',
             colorErrorBorderHover: 'rgb(72, 182, 19)'
+        },
+        Input33: {
+            algorithm: false,
+            hoverBorderColor: 'rgb(82, 196, 26)',
+            activeBorderColor: '#ff0000',
+            handleHoverColor: '#6f00ff',
+            colorError: '#ff0000',
+            colorErrorBorderHover: '#ff0000'
         },
 
         InputNumber: {
             // controlWidth: 312,
             algorithm: false,
-            colorPrimaryHover: 'red',
             hoverBorderColor: 'rgb(82, 196, 26)',
             activeBorderColor: 'rgb(82, 196, 26)',
             handleHoverColor: 'rgb(82, 196, 26)',
