@@ -49,16 +49,6 @@ const CommonTableForm = (props) => {
                                 item.props['x-props'].nnstore = props.NanxTableStore;
                                 item.props['x-props'].datagrid_code = props.NanxTableStore.datagrid_code;
                                 item.props['x-props'].actions = actions;
-                                // 不知道为何无法取到日期型的数据的值
-                                if (props.NanxTableStore.table_action == 'edit') {
-                                    // console.log('编辑:', props.NanxTableStore.selectedRows[0][key]);
-                                    // item.props['x-props'].value = props.NanxTableStore.selectedRows[0][key];
-                                    // item.props['x-props'].d_value = props.NanxTableStore.selectedRows[0][key];
-                                }
-
-                                if (props.NanxTableStore.table_action == 'add') {
-                                    // console.log('残留:', props.NanxTableStore.selectedRows);
-                                }
                             });
                         }
                     });
