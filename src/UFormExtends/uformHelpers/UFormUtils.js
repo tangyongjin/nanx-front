@@ -1,6 +1,7 @@
 import { Select } from 'antd';
 import React from 'react';
 import dayjs from 'dayjs';
+import { isFn } from '@uform/utils';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import 'dayjs/locale/zh-cn';
 
@@ -33,4 +34,21 @@ const mapMomentValue = (props) => {
     return props;
 };
 
-export { mapMomentValue, mapStyledProps, compose, acceptEnum };
+const mapTextComponent = (
+    Target: React.ComponentClass,
+    props,
+    { editable, name }: { editable: boolean | ((name: string) => boolean), name: string }
+): React.ComponentClass => {
+    if (editable !== undefined) {
+        if (isFn(editable)) {
+            if (!editable(name)) {
+                return Text;
+            }
+        } else if (editable === false) {
+            return Text;
+        }
+    }
+    return Target;
+};
+
+export { mapMomentValue, mapStyledProps, mapTextComponent, compose, acceptEnum };

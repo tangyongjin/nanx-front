@@ -14,8 +14,7 @@ import GetLoginuser from './UGetLoginuser';
 import GetRadio from './UGetRadio';
 import Wangeditor from './UWangeditor';
 import YesOrNo from './UYesOrNo';
-import { acceptEnum, mapStyledProps } from './UFormUtils';
-import { mapTextComponent } from '@uform/utils';
+import { acceptEnum, mapStyledProps, mapTextComponent } from './uformHelpers/UFormUtils';
 
 import './UDateEditor';
 
