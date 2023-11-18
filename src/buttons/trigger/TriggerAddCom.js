@@ -70,7 +70,6 @@ export default class TriggerAddCom extends React.Component {
             <div style={{ marginLeft: '40px', marginTop: '30px' }}>
                 <div style={{ marginBottom: '10px' }}>联动组名称:</div>
                 <div style={{ marginBottom: '10px' }}>
-                    {' '}
                     <Input onChange={(event) => this.setGroupName(event)} />
                 </div>
                 <Row>
