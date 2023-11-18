@@ -60,7 +60,10 @@ const themeJson = {
         },
         Tabs: {
             colorPrimaryActive: 'white',
-            itemActiveColor: 'white'
+            cardBg: '#3B3B47',
+            itemColor: 'white',
+            itemActiveColor: 'white',
+            titleFontSize: '15px'
         },
 
         Input: {

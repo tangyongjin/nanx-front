@@ -229,7 +229,29 @@ span.anticon.anticon-exclamation-circle {
     border: 1px solid #225e04 !important;
 }
 
-
 .ant-input:hover {
-    border-color:#225e04 !important;
+    border-color: #225e04 !important;
+}
+
+.ant-select-open,
+.ant-select-selection-search {
+    border-color: #225e04 !important;
+}
+
+.ant-select-open:focus-within {
+    border-color: #225e04 !important;
+}
+
+.ant-select-open:focus {
+    border-color: #225e04 !important;
+}
+
+.ant-select:hover {
+    border-color: #225e04 !important;
+}
+
+.ant-select-selector:hover,
+.ant-select-selector:focus,
+.ant-select-selector:active {
+    border-color: #225e04 !important;
 }

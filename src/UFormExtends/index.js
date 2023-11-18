@@ -14,6 +14,7 @@ import GetRadio from './UGetRadio';
 import Wangeditor from './UWangeditor';
 import YesOrNo from './UYesOrNo';
 import UDateEditor from './UDateEditor';
+import UDateTimeEditor from './UDateTimeEditor';
 
 registerFormFields({
     YesOrNo: connect()((props) => <YesOrNo {...props} getComponentValue={props.onChange} value={props.value || ''} />),
@@ -39,6 +40,11 @@ registerFormFields({
     UDateEditor: connect()((props) => {
         console.log('插件:', props); // 在这里输出 props 的内容
         return <UDateEditor {...props} value={props.value} />;
+    }),
+
+    UDateTimeEditor: connect()((props) => {
+        console.log('插件:', props); // 在这里输出 props 的内容
+        return <UDateTimeEditor {...props} value={props.value} />;
     }),
 
     TableEditor: connect()((props) => {
