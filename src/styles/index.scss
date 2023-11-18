@@ -175,15 +175,12 @@ span.anticon.anticon-exclamation-circle {
 }
 
 .formItem svg {
-      vertical-align: middle;
+    vertical-align: middle;
 }
 
 .loginBtnContainer svg {
     vertical-align: middle;
 }
-
- 
-
 
 .ant-tabs-tab-active {
     background: rgb(1, 63, 24) !important;
@@ -199,4 +196,35 @@ span.anticon.anticon-exclamation-circle {
     height: 20px;
     width: 20px;
     margin-right: 4px;
+}
+
+/* uform css hack */
+/* Apply styles when input is hovered or focused */
+.ant-input input:hover,
+.ant-input input:focus,
+.ant-input:focus-within,
+.ant-input-number input:hover,
+.ant-input-number input:focus,
+.ant-input-number:focus-within {
+    border-color: #225e04 !important;
+}
+
+/* Apply styles to the input when the parent wrapper is focused or focused within */
+.ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper:focus-within,
+.ant-input-number-affix-wrapper:focus,
+.ant-input-number-affix-wrapper:focus-within {
+    border-color: #225e04 !important;
+    box-shadow: 0 0 0 1px rgba(5, 145, 255, 0.1);
+    outline: 0;
+}
+
+/* Apply styles to the wrapper when hovered, active, or focused */
+.ant-input-affix-wrapper:hover,
+.ant-input-affix-wrapper:active,
+.ant-input-affix-wrapper:focus,
+.ant-input-number-affix-wrapper:hover,
+.ant-input-number-affix-wrapper:active,
+.ant-input-number-affix-wrapper:focus {
+    border: 1px solid #225e04 !important;
 }

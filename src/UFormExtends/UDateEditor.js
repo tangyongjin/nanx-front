@@ -1,7 +1,5 @@
 import React from 'react';
 import { DatePicker } from 'antd';
-// import moment from 'moment';
-// import locale from 'antd/es/date-picker/locale/zh_CN';
 
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -36,13 +34,11 @@ export default class DateEditor extends React.Component {
         return (
             <div>
                 <DatePicker
+                    style={{ width: '172px' }}
                     onChange={(e, ds) => {
                         this.props.onChange(ds);
                     }}
                     defaultValue={this.state.datevalue ? dayjs(this.state.datevalue, dateFormat) : null}
-                    // defaultValue= { null }
-                    // value={dayjs(this.state.datevalue, dateFormat)}
-
                     locale={locale}
                     format={dateFormat}
                 />

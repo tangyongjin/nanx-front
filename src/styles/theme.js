@@ -13,33 +13,6 @@ const themeJson = {
     },
 
     components: {
-        Input22: {
-            algorithm: false,
-            hoverBorderColor: 'rgb(82, 196, 26)',
-            activeBorderColor: 'rgb(82, 196, 26)',
-            handleHoverColor: 'rgb(82, 196, 26)',
-            colorError: 'rgb(82, 196, 26)',
-            colorErrorBorderHover: 'rgb(72, 182, 19)'
-        },
-        Input33: {
-            algorithm: false,
-            hoverBorderColor: 'rgb(82, 196, 26)',
-            activeBorderColor: '#ff0000',
-            handleHoverColor: '#6f00ff',
-            colorError: '#ff0000',
-            colorErrorBorderHover: '#ff0000'
-        },
-
-        InputNumber: {
-            // controlWidth: 312,
-            algorithm: false,
-            hoverBorderColor: 'rgb(82, 196, 26)',
-            activeBorderColor: 'rgb(82, 196, 26)',
-            handleHoverColor: 'rgb(82, 196, 26)',
-            colorError: 'rgb(82, 196, 26)',
-            colorErrorBorderHover: 'rgb(72, 182, 19)'
-        },
-
         Menu: {
             groupTitleColor: 'rgba(245, 237, 237, 0.45)',
             dangerItemActiveBg: 'rgb(70, 187, 13)',
@@ -88,6 +61,24 @@ const themeJson = {
         Tabs: {
             colorPrimaryActive: 'white',
             itemActiveColor: 'white'
+        },
+
+        Input: {
+            algorithm: false,
+            hoverBorderColor: '#366503',
+            activeBorderColor: '#366503',
+            handleHoverColor: '#366503',
+            colorError: '#366503',
+            colorErrorBorderHover: '#366503'
+        },
+
+        InputNumber: {
+            algorithm: false,
+            hoverBorderColor: '#366503',
+            activeBorderColor: '#366503',
+            handleHoverColor: '#366503',
+            colorError: '#366503',
+            colorErrorBorderHover: '#366503'
         }
     }
 };
