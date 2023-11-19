@@ -6,6 +6,26 @@ const { Option } = Select;
 @inject('DataGridStore')
 @observer
 class PluginCfg extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log('props: ', props);
+
+        this.state = {
+            opts: [
+                {
+                    validateItemId: 'chineseMobile',
+                    validateItemName: '中国手机号',
+                    memo: 'ff'
+                },
+                {
+                    validateItemId: 'chinaID',
+                    validateItemName: '中国身份证',
+                    memo: 'ff'
+                }
+            ]
+        };
+    }
+
     render() {
         return (
             <div className="fromBox">
@@ -22,22 +42,27 @@ class PluginCfg extends React.Component {
                 </div>
                 <div className="formItem">
                     <Select
-                        style={{ width: '200px' }}
-                        value={this.props.col.category}
+                        value={this.props.col.validateRule}
                         onChange={(e) => {
-                            this.props.DataGridStore.changeCfg_dropdown(e, 'category', this.props.col.Field);
+                            this.props.DataGridStore.changeCfg_dropdown(e, 'validateRule', this.props.col.Field);
                         }}
                         showSearch
                         allowClear
                         disabled={this.props.col.Field == 'id'}
-                        placeholder="字典表"
-                        name="category">
-                        {this.props.DataGridStore.Categories.length &&
-                            this.props.DataGridStore.Categories.map((item, index) => (
-                                <Option key={index} value={item.catid}>
-                                    {item.catname}
-                                </Option>
-                            ))}
+                        placeholder="校验规则"
+                        name="validateRule">
+                        {this.state.opts.map((item, index) => (
+                            <Option key={index} value={item.validateItemId}>
+                                <div style={{ display: 'flex', justifyContent: 'flexStart' }}>
+                                    <span style={{ width: '150px' }}>{item.validateItemId}</span>
+                                    <span style={{ marginLeft: '30px' }}>
+                                        (<span>{item.validateItemName}</span>
+                                        <span style={{ width: '10px' }}>/</span>
+                                        <span>{item.memo}]</span>)
+                                    </span>
+                                </div>
+                            </Option>
+                        ))}
                     </Select>
                 </div>
             </div>

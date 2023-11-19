@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Select, Button, Checkbox, Popover } from 'antd';
+import { Input, Select, Button, Popover } from 'antd';
 import { observer, inject } from 'mobx-react';
 import ReactJson from 'react-json-view';
 
@@ -98,6 +98,13 @@ class PluginCfg extends React.Component {
                                     </Option>
                                 ))}
                         </Select>
+                        <Popover
+                            className="help-tip"
+                            title="帮助:插件参数"
+                            content={'只能选择一个插件,有些插件可能需要配置json形式的参数'}
+                            trigger="hover">
+                            <Button>?</Button>
+                        </Popover>
                     </div>
                 </div>
 

@@ -1,11 +1,31 @@
 import React from 'react';
-import { Checkbox, Select } from 'antd';
+import { Select } from 'antd';
 import { observer, inject } from 'mobx-react';
 
 const { Option } = Select;
 @inject('DataGridStore')
 @observer
 class PluginCfg extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log('props: ', props);
+
+        this.state = {
+            opts: [
+                {
+                    initItemID: 'fixValue',
+                    initItemName: '固定值',
+                    memo: 'ff'
+                },
+                {
+                    initItemID: 'currentData',
+                    initItemName: '当前日期',
+                    memo: 'ff'
+                }
+            ]
+        };
+    }
+
     render() {
         return (
             <div className="fromBox">
@@ -19,24 +39,30 @@ class PluginCfg extends React.Component {
                     </svg>
                     初始值
                 </div>
+
                 <div className="formItem">
                     <Select
-                        style={{ width: '200px' }}
-                        value={this.props.col.category}
+                        value={this.props.col.initValueCfg}
                         onChange={(e) => {
-                            this.props.DataGridStore.changeCfg_dropdown(e, 'category', this.props.col.Field);
+                            this.props.DataGridStore.changeCfg_dropdown(e, 'initValueCfg', this.props.col.Field);
                         }}
                         showSearch
                         allowClear
                         disabled={this.props.col.Field == 'id'}
-                        placeholder="字典表"
-                        name="category">
-                        {this.props.DataGridStore.Categories.length &&
-                            this.props.DataGridStore.Categories.map((item, index) => (
-                                <Option key={index} value={item.catid}>
-                                    {item.catname}
-                                </Option>
-                            ))}
+                        placeholder="初始值配置"
+                        name="initValueCfg">
+                        {this.state.opts.map((item, index) => (
+                            <Option key={index} value={item.initItemID}>
+                                <div style={{ display: 'flex', justifyContent: 'flexStart' }}>
+                                    <span style={{ width: '150px' }}>{item.initItemID}</span>
+                                    <span style={{ marginLeft: '30px' }}>
+                                        (<span>{item.initItemName}</span>
+                                        <span style={{ width: '10px' }}>/</span>
+                                        <span>{item.memo}]</span>)
+                                    </span>
+                                </div>
+                            </Option>
+                        ))}
                     </Select>
                 </div>
             </div>

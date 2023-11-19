@@ -9,14 +9,14 @@ import FormVisbleCfg from './FileldCfgCompoments/FormVisbleCfg';
 import CategeroyCfg from './FileldCfgCompoments/CategeroyCfg';
 import InitValeCfg from './FileldCfgCompoments/InitValeCfg';
 import ReadOnlyCfg from './FileldCfgCompoments/ReadOnlyCfg';
-import ValRuleCfg from './FileldCfgCompoments/ValRuleCfg';
+import ValidateRuleCfg from './FileldCfgCompoments/ValidateRuleCfg';
 
 @inject('DataGridStore')
 @observer
 class FieldPropertyRender extends React.Component {
     render() {
         return (
-            <div>
+            <div style={{ marginLeft: '10px' }}>
                 <h3>
                     字段:{this.props.col.Field}/元类型:{this.props.col.Type}
                 </h3>
@@ -30,7 +30,7 @@ class FieldPropertyRender extends React.Component {
                     <ReadOnlyCfg col={this.props.col} />
                     <CategeroyCfg col={this.props.col} />
                     <InitValeCfg col={this.props.col} />
-                    <ValRuleCfg col={this.props.col} />
+                    <ValidateRuleCfg col={this.props.col} />
                 </div>
                 <div style={{ marginLeft: '390px', marginTop: '46px' }}>
                     <Button

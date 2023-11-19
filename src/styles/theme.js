@@ -9,7 +9,8 @@ const themeJson = {
         borderRadius: 4,
         headerPadding: '150px',
         colorPrimaryHover: '#225e04',
-        controlOutlineWidth: 0.5
+        controlOutlineWidth: 0.5,
+        colorBgContainer: 'white'
     },
 
     components: {
@@ -82,6 +83,12 @@ const themeJson = {
             handleHoverColor: '#366503',
             colorError: '#366503',
             colorErrorBorderHover: '#366503'
+        },
+        Card: {
+            actionsBg: 'red',
+            headerFontSize: 12,
+            headerFontSizeSM: 12,
+            headerBg: 'white'
         }
     }
 };
