@@ -7,7 +7,6 @@ export default class GetLoginuser extends React.Component {
         console.log(props);
     }
     componentWillMount() {
-        console.log(1234, JSON.parse(sessionStorage.getItem('userInfo')).user);
         this.props.onChange(JSON.parse(sessionStorage.getItem('userInfo')).user);
     }
     render() {

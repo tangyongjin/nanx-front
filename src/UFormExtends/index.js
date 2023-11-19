@@ -8,8 +8,6 @@ import CheckBox from './UCheckbox';
 import TableEditor from './UTableEditor';
 import Dropdownlist from './UDropdownList';
 import Fileuploader from './UFileuploader';
-import GetActionCode from './UGetActionCode';
-import GetDate from './UGetDateString';
 import GetLoginuser from './UGetLoginuser';
 import GetRadio from './UGetRadio';
 import Wangeditor from './UWangeditor';
@@ -39,8 +37,6 @@ registerFormFields({
     )),
 
     GetLoginuser: connect()((props) => <GetLoginuser {...props} value={props.value || ''} />),
-    GetDate: connect()((props) => <GetDate {...props} value={props.value || ''} />),
-    GetActionCode: connect()((props) => <GetActionCode {...props} value={props.value || ''} />),
     CheckBox: connect()((props) => <CheckBox {...props} value={props.value || ''} />),
     Wangeditor: connect()((props) => <Wangeditor {...props} value={props.value || ''} />),
     GetRadio: connect()((props) => <GetRadio {...props} value={props.value || ''} />),

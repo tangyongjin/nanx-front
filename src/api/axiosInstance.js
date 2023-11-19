@@ -54,7 +54,7 @@ export function post(url, params, config) {
 }
 
 const responseSuccess = (response) => {
-    console.log('response: ', response);
+    // console.log('response: ', response);
     //接收到响应数据并成功后的一些共有的处理，关闭loading等
     AuthStore.setLoading(false);
     AuthStore.delRunnitem(response.config.requestId);
@@ -129,7 +129,7 @@ const responseFailed = (error) => {
     } else {
         // 超时处理
         if (JSON.stringify(error).includes('timeout')) {
-            console.error('服务器响应超时，请刷新当前页');
+            // console.error('服务器响应超时，请刷新当前页');
         }
         error.message = '连接服务器失败';
     }

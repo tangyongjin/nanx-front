@@ -72,7 +72,7 @@ export default class TriggerAddCom extends React.Component {
                 <div style={{ marginBottom: '10px' }}>
                     <Input onChange={(event) => this.setGroupName(event)} />
                 </div>
-                <Row>
+                <Row align="bottom">
                     <Col span={2}>
                         <Button type="default" htmlType="submit" onClick={this.increateCounter.bind(this)}>
                             添加

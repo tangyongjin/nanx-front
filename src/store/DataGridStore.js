@@ -76,20 +76,6 @@ class DataGridStore {
         this.plugins = json.data;
     };
 
-    @action batchUpdateFieldCfg = async () => {
-        console.log('批量修改字段配置', this.ColsDbInfo);
-        let params = {
-            data: {
-                submitData: this.ColsDbInfo,
-                datagrid_code: this.DataGridCode
-            }
-        };
-        let json = await api.dataGrid.batchUpdateFieldCfg(params);
-        if (json.code == 200) {
-            await this.getColsDbInfo();
-        }
-    };
-
     @action getAllCategory = async () => {
         let params = { data: {} };
         let json = await api.dataGrid.getAllCategory(params);
@@ -142,7 +128,7 @@ class DataGridStore {
     };
 
     @action setFieldAttr = (field, attr, value) => {
-        this.ColsDbInfo.foreach((element) => {
+        this.ColsDbInfo.map((element) => {
             if (element.Field === field) {
                 element[attr] = value;
             }
@@ -164,6 +150,39 @@ class DataGridStore {
         let params = { data: obj };
         await api.dataGrid.saveFieldCfg(params);
         this.getColsDbInfo();
+    };
+
+    // 字段配置保存
+    @action saveCfg = (field_cfg) => {
+        this.saveFieldCfg(field_cfg);
+    };
+
+    @action changeCfg_input = (event, attr, field) => {
+        let value = event.target.value;
+        this.setFieldAttr(field, attr, value);
+    };
+
+    @action changeCfg_cbx = (event, attr, field) => {
+        console.log(event, attr, field);
+        let value = event.target.checked;
+        this.setFieldAttr(field, attr, value);
+    };
+
+    @action changeCfg_dropdown = (v, attr, field) => {
+        if (v == undefined) {
+            v = '';
+        }
+        this.setFieldAttr(field, attr, v);
+    };
+
+    @action getFieldAttr = (field, attr) => {
+        console.log(this.ColsDbInfo);
+        this.ColsDbInfo.map((element) => {
+            if (element.Field === field) {
+                return element[attr];
+            }
+        });
+        return '{}';
     };
 }
 

@@ -14,7 +14,7 @@ body {
     margin: -10px -20px 0 0 !important;
 }
 
-div.ant-modal-title > div > span {
+div.ant-modal-title>div>span {
     margin-right: 10px !important;
 }
 
@@ -110,11 +110,21 @@ div.ant-modal-title > div > span {
     border: #fff;
 }
 
-.ant-tree-checkbox-disabled > span {
+// 帮助
+
+.help-tip {
+    color: white;
+    margin-left: 4px;
+    border-radius: 1px;
+    border: #fff;
+}
+
+
+.ant-tree-checkbox-disabled>span {
     border-color: rgb(5, 82, 9) !important;
 }
 
-.ant-tree-checkbox-disabled > span::after {
+.ant-tree-checkbox-disabled>span::after {
     border-color: rgb(5, 82, 9) !important;
 }
 
@@ -147,6 +157,7 @@ div.ant-modal-title > div > span {
 span.anticon.anticon-info-circle {
     color: #035017 !important;
 }
+
 span.anticon.anticon-check-circle {
     color: #035017 !important;
 }
@@ -168,11 +179,22 @@ span.anticon.anticon-exclamation-circle {
 
 .formItem {
     display: flex;
-    align-items: center; /* Align items vertically in the center */
+    align-items: center;
+    /* Align items vertically in the center */
     height: 44px;
     margin-right: 20px; // 增加边距
     width: calc((100% - 20px) / 5); // 这个是公式，减去边距以后一行放多少个。
 }
+
+.formItemBig {
+    display: flex;
+    align-items: center;
+    /* Align items vertically in the center */
+    height: 44px;
+    margin-right: 20px; // 增加边距
+    width: 570px
+}
+
 
 .formItem svg {
     vertical-align: middle;
@@ -186,7 +208,7 @@ span.anticon.anticon-exclamation-circle {
     background: rgb(1, 63, 24) !important;
 }
 
-.ant-tabs-tab-active > div {
+.ant-tabs-tab-active>div {
     color: #d3e1d6 !important;
 }
 
@@ -254,4 +276,10 @@ span.anticon.anticon-exclamation-circle {
 .ant-select-selector:focus,
 .ant-select-selector:active {
     border-color: #225e04 !important;
+}
+
+
+div.longSelect {
+    border: 1px solod red !important;
+    width: 600px !important;
 }
