@@ -6,7 +6,11 @@ const ImgRender = (url) => {
     }
     return (
         <div>
-            <img style={{ marginLeft: '30px', width: '30px', height: '30px' }} alt="useravatar" src={url} />
+            <img
+                style={{ borderRadius: '5px', marginLeft: '30px', width: '30px', height: '30px' }}
+                alt="useravatar"
+                src={url}
+            />
         </div>
     );
 };

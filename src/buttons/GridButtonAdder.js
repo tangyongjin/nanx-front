@@ -201,7 +201,7 @@ export default class GridButtonAdder extends React.Component {
                                 <h4>&nbsp;</h4>
                                 <h3>选择新分配按钮:</h3>
                                 <Select
-                                    style={{ width: '400px' }}
+                                    className="longSelect"
                                     value={this.state.btncode}
                                     showSearch
                                     allowClear
@@ -211,7 +211,14 @@ export default class GridButtonAdder extends React.Component {
                                     {this.state.allButtons.length &&
                                         this.state.allButtons.map((item, index) => (
                                             <Option key={index} value={item.button_code}>
-                                                {item.button_code} {item.name}
+                                                <div style={{ display: 'flex', justifyContent: 'flexStart' }}>
+                                                    <span style={{ width: '150px' }}>{item.button_code}</span>
+                                                    <span style={{ marginLeft: '30px' }}>
+                                                        <span>
+                                                            {IconRender(item.icon)} {item.name}
+                                                        </span>
+                                                    </span>
+                                                </div>
                                             </Option>
                                         ))}
                                 </Select>

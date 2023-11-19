@@ -1,14 +1,14 @@
 import React from 'react';
 import { Select } from 'antd';
+import { tryParseJSON } from '@/utils/tools';
 const { Option } = Select;
-
 export default class Dropdownlist extends React.Component {
     constructor(props) {
         super(props);
         console.log('props: ', props);
 
         this.state = {
-            opts: JSON.parse(props.uform_para)
+            opts: tryParseJSON(props.uform_para)
         };
     }
 

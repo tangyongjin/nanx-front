@@ -83,7 +83,6 @@ export default class NavDropDown extends React.Component {
                                 verticalAlign: 'middle'
                             }}
                             src={avatarRoot + JSON.parse(sessionStorage.getItem('userInfo')).head_portrait}
-                            className="user-avatar"
                         />
                     </div>
                 </Dropdown>

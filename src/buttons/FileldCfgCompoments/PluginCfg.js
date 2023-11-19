@@ -2,55 +2,20 @@ import React from 'react';
 import { Input, Select, Button, Popover } from 'antd';
 import { observer, inject } from 'mobx-react';
 import ReactJson from 'react-json-view';
+import { tryParseJSON } from '@/utils/tools';
 
 const { Option } = Select;
 @inject('DataGridStore')
 @observer
 class PluginCfg extends React.Component {
     render() {
-        function tryParseJSON(str) {
-            if (str == undefined) {
-                return '';
-            }
-
-            if (!str) {
-                return '';
-            }
-            if (str.length == 0) {
-                return '';
-            }
-            if (str.length < 4) {
-                return '';
-            }
-
-            try {
-                const parsedJSON = JSON.parse(str);
-                return parsedJSON;
-            } catch (error) {
-                console.error('Error parsing JSON:', error);
-                return null; // or handle the error in some way
-            }
-        }
-
-        const paraJson = (str) => {
-            if (str == undefined) {
-                return <div></div>;
-            }
-
-            if (str == null) {
-                return <div></div>;
-            }
-
-            console.log(str);
+        const showJsonTree = (str) => {
             const parsedObject = tryParseJSON(str);
 
-            if (parsedObject !== null) {
-                console.log('Parsed JSON:', parsedObject);
-                return <ReactJson src={parsedObject} theme="twilight" />;
+            if (parsedObject == null) {
+                return <div>{str}</div>;
             } else {
-                if (str.length > 0) {
-                    return <div>{str}</div>;
-                }
+                return <ReactJson src={parsedObject} theme="twilight" />;
             }
         };
 
@@ -135,7 +100,7 @@ class PluginCfg extends React.Component {
 
                         <Popover
                             className="help-tip"
-                            content={paraJson(this.props.col.uform_para)}
+                            content={showJsonTree(this.props.col.uform_para)}
                             title="帮助:插件参数"
                             trigger="hover">
                             <Button>?</Button>
