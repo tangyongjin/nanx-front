@@ -10,6 +10,7 @@ class CellsRenderHandlers {
         let arr = text.split(' ');
         return arr[0];
     }
+
     renderTag(text) {
         if (text == 'y') {
             return <Tag color="#108ee9">已读</Tag>;

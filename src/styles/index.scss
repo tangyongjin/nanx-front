@@ -170,11 +170,29 @@ span.anticon.anticon-exclamation-circle {
     color: #191819 !important;
 }
 
-.fromBox {
-    width: 90%;
+.formWrapper {
+    width: 100%;
     display: flex;
-    justify-content: flex-start; // 靠左对齐
-    flex-wrap: wrap; // 换行
+    flex-wrap: wrap;
+}
+
+
+
+// .fromBox {
+//     width: 50%;
+//     flex: 1 1 100%; /* 每个 fromBox 占据整行 */
+//     display: flex;
+//     justify-content: flex-start; // 靠左对齐
+//     border: 1px solid #225e04;
+//     flex-wrap: wrap; // 换行
+//     flex-direction: row; /* 默认是 row，这一行可以省略 */
+
+// }
+
+.fromBox {
+    flex: 1 1 35%; /* 每个 fromBox 占据整行 */
+    box-sizing: border-box;
+    display: flex; /* 让 formItem 在同一行内显示 */
 }
 
 .formItem {
@@ -182,8 +200,13 @@ span.anticon.anticon-exclamation-circle {
     align-items: center;
     /* Align items vertically in the center */
     height: 44px;
-    margin-right: 20px; // 增加边距
-    width: calc((100% - 20px) / 5); // 这个是公式，减去边距以后一行放多少个。
+    justify-content: flex-start; // 靠左对齐
+    flex-direction: row; /* 默认是 row，这一行可以省略 */
+    // width: calc((100% - 20px) / 1); // 这个是公式，减去边距以后一行放多少个。
+}
+
+.formItem:first-child {
+    flex: 0 0 135px; /* 第一个 formItem 固定宽度 */
 }
 
 .formItemBig {
@@ -191,18 +214,18 @@ span.anticon.anticon-exclamation-circle {
     align-items: center;
     /* Align items vertically in the center */
     height: 44px;
-    margin-right: 20px; // 增加边距
-    width: 570px
+    width: 680px
 }
-
 
 .formItem svg {
     vertical-align: middle;
 }
-
-.loginBtnContainer svg {
-    vertical-align: middle;
+ 
+div.longSelect {
+    width: 1650px !important;
 }
+
+
 
 .ant-tabs-tab-active {
     background: rgb(1, 63, 24) !important;
@@ -276,10 +299,4 @@ span.anticon.anticon-exclamation-circle {
 .ant-select-selector:focus,
 .ant-select-selector:active {
     border-color: #225e04 !important;
-}
-
-
-div.longSelect {
-    border: 1px solod red !important;
-    width: 600px !important;
 }
