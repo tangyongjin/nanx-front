@@ -14,6 +14,19 @@ const CommonTableForm = (props) => {
         return null;
     }
 
+    const setInitValue = (key) => {
+        let _tmp = rawData;
+        if (key == 'total') {
+            _tmp[key] = 222;
+            setRawData({ value: _tmp });
+        }
+
+        if (key == 'location_name') {
+            _tmp[key] = 333;
+            setRawData({ value: _tmp });
+        }
+    };
+
     return (
         <div style={{ marginTop: '20px' }}>
             <SchemaForm
@@ -40,11 +53,12 @@ const CommonTableForm = (props) => {
                             setRawData({ value: { ...rest } });
                         }
 
-                        if (props.NanxTableStore.table_action == 'add') {
-                            setRawData({ value: {} });
-                        }
-
                         for (let key in formCfg.properties) {
+                            if (props.NanxTableStore.table_action == 'add') {
+                                // add 时候确定 default value
+                                setInitValue(key);
+                            }
+
                             setFieldState(key, (item) => {
                                 item.props['x-props'].nnstore = props.NanxTableStore;
                                 item.props['x-props'].datagrid_code = props.NanxTableStore.datagrid_code;
