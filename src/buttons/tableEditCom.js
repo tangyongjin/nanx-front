@@ -67,7 +67,6 @@ export default class TableEditCom extends React.Component {
                     </div>
                 }>
                 <CommonTableForm
-                    onChange={this.props.onChange}
                     NanxTableStore={this.props.NanxTableStore}
                     saveFormData={this.saveFormData.bind(this)}
                 />

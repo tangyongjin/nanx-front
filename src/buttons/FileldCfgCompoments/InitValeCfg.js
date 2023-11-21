@@ -42,15 +42,15 @@ class PluginCfg extends React.Component {
 
                 <div className="formItem">
                     <Select
-                        value={this.props.col.initValueCfg}
+                        value={this.props.col.default_v}
                         onChange={(e) => {
-                            this.props.DataGridStore.changeCfg_dropdown(e, 'initValueCfg', this.props.col.Field);
+                            this.props.DataGridStore.changeCfg_dropdown(e, 'default_v', this.props.col.Field);
                         }}
                         showSearch
                         allowClear
                         disabled={this.props.col.Field == 'id'}
                         placeholder="初始值配置"
-                        name="initValueCfg">
+                        name="default_v">
                         {this.state.opts.map((item, index) => (
                             <Option key={index} value={item.initItemID}>
                                 <div style={{ display: 'flex', justifyContent: 'flexStart' }}>

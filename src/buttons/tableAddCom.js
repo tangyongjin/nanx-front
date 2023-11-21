@@ -48,7 +48,6 @@ export default class TableAddCom extends React.Component {
                     </div>
                 }>
                 <CommonTableForm
-                    onChange={this.props.onChange}
                     NanxTableStore={this.props.NanxTableStore}
                     saveFormData={this.saveFormData.bind(this)}
                 />

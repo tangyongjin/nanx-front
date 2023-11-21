@@ -17,11 +17,11 @@ class LabelCfg extends React.Component {
                             clipRule="evenodd"
                         />
                     </svg>
-                    列名显示文本
+                    列名显示为
                 </div>
                 <div className="formItem">
                     <Input
-                        value={this.props.col.label}
+                        value={this.props.col.label || this.props.col.Comment || this.props.col.Field}
                         onChange={(e) => {
                             this.props.DataGridStore.changeCfg_input(e, 'label', this.props.col.Field);
                         }}

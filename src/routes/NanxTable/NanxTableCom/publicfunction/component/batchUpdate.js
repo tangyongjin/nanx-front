@@ -85,7 +85,7 @@ export default class BatchUpdate extends React.Component {
         console.log(this.state.formConfigData, event);
 
         let newValuearr = [];
-        if (this.state.formConfigData[event].type == 'assocselect') {
+        if (this.state.formConfigData[event].type == '') {
             let params = {
                 data: this.state.formConfigData[event]['x-props']
             };
