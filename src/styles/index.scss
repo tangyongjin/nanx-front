@@ -290,7 +290,6 @@ div.longSelect {
     width    : 600px;
     display  : flex;
     flex-wrap: wrap;
-    border   : 1px solid #035017;
 }
 
 .plugBox {
@@ -298,9 +297,8 @@ div.longSelect {
     /* 每个 fromBox 占据整行 */
     box-sizing: border-box;
     display   : flex;
-    overflow  : hidden;
-
-    /* 让 formItem 在同一行内显示 */
+    word-wrap    : break-word !important;
+    white-space:normal ;
 }
 
 .plugItem {
@@ -310,11 +308,10 @@ div.longSelect {
 }
 
 
-
+ 
 .plugMemo {
     width        : 260px !important;
     height       : 200px !important;
-    border       : 1px solid #2e940d;
     color        : rgb(9, 3, 3) !important;
     font-size    : 13px !important;
     word-wrap    : break-word !important;
@@ -324,3 +321,6 @@ div.longSelect {
     word-break   : break-all !important;
     overflow-wrap: break-word !important;
 }
+
+
+ 

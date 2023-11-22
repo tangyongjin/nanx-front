@@ -51,27 +51,30 @@ class PluginCfg extends React.Component {
                             onChange={(e) => {
                                 this.props.DataGridStore.changeCfg_dropdown(e, 'pluginname', this.props.col.Field);
                             }}
-                            // optionRender={(item) => {
-                            //     return (
-                            //         <div className="plugMemo">
-                            //             A card can be used to display content related to a single subject. The content
-                            //             can consist of multiple elements of varying types and sizes.
-                            //         </div>
+                            optionRender={(item) => {
+                                console.log('item: ', item);
 
-                            //         // <div className="1dropdownItemStyle">
-                            //         //     <div className="1plugBox">
-                            //         //         <div className="plugItem">{item.data.value}</div>
-                            //         //         <div className="plugItem"> {item.data.label}</div>
-                            //         //     </div>
-                            //         //     <div className="plugBox">
-                            //         //         <div className="plugMemo">
-                            //         //             A card can be used to display content related to a single subject. The
-                            //         //             content can consist of multiple elements of varying types and sizes.
-                            //         //         </div>
-                            //         //     </div>
-                            //         // </div>
-                            //     );
-                            // }}
+                                return (
+                                    <div className="plugBox">
+                                        <div className="plugItem">{item.data.value}</div>
+                                        <div className="plugItem"> {item.data.label}</div>
+                                        <div className="plugMemo">{item.data.memo}</div>
+                                    </div>
+
+                                    // <div className="dropdownItemStyle">
+                                    //     <div className="plugBox">
+                                    //         <div className="plugItem">{item.data.value}</div>
+                                    //         <div className="plugItem"> {item.data.label}</div>
+                                    //     </div>
+                                    //     <div className="plugBox">
+                                    //         <div className="plugMemo">
+                                    //             A card can be used to display content related to a single subject. The
+                                    //             content can consist of multiple elements of varying types and sizes.
+                                    //         </div>
+                                    //     </div>
+                                    // </div>
+                                );
+                            }}
                             disabled={this.props.col.Field == 'id'}
                             placeholder="UForm字段类型"
                             name="plugin">
