@@ -1,8 +1,10 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import { DatePicker as AntDatePicker } from 'antd';
+
 import { compose, mapStyledProps, mapTextComponent } from './uformHelpers/UFormUtils';
 import { registerFormField, connect } from '@uform/react';
+
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import locale from 'antd/es/date-picker/locale/zh_CN';
 import 'dayjs/locale/zh-cn';

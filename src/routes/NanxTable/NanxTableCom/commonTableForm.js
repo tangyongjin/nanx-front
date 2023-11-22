@@ -1,15 +1,39 @@
 import React, { useState } from 'react';
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 import '@/UFormExtends';
 import { SchemaForm, createFormActions } from '@uform/antd';
 import 'antd/dist/reset.css';
 import 'dayjs/locale/zh-cn';
 import CalucateInitValue from './tableUtils/calucateInitValue';
+import cloneDeep from 'lodash/cloneDeep';
 
 const actions = createFormActions();
 
 const CommonTableForm = (props) => {
-    let formCfg = props.NanxTableStore.formCfg;
+    /**
+     *
+     *
+     * 如果有 A自动 点击按钮,设置B字段
+     *
+     * default_v : "RemoteFetchAlone"
+     *
+     *
+     *
+     */
+    const prepareFormSchema = () => {
+        let formCfg = cloneDeep(props.NanxTableStore.formCfg);
+        let Fixed = cloneDeep(props.NanxTableStore.formCfg);
+        console.log('booksn: ', formCfg.properties['booksn']);
+
+        let booksn = cloneDeep(formCfg.properties['booksn']);
+        let bookname = cloneDeep(formCfg.properties['bookname']);
+
+        booksn.type = 'UString';
+        console.log(' formCfg.properties: ', formCfg.properties);
+        Fixed.properties = { booksn: booksn, bookname: bookname };
+        console.log('Fixed: ', Fixed);
+        return Fixed;
+    };
 
     const prepareRawData = () => {
         if (props.NanxTableStore.table_action == 'edit') {
@@ -32,12 +56,15 @@ const CommonTableForm = (props) => {
         }
     };
 
+    let formCfgRebuild = prepareFormSchema();
+    const [formCfg] = useState(formCfgRebuild);
+
     let tplData = prepareRawData();
     const [rawData] = useState({ value: tplData });
 
-    if (!formCfg) {
-        return null;
-    }
+    // if (!formCfg) {
+    //     return null;
+    // }
 
     return (
         <div style={{ marginTop: '20px' }}>

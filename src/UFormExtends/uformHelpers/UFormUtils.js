@@ -34,13 +34,26 @@ const mapMomentValue = (props) => {
     return props;
 };
 
-const mapTextComponent = (
-    Target: React.ComponentClass,
-    props,
-    { editable, name }: { editable: boolean | ((name: string) => boolean), name: string }
-): React.ComponentClass => {
+// const mapTextComponent = (
+//     Target: React.ComponentClass,
+//     props,
+//     { editable, name }: { editable: boolean | ((name: string) => boolean), name: string }
+// ): React.ComponentClass => {
+//     if (editable !== undefined) {
+//         if (isFn(editable)) {
+//             if (!editable(name)) {
+//                 return Text;
+//             }
+//         } else if (editable === false) {
+//             return Text;
+//         }
+//     }
+//     return Target;
+// };
+
+const mapTextComponent = (Target, props, { editable, name }) => {
     if (editable !== undefined) {
-        if (isFn(editable)) {
+        if (typeof editable === 'function') {
             if (!editable(name)) {
                 return Text;
             }
@@ -48,6 +61,7 @@ const mapTextComponent = (
             return Text;
         }
     }
+    console.log(props);
     return Target;
 };
 

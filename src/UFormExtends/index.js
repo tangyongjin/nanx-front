@@ -14,7 +14,8 @@ import Wangeditor from './UWangeditor';
 import YesOrNo from './UYesOrNo';
 import { acceptEnum, mapStyledProps, mapTextComponent } from './uformHelpers/UFormUtils';
 
-import './UDateEditor';
+import './UPackedDate';
+import './UPackedString';
 
 const { TextArea } = Input;
 
