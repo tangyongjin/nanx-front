@@ -5,53 +5,53 @@ body {
 }
 
 .ant-modal-title {
-    color  : white !important;
+    color: white !important;
     padding: 12px 0 0 12px !important;
 }
 
 .ant-modal-close-icon {
-    color : white;
+    color: white;
     margin: -10px -20px 0 0 !important;
 }
 
-div.ant-modal-title>div>span {
+div.ant-modal-title > div > span {
     margin-right: 10px !important;
 }
 
 .ant-modal-header {
-    color        : #fff !important;
-    background   : hwb(126 9% 79%) !important;
-    height       : 42px !important;
+    color: #fff !important;
+    background: hwb(126 9% 79%) !important;
+    height: 42px !important;
     border-radius: 2px 2px 0 0;
-    margin       : -20px -24px 0 -24px !important;
-    box-sizing   : border-box;
-    box-shadow   : 0px 3px 6px rgba(0, 0, 0, 0.16);
+    margin: -20px -24px 0 -24px !important;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     /* 添加阴影效果 */
     border-bottom: 0.5px solid #0f2512;
     /* 添加底部边框 */
 }
 
 .table_wrapper {
-    padding         : 4px;
+    padding: 4px;
     background-color: white !important;
-    background      : white !important;
-    height          : auto !important;
-    min-width       : 100vh;
+    background: white !important;
+    height: auto !important;
+    min-width: 100vh;
 }
 
 .editor_table_wrapper {
-    padding         : 10px 10px 0px 10px;
-    border          : 0.5px dashed #2e940d;
+    padding: 10px 10px 0px 10px;
+    border: 0.5px dashed #2e940d;
     background-color: white !important;
-    background      : white !important;
-    height          : auto !important;
-    min-width       : 100vh;
+    background: white !important;
+    height: auto !important;
+    min-width: 100vh;
 }
 
 .ant-table-wrapper::after {
-    color           : red;
+    color: red;
     background-color: white;
-    background      : white;
+    background: white;
 }
 
 .ant-select,
@@ -62,30 +62,30 @@ div.ant-modal-title>div>span {
 }
 
 .ant-btn-dangerous {
-    color       : #2e940d !important;
+    color: #2e940d !important;
     border-color: #3b3b47 !important;
 }
 
 /*滚动条样式*/
 ::-webkit-scrollbar {
     /*滚动条整体样式*/
-    width : 6px;
+    width: 6px;
     /*高宽分别对应横竖滚动条的尺寸*/
     height: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
     /*滚动条里面小方块*/
-    border-radius     : 5px;
+    border-radius: 5px;
     -webkit-box-shadow: inset 12px rgb(2, 78, 6) !important;
-    background        : rgb(2, 62, 5);
+    background: rgb(2, 62, 5);
 }
 
 ::-webkit-scrollbar-track {
     /*滚动条里面轨道*/
     -webkit-box-shadow: inset 12px rgb(185, 181, 186) !important;
-    border-radius     : 0;
-    background        : rgb(207, 201, 207);
+    border-radius: 0;
+    background: rgb(207, 201, 207);
 }
 
 // 错误信息屏蔽
@@ -95,60 +95,60 @@ div.ant-modal-title>div>span {
 }
 
 .btn-assign-menu {
-    color           : white;
-    cursor          : pointer;
+    color: white;
+    cursor: pointer;
     background-color: rgb(5, 82, 9);
-    border          : #fff;
-    border-radius   : 8px;
+    border: #fff;
+    border-radius: 8px;
 }
 
 .btn-cancel-menu {
-    color           : white;
-    cursor          : pointer;
-    border-radius   : 8px;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
     background-color: rgb(5, 82, 9);
-    border          : #fff;
+    border: #fff;
 }
 
 // 帮助
 
 .help-tip {
-    color        : white;
-    margin-left  : 4px;
+    color: white;
+    margin-left: 4px;
     border-radius: 1px;
-    border       : #fff;
+    border: #fff;
 }
 
-.ant-tree-checkbox-disabled>span {
+.ant-tree-checkbox-disabled > span {
     border-color: rgb(5, 82, 9) !important;
 }
 
-.ant-tree-checkbox-disabled>span::after {
+.ant-tree-checkbox-disabled > span::after {
     border-color: rgb(5, 82, 9) !important;
 }
 
 // 顶部菜单
 
 #navbar_collapse_bread {
-    width         : 33.33%;
-    text-align    : left;
-    display       : flex;
+    width: 33.33%;
+    text-align: left;
+    display: flex;
     flex-direction: row;
 }
 
 #navbar_preloader {
-    flex      : 1;
-    width     : 33.33%;
-    display   : none;
+    flex: 1;
+    width: 33.33%;
+    display: none;
     text-align: center;
 }
 
 #navbar_dropdown {
-    flex           : 1;
-    width          : 33.33%;
-    text-align     : right;
-    display        : flex;
-    padding-right  : 15px;
+    flex: 1;
+    width: 33.33%;
+    text-align: right;
+    display: flex;
+    padding-right: 15px;
     justify-content: flex-end;
 }
 
@@ -170,25 +170,25 @@ span.anticon.anticon-exclamation-circle {
 }
 
 .formWrapper {
-    width    : 100%;
-    display  : flex;
+    width: 100%;
+    display: flex;
     flex-wrap: wrap;
 }
 
 .fromBox {
-    flex      : 1 1 35%;
+    flex: 1 1 35%;
     /* 每个 fromBox 占据整行 */
     box-sizing: border-box;
-    display   : flex;
+    display: flex;
     /* 让 formItem 在同一行内显示 */
 }
 
 .formItem {
-    display        : flex;
-    align-items    : center;
-    height         : 44px;
+    display: flex;
+    align-items: center;
+    height: 44px;
     justify-content: flex-start; // 靠左对齐
-    flex-direction : row;
+    flex-direction: row;
 }
 
 .formItem:first-child {
@@ -197,11 +197,11 @@ span.anticon.anticon-exclamation-circle {
 }
 
 .formItemBig {
-    display    : flex;
+    display: flex;
     align-items: center;
     /* Align items vertically in the center */
-    height     : 44px;
-    width      : 680px;
+    height: 44px;
+    width: 680px;
 }
 
 .formItem svg {
@@ -216,15 +216,15 @@ div.longSelect {
     background: rgb(1, 63, 24) !important;
 }
 
-.ant-tabs-tab-active>div {
+.ant-tabs-tab-active > div {
     color: #d3e1d6 !important;
 }
 
 /** hero icons */
 
 .w-5 {
-    height      : 20px;
-    width       : 20px;
+    height: 20px;
+    width: 20px;
     margin-right: 4px;
 }
 
@@ -245,8 +245,8 @@ div.longSelect {
 .ant-input-number-affix-wrapper:focus,
 .ant-input-number-affix-wrapper:focus-within {
     border-color: #225e04 !important;
-    box-shadow  : 0 0 0 1px rgba(5, 145, 255, 0.1);
-    outline     : 0;
+    box-shadow: 0 0 0 1px rgba(5, 145, 255, 0.1);
+    outline: 0;
 }
 
 /* Apply styles to the wrapper when hovered, active, or focused */
@@ -286,41 +286,39 @@ div.longSelect {
     border-color: #225e04 !important;
 }
 
-.dropdownItemStyle {
-    width    : 600px;
-    display  : flex;
-    flex-wrap: wrap;
+ 
+.plugBox {
+    box-sizing: border-box;
+    display: flex;
+    word-wrap: break-word !important;
+    white-space: normal;
 }
 
-.plugBox {
-    flex      : 1 1 90%;
-    /* 每个 fromBox 占据整行 */
-    box-sizing: border-box;
-    display   : flex;
-    word-wrap    : break-word !important;
-    white-space:normal ;
+.bottom_border{
+    border-bottom: 1px solid rgb(168, 166, 166) ;
+}
+
+.plugItem:nth-child(1) {
+    flex: 0 0 30%; /* flex-grow: 0, flex-shrink: 0, flex-basis: 30% */
+}
+
+.plugItem:nth-child(2) {
+    flex: 0 0 70%; /* flex-grow: 0, flex-shrink: 0, flex-basis: 70% */
 }
 
 .plugItem {
-    display        : flex;
-    align-items    : left;
+    font-size: 15px;
+    display: flex;
+    align-items: left;
     justify-content: flex-start; // 靠左对齐
 }
 
-
- 
 .plugMemo {
-    width        : 260px !important;
-    height       : 200px !important;
-    color        : rgb(9, 3, 3) !important;
-    font-size    : 13px !important;
-    word-wrap    : break-word !important;
-    flex-wrap    : wrap !important;
-    align-items  : stretch !important;
-    display      : flex !important;
-    word-break   : break-all !important;
+    width: 260px !important;
+    color: rgb(9, 3, 3) !important;
     overflow-wrap: break-word !important;
+    font-size: 13px;
+    padding-bottom: 6px;
+    padding-top: 5px;
+    margin-bottom: 6px;
 }
-
-
- 

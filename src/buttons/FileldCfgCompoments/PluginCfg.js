@@ -52,27 +52,17 @@ class PluginCfg extends React.Component {
                                 this.props.DataGridStore.changeCfg_dropdown(e, 'pluginname', this.props.col.Field);
                             }}
                             optionRender={(item) => {
-                                console.log('item: ', item);
-
                                 return (
-                                    <div className="plugBox">
-                                        <div className="plugItem">{item.data.value}</div>
-                                        <div className="plugItem"> {item.data.label}</div>
-                                        <div className="plugMemo">{item.data.memo}</div>
+                                    <div>
+                                        <div className="plugBox  bottom_border">
+                                            <div className="plugItem">{item.data.value}</div>
+                                            <div className="plugItem"> {item.data.label}</div>
+                                        </div>
+                                        <div className="plugBox">
+                                            <div className="plugItem"></div>
+                                            <div className="plugMemo">{item.data.memo}</div>
+                                        </div>
                                     </div>
-
-                                    // <div className="dropdownItemStyle">
-                                    //     <div className="plugBox">
-                                    //         <div className="plugItem">{item.data.value}</div>
-                                    //         <div className="plugItem"> {item.data.label}</div>
-                                    //     </div>
-                                    //     <div className="plugBox">
-                                    //         <div className="plugMemo">
-                                    //             A card can be used to display content related to a single subject. The
-                                    //             content can consist of multiple elements of varying types and sizes.
-                                    //         </div>
-                                    //     </div>
-                                    // </div>
                                 );
                             }}
                             disabled={this.props.col.Field == 'id'}
@@ -83,11 +73,7 @@ class PluginCfg extends React.Component {
                                     <Option key={index} value={item.plugid} label={item.plugname} memo={item.memo}>
                                         <div style={{ display: 'flex', justifyContent: 'flexStart' }}>
                                             <span style={{ width: '150px' }}>{item.plugid}</span>
-                                            <span style={{ marginLeft: '30px' }}>
-                                                (<span>{item.plugname}</span>
-                                                <span style={{ width: '10px' }}>/</span>
-                                                <span>{item.memo}]</span>)
-                                            </span>
+                                            <span style={{ marginLeft: '30px' }}>{item.plugname}</span>
                                         </div>
                                     </Option>
                                 ))}
