@@ -1,4 +1,4 @@
-import CommonTableForm from '@/routes/NanxTable/NanxTableCom/commonTableForm';
+import TableSchemaForm from '@/routes/NanxTable/NanxTableCom/TableForm';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import React from 'react';
 import { message } from 'antd';
@@ -66,7 +66,7 @@ export default class TableEditCom extends React.Component {
                         编辑
                     </div>
                 }>
-                <CommonTableForm
+                <TableSchemaForm
                     NanxTableStore={this.props.NanxTableStore}
                     saveFormData={this.saveFormData.bind(this)}
                 />

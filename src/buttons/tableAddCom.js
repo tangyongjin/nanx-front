@@ -1,4 +1,4 @@
-import CommonTableForm from '@/routes/NanxTable/NanxTableCom/commonTableForm';
+import TableSchemaForm from '@/routes/NanxTable/NanxTableCom/TableForm';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import React from 'react';
 import { observer, inject } from 'mobx-react';
@@ -47,7 +47,7 @@ export default class TableAddCom extends React.Component {
                         添加数据
                     </div>
                 }>
-                <CommonTableForm
+                <TableSchemaForm
                     NanxTableStore={this.props.NanxTableStore}
                     saveFormData={this.saveFormData.bind(this)}
                 />
