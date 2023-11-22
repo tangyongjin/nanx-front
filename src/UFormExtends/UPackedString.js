@@ -3,6 +3,8 @@ import { Input as AntInput, Button, message } from 'antd';
 import { compose, mapStyledProps, mapTextComponent } from './uformHelpers/UFormUtils';
 import { registerFormField, connect } from '@uform/react';
 import { CloudDownloadOutlined, FunctionOutlined } from '@ant-design/icons';
+import { tryParseJSON } from '@/utils/tools';
+
 import api from '@/api/api';
 import 'dayjs/locale/zh-cn';
 
@@ -50,8 +52,15 @@ const WrapperAntStringComomnet = (TarGet) => {
 
                             if (this.props?.default_v == 'RemoteFetchOnSite') {
                                 console.log(this.props);
-
                                 let tarGetField = 'bookname';
+
+                                const parsedObject = tryParseJSON(this.props.defaultv_para);
+                                if (parsedObject == null) {
+                                    tarGetField = null;
+                                } else {
+                                    tarGetField = parsedObject['target'];
+                                }
+
                                 let cloudValue = await fetchRemoteWithOnSiteValue(this.props.title, this.props.value);
                                 this.props.actions.setFormState((state) => {
                                     state.values = {
@@ -71,7 +80,6 @@ const WrapperAntStringComomnet = (TarGet) => {
 };
 
 const mapStringValue = (props) => {
-    console.log(' 👿👿👿👿👿👿👿👿👿 属性: ', props);
     return props;
 };
 

@@ -12,12 +12,8 @@ const actions = createFormActions();
 const TableSchemaForm = (props) => {
     /**
      *
-     *
      * 如果有 A自动 点击按钮,设置B字段
-     *
      * default_v : "RemoteFetchAlone"
-     *
-     *
      *
      */
     const prepareFormSchema = () => {
@@ -26,14 +22,12 @@ const TableSchemaForm = (props) => {
 
         for (let key in formCfg.properties) {
             let keyConfig = cloneDeep(formCfg.properties[key]);
-            console.log('keyConfig: ', keyConfig);
 
             if (
                 keyConfig['x-props']?.default_v == 'RemoteFetchAlone' ||
                 keyConfig['x-props']?.default_v == 'RemoteFetchOnSite'
             ) {
                 keyConfig['type'] = 'UString';
-                console.log('UString: ');
             }
             Fixed.properties[key] = keyConfig;
         }

@@ -42,7 +42,6 @@ const mapTextComponent = (Target, props, { editable, name }) => {
             return Text;
         }
     }
-    console.log(props);
     return Target;
 };
 

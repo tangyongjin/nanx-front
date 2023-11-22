@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { tryParseJSON } from '@/utils/tools';
 
 const CalucateInitValue = (formCfg, key) => {
     const _item = formCfg['properties'][key];
@@ -8,7 +9,12 @@ const CalucateInitValue = (formCfg, key) => {
     }
 
     if (_item['x-props']['default_v'] == 'fixValue') {
-        return 1989;
+        const parsedObject = tryParseJSON(_item['x-props']['defaultv_para']);
+        if (parsedObject == null) {
+            return null;
+        } else {
+            return parsedObject['value'];
+        }
     }
 
     if (_item['x-props']['default_v'] == 'currentData') {
@@ -18,11 +24,6 @@ const CalucateInitValue = (formCfg, key) => {
     if (_item['x-props']['default_v'] == 'currentDataTime') {
         return dayjs().format('YYYY-MM-DD HH:mm:ss');
     }
-
-    // if (_item['x-props']['default_v'] == 'FetchRemoteData') {
-    //     _tmp[key] = 'abc';
-    //     setRawData({ value: _tmp });
-    // }
 };
 
 export default CalucateInitValue;
