@@ -11,12 +11,20 @@ dayjs.locale('zh-cn'); // 全局使用简体中文
 dayjs.extend(customParseFormat);
 const dateFormat1 = 'YYYY-MM-DD';
 const dateFormat2 = 'YYYY-MM-DD HH:mm:ss';
-console.log('mapTextComponent: ', mapTextComponent);
+// console.log('mapTextComponent: ', mapTextComponent);
 
 const WrapperAntDateComomnet = (TarGet) => {
     return class Select extends React.Component {
         render() {
-            return <TarGet placeholder={'请输入日期'} locale={locale} format={dateFormat1} {...this.props} />;
+            return (
+                <TarGet
+                    style={{ width: '174px' }}
+                    placeholder={'请输入日期'}
+                    locale={locale}
+                    format={dateFormat1}
+                    {...this.props}
+                />
+            );
         }
     };
 };
@@ -24,7 +32,16 @@ const WrapperAntDateComomnet = (TarGet) => {
 const WrapperAntDateTimeComomnet = (TarGet) => {
     return class Select extends React.Component {
         render() {
-            return <TarGet showTime placeholder={'请输入时间'} locale={locale} format={dateFormat2} {...this.props} />;
+            return (
+                <TarGet
+                    style={{ width: '174px' }}
+                    showTime
+                    placeholder={'请输入时间'}
+                    locale={locale}
+                    format={dateFormat2}
+                    {...this.props}
+                />
+            );
         }
     };
 };

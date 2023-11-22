@@ -17,14 +17,14 @@ class GridFieldManager extends React.Component {
         let allcols = this.props.DataGridStore.ColsDbInfo;
 
         return (
-            <Card title={xtitle}>
+            <Card title={<h3>{xtitle}</h3>}>
                 <div>
                     <Tabs
                         defaultActiveKey="1"
                         tabPosition={'top'}
                         type="card"
                         style={{
-                            height: 388
+                            height: 432
                         }}
                         items={allcols.map((col, idx) => {
                             const id = String(idx);

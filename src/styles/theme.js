@@ -86,8 +86,8 @@ const themeJson = {
         },
         Card: {
             actionsBg: 'red',
-            headerFontSize: 12,
-            headerFontSizeSM: 12,
+            headerFontSize: 14,
+            headerFontSizeSM: 14,
             headerBg: 'white'
         }
     }

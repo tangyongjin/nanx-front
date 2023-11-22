@@ -5,7 +5,7 @@ import { observer, inject } from 'mobx-react';
 const { Option } = Select;
 @inject('DataGridStore')
 @observer
-class PluginCfg extends React.Component {
+class InitValeCfg extends React.Component {
     constructor(props) {
         super(props);
         console.log('props: ', props);
@@ -20,7 +20,22 @@ class PluginCfg extends React.Component {
                 {
                     initItemID: 'currentData',
                     initItemName: '当前日期',
-                    memo: 'ff'
+                    memo: '类似 2023-11-22'
+                },
+                {
+                    initItemID: 'currentDataTime',
+                    initItemName: '当前日期',
+                    memo: '类似 2023-11-22 14:31:22'
+                },
+                {
+                    initItemID: 'RemoteFetchOnSite',
+                    initItemName: '根据当前表单某个字段获取其他值',
+                    memo: '如根据ISBN号获取书名,必须返回json,{"value:"someValue"}'
+                },
+                {
+                    initItemID: 'RemoteFetchAlone',
+                    initItemName: '获取某个接口返回的数据',
+                    memo: '比如当天汇率/温度,必须返回json,{"value:"someValue"}'
                 }
             ]
         };
@@ -40,8 +55,9 @@ class PluginCfg extends React.Component {
                     初始值
                 </div>
 
-                <div className="formItem">
+                <div className="formItemBig">
                     <Select
+                        className="longSelect"
                         value={this.props.col.default_v}
                         onChange={(e) => {
                             this.props.DataGridStore.changeCfg_dropdown(e, 'default_v', this.props.col.Field);
@@ -69,4 +85,4 @@ class PluginCfg extends React.Component {
         );
     }
 }
-export default PluginCfg;
+export default InitValeCfg;

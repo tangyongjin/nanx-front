@@ -4,6 +4,9 @@ import { observer, inject } from 'mobx-react';
 import ReactJson from 'react-json-view';
 import { tryParseJSON } from '@/utils/tools';
 
+import QuestionIcon from '@/iconsHero/question';
+import CodeBracketSquare from '@/iconsHero/CodeBracketSquare';
+
 const { Option } = Select;
 @inject('DataGridStore')
 @observer
@@ -41,17 +44,40 @@ class PluginCfg extends React.Component {
                         <Select
                             className="longSelect"
                             style={{ width: '500px' }}
+                            listItemHeight={321}
+                            popupClassName="drop"
                             value={this.props.col.pluginname}
                             key={this.props.col.pluginname}
                             onChange={(e) => {
                                 this.props.DataGridStore.changeCfg_dropdown(e, 'pluginname', this.props.col.Field);
                             }}
+                            // optionRender={(item) => {
+                            //     return (
+                            //         <div className="plugMemo">
+                            //             A card can be used to display content related to a single subject. The content
+                            //             can consist of multiple elements of varying types and sizes.
+                            //         </div>
+
+                            //         // <div className="1dropdownItemStyle">
+                            //         //     <div className="1plugBox">
+                            //         //         <div className="plugItem">{item.data.value}</div>
+                            //         //         <div className="plugItem"> {item.data.label}</div>
+                            //         //     </div>
+                            //         //     <div className="plugBox">
+                            //         //         <div className="plugMemo">
+                            //         //             A card can be used to display content related to a single subject. The
+                            //         //             content can consist of multiple elements of varying types and sizes.
+                            //         //         </div>
+                            //         //     </div>
+                            //         // </div>
+                            //     );
+                            // }}
                             disabled={this.props.col.Field == 'id'}
                             placeholder="UForm字段类型"
                             name="plugin">
                             {this.props.DataGridStore.plugins.length &&
                                 this.props.DataGridStore.plugins.map((item, index) => (
-                                    <Option key={index} value={item.plugid}>
+                                    <Option key={index} value={item.plugid} label={item.plugname} memo={item.memo}>
                                         <div style={{ display: 'flex', justifyContent: 'flexStart' }}>
                                             <span style={{ width: '150px' }}>{item.plugid}</span>
                                             <span style={{ marginLeft: '30px' }}>
@@ -68,7 +94,9 @@ class PluginCfg extends React.Component {
                             title="帮助:插件参数"
                             content={'只能选择一个插件,有些插件可能需要配置json形式的参数'}
                             trigger="hover">
-                            <Button>?</Button>
+                            <Button>
+                                <QuestionIcon />
+                            </Button>
                         </Popover>
                     </div>
                 </div>
@@ -97,13 +125,17 @@ class PluginCfg extends React.Component {
                                 this.props.DataGridStore.changeCfg_input(e, 'uform_para', this.props.col.Field);
                             }}
                         />
-
+                        <Button style={{ marginLeft: '10px' }}>
+                            <CodeBracketSquare />
+                        </Button>
                         <Popover
                             className="help-tip"
                             content={showJsonTree(this.props.col.uform_para)}
                             title="帮助:插件参数"
                             trigger="hover">
-                            <Button>?</Button>
+                            <Button>
+                                <QuestionIcon />
+                            </Button>
                         </Popover>
                     </div>
                 </div>

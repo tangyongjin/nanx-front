@@ -3,29 +3,41 @@ import { Button } from 'antd';
 import '@/UFormExtends';
 import { SchemaForm, createFormActions } from '@uform/antd';
 import 'antd/dist/reset.css';
+import 'dayjs/locale/zh-cn';
+import CalucateInitValue from './tableUtils/calucateInitValue';
 
 const actions = createFormActions();
 
 const CommonTableForm = (props) => {
     let formCfg = props.NanxTableStore.formCfg;
-    const [rawData, setRawData] = useState({ value: {} });
+
+    const prepareRawData = () => {
+        if (props.NanxTableStore.table_action == 'edit') {
+            let _tmp_for_edit = { ...props.NanxTableStore.selectedRows[0] };
+            return _tmp_for_edit;
+        }
+
+        if (props.NanxTableStore.table_action == 'add_from_tpl') {
+            //eslint-disable-next-line
+            const { id, ...rest } = props.NanxTableStore.selectedRows[0];
+            return { ...rest };
+        }
+
+        if (props.NanxTableStore.table_action == 'add') {
+            let _tmp_for_add = {};
+            for (let key in formCfg.properties) {
+                _tmp_for_add[key] = CalucateInitValue(formCfg, key);
+            }
+            return _tmp_for_add;
+        }
+    };
+
+    let tplData = prepareRawData();
+    const [rawData] = useState({ value: tplData });
 
     if (!formCfg) {
         return null;
     }
-
-    const setInitValue = (key) => {
-        let _tmp = rawData;
-        if (key == 'total') {
-            _tmp[key] = 222;
-            setRawData({ value: _tmp });
-        }
-
-        if (key == 'location_name') {
-            _tmp[key] = 333;
-            setRawData({ value: _tmp });
-        }
-    };
 
     return (
         <div style={{ marginTop: '20px' }}>
@@ -43,24 +55,14 @@ const CommonTableForm = (props) => {
                     $('onFormInit').subscribe(async () => {
                         hide('id');
 
-                        if (props.NanxTableStore.table_action == 'edit') {
-                            setRawData({ value: { ...props.NanxTableStore.selectedRows[0] } });
-                        }
-
-                        if (props.NanxTableStore.table_action == 'add_from_tpl') {
-                            //eslint-disable-next-line
-                            const { id, ...rest } = props.NanxTableStore.selectedRows[0];
-                            setRawData({ value: { ...rest } });
-                        }
-
                         for (let key in formCfg.properties) {
-                            if (props.NanxTableStore.table_action == 'add') {
-                                // add 时候确定 default value
-                                setInitValue(key);
-                            }
-
                             setFieldState(key, (item) => {
+                                console.log('onFormInit>>>>>>: ', item);
+
                                 item.props['x-props'].nnstore = props.NanxTableStore;
+
+                                // 设置 字段 style
+                                // item.props['x-props'].style = { width: '110px' };
                                 item.props['x-props'].datagrid_code = props.NanxTableStore.datagrid_code;
                                 item.props['x-props'].actions = actions;
                             });
