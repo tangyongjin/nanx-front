@@ -6,6 +6,7 @@ import { tryParseJSON } from '@/utils/tools';
 
 import QuestionIcon from '@/iconsHero/question';
 import CodeBracketSquare from '@/iconsHero/CodeBracketSquare';
+import { InfoCircleOutlined, ExclamationCircleFilled, FunctionOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 @inject('DataGridStore')
@@ -40,6 +41,7 @@ class PluginCfg extends React.Component {
                         </svg>
                         字段类型/插件
                     </div>
+
                     <div className="formItemBig">
                         <Select
                             className="longSelect"
@@ -78,6 +80,7 @@ class PluginCfg extends React.Component {
                                     </Option>
                                 ))}
                         </Select>
+
                         <Popover
                             className="help-tip"
                             title="帮助:插件参数"

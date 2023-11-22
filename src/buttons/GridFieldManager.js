@@ -24,7 +24,7 @@ class GridFieldManager extends React.Component {
                         tabPosition={'top'}
                         type="card"
                         style={{
-                            height: 432
+                            height: 478
                         }}
                         items={allcols.map((col, idx) => {
                             const id = String(idx);

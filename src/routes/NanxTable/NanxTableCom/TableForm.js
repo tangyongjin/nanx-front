@@ -23,13 +23,6 @@ const TableSchemaForm = (props) => {
     const prepareFormSchema = () => {
         let formCfg = cloneDeep(props.NanxTableStore.formCfg);
         let Fixed = cloneDeep(props.NanxTableStore.formCfg);
-        // console.log('booksn: ', formCfg.properties['booksn']);
-
-        // let booksn = cloneDeep(formCfg.properties['booksn']);
-        // let bookname = cloneDeep(formCfg.properties['bookname']);
-
-        // booksn.type = 'UString';
-        // console.log(' formCfg.properties: ', formCfg.properties);
 
         for (let key in formCfg.properties) {
             let keyConfig = cloneDeep(formCfg.properties[key]);
@@ -45,7 +38,6 @@ const TableSchemaForm = (props) => {
             Fixed.properties[key] = keyConfig;
         }
 
-        // Fixed.properties = { booksn: booksn, bookname: bookname };
         console.log('Fixed: ', Fixed);
         return Fixed;
     };
@@ -96,6 +88,8 @@ const TableSchemaForm = (props) => {
                         for (let key in formCfg.properties) {
                             setFieldState(key, (item) => {
                                 item.props['x-props'].nnstore = props.NanxTableStore;
+                                item.props['x-props'].title = item.props.title;
+
                                 // 设置 字段 style
                                 // item.props['x-props'].style = { width: '110px' };
                                 item.props['x-props'].datagrid_code = props.NanxTableStore.datagrid_code;
