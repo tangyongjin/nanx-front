@@ -34,6 +34,7 @@ class FieldPropertyRender extends React.Component {
                 </div>
                 <div style={{ marginLeft: '390px', marginTop: '46px' }}>
                     <Button
+                        disabled={this.props.col.Field == 'id'}
                         className="round-button"
                         type="primary"
                         size="small"

@@ -11,7 +11,11 @@ const routes = {
         require('./login').default,
         require('./NanxTable').default,
         require('./profile').default,
-        require('./system').default
+        require('./system').default,
+        {
+            ...require('./gpt').default,
+            component: PortalLayout
+        }
     ]
 };
 

@@ -3,10 +3,8 @@ import { Input, Select, Button, Popover } from 'antd';
 import { observer, inject } from 'mobx-react';
 import ReactJson from 'react-json-view';
 import { tryParseJSON } from '@/utils/tools';
-
 import QuestionIcon from '@/iconsHero/question';
 import CodeBracketSquare from '@/iconsHero/CodeBracketSquare';
-import { InfoCircleOutlined, ExclamationCircleFilled, FunctionOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 @inject('DataGridStore')

@@ -20,6 +20,7 @@ class PluginCfg extends React.Component {
                 </div>
                 <div className="formItem">
                     <Checkbox
+                        disabled={this.props.col.Field == 'id'}
                         checked={this.props.col.readonly}
                         onChange={(e) => {
                             this.props.DataGridStore.changeCfg_cbx(e, 'readonly', this.props.col.Field);
