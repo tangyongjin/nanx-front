@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 
-const PortalLayout = inject('MenuStore')(
+const CommonModal = inject('MenuStore')(
     observer((props) => {
         console.log('props: ', props);
         useEffect(() => {
@@ -12,4 +12,4 @@ const PortalLayout = inject('MenuStore')(
     })
 );
 
-export default PortalLayout;
+export default CommonModal;

@@ -6,7 +6,7 @@ class GPTicon extends React.Component {
             <svg
                 style={{ marginRight: '12px', paddingTop: '4px' }}
                 t="1700714755144"
-                class="icon"
+                className="icon"
                 viewBox="0 0 1024 1024"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"

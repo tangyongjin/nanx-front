@@ -1,14 +1,14 @@
 import React from 'react';
 import { message, Modal, Button } from 'antd';
 import MenuDetailCom from './MenuDetailCom';
+import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 
 export default class MenuDetail extends React.Component {
     constructor(props) {
         super(props);
         this.NanxTableStore = props.NanxTableStore;
         this.state = {
-            record: null,
-            open: false
+            record: null
         };
     }
 
@@ -20,27 +20,20 @@ export default class MenuDetail extends React.Component {
         }
 
         let currentrow = this.props.NanxTableStore.selectedRows[0];
-        this.setState({ open: true, record: currentrow });
+        this.setState({ record: currentrow });
+        this.props.NanxTableStore.showButtonModal();
     }
-
-    handleCancel = () => {
-        this.setState({
-            open: false
-        });
-    };
 
     render() {
         return (
             <div>
                 {this.state.record ? (
-                    <Modal
+                    <CommonModal
                         title="菜单分配情况"
                         onCancel={this.handleCancel}
                         okText="确认"
                         cancelText="取消"
                         width="1200px"
-                        open={this.state.open}
-                        destroyOnClose={true}
                         footer={[
                             <Button key="submit" type="primary" onClick={this.handleCancel}>
                                 关闭
@@ -48,7 +41,7 @@ export default class MenuDetail extends React.Component {
                         ]}>
                         <br />
                         <MenuDetailCom menuID={this.state.record.id} />
-                    </Modal>
+                    </CommonModal>
                 ) : null}
             </div>
         );

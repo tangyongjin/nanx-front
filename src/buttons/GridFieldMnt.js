@@ -1,18 +1,15 @@
 import React from 'react';
-import { Modal, message, Button } from 'antd';
+import { message, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
 import GridFieldManager from './GridFieldManager';
 import { toJS } from 'mobx';
 import { SlidersOutlined } from '@ant-design/icons';
-
+import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 @inject('DataGridStore')
 @observer
 export default class GridFieldMnt extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            open: false
-        };
         this.init = this.init.bind(this);
     }
 
@@ -28,25 +25,17 @@ export default class GridFieldMnt extends React.Component {
             this.props.DataGridStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
             this.props.DataGridStore.setCurrentBasetable(toJS(record).base_table);
             this.props.DataGridStore.prepareDataGirdEnv();
-            this.setState({ open: true });
+
+            this.props.NanxTableStore.showButtonModal();
         }
     }
-
-    onCancel = () => {
-        this.setState({
-            open: false
-        });
-    };
 
     render() {
         console.log(this.props.DataGridStore);
 
         let { selectedRows } = this.props.NanxTableStore;
         return selectedRows.length > 0 ? (
-            <Modal
-                open={this.state.open}
-                destroyOnClose={true}
-                onCancel={() => this.onCancel()}
+            <CommonModal
                 width={'1100px'}
                 footer={[
                     <Button key="gidmnt" type="primary" onClick={this.onCancel}>
@@ -60,7 +49,7 @@ export default class GridFieldMnt extends React.Component {
                     </div>
                 }>
                 {this.props.DataGridStore.ColsDbInfo.length == 0 ? null : <GridFieldManager />}
-            </Modal>
+            </CommonModal>
         ) : null;
     }
 }

@@ -3,6 +3,7 @@ import { Input, message, Popconfirm, Button, Select, Table, Modal } from 'antd';
 import api from '@/api/api';
 import cloneDeep from 'lodash/cloneDeep';
 import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 
 import { BorderOutlined } from '@ant-design/icons';
 const { Option } = Select;
@@ -16,7 +17,6 @@ export default class GridButtonAdder extends React.Component {
             allButtons: [],
             gridButtons: [],
             gridButtonOrders: [],
-            open: false,
             btncode: null
         };
     }
@@ -33,16 +33,12 @@ export default class GridButtonAdder extends React.Component {
         let params = {};
         let res = await api.button.getAllButtons(params);
         this.setState({
-            open: true,
             record: currentrow,
             allButtons: res.data
         });
 
         this.getDataGridButtons();
-    }
-
-    onChange(a) {
-        this.setState({ btncode: a });
+        this.props.NanxTableStore.showButtonModal();
     }
 
     getDataGridButtons = async () => {
@@ -165,7 +161,7 @@ export default class GridButtonAdder extends React.Component {
         return (
             <div>
                 {this.state.record ? (
-                    <Modal
+                    <CommonModal
                         title={
                             <div>
                                 <BorderOutlined />
@@ -227,7 +223,7 @@ export default class GridButtonAdder extends React.Component {
                                 </Button>
                             </div>
                         )}
-                    </Modal>
+                    </CommonModal>
                 ) : null}
             </div>
         );

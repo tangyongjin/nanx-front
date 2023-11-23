@@ -1,6 +1,7 @@
 import React from 'react';
-import { message, Popconfirm, Button, Select, Table, Modal } from 'antd';
+import { message, Popconfirm, Button, Select, Table } from 'antd';
 import api from '@/api/api';
+import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 
 import { GithubOutlined } from '@ant-design/icons';
 const { Option } = Select;
@@ -13,7 +14,6 @@ export default class RoleAsign extends React.Component {
             record: null,
             allRoles: [],
             currentRoles: [],
-            open: false,
             role_code: null
         };
     }
@@ -31,11 +31,10 @@ export default class RoleAsign extends React.Component {
 
         let res = await api.permission.getAllRoles();
         this.setState({
-            open: true,
             record: currentrow,
             allRoles: res.roles
         });
-
+        this.props.NanxTableStore.showButtonModal();
         await this.getUserRole();
     }
 
@@ -86,10 +85,6 @@ export default class RoleAsign extends React.Component {
         );
     }
 
-    handleCancel = () => {
-        this.setState({ open: false });
-    };
-
     columns = [
         {
             title: '操作',
@@ -117,7 +112,7 @@ export default class RoleAsign extends React.Component {
         return (
             <div>
                 {this.state.record ? (
-                    <Modal
+                    <CommonModal
                         title={
                             <div>
                                 <GithubOutlined />
@@ -129,11 +124,7 @@ export default class RoleAsign extends React.Component {
                                 关闭
                             </Button>
                         ]}
-                        okText="确认"
-                        onCancel={this.handleCancel}
-                        width="1200px"
-                        open={this.state.open}
-                        destroyOnClose={true}>
+                        width="1200px">
                         {this.state.currentRoles.length > 0 ? (
                             <div style={{ marginTop: '10px' }}>
                                 <h3>已分配的角色:</h3>
@@ -176,7 +167,7 @@ export default class RoleAsign extends React.Component {
                                 </Button>
                             </div>
                         )}
-                    </Modal>
+                    </CommonModal>
                 ) : null}
             </div>
         );

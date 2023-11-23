@@ -1,14 +1,14 @@
 import React from 'react';
-import { message, Modal, Button } from 'antd';
+import { message, Button } from 'antd';
 import AllocationMenu from './MenuAssign/allocationMenu';
+import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 
 export default class MenuAssign extends React.Component {
     constructor(props) {
         super(props);
         this.NanxTableStore = props.NanxTableStore;
         this.state = {
-            record: null,
-            open: false
+            record: null
         };
     }
 
@@ -20,34 +20,19 @@ export default class MenuAssign extends React.Component {
         }
 
         let currentrow = this.props.NanxTableStore.selectedRows[0];
-        console.log(currentrow);
-        this.setState({
-            open: true,
-            record: currentrow
-        });
+
+        this.props.NanxTableStore.showButtonModal();
+        this.setState({ record: currentrow });
     }
-
-    handleOk = async () => {};
-
-    handleCancel = () => {
-        this.setState({
-            open: false
-        });
-    };
 
     render() {
         return (
             <div>
                 {this.state.record ? (
-                    <Modal
+                    <CommonModal
                         title="分配菜单"
-                        onOk={this.handleOk}
-                        onCancel={this.handleCancel}
-                        okText="确认"
-                        cancelText="取消"
                         width="1200px"
                         height="500px"
-                        open={this.state.open}
                         destroyOnClose={true}
                         footer={[
                             <Button key="submit" type="primary" onClick={this.handleCancel}>
@@ -55,7 +40,7 @@ export default class MenuAssign extends React.Component {
                             </Button>
                         ]}>
                         <AllocationMenu roleCode={this.state.record.role_code} />
-                    </Modal>
+                    </CommonModal>
                 ) : null}
             </div>
         );

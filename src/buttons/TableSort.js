@@ -1,18 +1,17 @@
 import React from 'react';
-import { Modal, message, Button } from 'antd';
+import { message, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
 import TableSortCom from './TableSort/TableSortCom';
 import { toJS } from 'mobx';
 import { BarsOutlined } from '@ant-design/icons';
+import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 
 @inject('DataGridStore')
 @observer
 export default class TableSort extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            open: false
-        };
+
         this.init = this.init.bind(this);
     }
 
@@ -29,23 +28,13 @@ export default class TableSort extends React.Component {
             this.props.DataGridStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
             this.props.DataGridStore.setCurrentBasetable(toJS(record).base_table);
             this.props.DataGridStore.prepareDataGirdEnv();
-            this.setState({ open: true });
+            this.props.NanxTableStore.showButtonModal();
         }
     }
 
-    onCancel = () => {
-        this.setState({
-            open: false
-        });
-    };
-
     render() {
         return (
-            <Modal
-                open={this.state.open}
-                destroyOnClose={true}
-                onCancel={this.onCancel}
-                onOk={this.onCancel}
+            <CommonModal
                 footer={[
                     <Button key="submit" type="primary" onClick={this.onCancel}>
                         关闭
@@ -61,7 +50,7 @@ export default class TableSort extends React.Component {
                 {this.props.DataGridStore.ColsDbInfo.length == 0 ? null : (
                     <TableSortCom DataGridCode={this.props.DataGridStore.DataGridCode} />
                 )}
-            </Modal>
+            </CommonModal>
         );
     }
 }
