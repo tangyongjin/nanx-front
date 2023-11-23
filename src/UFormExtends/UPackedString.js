@@ -48,21 +48,37 @@ const WrapperAntStringComomnet = (TarGet) => {
                             }
 
                             //用自己的值当参数, 呼叫API
-                            // let tarGetField = this.props.field_id;
 
                             if (this.props?.default_v == 'RemoteFetchOnSite') {
-                                console.log(this.props);
-                                let tarGetField = 'bookname';
+                                const {
+                                    title: fieldTitle,
+                                    value: fieldValue,
+                                    defaultv_para: fieldDefaultvPara
+                                } = this.props;
 
-                                const parsedObject = tryParseJSON(this.props.defaultv_para);
+                                let tarGetField = null;
+                                const parsedObject = tryParseJSON(fieldDefaultvPara);
                                 if (parsedObject == null) {
-                                    tarGetField = null;
+                                    message.error('请检查此字段:' + this.props.title + '的配置');
+                                    return;
                                 } else {
                                     tarGetField = parsedObject['target'];
                                 }
 
-                                let cloudValue = await fetchRemoteWithOnSiteValue(this.props.title, this.props.value);
+                                let FormState = this.props.actions.getFormState();
+                                console.log('FormState: ', FormState);
+
+                                if (!FormState.values.hasOwnProperty(tarGetField)) {
+                                    message.info(
+                                        '注意:目标字段' + tarGetField + '不在此表单中，无需获取远程数据,也未被未被修改'
+                                    );
+                                    return;
+                                }
+
+                                let cloudValue = await fetchRemoteWithOnSiteValue(fieldTitle, fieldValue);
+
                                 this.props.actions.setFormState((state) => {
+                                    console.log(state.values);
                                     state.values = {
                                         ...state.values,
                                         [tarGetField]: cloudValue
