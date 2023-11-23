@@ -26,7 +26,6 @@ export default class RoleAsign extends React.Component {
         }
 
         let currentrow = this.props.NanxTableStore.selectedRows[0];
-        console.log(currentrow);
         this.setState({ allRoles: [], currentRoles: [] });
 
         let res = await api.permission.getAllRoles();
@@ -59,7 +58,6 @@ export default class RoleAsign extends React.Component {
     };
 
     deleteUserRole = async (e, record) => {
-        console.log('record: ', record);
         this.setState({ currentRoles: [] });
         let params = { data: { user: record.user, role: record.role_code } };
         await api.permission.deleteUserRole(params);
@@ -67,9 +65,6 @@ export default class RoleAsign extends React.Component {
     };
 
     getOperationButtons(record, rowIndex) {
-        console.log('record: ', record);
-        console.log('rowIndex: ', rowIndex);
-
         return (
             <div className="options">
                 <Popconfirm

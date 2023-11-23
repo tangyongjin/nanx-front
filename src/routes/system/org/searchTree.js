@@ -57,10 +57,6 @@ export default class SearchTree extends React.Component {
         return parentKey;
     };
 
-    nodeClick() {
-        console.log('node');
-    }
-
     renderTreeNodes = (data) =>
         data.map((item) => {
             const index = item[this.props.treeTitle].indexOf(this.state.searchValue);
@@ -78,7 +74,7 @@ export default class SearchTree extends React.Component {
                 );
             if (item.treeData) {
                 return (
-                    <TreeNode key={item[this.props.treeKey]} title={title} onClick={this.nodeClick}>
+                    <TreeNode key={item[this.props.treeKey]} title={title}>
                         {this.renderTreeNodes(item.treeData)}
                     </TreeNode>
                 );

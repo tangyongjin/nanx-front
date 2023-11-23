@@ -28,12 +28,7 @@ export default class UserManage extends React.Component {
         });
     }
 
-    async onClickTreeNode(treeNode) {
-        console.log(treeNode);
-    }
-
     async loadData(treeNode) {
-        console.log(treeNode);
         const params = {
             data: {
                 category_to_use: treeNode.props.dataRef.category,
@@ -53,7 +48,7 @@ export default class UserManage extends React.Component {
             loadData: this.loadData.bind(this),
             dataList: this.state.dataList,
             getFirstNode: this.getFirstNode.bind(this),
-            onSelect: this.onClickTreeNode.bind(this),
+
             multiple: false,
             treeKey: 'id_value',
             treeTitle: 'text',

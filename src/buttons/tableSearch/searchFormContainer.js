@@ -8,7 +8,6 @@ import api from '@/api/api';
 export default class SearchFormContainer extends React.Component {
     constructor(props) {
         super(props);
-        console.log('props: ', props);
 
         this.state = {
             field_group: [{ inner_order: 0 }]
@@ -76,17 +75,14 @@ export default class SearchFormContainer extends React.Component {
     //  回传搜索条件给上级组件 returnQueryLines
     returnQueryLines = async () => {
         let queryLines = [];
-        console.log(this.state.field_group);
         for (let i = 0; i < this.state.field_group.length; i++) {
             let formValue = await this.state.field_group[i].actions.getSearchTableFormData();
             formValue['and_or_' + i] = 'and';
-            console.log('formValue: ', formValue);
             let fixedFormValue = {};
             fixedFormValue.and_or = formValue['and_or_' + i];
             fixedFormValue.field = formValue['field_' + i];
             fixedFormValue.operator = formValue['operator_' + i];
             fixedFormValue.vset = formValue['vset_' + i];
-            console.log('fixedFormValue: ', fixedFormValue);
             queryLines.push(fixedFormValue);
         }
 
@@ -102,7 +98,6 @@ export default class SearchFormContainer extends React.Component {
             query_cfg.lines = { ...query_cfg.lines, ...item };
         });
 
-        console.log('queryLines: ', queryLines);
         return queryLines;
     };
 

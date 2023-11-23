@@ -22,7 +22,6 @@ class MenuRelatedStore {
 export default class MenuDetailCom extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.store = new MenuRelatedStore();
     }
 
@@ -74,8 +73,6 @@ export default class MenuDetailCom extends React.Component {
             };
             this.store.combinedArray.push(tmp);
         });
-
-        console.log('    this.store.combinedArray: ', this.store.combinedArray);
     };
 
     render() {

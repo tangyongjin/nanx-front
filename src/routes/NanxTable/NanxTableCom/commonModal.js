@@ -14,8 +14,9 @@ const CommonModal = inject('NanxTableStore')(
             right: 0
         });
         const draggleRef = useRef(null);
+        const { clientWidth } = window.document.documentElement;
+        const clientHeight = 2000;
         const onStart = (_event, uiData) => {
-            const { clientWidth, clientHeight } = window.document.documentElement;
             const targetRect = draggleRef.current?.getBoundingClientRect();
             if (!targetRect) {
                 return;
@@ -27,8 +28,6 @@ const CommonModal = inject('NanxTableStore')(
                 bottom: clientHeight - (targetRect.bottom - uiData.y)
             });
         };
-
-        // console.log('props: ', props);
 
         return (
             <Modal

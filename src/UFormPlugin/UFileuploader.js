@@ -93,7 +93,6 @@ export default class Fileuploader extends React.Component {
         }
     }
     getFilesList() {
-        console.log('文件上传组件props', this.props);
         if (this.props.value != '') {
             var fileListt = JSON.parse(this.props.value);
             var num = 0;
@@ -111,7 +110,6 @@ export default class Fileuploader extends React.Component {
     }
 
     render() {
-        console.log(this.props);
         const props = {
             multiple: true,
             onChange: () => {},

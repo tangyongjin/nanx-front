@@ -93,14 +93,11 @@ class _TableAsEditorStore {
 
     @action TableOnChange = async (pagination) => {
         if (pagination.pageSize == this.pageSize) {
-            console.log('没有改变 pageSize');
-            console.log(pagination.current);
             await this.setCurrentPage(pagination.current);
             await this.listData('setCurrentPage');
 
             // 没有改变 pageSize
         } else {
-            console.log('改变 pageSize !!! ');
             await this.setCurrentPage(1);
             await this.setPageSize(pagination.pageSize);
             await this.listData('onShowSizeChange');

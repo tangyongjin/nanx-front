@@ -12,7 +12,6 @@ const { Option } = Select;
 class InitValeCfg extends React.Component {
     constructor(props) {
         super(props);
-        console.log('props: ', props);
 
         this.state = {
             opts: [

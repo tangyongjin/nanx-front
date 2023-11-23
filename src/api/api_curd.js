@@ -10,7 +10,6 @@ export default class curd {
         deleteData: (params) => post(`${api_root}/${params.delurl}`, params),
         updateData: (params) => post(`${api_root}/${params.updateurl}`, params),
         addData: (params) => post(`${api_root}/${params.addurl}`, params),
-        batchUpdate: (params) => post(`${api_root}/Curd/batchData`, params),
         getTableData: (params) => post(`${api_root}/Curd/getTableData`, params),
         remoteCommonFetch: (params) => post(`${api_root}/Curd/remoteCommonFetch`, params)
     };

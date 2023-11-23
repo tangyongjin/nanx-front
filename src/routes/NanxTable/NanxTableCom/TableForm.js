@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
-import '@/UFormExtends';
+import '@/UFormPlugin';
 import { SchemaForm, createFormActions } from '@uform/antd';
 import 'antd/dist/reset.css';
 import 'dayjs/locale/zh-cn';
@@ -32,7 +32,6 @@ const TableSchemaForm = (props) => {
             Fixed.properties[key] = keyConfig;
         }
 
-        console.log('Fixed: ', Fixed);
         return Fixed;
     };
 

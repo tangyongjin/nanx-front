@@ -4,7 +4,7 @@ class GPTicon extends React.Component {
     render() {
         return (
             <svg
-                style={{ marginRight: '12px', paddingTop: '4px' }}
+                style={{ marginRight: '8px', paddingTop: '4px' }}
                 t="1700714755144"
                 className="icon"
                 viewBox="0 0 1024 1024"

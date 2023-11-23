@@ -11,11 +11,6 @@ const type = 'DragableBodyRow';
 @inject('DataGridStore')
 @observer
 export default class TableSortCom extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log(props);
-    }
-
     state = { maintableColumns: this.props.DataGridStore.ColsDbInfo };
 
     DragableBodyRow = ({ index, moveRow, className, style, ...restProps }) => {

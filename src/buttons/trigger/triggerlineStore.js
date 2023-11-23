@@ -17,7 +17,6 @@ export default class triggerlineStore {
         this.combo_table = table;
         let params = { data: { table: table } };
         let json = await api.processmanager.getTableCols(params);
-        console.log(json.data);
         this.refercolumns = json.data;
     };
 

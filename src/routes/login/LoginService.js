@@ -23,8 +23,6 @@ export default class LoginService {
         await api.user
             .loginMobile(params)
             .then(async (res) => {
-                console.log(res);
-
                 if (res.code == 401) {
                     document.getElementById('login_loading').style.display = 'none';
                     document.getElementById('login_msg').style.display = 'block';

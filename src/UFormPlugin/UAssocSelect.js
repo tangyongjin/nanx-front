@@ -8,7 +8,7 @@ import { observer, inject } from 'mobx-react';
 export default class AssocSelect extends React.Component {
     constructor(props) {
         super(props);
-        console.log(' 💘AssocSelect💘', props);
+
         this.state = {
             optionList: [],
             loading: false

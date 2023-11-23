@@ -96,7 +96,6 @@ export default class TableSearchForm extends React.Component {
 
                     const setEnum = (name, operator_list) => {
                         setFieldState(name, (state) => {
-                            console.log(state, name, operator_list);
                             state.props.enum = operator_list;
                             for (var k = 0; k < operator_list.length; k++) {
                                 if (operator_list[k].value == 'like') {
@@ -139,8 +138,6 @@ export default class TableSearchForm extends React.Component {
                             let type = '';
                             if (formCfg[state.value]) {
                                 type = formCfg[state.value].type;
-                                console.log('type: ', type);
-                                // break;
                             }
 
                             switch (type) {
@@ -170,7 +167,6 @@ export default class TableSearchForm extends React.Component {
                                     break;
 
                                 default:
-                                    console.log();
                                     setEnum(operator, this.operation_list.other);
                                     setType('vset_' + this.props.form_index, 'string');
                             }

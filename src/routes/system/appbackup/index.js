@@ -4,7 +4,6 @@ const api_root = `${root_url}:${port}/${version}`;
 export { api_root };
 export default class AppBackUp extends React.Component {
     render() {
-        console.log(api_root);
         const logurl = api_root + '/log';
         return (
             <div>

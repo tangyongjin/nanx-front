@@ -13,7 +13,6 @@ dayjs.locale('zh-cn'); // 全局使用简体中文
 dayjs.extend(customParseFormat);
 const dateFormat1 = 'YYYY-MM-DD';
 const dateFormat2 = 'YYYY-MM-DD HH:mm:ss';
-// console.log('mapTextComponent: ', mapTextComponent);
 
 const WrapperAntDateComomnet = (TarGet) => {
     return class Select extends React.Component {

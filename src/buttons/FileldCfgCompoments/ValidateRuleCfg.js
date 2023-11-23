@@ -8,7 +8,6 @@ const { Option } = Select;
 class PluginCfg extends React.Component {
     constructor(props) {
         super(props);
-        console.log('props: ', props);
 
         this.state = {
             opts: [

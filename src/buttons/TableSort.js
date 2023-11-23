@@ -23,7 +23,7 @@ export default class TableSort extends React.Component {
             return;
         } else {
             let record = selectedRows[0];
-            console.log(record);
+
             this.props.DataGridStore.setCurrentActcode(toJS(record).datagrid_code);
             this.props.DataGridStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
             this.props.DataGridStore.setCurrentBasetable(toJS(record).base_table);

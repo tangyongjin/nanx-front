@@ -14,7 +14,6 @@ export default class Login extends React.Component {
         this.state = {};
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmitMobile = this.handleFormSubmitMobile.bind(this);
-        this.changeValue = this.changeValue.bind(this);
         this.Auth = new LoginService();
         this.MenuStore = props.MenuStore;
     }
@@ -37,9 +36,6 @@ export default class Login extends React.Component {
         });
     }
 
-    changeValue(a, b) {
-        console.log(b.props.value, b.props.children);
-    }
     render() {
         return (
             <div className="auth-bg">

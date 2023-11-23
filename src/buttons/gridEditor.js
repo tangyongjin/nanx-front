@@ -22,7 +22,6 @@ class GridEditor extends React.Component {
     componentDidUpdate() {}
 
     setQueryValue = () => {
-        console.log(this.state);
         let value = event.target.value;
         this.setState({ query_cfg_value: value });
     };
@@ -62,7 +61,6 @@ class GridEditor extends React.Component {
                 query_cfg_value: this.state.query_cfg_value
             }
         };
-        console.log(params);
         api.activity.saveOverrideQueryCfg(params);
     };
 
@@ -75,7 +73,6 @@ class GridEditor extends React.Component {
                 let params = {
                     data: values
                 };
-                console.log(values);
 
                 let ret = await api.activity.modifyActionCode(params);
                 if (ret.code == 200) {

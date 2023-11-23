@@ -31,7 +31,6 @@ export default class OrgManage extends React.Component {
         };
         let res = await api.organization.getDeptMembers(params);
 
-        console.log(res);
         this.setState({
             userList: res
         });

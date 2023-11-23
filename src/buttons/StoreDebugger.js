@@ -15,7 +15,6 @@ export default class StoreDebugger extends React.Component {
 
     async init() {
         await this.props.NanxTableStore.showButtonModal();
-        console.log(' this.props.NanxTableStore: ', JSON.stringify(this.props.NanxTableStore.formCfg));
     }
 
     render() {

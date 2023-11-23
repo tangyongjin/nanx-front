@@ -2,6 +2,7 @@ import React from 'react';
 import { message, Button } from 'antd';
 import AllocationMenu from './MenuAssign/allocationMenu';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
+import { ClusterOutlined } from '@ant-design/icons';
 
 export default class MenuAssign extends React.Component {
     constructor(props) {
@@ -30,7 +31,12 @@ export default class MenuAssign extends React.Component {
             <div>
                 {this.state.record ? (
                     <CommonModal
-                        title="分配菜单"
+                        title={
+                            <div>
+                                <ClusterOutlined />
+                                分配菜单
+                            </div>
+                        }
                         width="1200px"
                         height="500px"
                         destroyOnClose={true}

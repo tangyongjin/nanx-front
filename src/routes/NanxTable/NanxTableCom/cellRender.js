@@ -16,7 +16,6 @@ const CellRender = (text, record, column_cfg, store) => {
         if (typeof CellsRenderHandlers[column_cfg.handler] === 'function') {
             return CellsRenderHandlers[column_cfg.handler](text, record, store);
         } else {
-            console.log('请检查colRender渲染方法:' + column_cfg.handler);
             return text;
         }
     }

@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path');
 const inquirer = require('inquirer');
 const config = require('./dbconn'); // 引入配置文件
 const mysql = require('mysql2/promise');
@@ -35,7 +33,6 @@ inquirer.prompt(questions).then(async (answers) => {
     const DataGridCode = answers.DataGridCode;
 
     if (!buttonCode || !buttonText) {
-        console.log('请提供button_code和button_text参数。');
         process.exit(1);
     }
 
@@ -48,8 +45,6 @@ inquirer.prompt(questions).then(async (answers) => {
             'INSERT INTO  nanx_portal_button (button_code, name, icon, style, file_path, using_component, component_name) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [buttonCode, buttonText, 'File', 'primary', compomentName, 'y', compomentName]
         );
-
-        console.log(`成功插入数据到 nanx_portal_button表格,插入ID: ${rows.insertId}`);
 
         // 查询 nanx_portal_button_actcode 表格中 datagrid_code 为 DataGridCode 的记录总数
         const [rowCount] = await connection.execute(

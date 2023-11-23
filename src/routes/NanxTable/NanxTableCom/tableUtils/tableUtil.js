@@ -18,7 +18,6 @@ const rowSelection = (tbStore) => {
         type: 'radio',
         selectedRowKeys: tbStore.selectedRowKeys,
         onChange: async (selectedRowKeys, selectedRows) => {
-            console.log('selectedRows: ', selectedRows);
             tbStore.rowSelectChange(selectedRowKeys, selectedRows);
         }
     };

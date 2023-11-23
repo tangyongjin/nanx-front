@@ -23,7 +23,6 @@ class DataGridStore {
     };
 
     @action initAll = async () => {
-        console.log('初始化所有 DataGridStore 属性.');
         await this.getAllGrids();
         await this.getAllBiztable();
         await this.getAllPlugins();
@@ -45,8 +44,6 @@ class DataGridStore {
     @action getRelatedTableCols = async () => {
         if (this.relatedtable == '') {
             this.relatedtableColumns = [];
-        } else {
-            console.log('getRelatedTableCols');
             let params = { data: { table: this.relatedtable } };
             let json = await api.processmanager.getTableCols(params);
             this.relatedtableColumns = json.data;
@@ -54,7 +51,6 @@ class DataGridStore {
     };
 
     @action setCurrentActcode = (DataGridCode) => {
-        console.log('设置当前 DataGridCode');
         this.DataGridCode = DataGridCode;
     };
 
@@ -114,7 +110,6 @@ class DataGridStore {
 
     @action saveTriggerGroup = async (obj) => {
         let params = { data: obj };
-        console.log(obj);
         let json = await api.dataGrid.saveTriggerGroup(params);
         message.info(json.message);
         this.getTriggerGroups();
@@ -163,7 +158,6 @@ class DataGridStore {
     };
 
     @action changeCfg_cbx = (event, attr, field) => {
-        console.log(event, attr, field);
         let value = event.target.checked;
         this.setFieldAttr(field, attr, value);
     };
@@ -176,7 +170,6 @@ class DataGridStore {
     };
 
     @action getFieldAttr = (field, attr) => {
-        console.log(this.ColsDbInfo);
         this.ColsDbInfo.map((element) => {
             if (element.Field === field) {
                 return element[attr];

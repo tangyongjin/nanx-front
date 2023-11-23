@@ -22,9 +22,10 @@ const beforeUpload = (file) => {
 const AvatarUpload = () => {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
-    const handleChange = (info) => {
-        console.log(info);
 
+    const [progress, setProgress] = useState(0);
+
+    const handleChange = (info) => {
         if (info.file.status === 'uploading') {
             setLoading(true);
             return;
@@ -37,6 +38,7 @@ const AvatarUpload = () => {
             });
         }
     };
+
     const uploadButton = (
         <div>
             {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -48,6 +50,37 @@ const AvatarUpload = () => {
             </div>
         </div>
     );
+
+    const uploadImage = async (options) => {
+        const { onSuccess, onError, file, onProgress } = options;
+
+        const fmData = new FormData();
+        const config = {
+            headers: { 'content-type': 'multipart/form-data', Authorization: sessionStorage.getItem('token') },
+            onUploadProgress: (event) => {
+                const percent = Math.floor((event.loaded / event.total) * 100);
+                setProgress(percent);
+                if (percent === 100) {
+                    setTimeout(() => setProgress(0), 1000);
+                }
+                onProgress({ percent: (event.loaded / event.total) * 100 });
+            }
+        };
+        fmData.append('image', file);
+        try {
+            // const res2 = await axios.post('http://127.0.0.1:9009/v2/File/uploadAvatar', fmData, config);
+            // const res = await api.file.uploadAvatar2(fmData, config);
+
+            let params = { data: fmData };
+            let res = await api.file.uploadAvatar2(params, config);
+
+            onSuccess('Ok');
+        } catch (err) {
+            const error = new Error('Some error');
+            onError({ err });
+        }
+    };
+
     return (
         <div
             style={{
@@ -58,11 +91,12 @@ const AvatarUpload = () => {
                 minHeight: '246px'
             }}>
             <Upload
+                customRequest={uploadImage}
                 name="avatar"
                 listType="picture-card"
                 className="avatar-uploader"
                 showUploadList={false}
-                action={api.file.uploadAvatar}
+                // action={api.file.uploadAvatar}
                 beforeUpload={beforeUpload}
                 headers={{
                     Authorization: sessionStorage.getItem('token')
@@ -73,10 +107,9 @@ const AvatarUpload = () => {
                         src={imageUrl}
                         alt="avatar"
                         style={{
-                            marginTop: '132px',
-                            width: '200px',
-                            maxHeight: '246px',
-                            minHeight: '246px'
+                            width: '100px',
+                            height: 'auto',
+                            maxHeight: '246px'
                         }}
                     />
                 ) : (

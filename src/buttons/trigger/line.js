@@ -9,13 +9,12 @@ const { Option } = Select;
 class Line extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
+
         this.DataGridStore = props.DataGridStore;
         this.tgstore = props.triggerlineStore;
     }
 
     destroyLine(idx) {
-        console.log(idx);
         this.props.descCounter(idx);
     }
 

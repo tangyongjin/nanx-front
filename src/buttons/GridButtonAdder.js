@@ -1,11 +1,11 @@
 import React from 'react';
-import { Input, message, Popconfirm, Button, Select, Table, Modal } from 'antd';
+import { Input, message, Popconfirm, Button, Select, Table } from 'antd';
 import api from '@/api/api';
 import cloneDeep from 'lodash/cloneDeep';
 import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
-
 import { BorderOutlined } from '@ant-design/icons';
+
 const { Option } = Select;
 
 export default class GridButtonAdder extends React.Component {
@@ -29,7 +29,6 @@ export default class GridButtonAdder extends React.Component {
         }
 
         let currentrow = this.props.NanxTableStore.selectedRows[0];
-        console.log(currentrow);
         let params = {};
         let res = await api.button.getAllButtons(params);
         this.setState({
@@ -73,9 +72,6 @@ export default class GridButtonAdder extends React.Component {
     };
 
     getOptionButtons(record, rowIndex) {
-        console.log('record: ', record);
-        console.log('rowIndex: ', rowIndex);
-
         return (
             <div className="options">
                 <Popconfirm

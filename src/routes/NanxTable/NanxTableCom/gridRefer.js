@@ -4,7 +4,7 @@ import { message, Descriptions, Table } from 'antd';
 export default class GridRefer extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
+
         this.state = {
             xinfo: null
         };
@@ -17,7 +17,6 @@ export default class GridRefer extends React.Component {
         this.setState({ xinfo: null });
     }
     createReferRowOne = (row) => {
-        console.log('******createReferRowOne******', row);
         if (!row) {
             return null;
         }
@@ -97,20 +96,7 @@ export default class GridRefer extends React.Component {
             </Descriptions>
         );
     };
-    getTitle(info, title) {
-        let numstr = '0123456789';
-        console.log(info.data);
-        for (var i = 0; i < info.length; i++) {
-            if (info[i].data.rows.length != 0) {
-                return (
-                    <div style={ref_title}>
-                        {title != null && numstr.indexOf(title.substring(0, 1)) != -1 ? title.substring(1) : title}
-                    </div>
-                );
-            }
-        }
-        console.log(980, info, title);
-    }
+
     renderRowsFormatData = (key, rows) => {
         if (!rows) {
             return null;

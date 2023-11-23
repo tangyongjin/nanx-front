@@ -5,8 +5,6 @@ const { Option } = Select;
 export default class Dropdownlist extends React.Component {
     constructor(props) {
         super(props);
-        console.log('props: ', props);
-
         this.state = {
             opts: tryParseJSON(props.uform_para)
         };

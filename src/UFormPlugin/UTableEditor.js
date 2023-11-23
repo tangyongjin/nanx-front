@@ -10,7 +10,7 @@ import { Collapse } from 'antd';
 export default class UTableEditor extends React.Component {
     constructor(props) {
         super(props);
-        console.log('TableEditor>>>>>>>>>>props: ', props);
+
         // uform_para like {"gridcode":"nanx_user_role","field":"role_code"}
         this.uformObj = JSON.parse(props.uform_para);
         this.tbStore = props.TableAsEditorStore;

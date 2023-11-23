@@ -133,7 +133,6 @@ const responseFailed = (error) => {
         }
         error.message = '连接服务器失败';
     }
-    console.error(error.response);
     return error.response;
 };
 

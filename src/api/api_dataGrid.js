@@ -12,7 +12,6 @@ export default class dataGrid {
         getTriggerGroups: (params) => post(`${api_root}/DataGrid/getTriggerGroups`, params),
         deleteTriggerGroup: (params) => post(`${api_root}/DataGrid/deleteTriggerGroup`, params),
         saveFieldCfg: (params) => post(`${api_root}/DataGrid/saveFieldCfg`, params),
-        batchUpdateFieldCfg: (params) => post(`${api_root}/DataGrid/batchUpdateFieldCfg`, params),
         saveActCodeColumnOrder: (params) => post(`${api_root}/DataGrid/saveActCodeColumnOrder`, params),
         saveFixedQueryConfigure: (params) => post(`${api_root}/DataGrid/saveFixedQueryConfigure`, params),
         fetchDataGridCfg: (params) => post(`${api_root}/DataGridCfg/fetchDataGridCfg`, params)

@@ -33,9 +33,7 @@ export default class DeleteData extends React.Component {
             onOk: () => {
                 this.deleteData();
             },
-            onCancel: () => {
-                console.log(this.props);
-            }
+            onCancel: () => {}
         });
     }
 

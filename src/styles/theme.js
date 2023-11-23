@@ -7,6 +7,7 @@ const themeJson = {
         colorWarning: '#225e04',
         colorTextBase: '#000000ef',
         borderRadius: 4,
+        borderRadiusLG: 6,
         headerPadding: '150px',
         colorPrimaryHover: '#225e04',
         controlOutlineWidth: 0.5,
@@ -49,8 +50,6 @@ const themeJson = {
         Button: {
             controlHeight: '30px',
             defaultBorderColor: '#366503',
-            primaryShadow: '0 0 0 0 #15ff00',
-            defaultShadow: '0px 0px 0px 0px #ffffff',
             defaultColor: 'white',
             colorBgContainer: '#3B3B47'
         },

@@ -9,8 +9,6 @@ import api from '@/api/api';
 export default class FixedQueryBuilder extends React.Component {
     constructor(props) {
         super(props);
-        console.log('props: ', props);
-        // this.init = this.init.bind(this);
         this.state = {
             fieldsList: []
         };
@@ -49,7 +47,6 @@ export default class FixedQueryBuilder extends React.Component {
         };
 
         let res = await api.dataGrid.fetchDataGridCfg(params);
-        console.log('res: ', res);
 
         let fds = res.data.tableColumnConfig.map(({ title, key }) => ({ label: title, value: key }));
         this.setState({ fieldsList: fds });

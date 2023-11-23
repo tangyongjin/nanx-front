@@ -11,7 +11,6 @@ import 'dayjs/locale/zh-cn';
 const WrapperAntStringComomnet = (TarGet) => {
     return class Select extends React.Component {
         render() {
-            // console.log(this.props.nnstore.table_action);
             const fetchRemoteAlone = async () => {
                 let res = await api.curd.remoteCommonFetch();
                 return res.value;
@@ -66,7 +65,6 @@ const WrapperAntStringComomnet = (TarGet) => {
                                 }
 
                                 let FormState = this.props.actions.getFormState();
-                                console.log('FormState: ', FormState);
 
                                 if (!FormState.values.hasOwnProperty(tarGetField)) {
                                     message.info(
@@ -78,7 +76,6 @@ const WrapperAntStringComomnet = (TarGet) => {
                                 let cloudValue = await fetchRemoteWithOnSiteValue(fieldTitle, fieldValue);
 
                                 this.props.actions.setFormState((state) => {
-                                    console.log(state.values);
                                     state.values = {
                                         ...state.values,
                                         [tarGetField]: cloudValue

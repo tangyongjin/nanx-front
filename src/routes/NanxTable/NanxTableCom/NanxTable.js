@@ -51,8 +51,6 @@ export default class NanxTable extends React.Component {
     onRowHandler = (record) => {
         return {
             onClick: async () => {
-                console.log(record.role_code);
-                console.log(this.props);
                 this.tbStore.rowSelectChange([record.id], [record]);
             }
         };

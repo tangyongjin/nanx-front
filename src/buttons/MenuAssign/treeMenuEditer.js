@@ -11,14 +11,12 @@ const TreeMenuEditer = inject('MenuStore')(
 
             await props.MenuStore.saveMenuPermission(props.role_code, menu.menu_level, menu.key, menu.parent_id);
             await props.MenuStore.getMenuTreeByTargetRoleCode(props.role_code);
-            console.log('props: ', props.role_code, menu);
         };
 
         const DisAssingMenu = async (e, menu) => {
             e.preventDefault();
             await props.MenuStore.deleteMenuPermission(props.role_code, menu.menu_level, menu.key, menu.parent_id);
             await props.MenuStore.getMenuTreeByTargetRoleCode(props.role_code);
-            console.log('props: ', props.role_code, menu);
         };
 
         const TitleMessage = (menu) => {
