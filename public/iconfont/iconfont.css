@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4345568 */
+  /* Color fonts */
+  src: 
+       url('iconfont.woff2?t=1700838022085') format('woff2'),
+       url('iconfont.woff?t=1700838022085') format('woff'),
+       url('iconfont.ttf?t=1700838022085') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-function:before {
+  content: "\e6a3";
+}
+
+.icon-preview:before {
+  content: "\e64e";
+}
+
+.icon-view:before {
+  content: "\e60b";
+}
+
+.icon-a-DefineFunction:before {
+  content: "\e609";
+}
+
+.icon-zip:before {
+  content: "\e6a8";
+}
+
+.icon-word:before {
+  content: "\e623";
+}
+
+.icon-zip1:before {
+  content: "\e65a";
+}
+
+.icon-PPT:before {
+  content: "\e642";
+}
+
+.icon-Download:before {
+  content: "\e679";
+}
+
+.icon-word1:before {
+  content: "\e716";
+}
+
+.icon-Download1:before {
+  content: "\eaa8";
+}
+
+.icon-Upload:before {
+  content: "\eaba";
+}
+
+.icon-word2:before {
+  content: "\e613";
+}
+
+.icon-upload:before {
+  content: "\e73e";
+}
+
+.icon-upload1:before {
+  content: "\e615";
+}
+
+.icon-Upload1:before {
+  content: "\e629";
+}
+
+.icon-ppt:before {
+  content: "\e61a";
+}
+
+.icon-upload2:before {
+  content: "\e61b";
+}
+
+.icon-excel:before {
+  content: "\e641";
+}
+
+.icon-ChatGPT:before {
+  content: "\e62d";
+}
+
+.icon-chatgpticon:before {
+  content: "\e635";
+}
+
+.icon-chatgpt:before {
+  content: "\e63c";
+}
+
+.icon-PDF:before {
+  content: "\e715";
+}
+

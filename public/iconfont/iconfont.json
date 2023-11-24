@@ -1,0 +1,170 @@
+{
+  "id": "4345568",
+  "name": "nanx",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "nanx项目图标集合",
+  "glyphs": [
+    {
+      "icon_id": "7425182",
+      "name": "function",
+      "font_class": "function",
+      "unicode": "e6a3",
+      "unicode_decimal": 59043
+    },
+    {
+      "icon_id": "9849093",
+      "name": "preview",
+      "font_class": "preview",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "15836344",
+      "name": "view",
+      "font_class": "view",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "23762260",
+      "name": "Define Function",
+      "font_class": "a-DefineFunction",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "385312",
+      "name": "ZIP",
+      "font_class": "zip",
+      "unicode": "e6a8",
+      "unicode_decimal": 59048
+    },
+    {
+      "icon_id": "1388144",
+      "name": "word",
+      "font_class": "word",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "4033510",
+      "name": "zip",
+      "font_class": "zip1",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "4628503",
+      "name": "PPT",
+      "font_class": "PPT",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "8193995",
+      "name": "Download",
+      "font_class": "Download",
+      "unicode": "e679",
+      "unicode_decimal": 59001
+    },
+    {
+      "icon_id": "10158840",
+      "name": "word",
+      "font_class": "word1",
+      "unicode": "e716",
+      "unicode_decimal": 59158
+    },
+    {
+      "icon_id": "12004911",
+      "name": "Download",
+      "font_class": "Download1",
+      "unicode": "eaa8",
+      "unicode_decimal": 60072
+    },
+    {
+      "icon_id": "12005074",
+      "name": "Upload",
+      "font_class": "Upload",
+      "unicode": "eaba",
+      "unicode_decimal": 60090
+    },
+    {
+      "icon_id": "13301856",
+      "name": "word",
+      "font_class": "word2",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "16678835",
+      "name": "upload",
+      "font_class": "upload",
+      "unicode": "e73e",
+      "unicode_decimal": 59198
+    },
+    {
+      "icon_id": "16853781",
+      "name": "upload",
+      "font_class": "upload1",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "19030238",
+      "name": "Upload",
+      "font_class": "Upload1",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "19035885",
+      "name": "ppt",
+      "font_class": "ppt",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "19301001",
+      "name": "upload",
+      "font_class": "upload2",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "19649321",
+      "name": "excel",
+      "font_class": "excel",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "35091872",
+      "name": "ChatGPT-copy",
+      "font_class": "ChatGPT",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "35505889",
+      "name": "chatgpticon",
+      "font_class": "chatgpticon",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "38256246",
+      "name": "chatgpticon-copy",
+      "font_class": "chatgpt",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "10158841",
+      "name": "PDF",
+      "font_class": "PDF",
+      "unicode": "e715",
+      "unicode_decimal": 59157
+    }
+  ]
+}

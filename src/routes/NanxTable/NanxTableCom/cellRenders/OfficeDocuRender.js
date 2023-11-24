@@ -1,5 +1,6 @@
 import React from 'react';
 import { root_url, port } from '@/api/api_config/base_config';
+
 const api_root = `${root_url}:${port}/`;
 function startsWithHttp(urlString) {
     return urlString.startsWith('http://');
