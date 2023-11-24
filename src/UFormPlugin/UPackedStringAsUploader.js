@@ -3,7 +3,7 @@ import { Input as AntInput } from 'antd';
 import { compose, mapStyledProps, mapTextComponent } from './uformHelpers/UFormUtils';
 import { registerFormField, connect } from '@uform/react';
 import FileUploder from '@/component/fileUploder';
-import { port, root_url } from '@/api/api_config/base_config';
+import { root_url, port } from '@/api/api_config/base_config';
 import api from '@/api/api';
 const fileRoot = `${root_url}:${port}/`;
 
@@ -53,6 +53,7 @@ const WrapperAntStringComomnet = (TarGet) => {
                             src={this.state.imageUrl}
                             alt="avatar"
                             style={{
+                                marginTop: '5px',
                                 width: '100px',
                                 height: 'auto',
                                 maxHeight: '246px'
