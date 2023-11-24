@@ -78,7 +78,7 @@ export default class TableSortCom extends React.Component {
                 filedids: dataarr
             }
         };
-        let res = await api.dataGrid.saveActCodeColumnOrder(params);
+        let res = await api.dataGrid.saveGridFieldOrder(params);
         if (res.code == 200) {
         }
     }

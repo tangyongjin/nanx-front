@@ -12,7 +12,7 @@ export default class dataGrid {
         getTriggerGroups: (params, config) => post(`${api_root}/DataGrid/getTriggerGroups`, params, config),
         deleteTriggerGroup: (params, config) => post(`${api_root}/DataGrid/deleteTriggerGroup`, params, config),
         saveFieldCfg: (params, config) => post(`${api_root}/DataGrid/saveFieldCfg`, params, config),
-        saveActCodeColumnOrder: (params, config) => post(`${api_root}/DataGrid/saveActCodeColumnOrder`, params, config),
+        saveGridFieldOrder: (params, config) => post(`${api_root}/DataGrid/saveGridFieldOrder`, params, config),
         saveFixedQueryConfigure: (params, config) =>
             post(`${api_root}/DataGrid/saveFixedQueryConfigure`, params, config),
         fetchDataGridCfg: (params, config) => post(`${api_root}/DataGridCfg/fetchDataGridCfg`, params, config)

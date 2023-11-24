@@ -17,6 +17,7 @@ const TableSchemaForm = (props) => {
      *
      */
     const prepareFormSchema = () => {
+        console.log('before sort', props.NanxTableStore.formCfg);
         let formCfg = cloneDeep(props.NanxTableStore.formCfg);
         let Fixed = cloneDeep(props.NanxTableStore.formCfg);
 
@@ -32,6 +33,7 @@ const TableSchemaForm = (props) => {
             Fixed.properties[key] = keyConfig;
         }
 
+        console.log('Fixed: ', Fixed);
         return Fixed;
     };
 
