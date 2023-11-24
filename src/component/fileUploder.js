@@ -1,10 +1,13 @@
 import { CloudUploadOutlined } from '@ant-design/icons';
 import { message, Upload, Button, Progress } from 'antd';
 import React, { useState } from 'react';
-import { getBase64 } from '@/utils/tools';
 
 /**
- * 通用文件上传组件
+ * 通用文件上传组件,上传完成后
+ * 利用 callbackRender 进行后续处理,
+ * 如;
+ * 渲染,
+ * 回填字段
  *
  */
 
@@ -34,27 +37,8 @@ const checkDocuTypeAnd10mSize = (file) => {
     return isOfficeDocu && isLessThen10m;
 };
 
-const ImgRender = (props) => {
-    return (
-        <div style={{ marginTop: 10 }}>
-            {props.imageUrl ? (
-                <img
-                    src={props.imageUrl}
-                    alt="avatar"
-                    style={{
-                        width: '100px',
-                        height: 'auto',
-                        maxHeight: '246px'
-                    }}
-                />
-            ) : null}
-        </div>
-    );
-};
-
 const FileUploder = (props) => {
     const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState();
     const [percent, setPercent] = useState(0);
 
     const handleChange = (info) => {
@@ -63,48 +47,47 @@ const FileUploder = (props) => {
             return;
         }
         if (info.file.status === 'done') {
-            getBase64(info.file.originFileObj, (url) => {
-                setLoading(false);
-                setImageUrl(url);
-            });
+            setLoading(false);
         }
+    };
+
+    const onUploadProgress = (event, onProgress) => {
+        const percent = Math.floor((event.loaded / event.total) * 100);
+        setPercent(percent);
+        if (percent === 100) {
+            setTimeout(() => {
+                setLoading(false);
+                setPercent(0);
+                // 上传完成后,修改对应的组件的渲染值
+                console.log('// 上传完成后,修改对应的组件的渲染值: ');
+                console.log(props);
+            }, 800);
+        }
+        onProgress({ percent: (event.loaded / event.total) * 100 });
     };
 
     const uploadHandler = async (options) => {
         const { onSuccess, onError, file, onProgress } = options;
         const fmData = new FormData();
-        const config = {
-            onUploadProgress: (event) => {
-                const percent = Math.floor((event.loaded / event.total) * 100);
-                setPercent(percent);
-                if (percent === 100) {
-                    setTimeout(() => {
-                        setLoading(false);
-                        setPercent(0);
-                    }, 999);
-                }
-                onProgress({ percent: (event.loaded / event.total) * 100 });
-            }
-        };
-
+        const config = { onUploadProgress: (event) => onUploadProgress(event, onProgress) };
         fmData.append('fileContent', file);
 
         try {
             let params = { data: fmData };
-            let res = props.apiEndpoint(params, config);
-
+            let res = await props.apiEndpoint(params, config);
             onSuccess('Ok');
             console.log('server res: ', res);
+            // 上传成功后, 给 callbackRender 回传上传结果
+            props.callbackRender && props.callbackRender(res.data);
         } catch (err) {
             console.log('Error: ', err);
             onError({ err });
         }
-
         onSuccess('Ok');
     };
 
     return (
-        <div>
+        <span>
             <Upload
                 customRequest={uploadHandler}
                 name="avatar"
@@ -115,9 +98,8 @@ const FileUploder = (props) => {
                     <CloudUploadOutlined />
                 </Button>
             </Upload>
-            {props.fileType == 'img' ? <ImgRender imageUrl={imageUrl} /> : null}
             {props.showProgress && loading ? <Progress percent={percent} /> : null}
-        </div>
+        </span>
     );
 };
 

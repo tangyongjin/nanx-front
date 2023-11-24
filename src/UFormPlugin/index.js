@@ -107,7 +107,7 @@ const { TextArea } = Input;
 
 registerFormFields({
     UYesOrNo: connect()((props) => {
-        console.log('Y/N: ', props);
+        // console.log('Y/N: ', props);
         return <UYesOrNo {...props} getComponentValue={props.onChange} value={props.value || ''} />;
     }),
 
@@ -117,46 +117,47 @@ registerFormFields({
     // }),
 
     UTextarea: connect()((props) => {
-        console.log('text_area: ', props);
+        // console.log('text_area: ', props);
         return <Input.TextArea {...props} value={props.value || ''} />;
     }),
 
     UDropdownList: connect()((props) => {
-        console.log('Dropdownlist: ', props);
+        // console.log('Dropdownlist: ', props);
         return <UDropdownList {...props} getComponentValue={props.onChange} value={props.value || ''} />;
     }),
 
-    UCategoryDropDown: connect()((props) => (
-        <UCategoryDropDown {...props} getComponentValue={props.onChange} value={props.value || ''} />
-    )),
+    UCategoryDropDown: connect()((props) => {
+        // console.log('UCategoryDropDown: ', props);
+        return <UCategoryDropDown {...props} getComponentValue={props.onChange} value={props.value || ''} />;
+    }),
 
     UGetLoginuser: connect()((props) => {
-        console.log('GetLoginuser: ', props);
+        // console.log('GetLoginuser: ', props);
         return <UGetLoginuser {...props} value={props.value || ''} />;
     }),
 
     UCheckbox: connect()((props) => {
-        console.log('CheckBox: ', props);
+        // console.log('CheckBox: ', props);
         return <UCheckbox {...props} value={props.value || ''} />;
     }),
 
     UWangeditor: connect()((props) => {
-        console.log('Wangeditor: ', props);
+        // console.log('Wangeditor: ', props);
         return <UWangeditor {...props} value={props.value || ''} />;
     }),
 
     UGetRadio: connect()((props) => {
-        console.log('GetRadio: ', props);
+        // console.log('GetRadio: ', props);
         return <UGetRadio {...props} value={props.value || ''} />;
     }),
 
     UAssocSelect: connect()((props) => {
-        console.log('AssocSelect: ', props);
+        // console.log('UAssocSelect: ', props);
         return <UAssocSelect {...props} value={props.value || ''} />;
     }),
 
     UTableEditor: connect()((props) => {
-        console.log('TableEditor: ', props);
+        // console.log('UTableEditor: ', props);
         return <UTableEditor {...props} getComponentValue={props.onChange} value={props.value} />;
     })
 });

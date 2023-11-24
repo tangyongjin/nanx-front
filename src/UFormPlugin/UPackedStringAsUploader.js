@@ -1,20 +1,64 @@
 import React from 'react';
-import { Input as AntInput, Button, message } from 'antd';
+import { Input as AntInput } from 'antd';
 import { compose, mapStyledProps, mapTextComponent } from './uformHelpers/UFormUtils';
 import { registerFormField, connect } from '@uform/react';
-import { CloudUploadOutlined } from '@ant-design/icons';
-
+import FileUploder from '@/component/fileUploder';
+import { port, root_url } from '@/api/api_config/base_config';
 import api from '@/api/api';
+const fileRoot = `${root_url}:${port}/`;
 
 const WrapperAntStringComomnet = (TarGet) => {
     return class Select extends React.Component {
+        constructor(props) {
+            super(props);
+            console.log('props: ', props);
+            this.state = {
+                imageUrl: null
+            };
+        }
+
         render() {
+            const uploadCallbackRender = (uploadResultData) => {
+                let tarGetField = this.props.field_id;
+                console.log('uploadResultData: ', uploadResultData);
+                let tarGetValue = uploadResultData[0]['url'];
+
+                this.setState({
+                    imageUrl: fileRoot + tarGetValue
+                });
+
+                this.props.actions.setFormState((state) => {
+                    state.values = {
+                        ...state.values,
+                        [tarGetField]: tarGetValue
+                    };
+                });
+            };
+
             return (
                 <div>
                     <TarGet style={{ width: '312px' }} placeholder={'请输入....'} {...this.props} />
-                    <Button onClick={async () => {}} style={{ marginLeft: '5px' }}>
-                        <CloudUploadOutlined />
-                    </Button>
+
+                    <span style={{ marginLeft: '5px' }}>
+                        <FileUploder
+                            callbackRender={uploadCallbackRender}
+                            fileType="img"
+                            showProgress={true}
+                            apiEndpoint={api.file.uploadAvatar2}
+                        />
+                    </span>
+
+                    {this.state.imageUrl ? (
+                        <img
+                            src={this.state.imageUrl}
+                            alt="avatar"
+                            style={{
+                                width: '100px',
+                                height: 'auto',
+                                maxHeight: '246px'
+                            }}
+                        />
+                    ) : null}
                 </div>
             );
         }

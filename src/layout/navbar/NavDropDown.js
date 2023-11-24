@@ -4,7 +4,6 @@ import React from 'react';
 import { hashHistory } from 'react-router';
 import LoginService from '@/routes/login/LoginService';
 import { port, root_url } from '@/api/api_config/base_config';
-
 const avatarRoot = `${root_url}:${port}/`;
 const { confirm } = Modal;
 

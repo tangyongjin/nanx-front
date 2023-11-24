@@ -14,7 +14,6 @@ class DataGridStore {
     @observable BaseTable = '';
     @observable ColsDbInfo = [];
     @observable trigger_groups = [];
-    @observable relatedtableColumns = [];
     @observable relatedtable = '';
 
     @action prepareDataGirdEnv = async () => {
@@ -33,22 +32,8 @@ class DataGridStore {
         // 单个 DataGrid 配置
         this.getColsDbInfo();
         this.getTriggerGroups();
-        this.getRelatedTableCols();
+        // this.getRelatedTableCols();
     }
-
-    @action setRelatedtable = (table) => {
-        this.relatedtable = table;
-        this.getRelatedTableCols();
-    };
-
-    @action getRelatedTableCols = async () => {
-        if (this.relatedtable == '') {
-            this.relatedtableColumns = [];
-            let params = { data: { table: this.relatedtable } };
-            let json = await api.processmanager.getTableCols(params);
-            this.relatedtableColumns = json.data;
-        }
-    };
 
     @action setCurrentActcode = (DataGridCode) => {
         this.DataGridCode = DataGridCode;
