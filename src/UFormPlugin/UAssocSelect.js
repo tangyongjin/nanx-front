@@ -5,7 +5,7 @@ import { observer, inject } from 'mobx-react';
 
 @inject('NanxTableStore', 'TriggerStore')
 @observer
-export default class AssocSelect extends React.Component {
+export default class UAssocSelect extends React.Component {
     constructor(props) {
         super(props);
 

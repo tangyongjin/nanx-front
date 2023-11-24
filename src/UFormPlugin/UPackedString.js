@@ -6,7 +6,6 @@ import { CloudDownloadOutlined, FunctionOutlined } from '@ant-design/icons';
 import { tryParseJSON } from '@/utils/tools';
 
 import api from '@/api/api';
-import 'dayjs/locale/zh-cn';
 
 const WrapperAntStringComomnet = (TarGet) => {
     return class Select extends React.Component {

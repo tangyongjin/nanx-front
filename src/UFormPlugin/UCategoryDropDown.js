@@ -3,7 +3,7 @@ import { Select } from 'antd';
 import api from '@/api/api';
 const { Option } = Select;
 
-export default class CategoryDropDown extends React.Component {
+export default class UCategoryDropDown extends React.Component {
     state = {
         opts: []
     };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Radio } from 'antd';
-export default class GetRadio extends React.Component {
+export default class UGetRadio extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

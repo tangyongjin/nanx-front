@@ -1,7 +1,7 @@
 import React from 'react';
 import { Radio } from 'antd';
 
-export default class YesOrNo extends React.Component {
+export default class UYesOrNo extends React.Component {
     onChange = (e) => {
         this.props.getComponentValue(e.target.value);
     };

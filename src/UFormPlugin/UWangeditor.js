@@ -1,7 +1,7 @@
 import React from 'react';
 import E from 'wangeditor';
 
-export default class Wangeditor extends React.Component {
+export default class UWangeditor extends React.Component {
     componentDidMount() {
         this.initEditor();
     }

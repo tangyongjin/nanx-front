@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from 'antd';
 
-export default class GetLoginuser extends React.Component {
+export default class UGetLoginuser extends React.Component {
     componentWillMount() {
         this.props.onChange(JSON.parse(sessionStorage.getItem('userInfo')).user);
     }
