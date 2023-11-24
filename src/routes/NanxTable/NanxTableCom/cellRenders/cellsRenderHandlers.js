@@ -2,6 +2,7 @@ import React from 'react';
 import { Tag } from 'antd';
 import IconRender from './IconRender';
 import ImgRender from './ImgRender';
+import OfficeDocuRender from './OfficeDocuRender';
 
 class CellsRenderHandlers {
     splitDate(text) {
@@ -31,5 +32,6 @@ class CellsRenderHandlers {
 
 CellsRenderHandlers.prototype.IconRender = IconRender;
 CellsRenderHandlers.prototype.ImgRender = ImgRender;
+CellsRenderHandlers.prototype.OfficeDocuRender = OfficeDocuRender;
 
 export default new CellsRenderHandlers();

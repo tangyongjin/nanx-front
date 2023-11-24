@@ -24,18 +24,43 @@ const checkImageTypeAnd2mSize = (file) => {
     return isJpgOrPng && isLessThen2m;
 };
 
-const checkDocuTypeAnd10mSize = (file) => {
-    const isOfficeDocu = file.type === 'application/pdf';
-    if (!isOfficeDocu) {
-        message.error('只能上传pdf');
+function checkDocuTypeAnd10mSize(file) {
+    const allowedMimeTypes = {
+        pdf: 'application/pdf',
+        word: ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+        excel: ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],
+        powerpoint: [
+            'application/vnd.ms-powerpoint',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        ],
+        openDocumentText: 'application/vnd.oasis.opendocument.text',
+        openDocumentSpreadsheet: 'application/vnd.oasis.opendocument.spreadsheet',
+        openDocumentPresentation: 'application/vnd.oasis.opendocument.presentation',
+        rtf: ['application/rtf', 'text/rtf'],
+        csv: 'text/csv',
+        keynote: 'application/vnd.apple.keynote'
+    };
+
+    let goodFileType = false;
+
+    for (const key of Object.keys(allowedMimeTypes)) {
+        const mimeTypes = Array.isArray(allowedMimeTypes[key]) ? allowedMimeTypes[key] : [allowedMimeTypes[key]];
+
+        if (mimeTypes.includes(file.type)) {
+            goodFileType = true; // Valid MIME type found
+        }
+    }
+
+    if (!goodFileType) {
+        message.error('只能上出word,pdf,excel,docx格式文件');
     }
 
     const isLessThen10m = file.size / 1024 / 1024 < 10;
     if (!isLessThen10m) {
         message.error('文件不能大于10M');
     }
-    return isOfficeDocu && isLessThen10m;
-};
+    return goodFileType && isLessThen10m;
+}
 
 const FileUploder = (props) => {
     const [loading, setLoading] = useState(false);

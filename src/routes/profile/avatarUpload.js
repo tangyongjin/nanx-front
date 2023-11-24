@@ -41,7 +41,7 @@ const AvatarUpload = () => {
                         callbackRender={uploadCallbackRender}
                         fileType="img"
                         showProgress={true}
-                        apiEndpoint={api.file.uploadAvatar2}
+                        apiEndpoint={api.file.uploadAvatar}
                     />
                     {imageUrl ? <ImgRender imageUrl={imageUrl} /> : null}
                 </Form.Item>

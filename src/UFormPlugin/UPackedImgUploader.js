@@ -44,7 +44,7 @@ const WrapperAntStringComomnet = (TarGet) => {
                             callbackRender={uploadCallbackRender}
                             fileType="img"
                             showProgress={true}
-                            apiEndpoint={api.file.uploadAvatar2}
+                            apiEndpoint={api.file.uploadPicture}
                         />
                     </span>
 
@@ -72,10 +72,10 @@ const mapStringValue = (props) => {
 
 const Input = WrapperAntStringComomnet(AntInput);
 
-const UFileuploader = connect({
+const UPackedImgUploader = connect({
     getProps: compose(mapStyledProps, mapStringValue),
     getComponent: mapTextComponent
 })(Input);
 
-registerFormField('UFileuploader', UFileuploader);
-export { UFileuploader };
+registerFormField('UPackedImgUploader', UPackedImgUploader);
+export { UPackedImgUploader };
