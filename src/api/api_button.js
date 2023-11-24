@@ -5,10 +5,10 @@ const api_root = `${root_url}:${port}/${version}`;
 
 export default class button {
     static apis = {
-        getAllButtons: (params) => post(`${api_root}/Button/getAllButtons`, params),
-        getGridButtons: (params) => post(`${api_root}/Button/getGridButtons`, params),
-        addGridButton: (params) => post(`${api_root}/Button/addGridButton`, params),
-        deleteGridButton: (params) => post(`${api_root}/Button/deleteGridButton`, params),
-        saveBtnOrder: (params) => post(`${api_root}/Button/saveBtnOrder`, params)
+        getAllButtons: (params, config) => post(`${api_root}/Button/getAllButtons`, params, config),
+        getGridButtons: (params, config) => post(`${api_root}/Button/getGridButtons`, params, config),
+        addGridButton: (params, config) => post(`${api_root}/Button/addGridButton`, params, config),
+        deleteGridButton: (params, config) => post(`${api_root}/Button/deleteGridButton`, params, config),
+        saveBtnOrder: (params, config) => post(`${api_root}/Button/saveBtnOrder`, params, config)
     };
 }

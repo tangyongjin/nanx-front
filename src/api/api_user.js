@@ -5,10 +5,10 @@ const api_root = `${root_url}:${port}/${version}`;
 
 export default class user {
     static apis = {
-        loginMobile: (params) => post(`${api_root}/Auth/loginMobile`, params),
-        profile: (params) => post(`${api_root}/Auth/profile`, params),
-        edit_password: (params) => post(`${api_root}/Auth/changepwd`, params),
-        resetPassword: (params) => post(`${api_root}/Auth/resetPassword`, params),
-        updateUserInformation: (params) => post(`${api_root}/User/updateUserInformation`, params)
+        loginMobile: (params, config) => post(`${api_root}/Auth/loginMobile`, params, config),
+        profile: (params, config) => post(`${api_root}/Auth/profile`, params, config),
+        edit_password: (params, config) => post(`${api_root}/Auth/changepwd`, params, config),
+        resetPassword: (params, config) => post(`${api_root}/Auth/resetPassword`, params, config),
+        updateUserInformation: (params, config) => post(`${api_root}/User/updateUserInformation`, params, config)
     };
 }

@@ -13,10 +13,6 @@ export function randomString(string_length) {
     return randomstring;
 }
 
-export function color() {}
-
-export function shape() {}
-
 export function getTargetMenuKey(url) {
     let hashLocation = url.indexOf('?_k=');
     let end_string = url.slice(hashLocation + 4);
@@ -102,4 +98,10 @@ export function tryParseJSON(str) {
         console.error('Error parsing JSON:', error);
         return null; // or handle the error in some way
     }
+}
+
+export function getBase64(img, callback) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
 }

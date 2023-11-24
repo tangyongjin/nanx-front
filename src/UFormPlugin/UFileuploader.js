@@ -1,8 +1,7 @@
-import React from 'react';
-import { Upload, Button, message } from 'antd';
 import { CloudUploadOutlined } from '@ant-design/icons';
-
+import { Upload, Button, message } from 'antd';
 import api from '@/api/api';
+import React from 'react';
 import reqwest from 'reqwest';
 
 export default class Fileuploader extends React.Component {
@@ -92,6 +91,7 @@ export default class Fileuploader extends React.Component {
             // message.success("删除附件成功")
         }
     }
+
     getFilesList() {
         if (this.props.value != '') {
             var fileListt = JSON.parse(this.props.value);

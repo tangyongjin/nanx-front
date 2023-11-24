@@ -5,7 +5,7 @@ const api_root = `${root_url}:${port}/${version}`;
 
 export default class organization {
     static apis = {
-        orgTree: (params) => post(`${api_root}/Organization/orgTree`, params),
-        getDeptMembers: (params) => post(`${api_root}/Organization/getDeptMembers`, params)
+        orgTree: (params, config) => post(`${api_root}/Organization/orgTree`, params, config),
+        getDeptMembers: (params, config) => post(`${api_root}/Organization/getDeptMembers`, params, config)
     };
 }
