@@ -78,7 +78,7 @@ export default class NavDropDown extends React.Component {
                             style={{
                                 width: '36px',
                                 borderRadius: '5px',
-                                height: '36px',
+                                maxHeight: '36px',
                                 verticalAlign: 'middle'
                             }}
                             src={avatarRoot + JSON.parse(sessionStorage.getItem('userInfo')).head_portrait}
