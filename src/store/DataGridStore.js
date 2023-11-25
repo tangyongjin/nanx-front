@@ -151,6 +151,7 @@ class DataGridStore {
         if (v == undefined) {
             v = '';
         }
+
         this.setFieldAttr(field, attr, v);
     };
 

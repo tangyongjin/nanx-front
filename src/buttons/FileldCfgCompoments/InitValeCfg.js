@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Select, Button, Popover, Input } from 'antd';
 import { observer, inject } from 'mobx-react';
 import QuestionIcon from '@/iconsHero/question';
-import CodeBracketSquare from '@/iconsHero/CodeBracketSquare';
 import ReactJson from 'react-json-view';
 import { tryParseJSON } from '@/utils/tools';
 import initCfgArr from './initCfgArray';
-
 import FinterIcon from '@/iconsHero/finterIcon';
 import Xsymbol from '@/iconsHero/xSymbol';
 
