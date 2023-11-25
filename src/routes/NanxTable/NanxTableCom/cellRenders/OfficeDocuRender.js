@@ -1,6 +1,7 @@
 import React from 'react';
 import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
 import { root_url, port } from '@/api/api_config/base_config';
+import { Space } from 'antd';
 const api_root = `${root_url}:${port}/`;
 function startsWithHttp(urlString) {
     return urlString.startsWith('http://');
@@ -61,6 +62,7 @@ const OfficeDocuRender = (text) => {
             <a style={{ color: 'black' }} href={_download}>
                 <span>
                     {short}
+                    <Space />
                     {IconRender(docuType)}
                 </span>
             </a>

@@ -3,17 +3,19 @@ import * as antIcons from '@ant-design/icons';
 import { fontIcons } from '@/iconsHero/iconColletion';
 
 const IconChooser = (props) => {
-    const { icon: IconText } = props;
+    const { icon: IconText, style } = props;
 
     if (fontIcons.includes(IconText)) {
         let dashname = `#${IconText}`;
         return (
-            <svg style={{ fontSize: '24px' }} className="icon" aria-hidden="true">
+            <svg style={{ fontSize: '24px' }} className="icon anticon" aria-hidden="true">
                 <use href={dashname}></use>
             </svg>
         );
     } else {
-        return React.createElement(antIcons[IconText]);
+        const antdIconItem = React.createElement(antIcons[IconText]);
+        return <span className="anticon anticon-tool">{antdIconItem}</span>;
     }
 };
+
 export default IconChooser;

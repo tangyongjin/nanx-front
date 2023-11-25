@@ -99,7 +99,7 @@ body {
 .help-tip {
     color: white;
     margin-left: 4px;
-    border-radius: 1px;
+    border-radius: 4px;
     border: #fff;
 }
 
@@ -185,7 +185,7 @@ span.anticon.anticon-exclamation-circle {
     align-items: center;
     /* Align items vertically in the center */
     height: 44px;
-    width: 680px;
+    width: 670px;
 }
 
 .formItem svg {
@@ -313,7 +313,7 @@ div.longSelect {
     width: 14px;
     height: 14px;
     vertical-align: -2px;
-    margin-right: 8px;
+    margin-right: 0px;
     // fill: currentColor;
     overflow: hidden;
   }
@@ -323,7 +323,7 @@ div.longSelect {
     width: 20px;
     height: 20px;
     vertical-align: -2px;
-    margin-right: 8px;
+    margin-right: 4px;
     // fill: currentColor;
     overflow: hidden;
   }
