@@ -6,6 +6,174 @@
   "description": "nanx项目图标集合",
   "glyphs": [
     {
+      "icon_id": "3782114",
+      "name": "dashboard",
+      "font_class": "dashboard",
+      "unicode": "e95d",
+      "unicode_decimal": 59741
+    },
+    {
+      "icon_id": "4628492",
+      "name": "CSV",
+      "font_class": "CSV",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "4628494",
+      "name": "TET",
+      "font_class": "TET",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "4628495",
+      "name": "JPG",
+      "font_class": "JPG",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "4628496",
+      "name": "VIDEO",
+      "font_class": "VIDEO",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "4628497",
+      "name": "WORD",
+      "font_class": "WORD",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "4628498",
+      "name": "PNG",
+      "font_class": "PNG",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "4628499",
+      "name": "GIF",
+      "font_class": "GIF",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
+      "icon_id": "4628500",
+      "name": "资金分析",
+      "font_class": "zijinfenxi",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "4628501",
+      "name": "ECEL",
+      "font_class": "ECEL",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
+      "icon_id": "4628502",
+      "name": "OUTLOOK",
+      "font_class": "OUTLOOK",
+      "unicode": "e649",
+      "unicode_decimal": 58953
+    },
+    {
+      "icon_id": "4628504",
+      "name": "图片资料",
+      "font_class": "tupianziliao",
+      "unicode": "e64b",
+      "unicode_decimal": 58955
+    },
+    {
+      "icon_id": "4628505",
+      "name": "综合文档",
+      "font_class": "zonghewendang",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "4628506",
+      "name": "电子邮件",
+      "font_class": "dianziyoujian",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "4628507",
+      "name": "密码字典",
+      "font_class": "mimazidian",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "4628508",
+      "name": "电子话单",
+      "font_class": "dianzihuadan",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "4628509",
+      "name": "DATA",
+      "font_class": "DATA",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "4628511",
+      "name": "EML",
+      "font_class": "EML",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    },
+    {
+      "icon_id": "4628512",
+      "name": "PDF",
+      "font_class": "PDF1",
+      "unicode": "e653",
+      "unicode_decimal": 58963
+    },
+    {
+      "icon_id": "35941041",
+      "name": "top-dashboard",
+      "font_class": "top-dashboard",
+      "unicode": "e765",
+      "unicode_decimal": 59237
+    },
+    {
+      "icon_id": "6762796",
+      "name": "pdf",
+      "font_class": "pdf",
+      "unicode": "e65b",
+      "unicode_decimal": 58971
+    },
+    {
+      "icon_id": "18448763",
+      "name": "Icon-fill-question",
+      "font_class": "Icon-fill-question",
+      "unicode": "e7ed",
+      "unicode_decimal": 59373
+    },
+    {
+      "icon_id": "23081221",
+      "name": "PDF",
+      "font_class": "PDF2",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "36370538",
+      "name": "gpt",
+      "font_class": "gpt",
+      "unicode": "e68b",
+      "unicode_decimal": 59019
+    },
+    {
       "icon_id": "7425182",
       "name": "function",
       "font_class": "function",

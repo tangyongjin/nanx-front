@@ -2,9 +2,9 @@
   font-family: "iconfont"; /* Project id 4345568 */
   /* Color fonts */
   src: 
-       url('iconfont.woff2?t=1700838022085') format('woff2'),
-       url('iconfont.woff?t=1700838022085') format('woff'),
-       url('iconfont.ttf?t=1700838022085') format('truetype');
+       url('iconfont.woff2?t=1700869230345') format('woff2'),
+       url('iconfont.woff?t=1700869230345') format('woff'),
+       url('iconfont.ttf?t=1700869230345') format('truetype');
 }
 
 .iconfont {
@@ -13,6 +13,102 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-dashboard:before {
+  content: "\e95d";
+}
+
+.icon-CSV:before {
+  content: "\e63e";
+}
+
+.icon-TET:before {
+  content: "\e63f";
+}
+
+.icon-JPG:before {
+  content: "\e640";
+}
+
+.icon-VIDEO:before {
+  content: "\e643";
+}
+
+.icon-WORD:before {
+  content: "\e644";
+}
+
+.icon-PNG:before {
+  content: "\e645";
+}
+
+.icon-GIF:before {
+  content: "\e646";
+}
+
+.icon-zijinfenxi:before {
+  content: "\e647";
+}
+
+.icon-ECEL:before {
+  content: "\e648";
+}
+
+.icon-OUTLOOK:before {
+  content: "\e649";
+}
+
+.icon-tupianziliao:before {
+  content: "\e64b";
+}
+
+.icon-zonghewendang:before {
+  content: "\e64c";
+}
+
+.icon-dianziyoujian:before {
+  content: "\e64d";
+}
+
+.icon-mimazidian:before {
+  content: "\e64f";
+}
+
+.icon-dianzihuadan:before {
+  content: "\e650";
+}
+
+.icon-DATA:before {
+  content: "\e651";
+}
+
+.icon-EML:before {
+  content: "\e652";
+}
+
+.icon-PDF1:before {
+  content: "\e653";
+}
+
+.icon-top-dashboard:before {
+  content: "\e765";
+}
+
+.icon-pdf:before {
+  content: "\e65b";
+}
+
+.icon-Icon-fill-question:before {
+  content: "\e7ed";
+}
+
+.icon-PDF2:before {
+  content: "\e667";
+}
+
+.icon-gpt:before {
+  content: "\e68b";
 }
 
 .icon-function:before {

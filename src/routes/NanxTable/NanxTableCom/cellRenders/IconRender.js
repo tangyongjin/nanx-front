@@ -1,10 +1,11 @@
 import React from 'react';
-import Icon from '@/utils/icon';
+import IconChooser from '@/utils/IconChooser';
 
 const IconRender = (text) => {
     if (text == '' || text == null || text == undefined) {
         return '';
     }
-    return <Icon icon={text} />;
+    // antdesign自带图标或者 iconfont图标
+    return <IconChooser icon={text} />;
 };
 export default IconRender;
