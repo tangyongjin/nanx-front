@@ -17,6 +17,7 @@ import './UPackedDate';
 import './UPackedString';
 import './UPackedImgUploader';
 import './UPackedDocumentUploader';
+import './UPackedIconSelector';
 
 const { TextArea } = Input;
 

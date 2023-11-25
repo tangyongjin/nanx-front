@@ -106,7 +106,6 @@ class PluginCfg extends React.Component {
                         </svg>
                         插件参数(json)
                     </div>
-
                     <div className="formItemBig">
                         <Input
                             disabled={this.props.col.Field == 'id'}
@@ -118,6 +117,7 @@ class PluginCfg extends React.Component {
                         <Button style={{ marginLeft: '10px' }}>
                             <CodeBracketSquare />
                         </Button>
+
                         <Popover
                             className="help-tip"
                             content={showJsonTree(this.props.col.uform_para)}

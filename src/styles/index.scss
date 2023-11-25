@@ -314,8 +314,21 @@ div.longSelect {
     height: 14px;
     vertical-align: -2px;
     margin-right: 8px;
-    fill: currentColor;
+    // fill: currentColor;
     overflow: hidden;
   }
 
+  
+  .icon36px {
+    width: 20px;
+    height: 20px;
+    vertical-align: -2px;
+    margin-right: 8px;
+    // fill: currentColor;
+    overflow: hidden;
+  }
+  
+  .pointerHand{
+    cursor: pointer;
+  }
  
