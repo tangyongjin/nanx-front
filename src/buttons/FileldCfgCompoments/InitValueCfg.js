@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Select, Button, Popover, Input } from 'antd';
 import { observer, inject } from 'mobx-react';
 import QuestionIcon from '@/iconsHero/question';
-import ReactJson from 'react-json-view';
-import { tryParseJSON } from '@/utils/tools';
 import initCfgArr from './initCfgArray';
-import FinterIcon from '@/iconsHero/finterIcon';
+import FingerIcon from '@/iconsHero/FingerIcon';
 import Xsymbol from '@/iconsHero/xSymbol';
+import showJsonTree from '@/component/jsonTree.js';
 
 const { Option } = Select;
 
@@ -44,16 +43,6 @@ const InitValueCfg = inject('GridConfigStore')(
             checkIfShowParaComponent(props.col.default_v);
         });
 
-        const showJsonTree = (str) => {
-            const parsedObject = tryParseJSON(str);
-
-            if (parsedObject == null) {
-                return <div>{str}</div>;
-            } else {
-                return <ReactJson src={parsedObject} theme="twilight" />;
-            }
-        };
-
         const showHelp_init = () => {
             return (
                 <div style={{ maxWidth: '300px', textIndent: '20px', lineHeight: '170%' }}>
@@ -68,7 +57,7 @@ const InitValueCfg = inject('GridConfigStore')(
             <div className="formWrapper">
                 <div className="fromBox">
                     <div className="formItem">
-                        <FinterIcon />
+                        <FingerIcon />
                         初始值
                     </div>
 

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Select, Button, Popover } from 'antd';
 import { observer, inject } from 'mobx-react';
-import ReactJson from 'react-json-view';
-import { tryParseJSON } from '@/utils/tools';
 import QuestionIcon from '@/iconsHero/question';
 import Xsymbol from '@/iconsHero/xSymbol';
 import PlugSymbol from '@/iconsHero/plugSymbol';
+import showJsonTree from '@/component/jsonTree.js';
 
 const { Option } = Select;
 
@@ -15,16 +14,6 @@ const PluginCfg = inject('GridConfigStore')(
 
         const [willShowParaComponent, setWillShowParaComponent] = useState(false);
         const [TplFromCfg, setTplFromCfg] = useState(null);
-
-        const showJsonTree = (str) => {
-            const parsedObject = tryParseJSON(str);
-
-            if (parsedObject == null) {
-                return <div>{str}</div>;
-            } else {
-                return <ReactJson src={parsedObject} theme="twilight" />;
-            }
-        };
 
         const checkIfShowParaComponent = (selectedPlugId) => {
             const foundItem = props.GridConfigStore.plugins.find((item) => item.plugid === selectedPlugId);
