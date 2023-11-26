@@ -1,11 +1,18 @@
 import React from 'react';
-import { Input } from 'antd';
+import { Input, Select } from 'antd';
 import { observer, inject } from 'mobx-react';
+import CellsRenderHandlers from '@/routes/NanxTable/NanxTableCom/cellRenders/cellsRenderHandlers';
+const { Option } = Select;
 
 @inject('GridConfigStore')
 @observer
 class ColRenderCfg extends React.Component {
     render() {
+        const renders = [];
+        for (let key in CellsRenderHandlers) {
+            renders.push(key);
+        }
+
         return (
             <div className="fromBox">
                 <div className="formItem">
@@ -19,13 +26,23 @@ class ColRenderCfg extends React.Component {
                     列渲染函数
                 </div>
                 <div className="formItem">
-                    <Input
-                        disabled={this.props.col.Field == 'id'}
+                    <Select
+                        style={{ width: '200px' }}
                         value={this.props.col.handler}
                         onChange={(e) => {
-                            this.props.GridConfigStore.changeCfg_input(e, 'handler', this.props.col.Field);
+                            this.props.GridConfigStore.changeCfg_dropdown(e, 'handler', this.props.col.Field);
                         }}
-                    />
+                        showSearch
+                        allowClear
+                        disabled={this.props.col.Field == 'id'}
+                        placeholder="列渲染函数"
+                        name="handler">
+                        {renders.map((item, index) => (
+                            <Option key={index} value={item}>
+                                {item}
+                            </Option>
+                        ))}
+                    </Select>
                 </div>
             </div>
         );

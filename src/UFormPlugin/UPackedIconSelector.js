@@ -24,6 +24,7 @@ const WrapperAntStringComomnet = (TarGet) => {
                 let tarGetField = this.props.field_id;
                 console.log('iconStr: ', iconStr);
                 let tarGetValue = iconStr;
+                this.toggleShow();
 
                 this.props.actions.setFormState((state) => {
                     state.values = {
