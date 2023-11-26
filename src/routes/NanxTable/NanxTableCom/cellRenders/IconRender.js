@@ -1,5 +1,5 @@
 import React from 'react';
-import IconChooser from '@/utils/IconChooser';
+import IconChooser from './IconChooser';
 
 const IconRender = (text, style) => {
     if (text == '' || text == null || text == undefined) {

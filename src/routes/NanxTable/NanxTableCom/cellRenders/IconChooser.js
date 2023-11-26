@@ -8,7 +8,7 @@ const IconChooser = (props) => {
     if (fontIcons.includes(IconText)) {
         let dashname = `#${IconText}`;
         return (
-            <svg style={{ fontSize: '24px', color: 'white' }} className="icon" aria-hidden="true">
+            <svg style={{ fontSize: '24px' }} className="icon" aria-hidden="true">
                 <use href={dashname}></use>
             </svg>
         );

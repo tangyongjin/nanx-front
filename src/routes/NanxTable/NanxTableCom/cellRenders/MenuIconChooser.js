@@ -2,13 +2,13 @@ import React from 'react';
 import * as antIcons from '@ant-design/icons';
 import { fontIcons } from '@/iconsHero/iconColletion';
 
-const IconChooser = (props) => {
+const MenuIconChooser = (props) => {
     const { icon: IconText } = props;
 
     if (fontIcons.includes(IconText)) {
         let dashname = `#${IconText}`;
         return (
-            <svg style={{ fontSize: '24px', color: 'white' }} className="icon" aria-hidden="true">
+            <svg style={{ fontSize: '24px', marginRight: '10px' }} className="icon" aria-hidden="true">
                 <use href={dashname}></use>
             </svg>
         );
@@ -18,4 +18,4 @@ const IconChooser = (props) => {
     }
 };
 
-export default IconChooser;
+export default MenuIconChooser;
