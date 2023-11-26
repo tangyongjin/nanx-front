@@ -2,14 +2,17 @@ import React from 'react';
 import SearchFormContainer from './tableSearch/searchFormContainer';
 import { SearchOutlined } from '@ant-design/icons';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
+import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
 
 export default class TableSearch extends React.Component {
     constructor(props) {
         super(props);
         this.init = this.init.bind(this);
+        this.state = { iconStr: null };
     }
 
-    init = async () => {
+    init = async (buttonSource) => {
+        this.setState({ iconStr: buttonSource.icon });
         await this.props.NanxTableStore.showButtonModal();
     };
 
@@ -19,7 +22,7 @@ export default class TableSearch extends React.Component {
                 width="700px"
                 title={
                     <div>
-                        <SearchOutlined />
+                        {IconRender(this.state.iconStr)}
                         数据检索
                     </div>
                 }>

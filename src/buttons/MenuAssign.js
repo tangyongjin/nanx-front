@@ -4,17 +4,21 @@ import AllocationMenu from './MenuAssign/allocationMenu';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import { ClusterOutlined } from '@ant-design/icons';
 
+import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+
 export default class MenuAssign extends React.Component {
     constructor(props) {
         super(props);
         this.NanxTableStore = props.NanxTableStore;
         this.state = {
-            record: null
+            record: null,
+            iconStr: null
         };
     }
 
     // eslint-disable-next-line
-    async init() {
+    async init(buttonSource) {
+        this.setState({ iconStr: buttonSource.icon });
         if (this.props.NanxTableStore.selectedRows.length <= 0) {
             message.error('请选择一个角色');
             return;
@@ -33,7 +37,7 @@ export default class MenuAssign extends React.Component {
                     <CommonModal
                         title={
                             <div>
-                                <ClusterOutlined />
+                                {IconRender(this.state.iconStr)}
                                 分配菜单
                             </div>
                         }

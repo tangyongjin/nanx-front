@@ -2,24 +2,19 @@ import React from 'react';
 import { message, Popconfirm, Button, Select, Table } from 'antd';
 import api from '@/api/api';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
-
-import { GithubOutlined } from '@ant-design/icons';
+import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
 const { Option } = Select;
 
 export default class RoleAsign extends React.Component {
     constructor(props) {
         super(props);
         this.NanxTableStore = props.NanxTableStore;
-        this.state = {
-            record: null,
-            allRoles: [],
-            currentRoles: [],
-            role_code: null
-        };
+        this.state = { iconStr: null, record: null, allRoles: [], currentRoles: [], role_code: null };
     }
 
     //eslint-disable-next-line
-    async init() {
+    async init(buttonSource) {
+        this.setState({ iconStr: buttonSource.icon });
         if (this.props.NanxTableStore.selectedRows.length <= 0) {
             message.error('请选择一个用户');
             return;
@@ -110,7 +105,7 @@ export default class RoleAsign extends React.Component {
                     <CommonModal
                         title={
                             <div>
-                                <GithubOutlined />
+                                {IconRender(this.state.iconStr)}
                                 分配角色
                             </div>
                         }

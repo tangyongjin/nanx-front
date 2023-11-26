@@ -3,8 +3,8 @@ import { message, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
 import TableSortCom from './TableSort/TableSortCom';
 import { toJS } from 'mobx';
-import { BarsOutlined } from '@ant-design/icons';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
+import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
 
 @inject('GridConfigStore')
 @observer
@@ -13,9 +13,12 @@ export default class TableSort extends React.Component {
         super(props);
 
         this.init = this.init.bind(this);
+        this.state = { iconStr: null };
     }
 
-    async init() {
+    async init(buttonSource) {
+        this.setState({ iconStr: buttonSource.icon });
+
         this.props.GridConfigStore.clearColsDbInfo();
         let { selectedRows } = this.props.NanxTableStore;
         if (selectedRows.length == 0) {
@@ -43,7 +46,7 @@ export default class TableSort extends React.Component {
                 width={'1300px'}
                 title={
                     <div>
-                        <BarsOutlined />
+                        {IconRender(this.state.iconStr)}
                         字段排序
                     </div>
                 }>

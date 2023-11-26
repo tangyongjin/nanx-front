@@ -4,7 +4,6 @@ import api from '@/api/api';
 import cloneDeep from 'lodash/cloneDeep';
 import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
-import { BorderOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
@@ -17,12 +16,14 @@ export default class GridButtonAdder extends React.Component {
             allButtons: [],
             gridButtons: [],
             gridButtonOrders: [],
-            btncode: null
+            btncode: null,
+            iconStr: null
         };
     }
 
     //eslint-disable-next-line
-    async init() {
+    async init(buttonSource) {
+        this.setState({ iconStr: buttonSource.icon });
         if (this.props.NanxTableStore.selectedRows.length <= 0) {
             message.error('请选择一条数据');
             return;
@@ -160,7 +161,7 @@ export default class GridButtonAdder extends React.Component {
                     <CommonModal
                         title={
                             <div>
-                                <BorderOutlined />
+                                {IconRender(this.state.iconStr)}
                                 分配按钮
                             </div>
                         }

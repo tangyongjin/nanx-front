@@ -5,7 +5,7 @@ import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
 const getButtonHandler = async (event, item, store) => {
     let tmp = require(`../../../buttons/${item.file_path}`).default;
     await store.setButtonUsedCom(tmp);
-    store.lazyButtonUsedCom['init']();
+    store.lazyButtonUsedCom['init'](item);
 };
 
 const renderButtons = (tableStore) => {

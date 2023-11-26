@@ -3,13 +3,20 @@ import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import React from 'react';
 import { message } from 'antd';
 import api from '@/api/api';
-import { PlusSquareOutlined } from '@ant-design/icons';
+import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
 
 import { observer, inject } from 'mobx-react';
+
 @inject('NanxTableStore')
 @observer
 export default class TableAddFromTplCom extends React.Component {
-    init = async () => {
+    constructor(props) {
+        super(props);
+        this.state = { iconStr: null };
+    }
+
+    init = async (buttonSource) => {
+        this.setState({ iconStr: buttonSource.icon });
         await this.props.NanxTableStore.setTableAction('add_from_tpl');
 
         if (this.props.NanxTableStore.selectedRows.length != 1) {
@@ -39,14 +46,7 @@ export default class TableAddFromTplCom extends React.Component {
 
     render() {
         return (
-            <CommonModal
-                height="500px"
-                title={
-                    <div>
-                        <PlusSquareOutlined />
-                        添加(从模版)
-                    </div>
-                }>
+            <CommonModal height="500px" title={<div>{IconRender(this.state.iconStr)} 添加(从模版)</div>}>
                 <TableSchemaForm
                     onChange={this.props.onChange}
                     NanxTableStore={this.props.NanxTableStore}

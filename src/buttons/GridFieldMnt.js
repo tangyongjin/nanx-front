@@ -3,17 +3,22 @@ import { message, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
 import GridFieldManager from './GridFieldManager';
 import { toJS } from 'mobx';
-import { SplitCellsOutlined } from '@ant-design/icons';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
+import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+
 @inject('GridConfigStore')
 @observer
 export default class GridFieldMnt extends React.Component {
     constructor(props) {
+        console.log('props: ', props);
         super(props);
         this.init = this.init.bind(this);
+        this.state = { iconStr: null };
     }
 
-    async init() {
+    async init(buttonSource) {
+        this.setState({ iconStr: buttonSource.icon });
+        console.log('item: ', buttonSource);
         let { selectedRows } = this.props.NanxTableStore;
         if (selectedRows.length == 0) {
             message.info('必须选择一个DataGrid');
@@ -40,7 +45,7 @@ export default class GridFieldMnt extends React.Component {
                 ]}
                 title={
                     <div>
-                        <SplitCellsOutlined />
+                        {IconRender(this.state.iconStr)}
                         字段管理
                     </div>
                 }>

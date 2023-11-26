@@ -3,19 +3,21 @@ import { message, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
 import TriggerListCom from './trigger/TriggerListCom';
 import { toJS } from 'mobx';
-import { FormatPainterOutlined } from '@ant-design/icons';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
+import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
 
 @inject('GridConfigStore')
 @observer
 export default class TriggerList extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state={iconStr:null}
         this.init = this.init.bind(this);
     }
 
-    async init() {
+    async init(buttonSource) {
+        this.setState({ iconStr: buttonSource.icon });
+
         let { selectedRows } = this.props.NanxTableStore;
         if (selectedRows.length == 0) {
             message.info('必须选择一项');
@@ -42,7 +44,7 @@ export default class TriggerList extends React.Component {
                 ]}
                 title={
                     <div>
-                        <FormatPainterOutlined />
+                        {IconRender(this.state.iconStr)}
                         管理联动
                     </div>
                 }>
