@@ -1,11 +1,10 @@
 import React from 'react';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
-import { toJS } from 'mobx';
 import { BugOutlined } from '@ant-design/icons';
 import { observer, inject } from 'mobx-react';
 import ReactJson from 'react-json-view';
 
-@inject('DataGridStore')
+@inject('GridConfigStore')
 @observer
 export default class StoreDebugger extends React.Component {
     constructor(props) {

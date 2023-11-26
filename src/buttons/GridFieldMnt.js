@@ -3,9 +3,9 @@ import { message, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
 import GridFieldManager from './GridFieldManager';
 import { toJS } from 'mobx';
-import { SlidersOutlined } from '@ant-design/icons';
+import { SplitCellsOutlined } from '@ant-design/icons';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
-@inject('DataGridStore')
+@inject('GridConfigStore')
 @observer
 export default class GridFieldMnt extends React.Component {
     constructor(props) {
@@ -20,12 +20,11 @@ export default class GridFieldMnt extends React.Component {
             return;
         } else {
             let record = selectedRows[0];
-            this.props.DataGridStore.setCurrentActcode(toJS(record).datagrid_code);
-            this.props.DataGridStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
-            this.props.DataGridStore.setCurrentBasetable(toJS(record).base_table);
-            this.props.DataGridStore.prepareDataGirdEnv();
-
             this.props.NanxTableStore.showButtonModal();
+            this.props.GridConfigStore.setCurrentActcode(toJS(record).datagrid_code);
+            this.props.GridConfigStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
+            this.props.GridConfigStore.setCurrentBasetable(toJS(record).base_table);
+            this.props.GridConfigStore.prepareDataGirdEnv();
         }
     }
 
@@ -41,11 +40,11 @@ export default class GridFieldMnt extends React.Component {
                 ]}
                 title={
                     <div>
-                        <SlidersOutlined />
+                        <SplitCellsOutlined />
                         字段管理
                     </div>
                 }>
-                {this.props.DataGridStore.ColsDbInfo.length == 0 ? null : <GridFieldManager />}
+                <GridFieldManager />
             </CommonModal>
         ) : null;
     }

@@ -8,10 +8,10 @@ import api from '@/api/api';
 
 const type = 'DragableBodyRow';
 
-@inject('DataGridStore')
+@inject('GridConfigStore')
 @observer
 export default class TableSortCom extends React.Component {
-    state = { maintableColumns: this.props.DataGridStore.ColsDbInfo };
+    state = { maintableColumns: this.props.GridConfigStore.ColsDbInfo };
 
     DragableBodyRow = ({ index, moveRow, className, style, ...restProps }) => {
         const ref = React.useRef();
@@ -74,7 +74,7 @@ export default class TableSortCom extends React.Component {
         const dataarr = maintableColumns.map((col) => col.Field);
         let params = {
             data: {
-                datagrid_code: this.props.DataGridStore.DataGridCode,
+                datagrid_code: this.props.GridConfigStore.DataGridCode,
                 filedids: dataarr
             }
         };

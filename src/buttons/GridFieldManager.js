@@ -4,17 +4,18 @@ import { observer, inject } from 'mobx-react';
 import { Tabs } from 'antd';
 import FieldPropertyRender from './FieldPropertyRender';
 
-@inject('DataGridStore')
-@observer
-class GridFieldManager extends React.Component {
-    render() {
-        let xtitle =
-            '当前DataGrid: (' +
-            this.props.DataGridStore.DataGridCode +
-            '/' +
-            this.props.DataGridStore.DataGridTitle +
-            ')';
-        let allcols = this.props.DataGridStore.ColsDbInfo;
+const GridFieldManager = inject('GridConfigStore')(
+    observer((props) => {
+        console.log('props: ', props);
+
+        const onChange = (key) => {
+            console.log('key: ', key);
+            props.GridConfigStore.getDataGridConfigure();
+        };
+
+        const xtitle =
+            '当前DataGrid: (' + props.GridConfigStore.DataGridCode + '/' + props.GridConfigStore.DataGridTitle + ')';
+        let ColsDbInfo = props.GridConfigStore.ColsDbInfo;
 
         return (
             <Card title={<h3>{xtitle}</h3>}>
@@ -22,11 +23,12 @@ class GridFieldManager extends React.Component {
                     <Tabs
                         defaultActiveKey="1"
                         tabPosition={'top'}
+                        onChange={onChange}
                         type="card"
                         style={{
                             height: 478
                         }}
-                        items={allcols.map((col, idx) => {
+                        items={ColsDbInfo.map((col, idx) => {
                             const id = String(idx);
                             return {
                                 label: col.Field,
@@ -38,6 +40,7 @@ class GridFieldManager extends React.Component {
                 </div>
             </Card>
         );
-    }
-}
+    })
+);
+
 export default GridFieldManager;

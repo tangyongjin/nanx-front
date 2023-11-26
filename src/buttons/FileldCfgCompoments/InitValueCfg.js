@@ -10,23 +10,17 @@ import Xsymbol from '@/iconsHero/xSymbol';
 
 const { Option } = Select;
 
-const InitValeCfg = inject('DataGridStore')(
+const InitValueCfg = inject('GridConfigStore')(
     observer((props) => {
         console.log('props: ', props);
         const [initCfgArray] = useState(initCfgArr);
-        const [currentInitItemId, setCurrentInitItemId] = useState(null);
-
         const [TplFromCfg, setTplFromCfg] = useState(null);
-
         const [willShowParaComponent, setWillShowParaComponent] = useState(false);
 
         const checkIfShowParaComponent = (initItemIDVar) => {
-            console.log('initItemIDVar: ', initItemIDVar);
-            setCurrentInitItemId(initItemIDVar);
             const foundItem = initCfgArray.find((item) => item.initItemID === initItemIDVar);
 
             if (foundItem) {
-                console.log('foundItem:++++++++= ', foundItem);
                 if (foundItem.para_tpl) {
                     setTplFromCfg(foundItem.para_tpl);
                     setWillShowParaComponent(true);
@@ -34,9 +28,16 @@ const InitValeCfg = inject('DataGridStore')(
                     setWillShowParaComponent(false);
                 }
             } else {
-                console.log('foundItem-------: ', foundItem);
                 setWillShowParaComponent(false);
             }
+        };
+
+        const handleSelectChange = (v) => {
+            props.GridConfigStore.changeCfg_dropdown(v, 'default_v', props.col.Field);
+            if (!v) {
+                props.GridConfigStore.changeCfg_dropdown(null, 'defaultv_para', props.col.Field);
+            }
+            checkIfShowParaComponent(v);
         };
 
         useEffect(() => {
@@ -51,6 +52,16 @@ const InitValeCfg = inject('DataGridStore')(
             } else {
                 return <ReactJson src={parsedObject} theme="twilight" />;
             }
+        };
+
+        const showHelp_init = () => {
+            return (
+                <div style={{ maxWidth: '300px', textIndent: '20px', lineHeight: '170%' }}>
+                    在新增记录时候,设置某些字段的初始值,有两种情况: 1: 直接设置值,不需要手工录入,比如直接设置"当前日期",
+                    "当前时刻". 2:通过当前字段录入的值,来设置另外一个字段的值.比如:录入产品型号, 来设置产品价格字段.
+                    这种情况需要一个json格式的参数.
+                </div>
+            );
         };
 
         return (
@@ -69,15 +80,7 @@ const InitValeCfg = inject('DataGridStore')(
                             listItemHeight={321}
                             value={props.col.default_v}
                             key={props.col.default_v}
-                            onChange={(v) => {
-                                props.DataGridStore.changeCfg_dropdown(v, 'default_v', props.col.Field);
-                                // 如果 没有 default_v, 则 defaultv_para也应该被清理
-                                if (!v) {
-                                    props.DataGridStore.changeCfg_dropdown(null, 'defaultv_para', props.col.Field);
-                                }
-
-                                checkIfShowParaComponent(v);
-                            }}
+                            onChange={handleSelectChange}
                             optionRender={(item) => {
                                 return (
                                     <div>
@@ -100,9 +103,9 @@ const InitValeCfg = inject('DataGridStore')(
                             disabled={props.col.Field == 'id'}
                             placeholder="初始值配置"
                             name="plugin">
-                            {initCfgArray.map((item, index) => (
+                            {initCfgArray.map((item) => (
                                 <Option
-                                    key={index}
+                                    key={item.initItemID}
                                     value={item.initItemID}
                                     label={item.initItemName}
                                     memo={item.memo}
@@ -114,10 +117,16 @@ const InitValeCfg = inject('DataGridStore')(
                                 </Option>
                             ))}
                         </Select>
+
+                        <Popover className="help-tip" title="帮助:初始值" content={showHelp_init()} trigger="hover">
+                            <Button>
+                                <QuestionIcon />
+                            </Button>
+                        </Popover>
                     </div>
                 </div>
 
-                {willShowParaComponent ? (
+                {willShowParaComponent && (
                     <div className="fromBox">
                         <div className="formItem">
                             <Xsymbol />
@@ -129,7 +138,7 @@ const InitValeCfg = inject('DataGridStore')(
                                 disabled={props.col.Field == 'id'}
                                 value={props.col.defaultv_para || TplFromCfg}
                                 onChange={(e) => {
-                                    props.DataGridStore.changeCfg_input(e, 'defaultv_para', props.col.Field);
+                                    props.GridConfigStore.changeCfg_input(e, 'defaultv_para', props.col.Field);
                                 }}
                             />
 
@@ -144,10 +153,10 @@ const InitValeCfg = inject('DataGridStore')(
                             </Popover>
                         </div>
                     </div>
-                ) : null}
+                )}
             </div>
         );
     })
 );
 
-export default InitValeCfg;
+export default InitValueCfg;

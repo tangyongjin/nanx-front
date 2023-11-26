@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from 'antd';
 import { observer, inject } from 'mobx-react';
 
-@inject('DataGridStore')
+@inject('GridConfigStore')
 @observer
 class ColRenderCfg extends React.Component {
     render() {
@@ -23,7 +23,7 @@ class ColRenderCfg extends React.Component {
                         disabled={this.props.col.Field == 'id'}
                         value={this.props.col.handler}
                         onChange={(e) => {
-                            this.props.DataGridStore.changeCfg_input(e, 'handler', this.props.col.Field);
+                            this.props.GridConfigStore.changeCfg_input(e, 'handler', this.props.col.Field);
                         }}
                     />
                 </div>

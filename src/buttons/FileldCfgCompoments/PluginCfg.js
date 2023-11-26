@@ -9,12 +9,11 @@ import PlugSymbol from '@/iconsHero/plugSymbol';
 
 const { Option } = Select;
 
-const PluginCfg = inject('DataGridStore')(
+const PluginCfg = inject('GridConfigStore')(
     observer((props) => {
         console.log('PluginCfg>props: ', props);
 
         const [willShowParaComponent, setWillShowParaComponent] = useState(false);
-        const [currentInitItemId, setCurrentInitItemId] = useState(null);
         const [TplFromCfg, setTplFromCfg] = useState(null);
 
         const showJsonTree = (str) => {
@@ -28,12 +27,9 @@ const PluginCfg = inject('DataGridStore')(
         };
 
         const checkIfShowParaComponent = (selectedPlugId) => {
-            console.log('selectedPlugId: ', selectedPlugId);
-            setCurrentInitItemId(selectedPlugId);
-            const foundItem = props.DataGridStore.plugins.find((item) => item.plugid === selectedPlugId);
+            const foundItem = props.GridConfigStore.plugins.find((item) => item.plugid === selectedPlugId);
 
             if (foundItem) {
-                console.log('foundItem:++++++++= ', foundItem);
                 if (foundItem.para_tpl) {
                     setTplFromCfg(foundItem.para_tpl);
                     setWillShowParaComponent(true);
@@ -41,7 +37,6 @@ const PluginCfg = inject('DataGridStore')(
                     setWillShowParaComponent(false);
                 }
             } else {
-                console.log('foundItem-------: ', foundItem);
                 setWillShowParaComponent(false);
             }
         };
@@ -68,10 +63,10 @@ const PluginCfg = inject('DataGridStore')(
                             value={props.col.plugid}
                             onChange={(v) => {
                                 if (!v) {
-                                    props.DataGridStore.changeCfg_dropdown(null, 'plugid', props.col.Field);
-                                    props.DataGridStore.changeCfg_dropdown(null, 'uform_para', props.col.Field);
+                                    props.GridConfigStore.changeCfg_dropdown(null, 'plugid', props.col.Field);
+                                    props.GridConfigStore.changeCfg_dropdown(null, 'uform_para', props.col.Field);
                                 } else {
-                                    props.DataGridStore.changeCfg_dropdown(v, 'plugid', props.col.Field);
+                                    props.GridConfigStore.changeCfg_dropdown(v, 'plugid', props.col.Field);
                                 }
 
                                 checkIfShowParaComponent(v);
@@ -99,8 +94,8 @@ const PluginCfg = inject('DataGridStore')(
                             disabled={props.col.Field === 'id'}
                             placeholder="UForm字段类型"
                             name="plugin">
-                            {props.DataGridStore.plugins.length &&
-                                props.DataGridStore.plugins.map((item, index) => (
+                            {props.GridConfigStore.plugins.length &&
+                                props.GridConfigStore.plugins.map((item, index) => (
                                     <Option
                                         key={index}
                                         value={item.plugid}
@@ -138,7 +133,7 @@ const PluginCfg = inject('DataGridStore')(
                                 disabled={props.col.Field === 'id'}
                                 value={props.col.uform_para || TplFromCfg}
                                 onChange={(e) => {
-                                    props.DataGridStore.changeCfg_input(e, 'uform_para', props.col.Field);
+                                    props.GridConfigStore.changeCfg_input(e, 'uform_para', props.col.Field);
                                 }}
                             />
                             <Popover

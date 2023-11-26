@@ -3,14 +3,14 @@ import { Select, Row, Col, Button } from 'antd';
 import { inject, observer } from 'mobx-react';
 
 const { Option } = Select;
-@inject('DataGridStore')
+@inject('GridConfigStore')
 @inject('triggerlineStore')
 @observer
 class Line extends React.Component {
     constructor(props) {
         super(props);
 
-        this.DataGridStore = props.DataGridStore;
+        this.GridConfigStore = props.GridConfigStore;
         this.tgstore = props.triggerlineStore;
     }
 
@@ -19,7 +19,7 @@ class Line extends React.Component {
     }
 
     render() {
-        let biztables = this.DataGridStore.biztableList;
+        let biztables = this.GridConfigStore.biztableList;
 
         return (
             <div style={{ marginBottom: '10px' }}>
@@ -39,8 +39,8 @@ class Line extends React.Component {
                             value={this.tgstore.field_e}
                             onChange={this.tgstore.resetFieldE}
                             style={{ width: '98%' }}>
-                            {this.DataGridStore.ColsDbInfo.length &&
-                                this.DataGridStore.ColsDbInfo.map((item, index) => (
+                            {this.GridConfigStore.ColsDbInfo.length &&
+                                this.GridConfigStore.ColsDbInfo.map((item, index) => (
                                     <Option key={index} value={item.Field}>
                                         {item.Field}
                                     </Option>

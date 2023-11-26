@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from 'antd';
 import { observer, inject } from 'mobx-react';
 
-@inject('DataGridStore')
+@inject('GridConfigStore')
 @observer
 class LabelCfg extends React.Component {
     render() {
@@ -23,7 +23,7 @@ class LabelCfg extends React.Component {
                     <Input
                         value={this.props.col.label || this.props.col.Comment || this.props.col.Field}
                         onChange={(e) => {
-                            this.props.DataGridStore.changeCfg_input(e, 'label', this.props.col.Field);
+                            this.props.GridConfigStore.changeCfg_input(e, 'label', this.props.col.Field);
                         }}
                     />
                 </div>

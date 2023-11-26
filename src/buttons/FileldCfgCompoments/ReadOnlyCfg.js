@@ -2,7 +2,7 @@ import React from 'react';
 import { Checkbox } from 'antd';
 import { observer, inject } from 'mobx-react';
 
-@inject('DataGridStore')
+@inject('GridConfigStore')
 @observer
 class PluginCfg extends React.Component {
     render() {
@@ -23,7 +23,7 @@ class PluginCfg extends React.Component {
                         disabled={this.props.col.Field == 'id'}
                         checked={this.props.col.readonly}
                         onChange={(e) => {
-                            this.props.DataGridStore.changeCfg_cbx(e, 'readonly', this.props.col.Field);
+                            this.props.GridConfigStore.changeCfg_cbx(e, 'readonly', this.props.col.Field);
                         }}>
                         只读
                     </Checkbox>

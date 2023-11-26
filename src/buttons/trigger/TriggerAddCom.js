@@ -4,12 +4,12 @@ import Line from './line';
 import { inject, observer } from 'mobx-react';
 import triggerlineStore from './triggerlineStore';
 
-@inject('DataGridStore')
+@inject('GridConfigStore')
 @observer
 export default class TriggerAddCom extends React.Component {
     constructor(props) {
         super(props);
-        this.DataGridStore = this.props.DataGridStore;
+        this.GridConfigStore = this.props.GridConfigStore;
     }
 
     state = {
@@ -49,7 +49,7 @@ export default class TriggerAddCom extends React.Component {
         let triggerObj = {};
         triggerObj.group_name = this.state.group_name;
         triggerObj.counter = this.state.linecounter;
-        triggerObj.DataGridCode = this.DataGridStore.DataGridCode;
+        triggerObj.DataGridCode = this.GridConfigStore.DataGridCode;
         triggerObj.lines = [];
         this.state.lines.forEach((element) => {
             let ts = element.props.triggerlineStore;
@@ -62,7 +62,7 @@ export default class TriggerAddCom extends React.Component {
             });
         });
 
-        this.DataGridStore.saveTriggerGroup(triggerObj);
+        this.GridConfigStore.saveTriggerGroup(triggerObj);
     }
 
     render() {

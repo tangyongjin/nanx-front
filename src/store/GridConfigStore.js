@@ -2,7 +2,11 @@ import { observable, action } from 'mobx';
 import { message } from 'antd';
 import api from '../api/api';
 
-class DataGridStore {
+class GridConfigStore {
+    constructor() {
+        this.initAll();
+    }
+
     @observable dataGrids = [];
     @observable biztableList = [];
     @observable plugins = [];
@@ -17,7 +21,7 @@ class DataGridStore {
     @observable relatedtable = '';
 
     @action prepareDataGirdEnv = async () => {
-        await this.initAll();
+        // await this.initAll();
         await this.getDataGridConfigure();
     };
 
@@ -32,7 +36,6 @@ class DataGridStore {
         // 单个 DataGrid 配置
         this.getColsDbInfo();
         this.getTriggerGroups();
-        // this.getRelatedTableCols();
     }
 
     @action setCurrentActcode = (DataGridCode) => {
@@ -165,4 +168,4 @@ class DataGridStore {
     };
 }
 
-export default new DataGridStore();
+export default new GridConfigStore();

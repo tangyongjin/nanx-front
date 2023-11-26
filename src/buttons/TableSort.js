@@ -6,7 +6,7 @@ import { toJS } from 'mobx';
 import { BarsOutlined } from '@ant-design/icons';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 
-@inject('DataGridStore')
+@inject('GridConfigStore')
 @observer
 export default class TableSort extends React.Component {
     constructor(props) {
@@ -16,7 +16,7 @@ export default class TableSort extends React.Component {
     }
 
     async init() {
-        this.props.DataGridStore.clearColsDbInfo();
+        this.props.GridConfigStore.clearColsDbInfo();
         let { selectedRows } = this.props.NanxTableStore;
         if (selectedRows.length == 0) {
             message.info('必须选择一项');
@@ -24,10 +24,10 @@ export default class TableSort extends React.Component {
         } else {
             let record = selectedRows[0];
 
-            this.props.DataGridStore.setCurrentActcode(toJS(record).datagrid_code);
-            this.props.DataGridStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
-            this.props.DataGridStore.setCurrentBasetable(toJS(record).base_table);
-            this.props.DataGridStore.prepareDataGirdEnv();
+            this.props.GridConfigStore.setCurrentActcode(toJS(record).datagrid_code);
+            this.props.GridConfigStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
+            this.props.GridConfigStore.setCurrentBasetable(toJS(record).base_table);
+            this.props.GridConfigStore.prepareDataGirdEnv();
             this.props.NanxTableStore.showButtonModal();
         }
     }
@@ -47,8 +47,8 @@ export default class TableSort extends React.Component {
                         字段排序
                     </div>
                 }>
-                {this.props.DataGridStore.ColsDbInfo.length == 0 ? null : (
-                    <TableSortCom DataGridCode={this.props.DataGridStore.DataGridCode} />
+                {this.props.GridConfigStore.ColsDbInfo.length == 0 ? null : (
+                    <TableSortCom DataGridCode={this.props.GridConfigStore.DataGridCode} />
                 )}
             </CommonModal>
         );

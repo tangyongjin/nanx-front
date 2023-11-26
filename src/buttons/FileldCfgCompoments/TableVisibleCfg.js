@@ -2,7 +2,7 @@ import React from 'react';
 import { Checkbox } from 'antd';
 import { observer, inject } from 'mobx-react';
 
-@inject('DataGridStore')
+@inject('GridConfigStore')
 @observer
 class TableVisibleCfg extends React.Component {
     render() {
@@ -23,7 +23,7 @@ class TableVisibleCfg extends React.Component {
                     <Checkbox
                         checked={this.props.col.column_hidden}
                         onChange={(e) => {
-                            this.props.DataGridStore.changeCfg_cbx(e, 'column_hidden', this.props.col.Field);
+                            this.props.GridConfigStore.changeCfg_cbx(e, 'column_hidden', this.props.col.Field);
                         }}>
                         隐藏
                     </Checkbox>

@@ -3,7 +3,7 @@ import { Select } from 'antd';
 import { observer, inject } from 'mobx-react';
 
 const { Option } = Select;
-@inject('DataGridStore')
+@inject('GridConfigStore')
 @observer
 class PluginCfg extends React.Component {
     constructor(props) {
@@ -43,7 +43,7 @@ class PluginCfg extends React.Component {
                     <Select
                         value={this.props.col.validateRule}
                         onChange={(e) => {
-                            this.props.DataGridStore.changeCfg_dropdown(e, 'validateRule', this.props.col.Field);
+                            this.props.GridConfigStore.changeCfg_dropdown(e, 'validateRule', this.props.col.Field);
                         }}
                         showSearch
                         allowClear

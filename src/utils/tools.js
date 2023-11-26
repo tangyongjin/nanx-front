@@ -95,7 +95,7 @@ export function tryParseJSON(str) {
         const parsedJSON = JSON.parse(str);
         return parsedJSON;
     } catch (error) {
-        console.error('Error parsing JSON:', error);
+        console.log('Error parsing JSON:', error);
         return null; // or handle the error in some way
     }
 }

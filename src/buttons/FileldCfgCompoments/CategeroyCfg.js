@@ -3,7 +3,7 @@ import { Select } from 'antd';
 import { observer, inject } from 'mobx-react';
 
 const { Option } = Select;
-@inject('DataGridStore')
+@inject('GridConfigStore')
 @observer
 class PluginCfg extends React.Component {
     render() {
@@ -20,15 +20,15 @@ class PluginCfg extends React.Component {
                         style={{ width: '200px' }}
                         value={this.props.col.category}
                         onChange={(e) => {
-                            this.props.DataGridStore.changeCfg_dropdown(e, 'category', this.props.col.Field);
+                            this.props.GridConfigStore.changeCfg_dropdown(e, 'category', this.props.col.Field);
                         }}
                         showSearch
                         allowClear
                         disabled={this.props.col.Field == 'id'}
                         placeholder="字典表"
                         name="category">
-                        {this.props.DataGridStore.Categories.length &&
-                            this.props.DataGridStore.Categories.map((item, index) => (
+                        {this.props.GridConfigStore.Categories.length &&
+                            this.props.GridConfigStore.Categories.map((item, index) => (
                                 <Option key={index} value={item.catid}>
                                     {item.catname}
                                 </Option>
