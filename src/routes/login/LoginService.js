@@ -12,7 +12,6 @@ export default class LoginService {
 
     async loginMobile(mobile, password, transaction_id) {
         document.getElementById('login_msg').style.display = 'none';
-        document.getElementById('login_loading').style.display = 'block';
 
         sessionStorage.removeItem('id_token');
         sessionStorage.removeItem('mobile');
@@ -24,13 +23,11 @@ export default class LoginService {
             .loginMobile(params)
             .then(async (res) => {
                 if (res.code == 401) {
-                    document.getElementById('login_loading').style.display = 'none';
                     document.getElementById('login_msg').style.display = 'block';
                     return;
                 }
 
                 if (res.code == 500) {
-                    document.getElementById('login_loading').style.display = 'none';
                     document.getElementById('login_msg').style.display = 'block';
                     return;
                 }
@@ -47,7 +44,6 @@ export default class LoginService {
     }
 
     afterLoginSuccess = async () => {
-        document.getElementById('login_loading').style.display = 'none';
         hashHistory.push('/home');
     };
 

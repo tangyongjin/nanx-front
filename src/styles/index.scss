@@ -308,28 +308,49 @@ div.longSelect {
 }
 
 
-// iconfontcn 
-.icon {
-    width: 14px;
-    height: 14px;
+   
+  // commonModal 标题的 icon
+  div.modeal-drag-title > div > svg {
     vertical-align: -2px;
-    color: white;
-    margin-right: 0px;
-    fill: white;
-    overflow: hidden;
-  }
-
-  
-  .icon36px {
-    width: 20px;
-    height: 20px;
-    vertical-align: -2px;
-    margin-right: 4px;
-    // fill: currentColor;
-    overflow: hidden;
-  }
-  
+    margin-right: 2px;
+    
+  } 
+   
   .pointerHand{
     cursor: pointer;
   }
+  
+  
+  .table-button {
+   color:rgb(207, 201, 201) !important; 
+   background-color: rgb(19, 3, 3) !important;
+  }
  
+  .table-button *:hover{
+    color: white !important; 
+    background-color: rgb(19, 3, 3) !important;
+   }
+ 
+   
+   // 按钮里面的icon
+.ant-btn-icon {
+    width: 14px;
+    height: 14px;
+    vertical-align: -2px;
+    color:rgb(207, 201, 201) !important; 
+    margin-right: 0px;
+    fill:rgb(207, 201, 201) !important; 
+    overflow: hidden;
+  }
+
+  .ant-btn-icon :hover{
+    color: white !important; 
+    fill: white !important; 
+  }
+
+// 菜单的  icon  
+  span.ant-menu-title-content > span > svg{
+    
+    vertical-align: -2px;
+    margin-right: 4px;
+  }

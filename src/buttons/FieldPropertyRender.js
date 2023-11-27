@@ -35,7 +35,6 @@ class FieldPropertyRender extends React.Component {
                 <div style={{ marginLeft: '390px', marginTop: '46px' }}>
                     <Button
                         disabled={this.props.col.Field == 'id'}
-                        className="round-button"
                         type="primary"
                         size="small"
                         onClick={() => this.props.GridConfigStore.saveCfg(this.props.col.Field)}>

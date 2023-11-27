@@ -1,6 +1,5 @@
 import { Menu } from 'antd';
 import IconWrapper from '@/utils/IconWrapper';
-
 import { toJS } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
