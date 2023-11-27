@@ -3,7 +3,7 @@ import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import api from '@/api/api';
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
 
 @inject('NanxTableStore') //
 @observer
@@ -49,7 +49,7 @@ export default class TableAddCom extends React.Component {
                 width={_width}
                 title={
                     <div>
-                        {IconRender(this.state.iconStr)}
+                        {IconWrapper(this.state.iconStr)}
                         添加数据
                     </div>
                 }>

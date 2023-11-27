@@ -2,9 +2,7 @@ import React from 'react';
 import { message, Button } from 'antd';
 import AllocationMenu from './MenuAssign/allocationMenu';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
-import { ClusterOutlined } from '@ant-design/icons';
-
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
 
 export default class MenuAssign extends React.Component {
     constructor(props) {
@@ -37,7 +35,7 @@ export default class MenuAssign extends React.Component {
                     <CommonModal
                         title={
                             <div>
-                                {IconRender(this.state.iconStr)}
+                                {IconWrapper(this.state.iconStr)}
                                 分配菜单
                             </div>
                         }

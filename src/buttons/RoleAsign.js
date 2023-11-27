@@ -2,7 +2,8 @@ import React from 'react';
 import { message, Popconfirm, Button, Select, Table } from 'antd';
 import api from '@/api/api';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
+
 const { Option } = Select;
 
 export default class RoleAsign extends React.Component {
@@ -105,7 +106,7 @@ export default class RoleAsign extends React.Component {
                     <CommonModal
                         title={
                             <div>
-                                {IconRender(this.state.iconStr)}
+                                {IconWrapper(this.state.iconStr)}
                                 分配角色
                             </div>
                         }

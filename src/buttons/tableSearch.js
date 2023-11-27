@@ -1,8 +1,7 @@
 import React from 'react';
 import SearchFormContainer from './tableSearch/searchFormContainer';
-import { SearchOutlined } from '@ant-design/icons';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
 
 export default class TableSearch extends React.Component {
     constructor(props) {
@@ -22,7 +21,7 @@ export default class TableSearch extends React.Component {
                 width="700px"
                 title={
                     <div>
-                        {IconRender(this.state.iconStr)}
+                        {IconWrapper(this.state.iconStr)}
                         数据检索
                     </div>
                 }>

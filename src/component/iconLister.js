@@ -1,55 +1,65 @@
+/*
+
+来源:
+https://react-icons.github.io/react-icons/icons/vsc/
+
+*/
+
 import React from 'react';
-import { fontIcons, antdicons } from '@/iconsHero/iconColletion';
-import * as antIcons from '@ant-design/icons';
+
+import * as BootStrapIcons from 'react-icons/bs';
+import * as VscIcons from 'react-icons/vsc';
 
 const IconLister = (props) => {
     const { ifShowList } = props;
 
+    const BootStrapIconsList = [];
+    const VscIconsList = [];
+
+    for (let key in BootStrapIcons) {
+        BootStrapIconsList.push(key);
+    }
+
+    for (let key in VscIcons) {
+        VscIconsList.push(key);
+    }
+
     const containerMainStyle = {
-        width: '312px',
+        width: '812px',
         maxHeight: '400px',
+        backgroundColor: 'white',
         overflow: 'auto'
     };
 
     const containerStyle = {
-        width: '312px',
+        width: '812px',
         display: ifShowList ? 'flex' : 'none',
         flexWrap: 'wrap' // Allow items to wrap onto a new line
-    };
-
-    const AntIconWrapper = (IconText) => {
-        const antdIconItem = React.createElement(antIcons[IconText], {
-            style: { fontSize: '20px' }
-        });
-        return <div style={{ width: '40px' }}>{antdIconItem}</div>;
     };
 
     return (
         <div style={containerMainStyle}>
             <div style={containerStyle}>
-                {fontIcons.map((IconText, index) => (
+                {VscIconsList.map((IconText, index) => (
                     <div
+                        style={{ cursor: 'pointer', margin: '6px', height: '32px', width: '32px' }}
                         onClick={() => {
-                            props.callbackRender(IconText);
+                            props.callbackRender('Vsc:' + IconText);
                         }}
-                        key={index}
-                        style={{ margin: '6px' }}>
-                        <svg key={index} className="icon36px  pointerHand" aria-hidden="true">
-                            <use href={`#${IconText}`}></use>
-                        </svg>
+                        key={index}>
+                        <div style={{ fontSize: '22px' }}> {React.createElement(VscIcons[IconText])}</div>
                     </div>
                 ))}
             </div>
-
             <div style={containerStyle}>
-                {antdicons.map((IconText, index) => (
+                {BootStrapIconsList.map((IconText, index) => (
                     <div
-                        style={{ cursor: 'pointer', margin: '6px', height: '24px', width: '24px' }}
+                        style={{ cursor: 'pointer', margin: '6px', height: '32px', width: '32px' }}
                         onClick={() => {
-                            props.callbackRender(IconText);
+                            props.callbackRender('Bs:' + IconText);
                         }}
                         key={index}>
-                        {AntIconWrapper(IconText)}
+                        <div style={{ fontSize: '22px' }}> {React.createElement(BootStrapIcons[IconText])}</div>
                     </div>
                 ))}
             </div>

@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import React from 'react';
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
 
 const getButtonHandler = async (event, item, store) => {
     let tmp = require(`../../../buttons/${item.file_path}`).default;
@@ -19,7 +19,7 @@ const renderButtons = (tableStore) => {
                     danger
                     key={index}
                     htmlType="button"
-                    icon={IconRender(item.icon)}
+                    icon={IconWrapper(item.icon)}
                     onClick={(event) => getButtonHandler(event, item, tableStore)}
                     className="round-button"
                     style={{ margin: 8 }}>
@@ -32,7 +32,7 @@ const renderButtons = (tableStore) => {
                     key={index}
                     type={item.ui_type}
                     htmlType="button"
-                    icon={IconRender(item.icon)}
+                    icon={IconWrapper(item.icon)}
                     onClick={(event) => getButtonHandler(event, item, tableStore)}
                     className="round-button"
                     style={{ margin: 8 }}>

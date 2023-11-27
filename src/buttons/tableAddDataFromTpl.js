@@ -3,7 +3,7 @@ import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import React from 'react';
 import { message } from 'antd';
 import api from '@/api/api';
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
 
 import { observer, inject } from 'mobx-react';
 
@@ -46,7 +46,7 @@ export default class TableAddFromTplCom extends React.Component {
 
     render() {
         return (
-            <CommonModal height="500px" title={<div>{IconRender(this.state.iconStr)} 添加(从模版)</div>}>
+            <CommonModal height="500px" title={<div>{IconWrapper(this.state.iconStr)} 添加(从模版)</div>}>
                 <TableSchemaForm
                     onChange={this.props.onChange}
                     NanxTableStore={this.props.NanxTableStore}

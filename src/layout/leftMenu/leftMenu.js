@@ -1,5 +1,5 @@
 import { Menu } from 'antd';
-import MenuIconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/MenuIconRender';
+import IconWrapper from '@/utils/IconWrapper';
 
 import { toJS } from 'mobx';
 import { inject, observer } from 'mobx-react';
@@ -50,7 +50,7 @@ export default class LeftMenu extends React.Component {
 
         return one.children.length === 0 ? (
             <Menu.Item key={menuitem.key} onClick={this.menuclickHandler.bind(this, one)}>
-                {MenuIconRender(one.icon)}
+                <span>{IconWrapper(one.icon)}</span>
                 <span id={one.menu_uuid}>{one.title}</span>
             </Menu.Item>
         ) : (
@@ -58,7 +58,7 @@ export default class LeftMenu extends React.Component {
                 key={menuitem.key}
                 title={
                     <span>
-                        {MenuIconRender(one.icon)}
+                        <span>{IconWrapper(one.icon)} </span>
                         <span id={one.menu_uuid}>{one.title}</span>
                     </span>
                 }>

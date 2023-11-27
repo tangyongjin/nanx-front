@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react';
 import TableSortCom from './TableSort/TableSortCom';
 import { toJS } from 'mobx';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
 
 @inject('GridConfigStore')
 @observer
@@ -46,7 +46,7 @@ export default class TableSort extends React.Component {
                 width={'1300px'}
                 title={
                     <div>
-                        {IconRender(this.state.iconStr)}
+                        {IconWrapper(this.state.iconStr)}
                         字段排序
                     </div>
                 }>

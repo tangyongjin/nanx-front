@@ -2,7 +2,7 @@ import React from 'react';
 import { Input, message, Popconfirm, Button, Select, Table } from 'antd';
 import api from '@/api/api';
 import cloneDeep from 'lodash/cloneDeep';
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 
 const { Option } = Select;
@@ -133,7 +133,7 @@ export default class GridButtonAdder extends React.Component {
             dataIndex: 'icon',
 
             render: (text) => {
-                return IconRender(text);
+                return IconWrapper(text);
             }
         },
         {
@@ -161,7 +161,7 @@ export default class GridButtonAdder extends React.Component {
                     <CommonModal
                         title={
                             <div>
-                                {IconRender(this.state.iconStr)}
+                                {IconWrapper(this.state.iconStr)}
                                 分配按钮
                             </div>
                         }
@@ -208,7 +208,7 @@ export default class GridButtonAdder extends React.Component {
                                                     <span style={{ width: '150px' }}>{item.button_code}</span>
                                                     <span style={{ marginLeft: '30px' }}>
                                                         <span>
-                                                            {IconRender(item.icon)} {item.name}
+                                                            {IconWrapper(item.icon)} {item.name}
                                                         </span>
                                                     </span>
                                                 </div>

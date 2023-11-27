@@ -4,7 +4,7 @@ import SearchFormContainer from './tableSearch/searchFormContainer';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 
 import api from '@/api/api';
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
 
 export default class FixedQueryBuilder extends React.Component {
     constructor(props) {
@@ -56,7 +56,7 @@ export default class FixedQueryBuilder extends React.Component {
 
     render() {
         return (
-            <CommonModal width="700px" title={<div> {IconRender(this.state.iconStr)}QueryConfigure</div>}>
+            <CommonModal width="700px" title={<div> {IconWrapper(this.state.iconStr)}QueryConfigure</div>}>
                 <SearchFormContainer
                     HostedTableStore={this.props.NanxTableStore}
                     targetDataGrid={this.targetDataGrid()}

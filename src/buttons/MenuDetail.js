@@ -2,7 +2,7 @@ import React from 'react';
 import { message, Button } from 'antd';
 import MenuDetailCom from './MenuDetailCom';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
 
 export default class MenuDetail extends React.Component {
     constructor(props) {
@@ -32,18 +32,16 @@ export default class MenuDetail extends React.Component {
                     <CommonModal
                         title={
                             <div>
-                                {IconRender(this.state.iconStr)}
+                                {IconWrapper(this.state.iconStr)}
                                 菜单分配情况
                             </div>
-                        }>
+                        }
                         onCancel={this.handleCancel}
-                        okText="确认" cancelText="取消" width="1200px" footer=
-                        {[
+                        footer={[
                             <Button key="submit" type="primary" onClick={this.handleCancel}>
                                 关闭
                             </Button>
-                        ]}
-                        >
+                        ]}>
                         <br />
                         <MenuDetailCom menuID={this.state.record.id} />
                     </CommonModal>

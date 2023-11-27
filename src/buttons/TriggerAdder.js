@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react';
 import TriggerAddCom from './trigger/TriggerAddCom';
 import { toJS } from 'mobx';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
 
 @inject('GridConfigStore')
 @observer
@@ -45,7 +45,7 @@ export default class TriggerAdder extends React.Component {
                 ]}
                 title={
                     <div>
-                        {IconRender(this.state.iconStr)}
+                        {IconWrapper(this.state.iconStr)}
                         添加联动
                     </div>
                 }>

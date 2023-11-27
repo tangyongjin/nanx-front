@@ -4,7 +4,7 @@ import fetchDataGridCfg from '@/routes/NanxTable/NanxTableCom/fetchDataGridCfg';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import listDataParams from '@/routes/NanxTable/NanxTableCom/listDataParams';
 import { toJS } from 'mobx';
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
 
 export default class ExportExcel extends React.Component {
     constructor(props) {
@@ -49,7 +49,7 @@ export default class ExportExcel extends React.Component {
                 cancel={this.hideModal}
                 title={
                     <div>
-                        {IconRender(this.state.iconStr)}
+                        {IconWrapper(this.state.iconStr)}
                         导出excel(点击下载)
                     </div>
                 }>

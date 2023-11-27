@@ -4,8 +4,7 @@ import React from 'react';
 import { message } from 'antd';
 import api from '@/api/api';
 import { observer, inject } from 'mobx-react';
-
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
+import IconWrapper from '@/utils/IconWrapper';
 
 @inject('NanxTableStore')
 @observer
@@ -69,7 +68,7 @@ export default class TableEditCom extends React.Component {
                 width={_width}
                 title={
                     <div>
-                        {IconRender(this.state.iconStr)}
+                        {IconWrapper(this.state.iconStr)}
                         编辑
                     </div>
                 }>

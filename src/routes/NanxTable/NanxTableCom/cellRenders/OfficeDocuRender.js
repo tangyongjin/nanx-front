@@ -1,7 +1,8 @@
 import React from 'react';
-import IconRender from '@/routes/NanxTable/NanxTableCom/cellRenders/IconRender';
 import { root_url, port } from '@/api/api_config/base_config';
 import { Space } from 'antd';
+import { BsFilePdf } from 'react-icons/bs';
+
 const api_root = `${root_url}:${port}/`;
 function startsWithHttp(urlString) {
     return urlString.startsWith('http://');
@@ -34,7 +35,9 @@ const OfficeDocuRender = (text) => {
         const extension = getFileExtension(filename).toLowerCase();
         switch (extension) {
             case 'pdf':
-                return 'icon-PDF1';
+                // return 'icon-PDF1';
+                return <BsFilePdf />;
+
             case 'doc':
                 return 'icon-WORD';
             case 'docx':
@@ -63,7 +66,7 @@ const OfficeDocuRender = (text) => {
                 <span>
                     {short}
                     <Space />
-                    {IconRender(docuType)}
+                    {docuType}
                 </span>
             </a>
         </div>
