@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Select, Button, Popover } from 'antd';
 import { observer, inject } from 'mobx-react';
-import QuestionIcon from '@/iconsHero/question';
-import Xsymbol from '@/iconsHero/xSymbol';
-import PlugSymbol from '@/iconsHero/plugSymbol';
 import showJsonTree from '@/component/jsonTree.js';
+import { VscSymbolNamespace } from 'react-icons/vsc';
+
+import { BsBraces, BsFillQuestionCircleFill } from 'react-icons/bs';
+import { BsGearWideConnected } from 'react-icons/bs';
 
 const { Option } = Select;
 
@@ -38,7 +39,7 @@ const PluginCfg = inject('GridConfigStore')(
             <div className="formWrapper">
                 <div className="fromBox">
                     <div className="formItem">
-                        <PlugSymbol />
+                        <BsGearWideConnected style={{ marginRight: '6px' }} />
                         字段类型/插件
                     </div>
 
@@ -105,7 +106,7 @@ const PluginCfg = inject('GridConfigStore')(
                             content={'只能选择一个插件,有些插件可能需要配置json形式的参数'}
                             trigger="hover">
                             <Button>
-                                <QuestionIcon />
+                                <BsFillQuestionCircleFill style={{ verticalAlign: '-2px' }} />
                             </Button>
                         </Popover>
                     </div>
@@ -114,7 +115,7 @@ const PluginCfg = inject('GridConfigStore')(
                 {willShowParaComponent && (
                     <div className="fromBox">
                         <div className="formItem">
-                            <Xsymbol />
+                            <VscSymbolNamespace />
                             插件参数(json)
                         </div>
                         <div className="formItemBig">
@@ -131,7 +132,7 @@ const PluginCfg = inject('GridConfigStore')(
                                 title="帮助:插件参数"
                                 trigger="hover">
                                 <Button>
-                                    <QuestionIcon />
+                                    <BsBraces style={{ verticalAlign: '-2px' }} />
                                 </Button>
                             </Popover>
                         </div>
