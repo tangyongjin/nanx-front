@@ -35,9 +35,9 @@ const PortalLayout = inject('MenuStore')(
             <Layout style={{ minHeight: '100vh', minWidth: '100vh' }}>
                 <Sider collapsed={props.MenuStore.isCollapse}>
                     <LeftMenu
-                        collapsed={props.MenuStore.isCollapse}
+                        // collapsed={props.MenuStore.isCollapse}
                         className="portal_menu"
-                        menuList={props.MenuStore.RoleBasedMenuList}
+                        // menuList={props.MenuStore.RoleBasedMenuList}
                         style={{ padding: 0, height: '100vh', overflowY: 'scroll' }}
                         width={300}
                     />
