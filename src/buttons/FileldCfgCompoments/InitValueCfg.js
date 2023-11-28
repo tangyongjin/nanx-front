@@ -4,7 +4,6 @@ import { observer, inject } from 'mobx-react';
 import initCfgArr from './initCfgArray';
 import showJsonTree from '@/component/jsonTree.js';
 import { BsBraces, BsFillQuestionCircleFill } from 'react-icons/bs';
-import { VscSymbolNamespace } from 'react-icons/vsc';
 import { BsSignRailroadFill } from 'react-icons/bs';
 
 const { Option } = Select;
@@ -118,7 +117,7 @@ const InitValueCfg = inject('GridConfigStore')(
                 {willShowParaComponent && (
                     <div className="fromBox">
                         <div className="formItem">
-                            <VscSymbolNamespace style={{ marginRight: '6px' }} />
+                            <BsBraces style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                             初始值参数
                         </div>
 

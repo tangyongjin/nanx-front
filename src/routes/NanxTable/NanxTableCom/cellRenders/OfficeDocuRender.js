@@ -1,7 +1,6 @@
 import React from 'react';
 import { root_url, port } from '@/api/api_config/base_config';
-import { Space } from 'antd';
-import { BsFilePdf } from 'react-icons/bs';
+import { BsFilePdf, BsFillFileExcelFill, BsFileEarmark, BsFileZip, BsFileEarmarkWord } from 'react-icons/bs';
 
 const api_root = `${root_url}:${port}/`;
 function startsWithHttp(urlString) {
@@ -35,38 +34,35 @@ const OfficeDocuRender = (text) => {
         const extension = getFileExtension(filename).toLowerCase();
         switch (extension) {
             case 'pdf':
-                // return 'icon-PDF1';
-                return <BsFilePdf />;
-
+                return <BsFilePdf style={{ color: 'green', marginRight: '4px', fontSize: '18px' }} />;
             case 'doc':
-                return 'icon-WORD';
+                return <BsFileEarmarkWord style={{ color: 'green', marginRight: '4px', fontSize: '18px' }} />;
             case 'docx':
-                return 'icon-WORD';
+                return <BsFileEarmarkWord style={{ color: 'green', marginRight: '4px', fontSize: '18px' }} />;
             case 'xlsx':
-                return 'icon-ECEL';
+                return <BsFillFileExcelFill style={{ color: 'green', marginRight: '4px', fontSize: '18px' }} />;
             case 'csv':
-                return 'icon-ECEL';
+                return <BsFillFileExcelFill style={{ color: 'green', marginRight: '4px', fontSize: '18px' }} />;
             case 'xls':
-                return 'icon-ECEL';
+                return <BsFillFileExcelFill style={{ color: 'green', marginRight: '4px', fontSize: '18px' }} />;
             case 'pptx':
                 return 'icon-PPT';
             case 'zip':
-                return 'icon-zip1';
+                return <BsFileZip style={{ color: 'green', marginRight: '4px', fontSize: '18px' }} />;
             default:
-                return 'FileUnknownOutlined';
+                return <BsFileEarmark style={{ color: 'green', marginRight: '4px', fontSize: '18px' }} />;
         }
     };
 
-    let docuType = getDocumentType(short);
-    console.log('docuType: ', docuType);
+    let docuIcon = getDocumentType(short);
+    console.log('docuType: ', docuIcon);
 
     return (
         <div>
             <a style={{ color: 'black' }} href={_download}>
-                <span>
+                <span className="office-docu-title">
+                    {docuIcon}
                     {short}
-                    <Space />
-                    {docuType}
                 </span>
             </a>
         </div>

@@ -39,7 +39,7 @@ const PluginCfg = inject('GridConfigStore')(
             <div className="formWrapper">
                 <div className="fromBox">
                     <div className="formItem">
-                        <BsGearWideConnected style={{ marginRight: '6px' }} />
+                        <BsGearWideConnected style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                         字段类型/插件
                     </div>
 
