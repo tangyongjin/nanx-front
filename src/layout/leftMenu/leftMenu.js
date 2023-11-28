@@ -15,9 +15,12 @@ export default class LeftMenu extends React.Component {
     }
 
     async menuclickHandler(menuItem, event) {
+        console.log('event: ', event);
+        console.log('menuItem: ', menuItem);
+
         event.domEvent.preventDefault();
         event.domEvent.stopPropagation();
-        let menuClicked = toJS(menuItem);
+        let menuClicked = menuItem;
 
         // 重复点击相同菜单,刷新内容
 
@@ -29,6 +32,8 @@ export default class LeftMenu extends React.Component {
         await this.MenuStore.setCurrentMenu(menuClicked);
         await this.MenuStore.setSelectedKeys(menuClicked.key);
         let path = findMenuPath(this.MenuStore.RoleBasedMenuList, menuClicked.key);
+        console.log('path: ', path);
+
         await this.MenuStore.setMenuPath(path);
 
         hashHistory.push({
@@ -63,7 +68,7 @@ export default class LeftMenu extends React.Component {
     }
 
     render() {
-        const menuItems = this.transformMenuArray(toJS(this.props.menuList));
+        // const menuItems = this.transformMenuArray(toJS(this.props.menuList));
 
         return (
             <div>
@@ -87,7 +92,7 @@ export default class LeftMenu extends React.Component {
                         theme="dark"
                         onOpenChange={(openKeys) => this.MenuStore.onOpenChange(openKeys)}
                         selectedKeys={this.MenuStore.selectedKeys}
-                        items={menuItems}></Menu>
+                        items={this.props.menuItems}></Menu>
                 </div>
             </div>
         );

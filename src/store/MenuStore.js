@@ -36,6 +36,7 @@ class _MenuStore {
         path &&
             path.forEach((menu) => {
                 bread += menu.title + '/';
+                console.log('menu.title: ', menu.title);
                 opkeys.push(menu.key);
             });
 

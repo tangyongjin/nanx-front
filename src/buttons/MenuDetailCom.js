@@ -126,6 +126,7 @@ export default class MenuDetailCom extends React.Component {
             <div>
                 <Table
                     size="small"
+                    rowKey="id"
                     pagination={false}
                     columns={columns}
                     dataSource={toJS(this.store.combinedArray)}></Table>
