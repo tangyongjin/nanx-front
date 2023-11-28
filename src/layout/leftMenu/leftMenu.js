@@ -14,14 +14,14 @@ export default class LeftMenu extends React.Component {
         this.MenuStore = props.MenuStore;
     }
 
-    async menuclickHandler(menuItem, item) {
-        item.domEvent.preventDefault();
-        item.domEvent.stopPropagation();
+    async menuclickHandler(menuItem, event) {
+        event.domEvent.preventDefault();
+        event.domEvent.stopPropagation();
         let menuClicked = toJS(menuItem);
 
         // 重复点击相同菜单,刷新内容
 
-        if (item.key == this.MenuStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
+        if (event.key == this.MenuStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
             this.MenuStore.freshCurrentMenuItem();
             return;
         }
@@ -41,32 +41,30 @@ export default class LeftMenu extends React.Component {
         });
     }
 
-    getChildren(menuitem) {
-        let one = menuitem;
-        if (!one.children) {
-            one.children = [];
-        }
+    transformMenuArray(menuArray) {
+        return menuArray.map((item) => {
+            const { key, children, title, menu, router, datagrid_code } = item;
+            const icon = IconWrapper(item.icon);
 
-        return one.children.length === 0 ? (
-            <Menu.Item key={menuitem.key} onClick={this.menuclickHandler.bind(this, one)}>
-                <span>{IconWrapper(one.icon)}</span>
-                <span id={one.menu_uuid}>{one.title}</span>
-            </Menu.Item>
-        ) : (
-            <Menu.SubMenu
-                key={menuitem.key}
-                title={
-                    <span>
-                        <span>{IconWrapper(one.icon)} </span>
-                        <span id={one.menu_uuid}>{one.title}</span>
-                    </span>
-                }>
-                {one.children.map((xitem) => this.getChildren(xitem))}
-            </Menu.SubMenu>
-        );
+            const transformedItem = {
+                key,
+                icon,
+                ...(children && children.length > 0 && { children: this.transformMenuArray(children) }),
+                label: title,
+                menu,
+                router,
+                datagrid_code,
+                type: null,
+                onClick: (event) => this.menuclickHandler(item, event)
+            };
+
+            return transformedItem;
+        });
     }
 
     render() {
+        const menuItems = this.transformMenuArray(toJS(this.props.menuList));
+
         return (
             <div>
                 <div
@@ -88,9 +86,8 @@ export default class LeftMenu extends React.Component {
                         openKeys={this.MenuStore.openKeys}
                         theme="dark"
                         onOpenChange={(openKeys) => this.MenuStore.onOpenChange(openKeys)}
-                        selectedKeys={this.MenuStore.selectedKeys}>
-                        {this.props.menuList.map((menuitem, index) => this.getChildren(menuitem, index))}
-                    </Menu>
+                        selectedKeys={this.MenuStore.selectedKeys}
+                        items={menuItems}></Menu>
                 </div>
             </div>
         );
