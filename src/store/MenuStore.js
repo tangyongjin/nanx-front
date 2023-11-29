@@ -1,24 +1,28 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import api from '../api/api';
-import { randomString, getAllKeys, findMenuPath } from '@/utils/tools';
+import IconWrapper from '@/utils/IconWrapper';
+import { hashHistory } from 'react-router';
+
+import { randomString, getAllKeys } from '@/utils/tools';
 import { message } from 'antd';
 
 class _MenuStore {
     @observable randomKey = randomString(10);
     @observable isCollapse = false;
-    @observable openKeys = [];
     @observable currentMenu = {};
     @observable selectedKeys = [];
 
     // 系统所有菜单
     @observable AllMenuList = [];
     @observable AllMenuKeys = [];
-    @observable breadcrumb = '';
     @observable menuPath = [];
 
     // 基于当前登录的角色的菜单
     @observable RoleBasedMenuList = [];
     @observable RoleUsedKeys = [];
+
+    // 给 Menu 的数组
+    // @observable RoleMenuArray = [];
 
     // 要设置的角色的信息
     @observable TargetRoleBasedMenuList = [];
@@ -29,18 +33,96 @@ class _MenuStore {
         role_name: sessionStorage.getItem('role_name')
     };
 
-    @action setMenuPath = (path) => {
-        this.menuPath = path;
-        let opkeys = [];
+    @observable name = 'alex';
+
+    @action setRoleBasedMenuList = (para) => {
+        this.RoleBasedMenuList = para;
+    };
+
+    // 计算面包屑
+    // @observable breadcrumb = '';
+
+    @computed
+    get breadcrumb() {
+        function findMenuPath(RoleBasedMenuList, currentMenukey) {
+            const findPath = (menu, key, path) => {
+                for (let i = 0; i < menu.length; i++) {
+                    const item = menu[i];
+                    path.push(item);
+                    if (item.key === key) {
+                        return path;
+                    }
+                    if (item.children) {
+                        const foundPath = findPath(item.children, key, path);
+                        if (foundPath) {
+                            return foundPath;
+                        }
+                    }
+                    path.pop();
+                }
+            };
+
+            let path = [];
+
+            const result = findPath(RoleBasedMenuList, currentMenukey, path);
+            console.log('设置路???result', result);
+            if (typeof result === 'undefined') {
+                return [];
+                // this.setMenuPath([]);
+            } else {
+                // this.setMenuPath(result);
+                return result;
+            }
+        }
+
+        let sk = null;
+        if (sessionStorage.getItem('currentMenu')) {
+            let tmp = JSON.parse(sessionStorage.getItem('currentMenu'));
+            sk = tmp.key;
+        }
+
+        console.log('sk: ', sk);
+        console.log(this.currentMenu);
+        let _path = findMenuPath(this.RoleBasedMenuList, sk);
+        console.log('计算面包屑>>>>>>>>>>>>> ', _path);
+
         let bread = '';
-        path &&
-            path.forEach((menu) => {
+        _path &&
+            _path.forEach((menu) => {
                 bread += menu.title + '/';
-                opkeys.push(menu.key);
             });
 
-        this.breadcrumb = bread.slice(0, -1);
-        this.setOpenKeys(opkeys);
+        return bread.slice(0, -1);
+        // return 'BRE';
+    }
+
+    @computed
+    get RoleMenuArray() {
+        function transformMenuArray(menuArray, handler) {
+            return menuArray.map((item) => {
+                const { key, children, title, menu, router, datagrid_code } = item;
+                const icon = IconWrapper(item.icon);
+                const transformedItem = {
+                    key,
+                    icon,
+                    ...(children && children.length > 0 && { children: transformMenuArray(children, handler) }),
+                    label: title,
+                    menu,
+                    router,
+                    datagrid_code,
+                    type: null
+                    // onClick: (event) => handler(item, event)
+                };
+                return transformedItem;
+            });
+        }
+
+        let _mit = transformMenuArray(this.RoleBasedMenuList, this.menuclickHandler);
+        return _mit;
+    }
+
+    @action setMenuPath = (path) => {
+        this.menuPath = path;
     };
 
     @action saveMenuPermission = async (rolecode, menu_level, menuid, parentid) => {
@@ -86,6 +168,35 @@ class _MenuStore {
             this.setAllMenuList(res.data);
         }
     };
+    @action.bound
+    menuclickHandler = async (menuItem, event) => {
+        console.log('event: ', event);
+        console.log('menuItem: ', menuItem);
+
+        event.domEvent.preventDefault();
+        event.domEvent.stopPropagation();
+
+        let menuClicked = menuItem;
+
+        console.log('点击的key:', menuClicked.key);
+        await this.setCurrentMenu(menuClicked);
+
+        // 重复点击相同菜单,刷新内容
+
+        if (event.key == this.currentMenu.key && window.location.href.includes(menuClicked.router)) {
+            this.freshCurrentMenuItem();
+            return;
+        }
+
+        hashHistory.push({
+            pathname: menuClicked.router,
+            state: {
+                datagrid_code: menuClicked?.datagrid_code,
+                menu: menuClicked.menu,
+                key: menuClicked.key
+            }
+        });
+    };
 
     @action
     async getMenuTreeByRoleCode(roleCode) {
@@ -96,9 +207,10 @@ class _MenuStore {
         };
         let res = await api.permission.getMenuTreeByRoleCode(params);
         if (res.code == 200) {
-            this.RoleBasedMenuList = res.data.menuList;
+            this.setRoleBasedMenuList(res.data.menuList);
+            // this.RoleMenuArray = this.transformMenuArray(res.data.menuList);
             this.RoleUsedKeys = getAllKeys(res.data.menuList);
-            this.refreshBreadcrumbs();
+            // this.refreshBreadcrumbs();
         }
     }
 
@@ -116,10 +228,9 @@ class _MenuStore {
         }
     }
 
-    @action refreshBreadcrumbs = () => {
-        let key = this.getCurrentMenuKeyFromSessionStorage();
-        let path = findMenuPath(this.RoleBasedMenuList, key);
-        this.setMenuPath(path);
+    @action refreshBreadcrumbs = async () => {
+        // let path = await this.findMenuPath();
+        // this.setMenuPath(path);
     };
 
     @action getCurrentMenuKeyFromSessionStorage = () => {
@@ -129,14 +240,6 @@ class _MenuStore {
         } else {
             return null;
         }
-    };
-
-    @action onOpenChange = (openKeys) => {
-        this.openKeys = openKeys;
-    };
-
-    @action setOpenKeys = (path) => {
-        this.openKeys = path;
     };
 
     @action clear = () => {
@@ -180,11 +283,9 @@ class _MenuStore {
         this.selectedKeys = key;
     };
 
-    @action setCurrentMenu = (menu) => {
-        // 没有菜单列表时，菜单配置为空处理
-        if (menu == [] || menu == undefined) {
-            return;
-        }
+    @action.bound
+    setCurrentMenu = (menu) => {
+        console.log(JSON.stringify(menu));
         this.setSelectedKeys([menu.key]);
         this.currentMenu = menu;
         sessionStorage.setItem('currentMenu', JSON.stringify(menu));

@@ -1,139 +1,35 @@
-// import { Menu } from 'antd';
-// import IconWrapper from '@/utils/IconWrapper';
-// import { toJS } from 'mobx';
-// import { inject, observer } from 'mobx-react';
-// import React from 'react';
-// import { hashHistory } from 'react-router';
-// import { findMenuPath } from '@/utils/tools';
-
-// @inject('MenuStore')
-// @observer
-// export default class LeftMenu extends React.Component {
-//     constructor(props) {
-//         super();
-//         props.MenuStore = props.MenuStore;
-//     }
-
-//     async menuclickHandler(menuItem, item) {
-//         console.log('Clicked: ', menuItem);
-
-//         item.domEvent.preventDefault();
-//         item.domEvent.stopPropagation();
-//         let menuClicked = toJS(menuItem);
-
-//         // 重复点击相同菜单,刷新内容
-
-//         if (item.key == props.MenuStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
-//             props.MenuStore.freshCurrentMenuItem();
-//             return;
-//         }
-
-//         await props.MenuStore.setCurrentMenu(menuClicked);
-//         await props.MenuStore.setSelectedKeys(menuClicked.key);
-//         let path = findMenuPath(props.MenuStore.RoleBasedMenuList, menuClicked.key);
-//         await props.MenuStore.setMenuPath(path);
-
-//         hashHistory.push({
-//             pathname: menuClicked.router,
-//             state: {
-//                 datagrid_code: menuClicked?.datagrid_code,
-//                 menu: menuClicked.menu,
-//                 key: menuClicked.key
-//             }
-//         });
-//     }
-
-//     getChildren(menuitem) {
-//         let one = menuitem;
-//         if (!one.children) {
-//             one.children = [];
-//         }
-
-//         return one.children.length === 0 ? (
-//             <Menu.Item key={menuitem.key} onClick={props.menuclickHandler.bind(this, one)}>
-//                 <span>{IconWrapper(one.icon)}</span>
-//                 <span id={one.menu_uuid}>{one.title}</span>
-//             </Menu.Item>
-//         ) : (
-//             <Menu.SubMenu
-//                 key={menuitem.key}
-//                 title={
-//                     <span>
-//                         <span>{IconWrapper(one.icon)} </span>
-//                         <span id={one.menu_uuid}>{one.title}</span>
-//                     </span>
-//                 }>
-//                 {one.children.map((xitem) => props.getChildren(xitem))}
-//             </Menu.SubMenu>
-//         );
-//     }
-
-//     render() {
-//         return (
-//             <div>
-//                 <div
-//                     id="logo"
-//                     style={{
-//                         display: 'flex',
-//                         height: '80px',
-//                         color: 'white',
-//                         fontSize: '18px',
-//                         fontWeight: 'bold',
-//                         justifyContent: 'center',
-//                         alignItems: 'center'
-//                     }}>
-//                     [Nanx+]
-//                 </div>
-//                 <div>
-//                     <Menu
-//                         mode="inline"
-//                         openKeys={props.MenuStore.openKeys}
-//                         theme="dark"
-//                         onOpenChange={(openKeys) => props.MenuStore.onOpenChange(openKeys)}
-//                         selectedKeys={props.MenuStore.selectedKeys}>
-//                         {props.props.menuList.map((menuitem, index) => props.getChildren(menuitem, index))}
-//                     </Menu>
-//                 </div>
-//             </div>
-//         );
-//     }
-// }
-
 import { Menu } from 'antd';
-import IconWrapper from '@/utils/IconWrapper';
-import { toJS } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
-import { findMenuPath } from '@/utils/tools';
-import { useEffect } from 'react';
+// import { findMenuPath } from '@/utils/tools';
 
 const LeftMenu = inject('MenuStore')(
     observer((props) => {
-        console.log('props: ', props);
-        // useEffect(() => {
-        //     props.MenuStore.getMenuTreeByRoleCode();
-        // }, [props.MenuStore]);
+        console.log('props菜单渲染: ', props);
 
-        const menuclickHandler = async (menuItem, item) => {
-            console.log('Clicked: ', menuItem);
+        function findItemByKey(menuArray, key) {
+            for (const item of menuArray) {
+                if (item.key === key) {
+                    return item; // 返回找到的项
+                }
 
-            item.domEvent.preventDefault();
-            item.domEvent.stopPropagation();
-            let menuClicked = toJS(menuItem);
-
-            // 重复点击相同菜单,刷新内容
-
-            if (item.key == props.MenuStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
-                props.MenuStore.freshCurrentMenuItem();
-                return;
+                // 如果有子项，递归查找
+                if (item.children && item.children.length > 0) {
+                    const foundInChildren = findItemByKey(item.children, key);
+                    if (foundInChildren) {
+                        return foundInChildren; // 返回找到的子项
+                    }
+                }
             }
 
-            await props.MenuStore.setCurrentMenu(menuClicked);
-            await props.MenuStore.setSelectedKeys(menuClicked.key);
-            let path = findMenuPath(props.MenuStore.RoleBasedMenuList, menuClicked.key);
-            await props.MenuStore.setMenuPath(path);
+            // 如果未找到匹配项，返回 null 或适当的值
+            return null;
+        }
 
+        const handleMenuClick = (a) => {
+            const menuClicked = findItemByKey(props.MenuStore.RoleMenuArray, a.key);
+            props.MenuStore.setCurrentMenu(menuClicked);
             hashHistory.push({
                 pathname: menuClicked.router,
                 state: {
@@ -142,31 +38,6 @@ const LeftMenu = inject('MenuStore')(
                     key: menuClicked.key
                 }
             });
-        };
-
-        const getChildren = (menuitem) => {
-            let one = menuitem;
-            if (!one.children) {
-                one.children = [];
-            }
-
-            return one.children.length === 0 ? (
-                <Menu.Item key={menuitem.key} onClick={menuclickHandler.bind(this, one)}>
-                    <span>{IconWrapper(one.icon)}</span>
-                    <span id={one.menu_uuid}>{one.title}</span>
-                </Menu.Item>
-            ) : (
-                <Menu.SubMenu
-                    key={menuitem.key}
-                    title={
-                        <span>
-                            <span>{IconWrapper(one.icon)} </span>
-                            <span id={one.menu_uuid}>{one.title}</span>
-                        </span>
-                    }>
-                    {one.children.map((xitem) => getChildren(xitem))}
-                </Menu.SubMenu>
-            );
         };
 
         return (
@@ -182,17 +53,14 @@ const LeftMenu = inject('MenuStore')(
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                    [Nanx+]
+                    [Nanx+] {props.MenuStore.upperCaseName}
                 </div>
                 <div>
                     <Menu
                         mode="inline"
-                        openKeys={props.MenuStore.openKeys}
                         theme="dark"
-                        onOpenChange={(openKeys) => props.MenuStore.onOpenChange(openKeys)}
-                        selectedKeys={props.MenuStore.selectedKeys}>
-                        {props.MenuStore.RoleBasedMenuList.map((menuitem, index) => getChildren(menuitem, index))}
-                    </Menu>
+                        onClick={handleMenuClick}
+                        items={props.MenuStore.RoleMenuArray}></Menu>
                 </div>
             </div>
         );
