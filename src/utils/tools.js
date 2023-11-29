@@ -51,33 +51,6 @@ export function getAllKeys(menuData) {
     return keys;
 }
 
-export function findMenuPath(menu, key) {
-    const findPath = (menu, key, path) => {
-        for (let i = 0; i < menu.length; i++) {
-            const item = menu[i];
-            path.push(item);
-            if (item.key === key) {
-                return path;
-            }
-            if (item.children) {
-                const foundPath = findPath(item.children, key, path);
-                if (foundPath) {
-                    return foundPath;
-                }
-            }
-            path.pop();
-        }
-    };
-
-    const path = [];
-    const result = findPath(menu, key, path);
-    if (typeof result === 'undefined') {
-        return [];
-    } else {
-        return result;
-    }
-}
-
 export function tryParseJSON(str) {
     if (isEmpty(str)) {
         return null;

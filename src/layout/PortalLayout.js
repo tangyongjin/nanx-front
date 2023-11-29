@@ -6,8 +6,7 @@ import IconWrapper from '@/utils/IconWrapper';
 import { hashHistory } from 'react-router';
 
 import { inject, observer } from 'mobx-react';
-import { getTargetMenuKey } from '@/utils/tools';
-import { findMenuPath } from '@/utils/tools';
+// import { getTargetMenuKey } from '@/utils/tools';
 
 const { Header, Sider, Content } = Layout;
 
@@ -67,26 +66,19 @@ const PortalLayout = inject('MenuStore')(
         };
 
         useEffect(() => {
-            const onPrev = () => {
-                let goHref = window.location.href;
-                let targetMenuKey = getTargetMenuKey(goHref);
-                let path = findMenuPath(props.MenuStore.RoleBasedMenuList, targetMenuKey);
-                if (path.length > 0) {
-                    props.MenuStore.setCurrentMenu(path[path.length - 1]);
-                    props.MenuStore.refreshBreadcrumbs();
-                }
-            };
+            // const onPrev = () => {
+            //     // let goHref = window.location.href;
+            //     // let targetMenuKey = getTargetMenuKey(goHref);
+            //     // props.MenuStore.findMenuPath();
+            // };
 
             const asyncFun = async () => {
                 await props.MenuStore.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
+                // window.addEventListener('popstate', onPrev, false);
 
-                // props.MenuStore.RoleBasedMenuList;
-                const menuItems = transformMenuArray(props.MenuStore.RoleBasedMenuList);
-                setMenuItems(menuItems);
-                window.addEventListener('popstate', onPrev, false);
-                return () => {
-                    window.removeEventListener('popstate');
-                };
+                // return () => {
+                //     window.removeEventListener('popstate');
+                // };
             };
             asyncFun();
         }, [props.MenuStore]);
@@ -95,9 +87,7 @@ const PortalLayout = inject('MenuStore')(
             <Layout style={{ minHeight: '100vh', minWidth: '100vh' }}>
                 <Sider collapsed={props.MenuStore.isCollapse}>
                     <LeftMenu
-                        collapsed={props.MenuStore.isCollapse}
                         className="portal_menu"
-                        menuItems={menuItems}
                         style={{ padding: 0, height: '100vh', overflowY: 'scroll' }}
                         width={300}
                     />

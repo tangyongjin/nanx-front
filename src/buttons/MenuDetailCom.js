@@ -78,10 +78,10 @@ export default class MenuDetailCom extends React.Component {
     };
 
     render() {
-        const URRender = (text) => {
+        const URRender = (text, idx) => {
             if (text == '角色') {
                 return (
-                    <div style={{ verticalAlign: 'middle', display: 'flex' }}>
+                    <div key={idx} style={{ verticalAlign: 'middle', display: 'flex' }}>
                         <BsPeople style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                         <div style={{ fontWeight: 'bold' }}> {text}</div>
                     </div>
@@ -89,7 +89,7 @@ export default class MenuDetailCom extends React.Component {
             }
             if (text == '用户') {
                 return (
-                    <div style={{ verticalAlign: 'middle', display: 'flex' }}>
+                    <div key={idx} style={{ verticalAlign: 'middle', display: 'flex' }}>
                         <BsPerson style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                         <div> {text}</div>
                     </div>
@@ -121,12 +121,12 @@ export default class MenuDetailCom extends React.Component {
                 }
             }
         ];
-
+        console.log(toJS(this.store.combinedArray));
         return (
             <div>
                 <Table
                     size="small"
-                    rowKey="id"
+                    rowKey={(row) => row.name}
                     pagination={false}
                     columns={columns}
                     dataSource={toJS(this.store.combinedArray)}></Table>

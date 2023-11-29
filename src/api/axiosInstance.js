@@ -24,7 +24,7 @@ function nowString() {
 
 axiosInstance.interceptors.request.use(
     function (config) {
-        console.log('axiosInstance配置: ', config);
+        // console.log('axiosInstance配置: ', config);
 
         const requestId = uuidv4();
         config.requestId = requestId + config.url;

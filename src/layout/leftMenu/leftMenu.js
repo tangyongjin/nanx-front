@@ -1,74 +1,53 @@
 import { Menu } from 'antd';
-import IconWrapper from '@/utils/IconWrapper';
-import { toJS } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
-import { findMenuPath } from '@/utils/tools';
+import { randomString } from '@/utils/tools';
 
-@inject('MenuStore')
-@observer
-export default class LeftMenu extends React.Component {
-    constructor(props) {
-        super();
-        this.MenuStore = props.MenuStore;
-    }
+// import { findMenuPath } from '@/utils/tools';
 
-    async menuclickHandler(menuItem, event) {
-        console.log('event: ', event);
-        console.log('menuItem: ', menuItem);
+const LeftMenu = inject('MenuStore')(
+    observer((props) => {
+        console.log('props菜单渲染: ', props);
 
-        event.domEvent.preventDefault();
-        event.domEvent.stopPropagation();
-        let menuClicked = menuItem;
+        function findItemByKey(menuArray, key) {
+            for (const item of menuArray) {
+                if (item.key === key) {
+                    return item; // 返回找到的项
+                }
 
-        // 重复点击相同菜单,刷新内容
+                // 如果有子项，递归查找
+                if (item.children && item.children.length > 0) {
+                    const foundInChildren = findItemByKey(item.children, key);
+                    if (foundInChildren) {
+                        return foundInChildren; // 返回找到的子项
+                    }
+                }
+            }
 
-        if (event.key == this.MenuStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
-            this.MenuStore.freshCurrentMenuItem();
-            return;
+            // 如果未找到匹配项，返回 null 或适当的值
+            return null;
         }
 
-        await this.MenuStore.setCurrentMenu(menuClicked);
-        await this.MenuStore.setSelectedKeys(menuClicked.key);
-        let path = findMenuPath(this.MenuStore.RoleBasedMenuList, menuClicked.key);
-        console.log('path: ', path);
-
-        await this.MenuStore.setMenuPath(path);
-
-        hashHistory.push({
-            pathname: menuClicked.router,
-            state: {
-                datagrid_code: menuClicked?.datagrid_code,
-                menu: menuClicked.menu,
-                key: menuClicked.key
+        const handleMenuClick = (item) => {
+            const menuClicked = findItemByKey(props.MenuStore.RoleMenuArray, item.key);
+            if (item.key == props.MenuStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
+                console.log('点击相同菜单');
+                props.MenuStore.freshRandomKey();
+                return;
             }
-        });
-    }
 
-    transformMenuArray(menuArray) {
-        return menuArray.map((item) => {
-            const { key, children, title, menu, router, datagrid_code } = item;
-            const icon = IconWrapper(item.icon);
+            props.MenuStore.setCurrentMenu(menuClicked);
 
-            const transformedItem = {
-                key,
-                icon,
-                ...(children && children.length > 0 && { children: this.transformMenuArray(children) }),
-                label: title,
-                menu,
-                router,
-                datagrid_code,
-                type: null,
-                onClick: (event) => this.menuclickHandler(item, event)
-            };
-
-            return transformedItem;
-        });
-    }
-
-    render() {
-        // const menuItems = this.transformMenuArray(toJS(this.props.menuList));
+            hashHistory.push({
+                pathname: menuClicked.router,
+                state: {
+                    datagrid_code: menuClicked?.datagrid_code,
+                    menu: menuClicked.menu,
+                    key: menuClicked.key
+                }
+            });
+        };
 
         return (
             <div>
@@ -83,18 +62,24 @@ export default class LeftMenu extends React.Component {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                    [Nanx+]
+                    [Nanx+] {props.MenuStore.upperCaseName}
                 </div>
                 <div>
                     <Menu
                         mode="inline"
-                        openKeys={this.MenuStore.openKeys}
                         theme="dark"
+<<<<<<< HEAD
                         onOpenChange={(openKeys) => this.MenuStore.onOpenChange(openKeys)}
                         selectedKeys={this.MenuStore.selectedKeys}
                         items={this.props.menuItems}></Menu>
+=======
+                        onClick={handleMenuClick}
+                        items={props.MenuStore.RoleMenuArray}></Menu>
+>>>>>>> menu-issue
                 </div>
             </div>
         );
-    }
-}
+    })
+);
+
+export default LeftMenu;
