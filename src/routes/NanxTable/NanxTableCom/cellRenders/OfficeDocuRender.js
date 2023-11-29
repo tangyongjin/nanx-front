@@ -20,8 +20,6 @@ const OfficeDocuRender = (text) => {
 
     const segments = _download.split('/');
     const lastSegment = segments[segments.length - 1];
-    console.log('lastSegment: ', lastSegment);
-
     const short = lastSegment.length > 20 ? `${lastSegment.slice(-20)}` : lastSegment;
     console.log('short: ', short);
 

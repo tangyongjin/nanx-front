@@ -38,47 +38,78 @@ class _MenuStore {
         this.RoleBasedMenuList = para;
     };
 
+    findMenuPath(RoleBasedMenuList, currentMenukey) {
+        const findPath = (menu, key, path) => {
+            for (let i = 0; i < menu.length; i++) {
+                const item = menu[i];
+                path.push(item);
+                if (item.key === key) {
+                    return path;
+                }
+                if (item.children) {
+                    const foundPath = findPath(item.children, key, path);
+                    if (foundPath) {
+                        return foundPath;
+                    }
+                }
+                path.pop();
+            }
+        };
+
+        let path = [];
+
+        const result = findPath(RoleBasedMenuList, currentMenukey, path);
+        console.log('设置路???result', result);
+        if (typeof result === 'undefined') {
+            return [];
+        } else {
+            return result;
+        }
+    }
+
     // 计算面包屑,
     // @observable breadcrumb = '';
 
     @computed
     get breadcrumb() {
-        function findMenuPath(RoleBasedMenuList, currentMenukey) {
-            const findPath = (menu, key, path) => {
-                for (let i = 0; i < menu.length; i++) {
-                    const item = menu[i];
-                    path.push(item);
-                    if (item.key === key) {
-                        return path;
-                    }
-                    if (item.children) {
-                        const foundPath = findPath(item.children, key, path);
-                        if (foundPath) {
-                            return foundPath;
-                        }
-                    }
-                    path.pop();
-                }
-            };
+        // function findMenuPath(RoleBasedMenuList, currentMenukey) {
+        //     const findPath = (menu, key, path) => {
+        //         for (let i = 0; i < menu.length; i++) {
+        //             const item = menu[i];
+        //             path.push(item);
+        //             if (item.key === key) {
+        //                 return path;
+        //             }
+        //             if (item.children) {
+        //                 const foundPath = findPath(item.children, key, path);
+        //                 if (foundPath) {
+        //                     return foundPath;
+        //                 }
+        //             }
+        //             path.pop();
+        //         }
+        //     };
 
-            let path = [];
+        //     let path = [];
 
-            const result = findPath(RoleBasedMenuList, currentMenukey, path);
-            console.log('设置路???result', result);
-            if (typeof result === 'undefined') {
-                return [];
-            } else {
-                return result;
-            }
-        }
+        //     const result = findPath(RoleBasedMenuList, currentMenukey, path);
+        //     console.log('设置路???result', result);
+        //     if (typeof result === 'undefined') {
+        //         return [];
+        //     } else {
+        //         return result;
+        //     }
+        // }
 
-        let sk = null;
-        if (sessionStorage.getItem('currentMenu')) {
-            let tmp = JSON.parse(sessionStorage.getItem('currentMenu'));
-            sk = tmp.key;
-        }
+        // let sk = null;
+        // if (sessionStorage.getItem('currentMenu')) {
+        //     let tmp = JSON.parse(sessionStorage.getItem('currentMenu'));
+        //     sk = tmp.key;
+        // }
 
-        let _path = findMenuPath(this.RoleBasedMenuList, sk);
+        let currentMenyKey = this.currentMenu.key;
+
+        let _path = this.findMenuPath(this.RoleBasedMenuList, currentMenyKey);
         let bread = '';
         _path &&
             _path.forEach((menu) => {

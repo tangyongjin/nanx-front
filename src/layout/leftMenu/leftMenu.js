@@ -2,6 +2,8 @@ import { Menu } from 'antd';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
+import { randomString } from '@/utils/tools';
+
 // import { findMenuPath } from '@/utils/tools';
 
 const LeftMenu = inject('MenuStore')(
@@ -27,15 +29,15 @@ const LeftMenu = inject('MenuStore')(
             return null;
         }
 
-        const handleMenuClick = (a) => {
-            const menuClicked = findItemByKey(props.MenuStore.RoleMenuArray, a.key);
-            props.MenuStore.setCurrentMenu(menuClicked);
-            console.log(a.key);
-
-            if (a.key == menuClicked.key && window.location.href.includes(menuClicked.router)) {
+        const handleMenuClick = (item) => {
+            const menuClicked = findItemByKey(props.MenuStore.RoleMenuArray, item.key);
+            if (item.key == props.MenuStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
                 console.log('点击相同菜单');
                 props.MenuStore.freshRandomKey();
+                return;
             }
+
+            props.MenuStore.setCurrentMenu(menuClicked);
 
             hashHistory.push({
                 pathname: menuClicked.router,
