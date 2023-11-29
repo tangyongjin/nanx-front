@@ -30,6 +30,13 @@ const LeftMenu = inject('MenuStore')(
         const handleMenuClick = (a) => {
             const menuClicked = findItemByKey(props.MenuStore.RoleMenuArray, a.key);
             props.MenuStore.setCurrentMenu(menuClicked);
+            console.log(a.key);
+
+            if (a.key == menuClicked.key && window.location.href.includes(menuClicked.router)) {
+                console.log('点击相同菜单');
+                props.MenuStore.freshRandomKey();
+            }
+
             hashHistory.push({
                 pathname: menuClicked.router,
                 state: {

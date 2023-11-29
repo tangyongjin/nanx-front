@@ -1,7 +1,6 @@
 import { observable, action, computed } from 'mobx';
 import api from '../api/api';
 import IconWrapper from '@/utils/IconWrapper';
-import { hashHistory } from 'react-router';
 
 import { randomString, getAllKeys } from '@/utils/tools';
 import { message } from 'antd';
@@ -39,7 +38,7 @@ class _MenuStore {
         this.RoleBasedMenuList = para;
     };
 
-    // 计算面包屑
+    // 计算面包屑,
     // @observable breadcrumb = '';
 
     @computed
@@ -68,9 +67,7 @@ class _MenuStore {
             console.log('设置路???result', result);
             if (typeof result === 'undefined') {
                 return [];
-                // this.setMenuPath([]);
             } else {
-                // this.setMenuPath(result);
                 return result;
             }
         }
@@ -81,49 +78,39 @@ class _MenuStore {
             sk = tmp.key;
         }
 
-        console.log('sk: ', sk);
-        console.log(this.currentMenu);
         let _path = findMenuPath(this.RoleBasedMenuList, sk);
-        console.log('计算面包屑>>>>>>>>>>>>> ', _path);
-
         let bread = '';
         _path &&
             _path.forEach((menu) => {
                 bread += menu.title + '/';
             });
-
         return bread.slice(0, -1);
-        // return 'BRE';
     }
 
+    // 自动计算菜单项给 antd Menu
     @computed
     get RoleMenuArray() {
-        function transformMenuArray(menuArray, handler) {
+        function transformMenuArray(menuArray) {
             return menuArray.map((item) => {
                 const { key, children, title, menu, router, datagrid_code } = item;
                 const icon = IconWrapper(item.icon);
                 const transformedItem = {
                     key,
                     icon,
-                    ...(children && children.length > 0 && { children: transformMenuArray(children, handler) }),
+                    ...(children && children.length > 0 && { children: transformMenuArray(children) }),
                     label: title,
                     menu,
                     router,
                     datagrid_code,
                     type: null
-                    // onClick: (event) => handler(item, event)
                 };
                 return transformedItem;
             });
         }
 
-        let _mit = transformMenuArray(this.RoleBasedMenuList, this.menuclickHandler);
+        let _mit = transformMenuArray(this.RoleBasedMenuList);
         return _mit;
     }
-
-    @action setMenuPath = (path) => {
-        this.menuPath = path;
-    };
 
     @action saveMenuPermission = async (rolecode, menu_level, menuid, parentid) => {
         let params = {
@@ -168,35 +155,6 @@ class _MenuStore {
             this.setAllMenuList(res.data);
         }
     };
-    @action.bound
-    menuclickHandler = async (menuItem, event) => {
-        console.log('event: ', event);
-        console.log('menuItem: ', menuItem);
-
-        event.domEvent.preventDefault();
-        event.domEvent.stopPropagation();
-
-        let menuClicked = menuItem;
-
-        console.log('点击的key:', menuClicked.key);
-        await this.setCurrentMenu(menuClicked);
-
-        // 重复点击相同菜单,刷新内容
-
-        if (event.key == this.currentMenu.key && window.location.href.includes(menuClicked.router)) {
-            this.freshCurrentMenuItem();
-            return;
-        }
-
-        hashHistory.push({
-            pathname: menuClicked.router,
-            state: {
-                datagrid_code: menuClicked?.datagrid_code,
-                menu: menuClicked.menu,
-                key: menuClicked.key
-            }
-        });
-    };
 
     @action
     async getMenuTreeByRoleCode(roleCode) {
@@ -208,9 +166,7 @@ class _MenuStore {
         let res = await api.permission.getMenuTreeByRoleCode(params);
         if (res.code == 200) {
             this.setRoleBasedMenuList(res.data.menuList);
-            // this.RoleMenuArray = this.transformMenuArray(res.data.menuList);
             this.RoleUsedKeys = getAllKeys(res.data.menuList);
-            // this.refreshBreadcrumbs();
         }
     }
 
@@ -227,11 +183,6 @@ class _MenuStore {
             this.TargetRoleUsedKeys = getAllKeys(res.data.menuList);
         }
     }
-
-    @action refreshBreadcrumbs = async () => {
-        // let path = await this.findMenuPath();
-        // this.setMenuPath(path);
-    };
 
     @action getCurrentMenuKeyFromSessionStorage = () => {
         if (sessionStorage.getItem('currentMenu')) {
@@ -250,7 +201,7 @@ class _MenuStore {
         sessionStorage.clear();
     };
 
-    @action freshCurrentMenuItem = () => {
+    @action freshRandomKey = () => {
         setTimeout(() => {
             this.randomKey = randomString(10);
         }, 0);
