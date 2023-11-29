@@ -32,20 +32,7 @@ class _MenuStore {
         role_name: sessionStorage.getItem('role_name')
     };
 
-<<<<<<< HEAD
-    @action setMenuPath = (path) => {
-        this.menuPath = path;
-        let opkeys = [];
-        let bread = '';
-        path &&
-            path.forEach((menu) => {
-                bread += menu.title + '/';
-                console.log('menu.title: ', menu.title);
-                opkeys.push(menu.key);
-            });
-=======
     @observable name = 'alex';
->>>>>>> menu-issue
 
     @action setRoleBasedMenuList = (para) => {
         this.RoleBasedMenuList = para;
