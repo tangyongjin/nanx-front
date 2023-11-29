@@ -25,6 +25,24 @@ export function getTargetMenuKey(url) {
     }
 }
 
+export function findItemByKey(menuArray, key) {
+    for (const item of menuArray) {
+        if (item.key === key) {
+            return item; // 返回找到的项
+        }
+
+        // 如果有子项，递归查找
+        if (item.children && item.children.length > 0) {
+            const foundInChildren = findItemByKey(item.children, key);
+            if (foundInChildren) {
+                return foundInChildren; // 返回找到的子项
+            }
+        }
+    }
+    // 如果未找到匹配项，返回 null 或适当的值
+    return null;
+}
+
 export function getAllKeys(menuData) {
     let keys = [];
 
@@ -77,4 +95,33 @@ export function getBase64(img, callback) {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
     reader.readAsDataURL(img);
+}
+
+export function findMenuPath(RoleBasedMenuList, currentMenukey) {
+    const findPath = (menu, key, path) => {
+        for (let i = 0; i < menu.length; i++) {
+            const item = menu[i];
+            path.push(item);
+            if (item.key === key) {
+                return path;
+            }
+            if (item.children) {
+                const foundPath = findPath(item.children, key, path);
+                if (foundPath) {
+                    return foundPath;
+                }
+            }
+            path.pop();
+        }
+    };
+
+    let path = [];
+
+    const result = findPath(RoleBasedMenuList, currentMenukey, path);
+    console.log('设置路???result', result);
+    if (typeof result === 'undefined') {
+        return [];
+    } else {
+        return result;
+    }
 }

@@ -3,26 +3,33 @@ import LeftMenu from './leftMenu/leftMenu';
 import Navbar from './navbar//Navbar';
 import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
-// import { getTargetMenuKey } from '@/utils/tools';
+import { getTargetMenuKey, findItemByKey } from '@/utils/tools';
 
 const { Header, Sider, Content } = Layout;
 
 const PortalLayout = inject('MenuStore')(
     observer((props) => {
+        window.onload = () => {
+            console.log('浏览器刷新');
+
+            let storeageMenu = props.MenuStore.getCurrentMenuKeyFromSessionStorage();
+            props.MenuStore.setCurrentMenu(storeageMenu);
+        };
+
         useEffect(() => {
-            // const onPrev = () => {
-            //     // let goHref = window.location.href;
-            //     // let targetMenuKey = getTargetMenuKey(goHref);
-            //     // props.MenuStore.findMenuPath();
-            // };
+            const onPrev = () => {
+                let goHref = window.location.href;
+                let targetMenuKey = getTargetMenuKey(goHref);
+                let targetMenu = findItemByKey(props.MenuStore.RoleMenuArray, targetMenuKey);
+                props.MenuStore.setCurrentMenu(targetMenu);
+            };
 
             const asyncFun = async () => {
                 await props.MenuStore.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
-                // window.addEventListener('popstate', onPrev, false);
-
-                // return () => {
-                //     window.removeEventListener('popstate');
-                // };
+                window.addEventListener('popstate', onPrev, false);
+                return () => {
+                    window.removeEventListener('popstate');
+                };
             };
             asyncFun();
         }, [props.MenuStore]);

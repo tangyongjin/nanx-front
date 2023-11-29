@@ -1,8 +1,7 @@
 import { observable, action, computed } from 'mobx';
 import api from '../api/api';
 import IconWrapper from '@/utils/IconWrapper';
-
-import { randomString, getAllKeys } from '@/utils/tools';
+import { randomString, getAllKeys, findMenuPath } from '@/utils/tools';
 import { message } from 'antd';
 
 class _MenuStore {
@@ -20,9 +19,6 @@ class _MenuStore {
     @observable RoleBasedMenuList = [];
     @observable RoleUsedKeys = [];
 
-    // 给 Menu 的数组
-    // @observable RoleMenuArray = [];
-
     // 要设置的角色的信息
     @observable TargetRoleBasedMenuList = [];
     @observable TargetRoleUsedKeys = [];
@@ -32,84 +28,47 @@ class _MenuStore {
         role_name: sessionStorage.getItem('role_name')
     };
 
-    @observable name = 'alex';
-
     @action setRoleBasedMenuList = (para) => {
         this.RoleBasedMenuList = para;
     };
 
-    findMenuPath(RoleBasedMenuList, currentMenukey) {
-        const findPath = (menu, key, path) => {
-            for (let i = 0; i < menu.length; i++) {
-                const item = menu[i];
-                path.push(item);
-                if (item.key === key) {
-                    return path;
-                }
-                if (item.children) {
-                    const foundPath = findPath(item.children, key, path);
-                    if (foundPath) {
-                        return foundPath;
-                    }
-                }
-                path.pop();
-            }
-        };
+    // findMenuPath(RoleBasedMenuList, currentMenukey) {
+    //     const findPath = (menu, key, path) => {
+    //         for (let i = 0; i < menu.length; i++) {
+    //             const item = menu[i];
+    //             path.push(item);
+    //             if (item.key === key) {
+    //                 return path;
+    //             }
+    //             if (item.children) {
+    //                 const foundPath = findPath(item.children, key, path);
+    //                 if (foundPath) {
+    //                     return foundPath;
+    //                 }
+    //             }
+    //             path.pop();
+    //         }
+    //     };
 
-        let path = [];
+    //     let path = [];
 
-        const result = findPath(RoleBasedMenuList, currentMenukey, path);
-        console.log('设置路???result', result);
-        if (typeof result === 'undefined') {
-            return [];
-        } else {
-            return result;
-        }
-    }
+    //     const result = findPath(RoleBasedMenuList, currentMenukey, path);
+    //     console.log('设置路???result', result);
+    //     if (typeof result === 'undefined') {
+    //         return [];
+    //     } else {
+    //         return result;
+    //     }
+    // }
 
     // 计算面包屑,
     // @observable breadcrumb = '';
 
     @computed
     get breadcrumb() {
-        // function findMenuPath(RoleBasedMenuList, currentMenukey) {
-        //     const findPath = (menu, key, path) => {
-        //         for (let i = 0; i < menu.length; i++) {
-        //             const item = menu[i];
-        //             path.push(item);
-        //             if (item.key === key) {
-        //                 return path;
-        //             }
-        //             if (item.children) {
-        //                 const foundPath = findPath(item.children, key, path);
-        //                 if (foundPath) {
-        //                     return foundPath;
-        //                 }
-        //             }
-        //             path.pop();
-        //         }
-        //     };
-
-        //     let path = [];
-
-        //     const result = findPath(RoleBasedMenuList, currentMenukey, path);
-        //     console.log('设置路???result', result);
-        //     if (typeof result === 'undefined') {
-        //         return [];
-        //     } else {
-        //         return result;
-        //     }
-        // }
-
-        // let sk = null;
-        // if (sessionStorage.getItem('currentMenu')) {
-        //     let tmp = JSON.parse(sessionStorage.getItem('currentMenu'));
-        //     sk = tmp.key;
-        // }
-
         let currentMenyKey = this.currentMenu.key;
 
-        let _path = this.findMenuPath(this.RoleBasedMenuList, currentMenyKey);
+        let _path = findMenuPath(this.RoleBasedMenuList, currentMenyKey);
         let bread = '';
         _path &&
             _path.forEach((menu) => {
@@ -118,6 +77,7 @@ class _MenuStore {
         return bread.slice(0, -1);
     }
 
+    // 给 Menu 的数组
     // 自动计算菜单项给 antd Menu
     @computed
     get RoleMenuArray() {
@@ -218,7 +178,7 @@ class _MenuStore {
     @action getCurrentMenuKeyFromSessionStorage = () => {
         if (sessionStorage.getItem('currentMenu')) {
             let tmp = JSON.parse(sessionStorage.getItem('currentMenu'));
-            return tmp.key;
+            return tmp;
         } else {
             return null;
         }
