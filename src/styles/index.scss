@@ -178,8 +178,18 @@ span.anticon.anticon-exclamation-circle {
     display: flex;
     align-items: center;
     height: 44px;
-    justify-content: flex-start; // 靠左对齐
-    flex-direction: row;
+}
+
+.formItemBig {
+    display: flex;
+    align-items: center;
+    height: 44px;
+}
+
+.formItem svg {
+    display: flex;
+    align-items: center;
+    height: 44px;
 }
 
 .formItem:first-child {
@@ -187,20 +197,12 @@ span.anticon.anticon-exclamation-circle {
     /* 第一个 formItem 固定宽度 */
 }
 
-.formItemBig {
-    display: flex;
-    align-items: center;
-    /* Align items vertically in the center */
-    height: 44px;
-    width: 676px !important;
-}
-
-.formItem svg {
-    vertical-align: middle;
+.longInput {
+    width: 696px !important;
 }
 
 div.longSelect {
-    width: 676px !important;
+    width: 668px !important;
 }
 
 .ant-tabs-tab-active {
@@ -209,14 +211,6 @@ div.longSelect {
 
 .ant-tabs-tab-active > div {
     color: #d3e1d6 !important;
-}
-
-/** hero icons */
-
-.w-5 {
-    height: 20px;
-    width: 20px;
-    margin-right: 4px;
 }
 
 /* uform css hack */
@@ -371,16 +365,13 @@ div.formItem svg {
     align-items: center;
 }
 
- // 表格选中后的背景颜色
+// 表格选中后的背景颜色
 .ant-table-row-selected > td {
     color: white !important;
     background: rgb(6, 48, 8) !important;
 }
 
-
 .ant-table-row-selected > td > a {
     color: white !important;
     background: rgb(6, 48, 8) !important;
 }
-
- 

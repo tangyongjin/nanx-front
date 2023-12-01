@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Input, Select, Button, Popover } from 'antd';
 import { observer, inject } from 'mobx-react';
 import showJsonTree from '@/component/jsonTree.js';
-import { VscSymbolNamespace } from 'react-icons/vsc';
 
 import { BsBraces, BsFillQuestionCircleFill } from 'react-icons/bs';
 import { BsGearWideConnected } from 'react-icons/bs';
@@ -115,10 +114,10 @@ const PluginCfg = inject('GridConfigStore')(
                 {willShowParaComponent && (
                     <div className="fromBox">
                         <div className="formItem">
-                            <VscSymbolNamespace />
+                            <BsBraces style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                             插件参数(json)
                         </div>
-                        <div className="formItemBig">
+                        <div className="formItem longInput">
                             <Input
                                 disabled={props.col.Field === 'id'}
                                 value={props.col.uform_para || TplFromCfg}

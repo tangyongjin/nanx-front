@@ -121,7 +121,7 @@ const InitValueCfg = inject('GridConfigStore')(
                             初始值参数
                         </div>
 
-                        <div className="formItemBig">
+                        <div className="formItem longInput">
                             <Input
                                 disabled={props.col.Field == 'id'}
                                 value={props.col.defaultv_para || TplFromCfg}

@@ -21,7 +21,7 @@ class ColRenderCfg extends React.Component {
                     <BsCodeSquare style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                     列渲染函数
                 </div>
-                <div className="formItem">
+                <div className="formItemBig">
                     <Select
                         style={{ width: '200px' }}
                         value={this.props.col.handler}

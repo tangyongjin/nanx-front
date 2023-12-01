@@ -16,7 +16,7 @@ class PluginCfg extends React.Component {
                     <BsCardList style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                     数据字典
                 </div>
-                <div className="formItem">
+                <div className="formItemBig">
                     <Select
                         style={{ width: '200px' }}
                         value={this.props.col.category}
