@@ -56,14 +56,14 @@ const OfficeDocuRender = (text) => {
     console.log('docuType: ', docuIcon);
 
     return (
-        <div>
+        <>
             <a style={{ color: 'black' }} href={_download}>
                 <span className="office-docu-title">
                     {docuIcon}
                     {short}
                 </span>
             </a>
-        </div>
+        </>
     );
 };
 export default OfficeDocuRender;

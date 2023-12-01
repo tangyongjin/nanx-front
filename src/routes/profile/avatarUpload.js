@@ -38,6 +38,7 @@ const AvatarUpload = () => {
             <Form labelCol={{ span: 5 }} wrapperCol={{ span: 4 }}>
                 <Form.Item label="上传头像">
                     <FileUploder
+                        buttonWidth="70px"
                         callbackRender={uploadCallbackRender}
                         fileType="img"
                         showProgress={true}

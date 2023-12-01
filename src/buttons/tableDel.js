@@ -38,13 +38,7 @@ export default class DeleteData extends React.Component {
                 style: { color: 'red', backgroundColor: '#343c41', borderColor: '#343c41' }
             },
             cancelButtonProps: {
-                danger: true,
-                classNames: 'nanx-danger',
-                icon: <BsPeople />,
-                style: {
-                    color: '#343c41',
-                    borderColor: '#343c41'
-                }
+                danger: true
             }
         });
     }

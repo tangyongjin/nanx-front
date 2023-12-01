@@ -26,9 +26,10 @@ export default class GridFieldMnt extends React.Component {
         } else {
             let record = selectedRows[0];
             this.props.NanxTableStore.showButtonModal();
-            this.props.GridConfigStore.setCurrentActcode(toJS(record).datagrid_code);
+            this.props.GridConfigStore.setCurrentDataGridCode(toJS(record).datagrid_code);
             this.props.GridConfigStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
             this.props.GridConfigStore.setCurrentBasetable(toJS(record).base_table);
+            this.props.GridConfigStore.initAll();
             this.props.GridConfigStore.prepareDataGirdEnv();
         }
     }

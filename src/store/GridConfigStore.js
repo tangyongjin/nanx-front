@@ -33,7 +33,7 @@ class GridConfigStore {
         this.getTriggerGroups();
     }
 
-    @action setCurrentActcode = (DataGridCode) => {
+    @action setCurrentDataGridCode = (DataGridCode) => {
         this.DataGridCode = DataGridCode;
     };
 

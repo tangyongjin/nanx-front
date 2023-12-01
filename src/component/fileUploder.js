@@ -111,6 +111,10 @@ const FileUploder = (props) => {
         onSuccess('Ok');
     };
 
+    console.log(props);
+    const buttonwidth = props?.buttonWidth ? props.buttonWidth : 'auto';
+    console.log('buttonwidth: ', buttonwidth);
+
     return (
         <span>
             <Upload
@@ -119,7 +123,7 @@ const FileUploder = (props) => {
                 showUploadList={false}
                 beforeUpload={props.fileType == 'img' ? checkImageTypeAnd2mSize : checkDocuTypeAnd10mSize}
                 onChange={handleChange}>
-                <Button>
+                <Button style={{ width: buttonwidth }}>
                     <BsCloudUploadFill style={{ verticalAlign: '-2px' }} />
                 </Button>
             </Upload>

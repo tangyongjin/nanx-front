@@ -25,8 +25,14 @@ export default class NavDropDown extends React.Component {
             onOk: () => this.logout(),
             cancelText: '取消',
             okText: '确定',
-            okButtonProps: { style: { backgroundColor: '#343c41', color: '#fff', borderColor: '#343c41' } },
-            cancelButtonProps: { style: { color: '#174a02', borderColor: '#343c41' } }
+
+            okButtonProps: {
+                type: 'primary',
+                style: { backgroundColor: '#343c41', color: '#fff', borderColor: '#343c41' }
+            },
+            cancelButtonProps: {
+                danger: true
+            }
         });
     }
 
@@ -67,7 +73,7 @@ export default class NavDropDown extends React.Component {
                         onClick
                     }}>
                     <div>
-                        <span style={{ paddingRight: '5px', color: '#97a8be', fontSize: '14px' }}>
+                        <span className="nanx-role">
                             {sessionStorage.getItem('staff_name') + ' / ' + sessionStorage.getItem('role_name')}
                         </span>
                         <img
