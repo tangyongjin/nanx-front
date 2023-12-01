@@ -8,6 +8,8 @@ const LeftMenu = inject('MenuStore')(
         console.log('props菜单渲染: ', props);
 
         const handleMenuClick = (item) => {
+            console.log(props.MenuStore);
+
             const menuClicked = findItemByKey(props.MenuStore.RoleMenuArray, item.key);
             if (item.key == props.MenuStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
                 console.log('点击相同菜单');
@@ -15,13 +17,12 @@ const LeftMenu = inject('MenuStore')(
                 return;
             }
 
-            props.MenuStore.setCurrentMenu(menuClicked);
+            props.MenuStore.setCurrentMenu(menuClicked, 'handleMenuClick');
 
             hashHistory.push({
                 pathname: menuClicked.router,
                 state: {
                     datagrid_code: menuClicked?.datagrid_code,
-                    menu: menuClicked.menu,
                     key: menuClicked.key
                 }
             });

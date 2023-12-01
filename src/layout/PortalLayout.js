@@ -11,9 +11,8 @@ const PortalLayout = inject('MenuStore')(
     observer((props) => {
         window.onload = () => {
             console.log('浏览器刷新');
-
             let storeageMenu = props.MenuStore.getCurrentMenuKeyFromSessionStorage();
-            props.MenuStore.setCurrentMenu(storeageMenu);
+            props.MenuStore.setCurrentMenu(storeageMenu, '浏览器刷新');
         };
 
         useEffect(() => {
@@ -21,7 +20,10 @@ const PortalLayout = inject('MenuStore')(
                 let goHref = window.location.href;
                 let targetMenuKey = getTargetMenuKey(goHref);
                 let targetMenu = findItemByKey(props.MenuStore.RoleMenuArray, targetMenuKey);
-                props.MenuStore.setCurrentMenu(targetMenu);
+                // 点击profile 会找不到 targetMenu
+                if (targetMenu) {
+                    props.MenuStore.setCurrentMenu(targetMenu, 'onPrev');
+                }
             };
 
             const asyncFun = async () => {

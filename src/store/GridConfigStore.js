@@ -3,10 +3,6 @@ import { message } from 'antd';
 import api from '../api/api';
 
 class GridConfigStore {
-    constructor() {
-        this.initAll();
-    }
-
     @observable dataGrids = [];
     @observable biztableList = [];
     @observable plugins = [];
@@ -21,7 +17,6 @@ class GridConfigStore {
     @observable relatedtable = '';
 
     @action prepareDataGirdEnv = async () => {
-        // await this.initAll();
         await this.getDataGridConfigure();
     };
 

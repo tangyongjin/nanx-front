@@ -158,10 +158,9 @@ class _NanxTableStore {
 
     @action getTableColumns = () => {};
     @action setTableColumns = (cols) => (this.tableColumns = cols);
-
     @action hasTableEditor() {
         for (let key in this.formCfg.properties) {
-            if (this.formCfg.properties[key].type === 'TableEditor') {
+            if (this.formCfg.properties[key].type === 'UTableEditor') {
                 return true;
             }
         }

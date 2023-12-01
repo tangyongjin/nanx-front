@@ -2,8 +2,9 @@ import React from 'react';
 import { Input as AntInput, Button, message } from 'antd';
 import { compose, mapStyledProps, mapTextComponent } from './uformHelpers/UFormUtils';
 import { registerFormField, connect } from '@uform/react';
-import { CloudDownloadOutlined, FunctionOutlined } from '@ant-design/icons';
 import { tryParseJSON } from '@/utils/tools';
+import { VscLink } from 'react-icons/vsc';
+import { VscGitFetch } from 'react-icons/vsc';
 
 import api from '@/api/api';
 
@@ -83,7 +84,11 @@ const WrapperAntStringComomnet = (TarGet) => {
                             }
                         }}
                         style={{ marginLeft: '5px' }}>
-                        {this.props?.default_v == 'RemoteFetchAlone' ? <CloudDownloadOutlined /> : <FunctionOutlined />}
+                        {this.props?.default_v == 'RemoteFetchAlone' ? (
+                            <VscGitFetch style={{ verticalAlign: '-2px' }} />
+                        ) : (
+                            <VscLink style={{ verticalAlign: '-2px' }} />
+                        )}
                     </Button>
                 </div>
             );

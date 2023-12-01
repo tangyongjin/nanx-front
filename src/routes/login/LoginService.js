@@ -1,6 +1,7 @@
 import decode from 'jwt-decode';
 import { hashHistory } from 'react-router';
-import api from '../../api/api';
+import api from '@/api/api';
+import { getDefaultMenuItem } from '@/utils/tools';
 import MenuStore from '@/store/MenuStore';
 import UserStore from '@/store/UserStore';
 import { message } from 'antd';
@@ -12,7 +13,6 @@ export default class LoginService {
 
     async loginMobile(mobile, password, transaction_id) {
         document.getElementById('login_msg').style.display = 'none';
-
         sessionStorage.removeItem('id_token');
         sessionStorage.removeItem('mobile');
         let params = {
@@ -44,7 +44,11 @@ export default class LoginService {
     }
 
     afterLoginSuccess = async () => {
-        hashHistory.push('/home');
+        await MenuStore.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
+        let defaultMenuItem = getDefaultMenuItem(MenuStore.RoleMenuArray);
+        console.log('defaultMenuItem: ', defaultMenuItem);
+        MenuStore.setCurrentMenu(defaultMenuItem, 'afterLoginSuccess');
+        hashHistory.push(defaultMenuItem.router);
     };
 
     loggedIn() {

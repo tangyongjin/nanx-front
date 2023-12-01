@@ -118,10 +118,15 @@ export function findMenuPath(RoleBasedMenuList, currentMenukey) {
     let path = [];
 
     const result = findPath(RoleBasedMenuList, currentMenukey, path);
-    console.log('设置路???result', result);
+    console.log('setting router>>>', result);
     if (typeof result === 'undefined') {
         return [];
     } else {
         return result;
     }
+}
+
+// 登录后的第一个路由.暂时定位第一个原素
+export function getDefaultMenuItem(menus) {
+    return menus[0];
 }

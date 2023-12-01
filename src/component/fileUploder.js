@@ -1,4 +1,4 @@
-import { CloudUploadOutlined } from '@ant-design/icons';
+import { BsCloudUploadFill } from 'react-icons/bs';
 import { message, Upload, Button, Progress } from 'antd';
 import React, { useState } from 'react';
 
@@ -120,7 +120,7 @@ const FileUploder = (props) => {
                 beforeUpload={props.fileType == 'img' ? checkImageTypeAnd2mSize : checkDocuTypeAnd10mSize}
                 onChange={handleChange}>
                 <Button>
-                    <CloudUploadOutlined />
+                    <BsCloudUploadFill style={{ verticalAlign: '-2px' }} />
                 </Button>
             </Upload>
             {props.showProgress && loading ? <Progress percent={percent} /> : null}

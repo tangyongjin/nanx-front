@@ -32,40 +32,12 @@ class _MenuStore {
         this.RoleBasedMenuList = para;
     };
 
-    // findMenuPath(RoleBasedMenuList, currentMenukey) {
-    //     const findPath = (menu, key, path) => {
-    //         for (let i = 0; i < menu.length; i++) {
-    //             const item = menu[i];
-    //             path.push(item);
-    //             if (item.key === key) {
-    //                 return path;
-    //             }
-    //             if (item.children) {
-    //                 const foundPath = findPath(item.children, key, path);
-    //                 if (foundPath) {
-    //                     return foundPath;
-    //                 }
-    //             }
-    //             path.pop();
-    //         }
-    //     };
-
-    //     let path = [];
-
-    //     const result = findPath(RoleBasedMenuList, currentMenukey, path);
-    //     console.log('设置路???result', result);
-    //     if (typeof result === 'undefined') {
-    //         return [];
-    //     } else {
-    //         return result;
-    //     }
-    // }
-
-    // 计算面包屑,
-    // @observable breadcrumb = '';
-
     @computed
     get breadcrumb() {
+        if (!this.currentMenu) {
+            return '';
+        }
+
         let currentMenyKey = this.currentMenu.key;
 
         let _path = findMenuPath(this.RoleBasedMenuList, currentMenyKey);
@@ -194,6 +166,7 @@ class _MenuStore {
 
     @action freshRandomKey = () => {
         setTimeout(() => {
+            console.log('freshRandomKey');
             this.randomKey = randomString(10);
         }, 0);
     };
@@ -226,10 +199,15 @@ class _MenuStore {
     };
 
     @action.bound
-    setCurrentMenu = (menu) => {
-        console.log(JSON.stringify(menu));
-        this.setSelectedKeys([menu.key]);
+    setCurrentMenu = (menu, scense) => {
+        // console.log('scense: ', scense);
+        // console.log('menu: ', menu);
+        // console.log(JSON.stringify(menu));
+
         this.currentMenu = menu;
+        if (menu) {
+            this.setSelectedKeys([menu.key]);
+        }
         sessionStorage.setItem('currentMenu', JSON.stringify(menu));
     };
 }
