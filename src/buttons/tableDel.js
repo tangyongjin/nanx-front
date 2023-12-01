@@ -2,6 +2,8 @@ import React from 'react';
 import { Modal, message } from 'antd';
 import api from '@/api/api';
 import { observer, inject } from 'mobx-react';
+import { BsPeople } from 'react-icons/bs';
+
 const { confirm } = Modal;
 @inject('NanxTableStore') // 'myStore' 是你在Provider中提供的store名称
 @observer
@@ -23,17 +25,27 @@ export default class DeleteData extends React.Component {
             message.error('不是自己的数据不能删除');
             return;
         }
-
         confirm({
             title: '你确定要删出这条记录么?',
-            content: '删除后将无法恢复',
-            okText: '确认',
-            okType: 'danger',
-            cancelText: '取消',
+            content: <h4>确定要删出这条记录?</h4>,
             onOk: () => {
                 this.deleteData();
             },
-            onCancel: () => {}
+            onCancel: () => {},
+            okText: '确认删除',
+            okButtonProps: {
+                type: 'primary',
+                style: { color: 'red', backgroundColor: '#343c41', borderColor: '#343c41' }
+            },
+            cancelButtonProps: {
+                danger: true,
+                classNames: 'nanx-danger',
+                icon: <BsPeople />,
+                style: {
+                    color: '#343c41',
+                    borderColor: '#343c41'
+                }
+            }
         });
     }
 

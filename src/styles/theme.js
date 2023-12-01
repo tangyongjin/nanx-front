@@ -47,17 +47,20 @@ const themeJson = {
             headerBg: '#ffffff',
             siderBg: '#032c05'
         },
+
         Button: {
             controlHeight: '30px',
             defaultBorderColor: '#366503',
             defaultColor: 'white',
-            colorBgContainer: '#3B3B47'
+            colorBgContainer: '#366503'
         },
+
         Table: {
             borderColor: '#b3bab0',
             rowSelectedBg: '#748A3D',
             rowSelectedHoverBg: '#748A3D'
         },
+
         Tabs: {
             colorPrimaryActive: 'white',
             cardBg: '#3B3B47',

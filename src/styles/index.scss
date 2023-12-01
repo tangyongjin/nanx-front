@@ -52,13 +52,21 @@ body {
     border-color: #3b3b47 !important;
 }
 
-.ant-btn-dangerous:hover {
-    color       : #d4ccd0 !important;
-    border-color: #0d9450 !important;
-
+.ant-btn-default:hover {
+    color       : #023c26 !important;
+    background-color:rgb(18, 2, 2);
+    border-color: #0d9450 !important;   
 }
 
 
+.nanx-danger{
+    color       :goldenrod !important;
+    border-color: #3b3b47 !important;
+}
+
+
+
+ 
 
 /*滚动条样式*/
 ::-webkit-scrollbar {
