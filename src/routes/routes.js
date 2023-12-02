@@ -10,13 +10,19 @@ const routes = {
     },
 
     childRoutes: [
+        require('./login').default,
         {
             ...require('./home').default,
             component: PortalLayout
         },
-        require('./login').default,
-        require('./NanxTable').default,
-        require('./profile').default,
+        {
+            ...require('./NanxTable').default,
+            component: PortalLayout
+        },
+        {
+            ...require('./profile').default,
+            component: PortalLayout
+        },
         require('./system').default,
         {
             ...require('./gpt').default,

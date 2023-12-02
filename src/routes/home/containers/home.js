@@ -1,15 +1,10 @@
 import React from 'react';
 import { Button } from 'antd';
 import IconWrapper from '@/utils/IconWrapper';
-
 import '@/UFormPlugin';
 import 'antd/dist/reset.css';
 
 const Home = () => {
-    // for (let key in BootIcons) {
-    //     console.log('key: ', key);
-    // }
-
     const ix = IconWrapper('Bs:BsFileWord');
     console.log('ix: ', ix);
 

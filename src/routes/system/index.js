@@ -4,7 +4,6 @@ import UrlProtect from '@/routes/urlProtect';
 export default {
     onEnter: UrlProtect, // add this 判断是否登录
     path: 'system',
-    component: require('@/layout/PortalLayout').default,
     childRoutes: [
         {
             path: 'orgManage',

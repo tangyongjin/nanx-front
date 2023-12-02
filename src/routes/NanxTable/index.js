@@ -1,15 +1,7 @@
 import UrlProtect from '@/routes/urlProtect';
-import { abortHandler } from '@/api/axiosInstance';
 export default {
-    onEnter: UrlProtect, // add this
-    onLeave: () => {
-        console.log(' 😮‍💨 🤥  😮‍💨 🤥  😮‍💨 🤥  😮‍💨 🤥  😮‍💨 🤥  😮‍💨 🤥  😮‍💨 🤥  😮‍💨 🤥  😮‍💨 🤥 onChange');
-        // console.log('abortHandler: ', abortHandler);
-        // abortHandler.abort();
-    }, // add this
-
+    onEnter: UrlProtect,
     path: 'table',
-    component: require('@/layout/PortalLayout').default,
     childRoutes: [
         {
             path: 'commonXTable',
