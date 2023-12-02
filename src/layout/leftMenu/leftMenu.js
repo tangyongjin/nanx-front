@@ -1,8 +1,9 @@
+import React from 'react';
 import { Menu } from 'antd';
 import { inject, observer } from 'mobx-react';
-import React from 'react';
 import { hashHistory } from 'react-router';
 import { findItemByKey } from '@/utils/tools';
+
 const LeftMenu = inject(
     'MenuStore',
     'GridConfigStore'
@@ -11,13 +12,10 @@ const LeftMenu = inject(
         console.log('props菜单渲染: ', props);
 
         const handleMenuClick = async (item) => {
-            console.log(props.MenuStore);
-
             const menuClicked = findItemByKey(props.MenuStore.RoleMenuArray, item.key);
-            if ((menuClicked.router = '/table/commonXTable')) {
+            if (menuClicked.router == '/table/commonXTable') {
                 if (menuClicked?.datagrid_code == 'GirdMNT') {
                     console.log('GirdMNT: ', 'GirdMNT');
-                    await props.GridConfigStore.initAll();
                 }
             }
 

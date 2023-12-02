@@ -1,5 +1,13 @@
+import moment from 'moment';
+
 export function isEmpty(value) {
     return typeof value === 'undefined' || value === null;
+}
+
+export function nowString() {
+    const now = moment();
+    const timeString = now.format('HH:mm:ss');
+    return timeString;
 }
 
 export function randomString(string_length) {

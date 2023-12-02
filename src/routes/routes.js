@@ -25,4 +25,5 @@ const routes = {
     ]
 };
 
+console.log('routes: ', routes);
 export { routes };
