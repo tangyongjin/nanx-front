@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'antd';
-import SearchFormContainer from '@/buttons/tableSearch/searchFormContainer';
+import SearchFormContainer from '@/buttons/TableSearch/searchFormContainer';
 import { observer, inject } from 'mobx-react';
 import { pagination, rowSelection } from '@/routes/NanxTable/NanxTableCom/tableUtils/tableUtil';
 import { Collapse } from 'antd';

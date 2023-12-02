@@ -1,7 +1,7 @@
 import React from 'react';
 import { message, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
-import TriggerListCom from './trigger/TriggerListCom';
+import TriggerListCom from './Trigger/TriggerListCom';
 import { toJS } from 'mobx';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import IconWrapper from '@/utils/IconWrapper';

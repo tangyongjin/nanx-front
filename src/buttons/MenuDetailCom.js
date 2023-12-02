@@ -1,83 +1,32 @@
-import { observable, action } from 'mobx';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table } from 'antd';
 import { toJS } from 'mobx';
 import ImgRender from '@/routes/NanxTable/NanxTableCom/cellRenders/ImgRender';
 import { BsPerson } from 'react-icons/bs';
 import { BsPeople } from 'react-icons/bs';
-import { port, root_url } from '@/api/api_config/base_config';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import api from '@/api/api';
 
-const avatarRoot = `${root_url}:${port}/`;
-class MenuRelatedStore {
-    @observable userList = [];
-    @observable roleList = [];
-    @observable combinedArray = [];
-    @action clearUser = () => (this.userList = []);
-    @action clearRole = () => (this.roleList = []);
-    @action setRoleList = (data) => (this.roleList = data);
-    @action setUserList = (data) => (this.userList = data);
-}
+const MenuDetailCom = inject('MenuItemStore')(
+    observer((props) => {
+        console.log('props: ', props);
 
-@observer
-export default class MenuDetailCom extends React.Component {
-    constructor(props) {
-        super(props);
-        this.store = new MenuRelatedStore();
-    }
+        useEffect(() => {
+            const asyncFun = async () => {
+                let params = { data: { menu_id: props.menuID } };
 
-    getRelatedRole = async () => {
-        let params = {
-            data: {
-                menu_id: this.props.menuID
-            }
-        };
-        this.store.clearRole();
-        let res = await api.permission.getRolesByMenuId(params);
-        this.store.setRoleList(res.data);
-    };
+                let res = await api.permission.getRolesByMenuId(params);
+                props.MenuItemStore.setRoleList(res.data);
 
-    getRelatedUser = async () => {
-        let params = {
-            data: {
-                menu_id: this.props.menuID
-            }
-        };
-        this.store.clearUser();
-        let res = await api.permission.getUsersByMenuId(params);
-        this.store.setUserList(res.data);
-    };
+                let res2 = await api.permission.getUsersByMenuId(params);
+                props.MenuItemStore.setUserList(res2.data);
+                console.log('res2: ', res2);
 
-    componentWillMount = async () => {
-        await this.getRelatedRole();
-        await this.getRelatedUser();
-        this.store.combinedArray = [];
-
-        // 遍历roles数组
-        this.store.roleList.forEach((role) => {
-            const tmp = {
-                type: '角色',
-                name: role.role_name,
-                code: role.role_code,
-                avatar: ''
+                await props.MenuItemStore.getCombinedArray();
             };
-            this.store.combinedArray.push(tmp);
-        });
+            asyncFun();
+        }, [props.menuID, props.MenuItemStore]);
 
-        // 遍历users数组
-        this.store.userList.forEach((user) => {
-            const tmp = {
-                type: '用户',
-                name: user.user,
-                code: '',
-                avatar: avatarRoot + user.head_portrait
-            };
-            this.store.combinedArray.push(tmp);
-        });
-    };
-
-    render() {
         const URRender = (text, idx) => {
             if (text == '角色') {
                 return (
@@ -121,7 +70,7 @@ export default class MenuDetailCom extends React.Component {
                 }
             }
         ];
-        console.log(toJS(this.store.combinedArray));
+
         return (
             <div>
                 <Table
@@ -129,8 +78,10 @@ export default class MenuDetailCom extends React.Component {
                     rowKey={(row) => row.name}
                     pagination={false}
                     columns={columns}
-                    dataSource={toJS(this.store.combinedArray)}></Table>
+                    dataSource={toJS(props.MenuItemStore.combinedArray)}></Table>
             </div>
         );
-    }
-}
+    })
+);
+
+export default MenuDetailCom;

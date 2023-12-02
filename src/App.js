@@ -1,5 +1,5 @@
 import React from 'react';
-import { Provider } from 'mobx-react';
+import { Provider as MobxStoreProvider } from 'mobx-react';
 import { Router, hashHistory } from 'react-router';
 import RootStore from './store';
 import { ConfigProvider } from 'antd';
@@ -12,9 +12,9 @@ export default class App extends React.Component {
     render() {
         return (
             <ConfigProvider locale={zhCN} theme={themeJson}>
-                <Provider {...RootStore}>
+                <MobxStoreProvider {...RootStore}>
                     <Router history={hashHistory} routes={routes} />
-                </Provider>
+                </MobxStoreProvider>
             </ConfigProvider>
         );
     }

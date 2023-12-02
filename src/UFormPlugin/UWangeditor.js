@@ -72,10 +72,6 @@ export default class UWangeditor extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <div ref="editorElem" style={{ textAlign: 'left' }} />
-            </div>
-        );
+        return <div ref="editorElem" style={{ textAlign: 'left' }} />;
     }
 }

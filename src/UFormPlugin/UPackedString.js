@@ -28,9 +28,10 @@ const WrapperAntStringComomnet = (TarGet) => {
             };
 
             return (
-                <div>
+                <>
                     <TarGet style={{ width: '312px' }} placeholder={'请输入....'} {...this.props} />
                     <Button
+                        className="form-operation-button"
                         onClick={async () => {
                             // 获取远方数据,改变自己的值
 
@@ -90,7 +91,7 @@ const WrapperAntStringComomnet = (TarGet) => {
                             <VscLink style={{ verticalAlign: '-2px' }} />
                         )}
                     </Button>
-                </div>
+                </>
             );
         }
     };

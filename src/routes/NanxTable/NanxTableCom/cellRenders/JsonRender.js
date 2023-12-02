@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Popover } from 'antd';
-
 import showJsonTree from '@/component/jsonTree.js';
 
 const JsonRender = (text) => {
@@ -10,9 +9,10 @@ const JsonRender = (text) => {
 
     return (
         <div>
-            <span>{text}</span>
-            <Popover className="help-tip" content={showJsonTree(text)} title="JSON配置" trigger="hover">
-                <Button>JSON</Button>
+            <Popover content={showJsonTree(text)} title="JSON配置" trigger="hover">
+                <div style={{ display: 'flex', alignItems: 'top' }}>
+                    <Button style={{ marginRight: '4px' }}>JSON</Button> <span className="truncate">{text}</span>
+                </div>
             </Popover>
         </div>
     );

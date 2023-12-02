@@ -1,6 +1,6 @@
 import React from 'react';
 import { message } from 'antd';
-import SearchFormContainer from './tableSearch/searchFormContainer';
+import SearchFormContainer from './TableSearch/searchFormContainer';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 
 import api from '@/api/api';

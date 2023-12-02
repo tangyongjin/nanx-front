@@ -3,18 +3,22 @@ import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { hashHistory } from 'react-router';
 import { findItemByKey } from '@/utils/tools';
-const LeftMenu = inject('MenuStore')(
+const LeftMenu = inject(
+    'MenuStore',
+    'GridConfigStore'
+)(
     observer((props) => {
         console.log('props菜单渲染: ', props);
 
-        const handleMenuClick = (item) => {
+        const handleMenuClick = async (item) => {
             console.log(props.MenuStore);
 
             const menuClicked = findItemByKey(props.MenuStore.RoleMenuArray, item.key);
-            if (item.key == props.MenuStore.currentMenu.key && window.location.href.includes(menuClicked.router)) {
-                console.log('点击相同菜单');
-                props.MenuStore.freshRandomKey();
-                return;
+            if ((menuClicked.router = '/table/commonXTable')) {
+                if (menuClicked?.datagrid_code == 'GirdMNT') {
+                    console.log('GirdMNT: ', 'GirdMNT');
+                    await props.GridConfigStore.initAll();
+                }
             }
 
             props.MenuStore.setCurrentMenu(menuClicked, 'handleMenuClick');

@@ -4,6 +4,7 @@ import { compose, mapStyledProps, mapTextComponent } from './uformHelpers/UFormU
 import { registerFormField, connect } from '@uform/react';
 import IconToggleButton from '@/component/IconToggleButton';
 import IconLister from '@/component/iconLister';
+import IconWrapper from '@/utils/IconWrapper';
 
 const WrapperAntStringComomnet = (TarGet) => {
     return class Select extends React.Component {
@@ -35,11 +36,12 @@ const WrapperAntStringComomnet = (TarGet) => {
             };
 
             return (
-                <div>
-                    <TarGet readOnly style={{ width: '312px' }} placeholder={'请输入....'} {...this.props} />
+                <>
+                    <TarGet readOnly style={{ width: '288px' }} placeholder={'请输入....'} {...this.props} />
+                    <span style={{ marginLeft: '6px' }}>{IconWrapper(this.props.value)}</span>
                     <IconToggleButton ifShowList={this.state.ifShowList} toggleShow={this.toggleShow} />
                     <IconLister ifShowList={this.state.ifShowList} callbackRender={uploadCallbackRender} />
-                </div>
+                </>
             );
         }
     };

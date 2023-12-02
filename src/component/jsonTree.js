@@ -8,7 +8,12 @@ const showJsonTree = (str) => {
     if (parsedObject == null) {
         return <div>{str}</div>;
     } else {
-        return <ReactJson src={parsedObject} theme="twilight" />;
+        return (
+            <div style={{ maxHeight: '400px' }}>
+                <ReactJson src={parsedObject} theme="twilight" />
+                {str}
+            </div>
+        );
     }
 };
 

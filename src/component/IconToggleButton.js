@@ -5,13 +5,13 @@ import { UpOutlined, DownOutlined } from '@ant-design/icons';
 const IconToggleButton = (props) => {
     if (props.ifShowList) {
         return (
-            <Button onClick={props.toggleShow} style={{ marginLeft: '5px' }}>
+            <Button className="form-operation-button" onClick={props.toggleShow} style={{ marginLeft: '5px' }}>
                 <UpOutlined />
             </Button>
         );
     } else {
         return (
-            <Button onClick={props.toggleShow} style={{ marginLeft: '5px' }}>
+            <Button className="form-operation-button" onClick={props.toggleShow} style={{ marginLeft: '5px' }}>
                 <DownOutlined />
             </Button>
         );

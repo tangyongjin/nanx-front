@@ -1,7 +1,7 @@
 import React from 'react';
 import { message, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
-import TriggerAddCom from './trigger/TriggerAddCom';
+import TriggerAddCom from './Trigger/TriggerAddCom';
 import { toJS } from 'mobx';
 import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import IconWrapper from '@/utils/IconWrapper';
@@ -28,6 +28,7 @@ export default class TriggerAdder extends React.Component {
             this.props.GridConfigStore.setCurrentDataGridCode(toJS(record).datagrid_code);
             this.props.GridConfigStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
             this.props.GridConfigStore.setCurrentBasetable(toJS(record).base_table);
+            this.props.GridConfigStore.initAll();
             this.props.GridConfigStore.prepareDataGirdEnv();
             this.props.NanxTableStore.showButtonModal();
         }

@@ -32,21 +32,19 @@ export default class UCategoryDropDown extends React.Component {
 
     render() {
         return (
-            <div>
-                <Select
-                    value={this.props.value || this.props.default}
-                    placeholder="请选择"
-                    style={{ width: 120 }}
-                    onChange={this.onChange}>
-                    {this.state.opts.map((item, index) => {
-                        return (
-                            <Option key={index} value={item.display_text}>
-                                {item.display_text}
-                            </Option>
-                        );
-                    })}
-                </Select>
-            </div>
+            <Select
+                value={this.props.value || this.props.default}
+                placeholder="请选择"
+                style={{ width: 120 }}
+                onChange={this.onChange}>
+                {this.state.opts.map((item, index) => {
+                    return (
+                        <Option key={index} value={item.display_text}>
+                            {item.display_text}
+                        </Option>
+                    );
+                })}
+            </Select>
         );
     }
 }
