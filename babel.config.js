@@ -1,12 +1,6 @@
 module.exports = {
-    plugins: ['react-hot-loader/babel'],
+    plugins: ['react-hot-loader/babel', ['@babel/plugin-transform-private-property-in-object', { loose: true }]],
     presets: [
-        [
-            '@babel/preset-react',
-            {
-                throwIfNamespace: false // defaults to true
-            }
-        ],
         [
             '@babel/preset-env',
             {
