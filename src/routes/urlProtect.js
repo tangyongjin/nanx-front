@@ -6,10 +6,6 @@ function UrlProtect(nextState, replace, callback) {
     if (!Auth.loggedIn()) {
         replace('/login'); // 如果没有登录就跳转到登录路由
     }
-
-    // console.log('abortHandler: ', abortHandler);
-    // abortHandler.abort();
-
     return callback();
 }
 

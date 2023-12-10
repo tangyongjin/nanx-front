@@ -5,6 +5,8 @@ import LoginService from './LoginService';
 import { inject, observer } from 'mobx-react';
 import '@/styles/login.css';
 import { BsFingerprint } from 'react-icons/bs';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 @inject('MenuStore')
 @observer
@@ -68,19 +70,33 @@ export default class Login extends React.Component {
                                     placeholder="密码"
                                 />
                             </div>
-
                             <div className="loginbtn">
                                 <button id="loginbtn" onClick={this.handleFormSubmitMobile} type="submit">
-                                    <div className="loginBtnContainer">
+                                    <div
+                                        style={{ display: 'flex', alignItems: 'center' }}
+                                        className="loginBtnContainer">
                                         <BsFingerprint
                                             style={{
                                                 marginRight: '12px',
                                                 fontSize: '30px',
-                                                color: '#225e04',
-                                                verticalAlign: '-10px'
+                                                color: '#225e04'
                                             }}
                                         />
                                         Login/登录
+                                        <Spin
+                                            indicator={
+                                                <LoadingOutlined
+                                                    id="loadingSpin"
+                                                    style={{
+                                                        display: 'none',
+                                                        marginLeft: '20px',
+                                                        color: 'white',
+                                                        fontSize: 18
+                                                    }}
+                                                    spin
+                                                />
+                                            }
+                                        />
                                     </div>
                                 </button>
                             </div>

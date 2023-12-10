@@ -54,7 +54,7 @@ const responseFailed = (error) => {
     AuthStore.delRunnitem(error.config.requestId);
     AuthStore.setLoading(false);
 
-    abortHandler.abort();
+    // abortHandler.abort();
 
     /***** 接收到异常响应的处理开始 *****/
     if (error && error.response) {
@@ -119,8 +119,6 @@ const responseFailed = (error) => {
 
 export function post(url, params, config) {
     axiosInstance.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
-
-    console.log('abortHandler: ', abortHandler);
     if (!config) {
         config = {};
     }
