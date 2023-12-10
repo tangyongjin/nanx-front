@@ -48,7 +48,15 @@ export default class LoginService {
         let defaultMenuItem = getDefaultMenuItem(MenuStore.RoleMenuArray);
         console.log('defaultMenuItem: ', defaultMenuItem);
         MenuStore.setCurrentMenu(defaultMenuItem, 'afterLoginSuccess');
-        hashHistory.push(defaultMenuItem.router);
+
+        if (defaultMenuItem.router == '/table/commonXTable') {
+            hashHistory.push({
+                pathname: defaultMenuItem.router,
+                state: { datagrid_code: defaultMenuItem.datagrid_code }
+            });
+        } else {
+            hashHistory.push(defaultMenuItem.router);
+        }
     };
 
     loggedIn() {
