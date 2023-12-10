@@ -21,6 +21,11 @@ export default class GridButtonAdder extends React.Component {
         };
     }
 
+    onChange = (v) => {
+        console.log(v);
+        this.setState({ btncode: v });
+    };
+
     //eslint-disable-next-line
     async init(buttonSource) {
         this.setState({ iconStr: buttonSource.icon });

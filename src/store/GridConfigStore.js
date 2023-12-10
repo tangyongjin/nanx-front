@@ -29,7 +29,7 @@ class GridConfigStore {
 
     @action getDataGridConfigure() {
         // 单个 DataGrid 配置
-        this.getColsDbInfo();
+        this.getGridFieldConfig();
         this.getTriggerGroups();
     }
 
@@ -61,12 +61,12 @@ class GridConfigStore {
         this.Categories = json.data;
     };
 
-    @action getColsDbInfo = async () => {
+    @action getGridFieldConfig = async () => {
         if (this.DataGridCode === null) {
             this.setColsDbInfo([]);
         } else {
             let params = { data: { DataGridCode: this.DataGridCode } };
-            let json = await api.dataGrid.getColsDbInfo(params);
+            let json = await api.dataGrid.getGridFieldConfig(params);
             this.setColsDbInfo(json.data);
         }
     };
@@ -127,7 +127,7 @@ class GridConfigStore {
 
         let params = { data: obj };
         await api.dataGrid.saveFieldCfg(params);
-        this.getColsDbInfo();
+        this.getGridFieldConfig();
     };
 
     // 字段配置保存

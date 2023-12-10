@@ -22,7 +22,7 @@ class _NanxTableStore {
     @observable buttonModalVisuble = false;
     @observable datagrid_code = null;
     @observable datagrid_title = '';
-
+    @observable gridType = null;
     @observable selectedRowKeys = [];
     @observable selectedRows = [];
     @observable dataSource = [];
@@ -175,7 +175,7 @@ class _NanxTableStore {
     @action setTips = (tips) => (this.tips = tips);
     @action setTableButtons = (json) => (this.tableButtons = json);
     @action setCurd = (curd) => (this.curd = curd);
-
+    @action setGridType = (type) => (this.gridType = type);
     @action setLazyButtonUsedCom = (com) => {
         this.lazyButtonUsedCom = com;
     };
@@ -202,6 +202,7 @@ class _NanxTableStore {
             this.setTips(res.data.tips);
             this.setTableButtons(res.data.buttons);
             this.setCurd(res.data.curd);
+            this.setGridType(res.data.DataGridMeta.datagrid_type);
 
             this.setFixedQueryCfg(res.data.fixed_query_cfg);
         }
@@ -217,8 +218,15 @@ class _NanxTableStore {
         if (params.geturl === undefined) {
             return;
         }
+        let json;
+        if (this.gridType == 'table') {
+            json = await api.curd.listData(params);
+        }
+        if (this.gridType == 'service') {
+            params.data.serviceUrl = toJS(this.curd).geturl;
+            json = await api.curd.listServiceData(params);
+        }
 
-        let json = await api.curd.listData(params);
         if (json.code == 200) {
             await this.setDataSource(json.data);
             await this.setTotal(json.total);

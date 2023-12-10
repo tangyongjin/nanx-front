@@ -6,6 +6,7 @@ const api_root = `${root_url}:${port}/${version}`;
 export default class curd {
     static apis = {
         listData: (params, config) => post(`${api_root}/${params.geturl}`, params, config),
+        listServiceData: (params, config) => post(`${api_root}/Curd/serviceFetchData`, params, config),
         exportExcel: (params, config) => post(`${api_root}/Curd/exportExcel`, params, config),
         deleteData: (params, config) => post(`${api_root}/${params.delurl}`, params, config),
         updateData: (params, config) => post(`${api_root}/${params.updateurl}`, params, config),
