@@ -28,7 +28,7 @@ export default class NavDropDown extends React.Component {
 
             okButtonProps: {
                 type: 'primary',
-                style: { backgroundColor: '#343c41', color: '#fff', borderColor: '#343c41' }
+                style: { color: 'green', backgroundColor: '#070707', borderColor: '#343c41' }
             },
             cancelButtonProps: {
                 danger: true

@@ -35,7 +35,7 @@ export default class DeleteData extends React.Component {
             okText: '确认删除',
             okButtonProps: {
                 type: 'primary',
-                style: { color: 'red', backgroundColor: '#343c41', borderColor: '#343c41' }
+                style: { color: 'green', backgroundColor: '#070707', borderColor: '#343c41' }
             },
             cancelButtonProps: {
                 danger: true
