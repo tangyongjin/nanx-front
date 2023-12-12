@@ -2,7 +2,6 @@ import React from 'react';
 import { Modal, message } from 'antd';
 import api from '@/api/api';
 import { observer, inject } from 'mobx-react';
-import { BsPeople } from 'react-icons/bs';
 
 const { confirm } = Modal;
 @inject('NanxTableStore') // 'myStore' 是你在Provider中提供的store名称
