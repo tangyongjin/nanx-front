@@ -23,7 +23,10 @@ const routes = {
             ...require('./profile').default,
             component: PortalLayout
         },
-        require('./system').default,
+        {
+            ...require('./system').default,
+            component: PortalLayout
+        },
         {
             ...require('./gpt').default,
             component: PortalLayout

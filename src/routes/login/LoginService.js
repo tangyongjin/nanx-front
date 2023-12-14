@@ -52,7 +52,7 @@ export default class LoginService {
         console.log('defaultMenuItem: ', defaultMenuItem);
         MenuStore.setCurrentMenu(defaultMenuItem, 'afterLoginSuccess');
 
-        if (defaultMenuItem.router == '/table/commonXTable') {
+        if (defaultMenuItem.router == '/datagrid') {
             hashHistory.push({
                 pathname: defaultMenuItem.router,
                 state: { datagrid_code: defaultMenuItem.datagrid_code }
