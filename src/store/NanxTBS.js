@@ -12,10 +12,11 @@ class _NanxTableStore {
         autorun(() => {
             if (this.SERIALNO == null) {
                 this.SERIALNO = randomString(10);
+                this.AlphaVersion = 'NanxTBS' + randomString(10);
             }
         });
     }
-    @observable AlphaVersion = 'NanxTableStore';
+    @observable AlphaVersion = null;
 
     @observable DefaultPageSize = 20;
 
@@ -38,14 +39,19 @@ class _NanxTableStore {
 
     // 原始配置的 clos
     @observable tableColumnConfig = [];
-    // 给 Table用的 cols
-    @observable tableColumns = [];
 
     @observable table_action = null;
     @observable fixed_query_cfg = null;
     @observable lazyButtonUsedCom = null;
     @observable ButtonUsedCom = null;
     @observable search_query_cfg = [];
+
+    // 给 Table用的 cols
+    @observable tableColumns = [];
+
+    // ModalContent
+    @observable ModalContent = null;
+    @action setModalContent = async (children) => (this.ModalContent = children);
 
     @action hideButtonModal = async () => (this.buttonModalVisuble = false);
     @action showButtonModal = async () => (this.buttonModalVisuble = true);
@@ -270,6 +276,4 @@ class _NanxTableStore {
     };
 }
 
-const NanxTableStore = new _NanxTableStore();
-
-export default NanxTableStore;
+export default _NanxTableStore;

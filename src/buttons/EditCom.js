@@ -1,24 +1,18 @@
 import TableSchemaForm from '@/routes/NanxTable/NanxTableCom/TableForm';
-import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import React from 'react';
 import { message } from 'antd';
 import api from '@/api/api';
-import { observer, inject } from 'mobx-react';
-import IconWrapper from '@/utils/IconWrapper';
 
-@inject('NanxTableStore')
-@observer
-export default class TableEditCom extends React.Component {
+export default class EditCom extends React.Component {
     constructor(props) {
         super(props);
-        console.log('TableEditCom', props);
-        this.state = { iconStr: null };
+        console.log('EditCom', props);
+        console.log('EditCom', this.props);
         this.init = this.init.bind(this);
     }
 
-    init = async (buttonSource) => {
+    init = async () => {
         console.log('Button自己', this);
-        this.setState({ iconStr: buttonSource.icon });
         await this.props.NanxTableStore.setTableAction('edit');
         if (this.props.NanxTableStore.selectedRows.length != 1) {
             message.error('请选择1条数据.');
@@ -60,26 +54,8 @@ export default class TableEditCom extends React.Component {
     };
 
     render() {
-        let _width = '650px';
-        // form 宽度,因为 hasTableEditor 太窄不好看
-        if (this.props.NanxTableStore.hasTableEditor()) {
-            _width = '1150px';
-        }
         return (
-            <CommonModal
-                height="500px"
-                width={_width}
-                title={
-                    <div>
-                        {IconWrapper(this.state.iconStr)}
-                        编辑
-                    </div>
-                }>
-                <TableSchemaForm
-                    NanxTableStore={this.props.NanxTableStore}
-                    saveFormData={this.saveFormData.bind(this)}
-                />
-            </CommonModal>
+            <TableSchemaForm NanxTableStore={this.props.NanxTableStore} saveFormData={this.saveFormData.bind(this)} />
         );
     }
 }

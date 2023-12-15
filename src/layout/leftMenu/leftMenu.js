@@ -20,6 +20,7 @@ const LeftMenu = inject(
             }
 
             props.MenuStore.setCurrentMenu(menuClicked, 'handleMenuClick');
+            props.MenuStore.addMenuTabItem(menuClicked.key, menuClicked.label);
 
             hashHistory.push({
                 pathname: menuClicked.router,

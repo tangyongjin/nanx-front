@@ -4,11 +4,14 @@ import Navbar from './navbar//Navbar';
 import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
 import { getTargetMenuKey, findItemByKey } from '@/utils/tools';
+import { Tabs } from 'antd';
 
 const { Header, Sider, Content } = Layout;
 
 const PortalLayout = inject('MenuStore')(
     observer((props) => {
+        props.MenuStore.setMenuTabItemChildren(props.location.state.key, props.children);
+
         window.onload = () => {
             console.log('浏览器刷新');
             let storeageMenu = props.MenuStore.getCurrentMenuKeyFromSessionStorage();
@@ -37,7 +40,7 @@ const PortalLayout = inject('MenuStore')(
         }, [props.MenuStore]);
 
         return (
-            <Layout style={{ minHeight: '100vh', minWidth: '100vh' }}>
+            <Layout key={props.location.state.key} style={{ minHeight: '100vh', minWidth: '100vh' }}>
                 <Sider collapsed={props.MenuStore.isCollapse}>
                     <LeftMenu
                         className="portal_menu"
@@ -54,7 +57,8 @@ const PortalLayout = inject('MenuStore')(
                         style={{
                             marginLeft: '4px'
                         }}>
-                        {props.children}
+                        {/* {props.children} */}
+                        <Tabs items={props.MenuStore.MenuTabItems} />
                     </Content>
                 </Layout>
             </Layout>

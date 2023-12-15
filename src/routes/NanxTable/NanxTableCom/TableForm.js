@@ -10,6 +10,8 @@ import cloneDeep from 'lodash/cloneDeep';
 const actions = createFormActions();
 
 const TableSchemaForm = (props) => {
+    console.log('TableSchemaForm>props>: ', props);
+
     /**
      *
      * 如果有 A自动 点击按钮,设置B字段
@@ -38,6 +40,9 @@ const TableSchemaForm = (props) => {
     };
 
     const prepareRawData = () => {
+        console.log('prepareRawData: ', prepareRawData);
+        console.log('props.NanxTableStore.table_action: ', props.NanxTableStore.table_action);
+
         if (props.NanxTableStore.table_action == 'edit') {
             let _tmp_for_edit = { ...props.NanxTableStore.selectedRows[0] };
             return _tmp_for_edit;

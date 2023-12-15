@@ -16,4 +16,6 @@ const RootStore = {
     TriggerStore
 };
 
+console.log('RootStore', RootStore);
+
 export default RootStore;

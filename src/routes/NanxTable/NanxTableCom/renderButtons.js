@@ -4,6 +4,7 @@ import IconWrapper from '@/utils/IconWrapper';
 
 const getButtonHandler = async (event, item, store) => {
     let tmp = require(`../../../buttons/${item.file_path}`).default;
+    console.log('tmp: ', tmp);
     await store.setButtonUsedCom(tmp);
     store.lazyButtonUsedCom['init'](item);
 };

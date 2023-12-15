@@ -1,15 +1,27 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
 import renderButtons from './renderButtons';
 import { pagination, rowSelection } from './tableUtils/tableUtil';
+import { randomString } from '@/utils/tools';
+import _NanxTableStore from '@/store/NanxTBS';
+import TableModal from './TableModal';
 
-@inject('NanxTableStore')
+import DynamicComponentLoader from '@/buttons/DynamicComponentLoader';
+
+// import NanxTableStore from '@/store/NanxTableStore';
+// const tbStore = new _NanxTableStore();
+
+// @inject('tbStore')
 @observer
 export default class NanxTable extends React.Component {
     constructor(props) {
         super(props);
-        this.tbStore = props.NanxTableStore;
+        this.tbStore = new _NanxTableStore();
+        console.log(this.tbStore);
+        this.state = {
+            version: randomString(10)
+        };
     }
 
     async componentDidMount() {
@@ -56,11 +68,40 @@ export default class NanxTable extends React.Component {
         };
     };
 
+    createButton = () => {
+        const dynamic = (
+            <DynamicComponentLoader
+                icon="Bs:BsTextareaResize"
+                NanxTableStore={this.tbStore}
+                buttonPath="./BtnEditor.js"
+            />
+        );
+
+        console.log('dynamic: ', dynamic);
+        return dynamic;
+    };
+
+    loadTabForm = () => {
+        const dynamic = <DynamicComponentLoader NanxTableStore={this.tbStore} componentPath="./EditCom.js" />;
+
+        console.log('dynamic: ', dynamic);
+        // return dynamic;
+        this.tbStore.setModalContent(dynamic);
+        this.tbStore.showButtonModal();
+    };
+
     render() {
         return (
             <div className="table_wrapper">
-                {this.RenderBthHolder()}
-                <div>{renderButtons(this.tbStore)}</div>
+                {/* {this.RenderBthHolder()} */}
+
+                {/* {this.createButton()} */}
+                {/* <div>{renderButtons(this.tbStore)}</div> */}
+                <div>{this.state.version}</div>
+
+                <Button type="primary" onClick={this.loadTabForm}>
+                    Edit
+                </Button>
 
                 <Table
                     size="small"
@@ -74,6 +115,7 @@ export default class NanxTable extends React.Component {
                     rowSelection={rowSelection(this.tbStore)}
                     onRow={this.onRowHandler}
                 />
+                <TableModal ModalContent={this.tbStore.ModalContent} tbStore={this.tbStore} />
             </div>
         );
     }

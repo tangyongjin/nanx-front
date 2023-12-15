@@ -23,6 +23,10 @@ class _MenuStore {
     @observable TargetRoleBasedMenuList = [];
     @observable TargetRoleUsedKeys = [];
 
+    // 菜单对应的 Tabs
+
+    @observable MenuTabItems = [];
+
     @observable currentRole = {
         role_code: sessionStorage.getItem('role_code'),
         role_name: sessionStorage.getItem('role_name')
@@ -209,6 +213,36 @@ class _MenuStore {
             this.setSelectedKeys([menu.key]);
         }
         sessionStorage.setItem('currentMenu', JSON.stringify(menu));
+    };
+
+    // Assuming this.MenuTabItems is an array where you want to store unique items
+
+    @action addMenuTabItem = (key, label) => {
+        let keyAlreadyExists = this.MenuTabItems.some((item) => item.key === key);
+        if (!keyAlreadyExists) {
+            let _tmpTab = {
+                key: key,
+                label: label,
+                children: null,
+                closable: true
+            };
+
+            console.log('添加 Tab');
+            this.MenuTabItems.push(_tmpTab);
+        } else {
+            console.log('Key already exists. Do not add duplicate.');
+        }
+    };
+
+    @action setMenuTabItemChildren = (key, children) => {
+        this.MenuTabItems.forEach((element) => {
+            if (element.key == key) {
+                if (element.children == null) {
+                    console.info('添加子组件...');
+                    element.children = children;
+                }
+            }
+        });
     };
 }
 
