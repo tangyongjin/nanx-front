@@ -1,5 +1,6 @@
 import React from 'react';
-import { Table, Button } from 'antd';
+
+import { Table, Button, Input } from 'antd';
 import { observer, inject } from 'mobx-react';
 import renderButtons from './renderButtons';
 import { pagination, rowSelection } from './tableUtils/tableUtil';
@@ -8,6 +9,7 @@ import _NanxTableStore from '@/store/NanxTBS';
 import TableModal from './TableModal';
 
 import DynamicComponentLoader from '@/buttons/DynamicComponentLoader';
+import DynamicCom from '@/buttons/DynamicCom';
 
 // import NanxTableStore from '@/store/NanxTableStore';
 // const tbStore = new _NanxTableStore();
@@ -20,13 +22,18 @@ export default class NanxTable extends React.Component {
         this.tbStore = new _NanxTableStore();
         console.log(this.tbStore);
         this.state = {
-            version: randomString(10)
+            version: randomString(10),
+            _btns: [{ btntext: '编辑', icon: 'Vsc:VscEdit', path: './EditCom.js' }]
         };
+
+        this.xref = React.createRef();
     }
 
     async componentDidMount() {
         await this.tbStore.setDataGridCode(this.props.datagrid_code);
         await this.refreshTable();
+
+        // 准备按钮数组
     }
 
     refreshTable = async () => {
@@ -43,8 +50,24 @@ export default class NanxTable extends React.Component {
         await this.tbStore.listData('delete');
     };
 
+    onRowHandler = (record) => {
+        return {
+            onClick: async () => {
+                this.tbStore.rowSelectChange([record.id], [record]);
+            }
+        };
+    };
+
+    loadComponent = () => {
+        // const dynamic = <Input ref={this.state.dynamicComponentRef} />;
+        this.tbStore.setModalContent(<DynamicCom />);
+        this.tbStore.showButtonModal();
+    };
+
     RenderBthHolder() {
         let LazyModalContainer = this.tbStore.ButtonUsedCom;
+        // console.log('💚💚💚💚💚💚💚💚LazyModalContainer: ', LazyModalContainer);
+
         if (this.tbStore.ButtonUsedCom) {
             return (
                 <LazyModalContainer
@@ -60,49 +83,17 @@ export default class NanxTable extends React.Component {
         }
     }
 
-    onRowHandler = (record) => {
-        return {
-            onClick: async () => {
-                this.tbStore.rowSelectChange([record.id], [record]);
-            }
-        };
-    };
-
-    createButton = () => {
-        const dynamic = (
-            <DynamicComponentLoader
-                icon="Bs:BsTextareaResize"
-                NanxTableStore={this.tbStore}
-                buttonPath="./BtnEditor.js"
-            />
-        );
-
-        console.log('dynamic: ', dynamic);
-        return dynamic;
-    };
-
-    loadTabForm = () => {
-        const dynamic = <DynamicComponentLoader NanxTableStore={this.tbStore} componentPath="./EditCom.js" />;
-
-        console.log('dynamic: ', dynamic);
-        // return dynamic;
-        this.tbStore.setModalContent(dynamic);
-        this.tbStore.showButtonModal();
-    };
-
     render() {
         return (
             <div className="table_wrapper">
-                {/* {this.RenderBthHolder()} */}
-
+                {this.RenderBthHolder()}
+                <div>{renderButtons(this.tbStore)}</div>
                 {/* {this.createButton()} */}
-                {/* <div>{renderButtons(this.tbStore)}</div> */}
                 <div>{this.state.version}</div>
 
-                <Button type="primary" onClick={this.loadTabForm}>
+                <Button type="primary" onClick={this.loadComponent}>
                     Edit
                 </Button>
-
                 <Table
                     size="small"
                     bordered={true}

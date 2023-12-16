@@ -54,7 +54,10 @@ class _NanxTableStore {
     @action setModalContent = async (children) => (this.ModalContent = children);
 
     @action hideButtonModal = async () => (this.buttonModalVisuble = false);
-    @action showButtonModal = async () => (this.buttonModalVisuble = true);
+    @action showButtonModal = async () => {
+        console.log(this.ModalContent);
+        // this.buttonModalVisuble = true;
+    };
 
     @action setPageSize = (pageSize) => (this.pageSize = pageSize);
 

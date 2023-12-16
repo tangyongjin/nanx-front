@@ -44,7 +44,9 @@ const TableSchemaForm = (props) => {
         console.log('props.NanxTableStore.table_action: ', props.NanxTableStore.table_action);
 
         if (props.NanxTableStore.table_action == 'edit') {
+            console.log('编辑场景');
             let _tmp_for_edit = { ...props.NanxTableStore.selectedRows[0] };
+            console.log('_tmp_for_edit: ', _tmp_for_edit);
             return _tmp_for_edit;
         }
 

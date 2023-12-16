@@ -31,6 +31,7 @@ const TableModal = inject('NanxTableStore')(
 
         return (
             <Modal
+                destroyOnClose={true}
                 title={
                     <div
                         className="modeal-drag-title"

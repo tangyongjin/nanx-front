@@ -16,6 +16,7 @@ export default class EditCom extends React.Component {
         await this.props.NanxTableStore.setTableAction('edit');
         if (this.props.NanxTableStore.selectedRows.length != 1) {
             message.error('请选择1条数据.');
+            this.props.NanxTableStore.hideButtonModal();
             return;
         }
 
@@ -25,7 +26,6 @@ export default class EditCom extends React.Component {
             message.error('不是自己的数据不能编辑');
             return;
         }
-        await this.props.NanxTableStore.showButtonModal();
     };
 
     saveFormData = (fmdata) => {

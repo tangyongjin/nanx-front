@@ -6,6 +6,7 @@ const getButtonHandler = async (event, item, store) => {
     let tmp = require(`../../../buttons/${item.file_path}`).default;
     console.log('tmp: ', tmp);
     await store.setButtonUsedCom(tmp);
+    console.log('👹👹👹👹👹👹👹👹👹👹 CAN INIT', item.file_path, store.lazyButtonUsedCom);
     store.lazyButtonUsedCom['init'](item);
 };
 
