@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import React, { useState, useEffect } from 'react';
 import IconWrapper from '@/utils/IconWrapper';
 
-const DynaLoader = ({ key, icon, NanxTableStore, comPath, buttontext, onClick }) => {
+const DynaLoader = ({ idx, icon, NanxTableStore, comPath, formTitle, buttontext, onClick }) => {
     const [Component, setComponent] = useState(null);
 
     useEffect(() => {
@@ -28,17 +28,18 @@ const DynaLoader = ({ key, icon, NanxTableStore, comPath, buttontext, onClick })
             if (typeof Instance.init === 'function') {
                 Instance.init();
             }
-            onClick(<Component NanxTableStore={NanxTableStore} />);
+            onClick(<Component NanxTableStore={NanxTableStore} />, formTitle);
         }
     };
 
     return (
         <Button
             danger
-            key={key}
+            key={idx}
             className="table-button"
             type="primary"
             icon={IconWrapper(icon)}
+            style={{ marginRight: 5, marginBottom: 8 }}
             onClick={handleButtonClick}>
             {buttontext}
         </Button>

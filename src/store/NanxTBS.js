@@ -16,10 +16,10 @@ class _NanxTableStore {
             }
         });
     }
+
+    @observable formTitle = 'formTitle';
     @observable AlphaVersion = null;
-
     @observable DefaultPageSize = 20;
-
     @observable SERIALNO = null;
     @observable buttonModalVisuble = false;
     @observable datagrid_code = null;
@@ -54,6 +54,10 @@ class _NanxTableStore {
 
     @action setAlphaVersion = (code) => {
         this.AlphaVersion = 'NanxTBS_' + code;
+    };
+
+    @action setFormTitle = (formTitle) => {
+        this.formTitle = formTitle;
     };
 
     @action setModalContent = async (children) => (this.ModalContent = children);

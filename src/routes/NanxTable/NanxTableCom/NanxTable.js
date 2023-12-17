@@ -67,7 +67,6 @@ export default class NanxTable extends React.Component {
     render() {
         return (
             <div className="table_wrapper">
-                <div>{this.state.version}</div>
                 <ButtonArray NanxTableStore={this.tbStore} buttons={this.tbStore.tableButtons} />
                 <Table
                     size="small"

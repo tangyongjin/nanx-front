@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import { useRef, useState } from 'react';
 import Draggable from 'react-draggable';
 
@@ -52,7 +52,7 @@ const TableModal = observer((props) => {
                     onBlur={() => {}}
                     // end
                 >
-                    "ABCD"
+                    {props.tbStore.formTitle}
                 </div>
             }
             styles={{
