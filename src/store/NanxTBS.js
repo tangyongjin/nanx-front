@@ -51,12 +51,17 @@ class _NanxTableStore {
 
     // ModalContent
     @observable ModalContent = null;
+
+    @action setAlphaVersion = (code) => {
+        this.AlphaVersion = 'NanxTBS_' + code;
+    };
+
     @action setModalContent = async (children) => (this.ModalContent = children);
 
     @action hideButtonModal = async () => (this.buttonModalVisuble = false);
     @action showButtonModal = async () => {
         console.log(this.ModalContent);
-        // this.buttonModalVisuble = true;
+        this.buttonModalVisuble = true;
     };
 
     @action setPageSize = (pageSize) => (this.pageSize = pageSize);
@@ -86,7 +91,10 @@ class _NanxTableStore {
         this.selectedRowKeys = [];
     };
 
-    @action setDataGridCode = (DataGridCode) => (this.datagrid_code = DataGridCode);
+    @action setDataGridCode = (DataGridCode) => {
+        this.datagrid_code = DataGridCode;
+        this.setAlphaVersion(DataGridCode);
+    };
 
     @action rowSelectChange = async (selectedRowKeys, selectedRows) => {
         this.selectedRowKeys = selectedRowKeys;
@@ -257,6 +265,7 @@ class _NanxTableStore {
      *
      */
     getDropdownLevelInfo() {
+        console.log('返回某个下拉组的level级别');
         let x_group = [];
         for (let key in this.formCfg.properties) {
             let item = this.formCfg.properties[key];

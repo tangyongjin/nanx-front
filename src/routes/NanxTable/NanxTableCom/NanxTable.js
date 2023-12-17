@@ -7,8 +7,9 @@ import { pagination, rowSelection } from './tableUtils/tableUtil';
 import { randomString } from '@/utils/tools';
 import _NanxTableStore from '@/store/NanxTBS';
 import TableModal from './TableModal';
+import ButtonArray from '@/buttons/ButtonArray';
 
-import DynamicComponentLoader from '@/buttons/DynamicComponentLoader';
+// import DynamicComponentLoader from '@/buttons/DynamicComponentLoader';
 import DynamicCom from '@/buttons/DynamicCom';
 
 // import NanxTableStore from '@/store/NanxTableStore';
@@ -22,8 +23,7 @@ export default class NanxTable extends React.Component {
         this.tbStore = new _NanxTableStore();
         console.log(this.tbStore);
         this.state = {
-            version: randomString(10),
-            _btns: [{ btntext: '编辑', icon: 'Vsc:VscEdit', path: './EditCom.js' }]
+            version: randomString(10)
         };
 
         this.xref = React.createRef();
@@ -64,36 +64,11 @@ export default class NanxTable extends React.Component {
         this.tbStore.showButtonModal();
     };
 
-    RenderBthHolder() {
-        let LazyModalContainer = this.tbStore.ButtonUsedCom;
-        // console.log('💚💚💚💚💚💚💚💚LazyModalContainer: ', LazyModalContainer);
-
-        if (this.tbStore.ButtonUsedCom) {
-            return (
-                <LazyModalContainer
-                    ref={async (item) => {
-                        await this.tbStore.setLazyButtonUsedCom(item);
-                    }}
-                    NanxTableStore={this.tbStore}
-                    refreshTable={this.refreshTable}
-                    afterEditRefresh={this.afterEditRefresh}
-                    afterDelteRefresh={this.afterEditRefresh}
-                />
-            );
-        }
-    }
-
     render() {
         return (
             <div className="table_wrapper">
-                {this.RenderBthHolder()}
-                <div>{renderButtons(this.tbStore)}</div>
-                {/* {this.createButton()} */}
                 <div>{this.state.version}</div>
-
-                <Button type="primary" onClick={this.loadComponent}>
-                    Edit
-                </Button>
+                <ButtonArray NanxTableStore={this.tbStore} buttons={this.tbStore.tableButtons} />
                 <Table
                     size="small"
                     bordered={true}

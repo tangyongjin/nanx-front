@@ -5,7 +5,7 @@ import LoadingGif from '@/styles/loading.gif';
 
 import NavDropDown from './NavDropDown';
 
-@inject('MenuStore', 'NanxTableStore')
+@inject('MenuStore')
 @observer
 export default class Navbar extends React.Component {
     constructor(props) {

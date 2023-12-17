@@ -1,4 +1,4 @@
-import NanxTableStore from './NanxTableStore';
+// import NanxTableStore from './NanxTableStore';
 import GridConfigStore from './GridConfigStore';
 import MenuStore from './MenuStore';
 import UserStore from './UserStore';
@@ -8,7 +8,7 @@ import MenuItemStore from './MenuItemStore';
 
 const RootStore = {
     UserStore,
-    NanxTableStore,
+    // NanxTableStore,
     MenuStore,
     MenuItemStore,
     GridConfigStore,

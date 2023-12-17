@@ -3,11 +3,12 @@ import { Select } from 'antd';
 import api from '@/api/api';
 import { observer, inject } from 'mobx-react';
 
-@inject('NanxTableStore', 'TriggerStore')
+@inject('TriggerStore')
 @observer
 export default class UAssocSelect extends React.Component {
     constructor(props) {
         super(props);
+        console.log('UAssocSelect💥💥>💥props💥>------', props);
 
         this.state = {
             optionList: [],
@@ -25,15 +26,15 @@ export default class UAssocSelect extends React.Component {
         //把自己(AssosSelect注册到 triggers )
 
         this.props.TriggerStore.registerTrigger(this);
-        let groups = this.props.NanxTableStore.getDropdownLevelInfo();
+        let groups = this.props.nnstore.getDropdownLevelInfo();
 
-        if (this.props.trigger_cfg.level == 1 && this.props.NanxTableStore.table_action === 'add') {
+        if (this.props.trigger_cfg.level == 1 && this.props.nnstore.table_action === 'add') {
             await this.getOptionList(this.props.trigger_cfg, null, this);
         }
 
         if (this.props.trigger_cfg.level == groups[this.props.trigger_cfg.trigger_group_uuid]) {
             //模拟用户点击下拉选择
-            if (this.props.NanxTableStore.table_action === 'edit') {
+            if (this.props.nnstore.table_action === 'edit') {
                 await this.simulateClick();
             }
         }

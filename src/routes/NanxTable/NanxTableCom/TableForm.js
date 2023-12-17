@@ -10,7 +10,7 @@ import cloneDeep from 'lodash/cloneDeep';
 const actions = createFormActions();
 
 const TableSchemaForm = (props) => {
-    console.log('TableSchemaForm>props>: ', props);
+    console.log('💟💟💟💟💟💟💟💟💟 TableForm 💟>props>💟:💟💟 ', props);
 
     /**
      *

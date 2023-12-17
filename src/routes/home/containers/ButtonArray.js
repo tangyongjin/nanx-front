@@ -4,7 +4,7 @@ import DynaLoader from './DynaLoader';
 const ButtonArray = ({ buttons }) => {
     const handleButtonClick = (Component) => {
         if (Component) {
-            console.log('Component: ', Component);
+            console.log('动态加载的组件: ', Component);
         }
     };
 

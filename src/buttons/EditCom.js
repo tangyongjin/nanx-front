@@ -6,16 +6,16 @@ import api from '@/api/api';
 export default class EditCom extends React.Component {
     constructor(props) {
         super(props);
-        console.log('EditCom', props);
-        console.log('EditCom', this.props);
+        console.log('EditCom', this);
+        // console.log('EditCom', this.props);
         this.init = this.init.bind(this);
     }
 
     init = async () => {
-        console.log('Button自己', this);
+        console.log('init呼叫>>>>Button props 属性', this.props);
         await this.props.NanxTableStore.setTableAction('edit');
         if (this.props.NanxTableStore.selectedRows.length != 1) {
-            message.error('请选择1条数据.');
+            message.error('必须请选择1条数据进行相应操作');
             this.props.NanxTableStore.hideButtonModal();
             return;
         }
@@ -26,6 +26,7 @@ export default class EditCom extends React.Component {
             message.error('不是自己的数据不能编辑');
             return;
         }
+        this.props.NanxTableStore.showButtonModal();
     };
 
     saveFormData = (fmdata) => {
@@ -53,7 +54,15 @@ export default class EditCom extends React.Component {
         }
     };
 
+    // <TableSchemaForm NanxTableStore={this.props.NanxTableStore} saveFormData={this.saveFormData.bind(this)} />
+
+    componentDidMount() {
+        console.log('EditCom😵😵😵😵😵😵> componentDidMount:', this.props);
+    }
+
     render() {
+        console.log('😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵');
+        console.log(this.props.NanxTableStore);
         return (
             <TableSchemaForm NanxTableStore={this.props.NanxTableStore} saveFormData={this.saveFormData.bind(this)} />
         );
