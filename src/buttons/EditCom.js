@@ -7,7 +7,6 @@ export default class EditCom extends React.Component {
     constructor(props) {
         super(props);
         console.log('EditCom', this);
-        // console.log('EditCom', this.props);
         this.init = this.init.bind(this);
     }
 
@@ -19,9 +18,7 @@ export default class EditCom extends React.Component {
             this.props.NanxTableStore.hideButtonModal();
             return;
         }
-
         let _tmprec = this.props.NanxTableStore.selectedRows[0];
-
         if (_tmprec.hasOwnProperty('ghost_author') && _tmprec.ghost_author != sessionStorage.getItem('user')) {
             message.error('不是自己的数据不能编辑');
             return;
@@ -50,19 +47,11 @@ export default class EditCom extends React.Component {
         params.updateurl = this.props.NanxTableStore.curd.updateurl;
         let json = await api.curd.updateData(params);
         if (json.code == 200) {
-            this.props.afterEditRefresh();
+            await this.props.NanxTableStore.listData('edit');
         }
     };
 
-    // <TableSchemaForm NanxTableStore={this.props.NanxTableStore} saveFormData={this.saveFormData.bind(this)} />
-
-    componentDidMount() {
-        console.log('EditCom😵😵😵😵😵😵> componentDidMount:', this.props);
-    }
-
     render() {
-        console.log('😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵');
-        console.log(this.props.NanxTableStore);
         return (
             <TableSchemaForm NanxTableStore={this.props.NanxTableStore} saveFormData={this.saveFormData.bind(this)} />
         );

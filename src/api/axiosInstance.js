@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { message } from 'antd';
-import { hashHistory } from 'react-router';
+// import { hashHistory } from 'react-router';
 import AuthStore from '@/store/AuthStore';
 import { nowString } from '@/utils/tools';
 
@@ -70,7 +70,7 @@ const responseFailed = (error) => {
                     console.error('401错误,登录引起', error.response);
                 } else {
                     console.error('401:token过期等', error);
-                    hashHistory.push('/login');
+                    // hashHistory.push('/login');
                 }
                 break;
             case 403:

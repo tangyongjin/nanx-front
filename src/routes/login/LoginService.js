@@ -1,12 +1,10 @@
 import decode from 'jwt-decode';
-import { hashHistory } from 'react-router';
 import api from '@/api/api';
-import { getDefaultMenuItem } from '@/utils/tools';
 import MenuStore from '@/store/MenuStore';
 import UserStore from '@/store/UserStore';
 import { message } from 'antd';
 
-export default class LoginService {
+class LoginService {
     constructor() {
         this.loginMobile = this.loginMobile.bind(this);
     }
@@ -20,47 +18,19 @@ export default class LoginService {
             data: { mobile, password, transaction_id }
         };
 
-        await api.user
-            .loginMobile(params)
-            .then(async (res) => {
-                if (res.code == 401) {
-                    document.getElementById('loadingSpin').style.display = 'none';
-                    document.getElementById('login_msg').style.display = 'block';
-                    return;
-                }
+        try {
+            let loginResult = await api.user.loginMobile(params);
+            // loginResult 现在是已经解析的对象
+            console.log(loginResult);
+            // 在这里可以对 loginResult 进行处理
+            // ...
 
-                if (res.code == 500) {
-                    document.getElementById('loadingSpin').style.display = 'none';
-                    document.getElementById('login_msg').style.display = 'block';
-                    return;
-                }
-
-                if (res.code == 200) {
-                    await UserStore.setToken(res.token);
-                    await UserStore.setUserProfile(res.profile);
-                    await this.afterLoginSuccess(res);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
-
-    afterLoginSuccess = async () => {
-        await MenuStore.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
-        let defaultMenuItem = getDefaultMenuItem(MenuStore.RoleMenuArray);
-        console.log('defaultMenuItem: ', defaultMenuItem);
-        MenuStore.setCurrentMenu(defaultMenuItem, 'afterLoginSuccess');
-
-        if (defaultMenuItem.router == '/datagrid') {
-            hashHistory.push({
-                pathname: defaultMenuItem.router,
-                state: { datagrid_code: defaultMenuItem.datagrid_code }
-            });
-        } else {
-            hashHistory.push(defaultMenuItem.router);
+            return loginResult;
+        } catch (error) {
+            console.error('登录失败', error);
+            throw error; // 你可以选择处理错误或将其传递给调用者
         }
-    };
+    }
 
     loggedIn() {
         let token = UserStore.getToken(); //
@@ -95,6 +65,7 @@ export default class LoginService {
         UserStore.clearToken();
         sessionStorage.clear();
         MenuStore.clear();
-        hashHistory.push('/login');
     }
 }
+
+export default LoginService;

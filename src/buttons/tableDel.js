@@ -1,11 +1,8 @@
 import React from 'react';
 import { Modal, message } from 'antd';
 import api from '@/api/api';
-import { observer, inject } from 'mobx-react';
 
 const { confirm } = Modal;
-@inject('NanxTableStore') // 'myStore' 是你在Provider中提供的store名称
-@observer
 export default class DeleteData extends React.Component {
     constructor(props) {
         super(props);
@@ -53,7 +50,7 @@ export default class DeleteData extends React.Component {
         let json = await api.curd.deleteData(params);
 
         if (json.code == 200) {
-            this.props.refreshTable();
+            await this.props.NanxTableStore.listData('add');
         }
     }
 

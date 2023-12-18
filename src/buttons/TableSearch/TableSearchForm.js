@@ -2,10 +2,7 @@ import React from 'react';
 import { withLatestFrom, map } from 'rxjs/operators';
 import { toJS } from 'mobx';
 import { SchemaForm, createAsyncFormActions, Field, FormItemGrid } from '@uform/antd';
-import { observer, inject } from 'mobx-react';
 
-@inject('NanxTableStore')
-@observer
 export default class TableSearchForm extends React.Component {
     constructor(props) {
         super(props);

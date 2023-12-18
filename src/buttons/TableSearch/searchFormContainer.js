@@ -69,7 +69,7 @@ export default class SearchFormContainer extends React.Component {
         await this.props.HostedTableStore.setSearchQueryConfig(queryLines);
         await this.props.HostedTableStore.rowSelectChange([], []);
         await this.props.HostedTableStore.listData();
-        this.props.HostedTableStore.hideButtonModal();
+        await this.props.HostedTableStore.hideButtonModal();
     };
 
     //  回传搜索条件给上级组件 returnQueryLines
@@ -155,6 +155,7 @@ export default class SearchFormContainer extends React.Component {
                 {this.state.field_group.map((item, index) => {
                     return (
                         <TableSearchForm
+                            NanxTableStore={this.props.HostedTableStore}
                             key={index}
                             fieldsList={this.getFieldList()}
                             saveActions={this.saveActions}

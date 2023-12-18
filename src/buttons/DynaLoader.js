@@ -8,11 +8,8 @@ const DynaLoader = ({ idx, icon, NanxTableStore, comPath, formTitle, buttontext,
     useEffect(() => {
         const loadComponent = async () => {
             try {
-                console.log('tbStore in DynaLoader:', NanxTableStore);
-
                 const module = await import(`./${comPath}.js`);
                 const loadedComponent = module.default;
-
                 setComponent(() => loadedComponent);
             } catch (error) {
                 console.error('Error loading component:', error);

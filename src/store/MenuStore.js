@@ -24,8 +24,13 @@ class _MenuStore {
     @observable TargetRoleUsedKeys = [];
 
     // 菜单对应的 Tabs
-
     @observable MenuTabItems = [];
+
+    @observable history = null;
+
+    @action setHistory = (his) => {
+        this.history = his;
+    };
 
     @observable currentRole = {
         role_code: sessionStorage.getItem('role_code'),
@@ -238,11 +243,13 @@ class _MenuStore {
         this.MenuTabItems.forEach((element) => {
             if (element.key == key) {
                 if (element.children == null) {
-                    console.info('添加子组件...');
+                    console.info('添加子组件...' + key);
                     element.children = children;
                 }
             }
         });
+
+        console.info(' this.MenuTabItems💓💓💓💓💓💓💓💓💓💓  ', this.MenuTabItems);
     };
 }
 

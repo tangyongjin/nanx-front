@@ -22,15 +22,18 @@ export function randomString(string_length) {
 }
 
 export function getTargetMenuKey(url) {
-    let hashLocation = url.indexOf('?_k=');
-    let end_string = url.slice(hashLocation + 4);
-    let sessionKey = '@@History/' + end_string;
-    let sessionValue = JSON.parse(sessionStorage.getItem(sessionKey));
-    if (sessionValue) {
-        return sessionValue.key;
-    } else {
-        return null;
-    }
+    // let hashLocation = url.indexOf('?_k=');
+    // let end_string = url.slice(hashLocation + 4);
+    // let sessionKey = '@@History/' + end_string;
+    // let sessionValue = JSON.parse(sessionStorage.getItem(sessionKey));
+    // if (sessionValue) {
+    //     return sessionValue.key;
+    // } else {
+    //     return null;
+    // }
+    const params = new URLSearchParams(url);
+    const menuKey = params.get('key');
+    return menuKey;
 }
 
 export function findItemByKey(menuArray, key) {
@@ -124,9 +127,7 @@ export function findMenuPath(RoleBasedMenuList, currentMenukey) {
     };
 
     let path = [];
-
     const result = findPath(RoleBasedMenuList, currentMenukey, path);
-    console.log('setting router>>>', result);
     if (typeof result === 'undefined') {
         return [];
     } else {
@@ -136,5 +137,7 @@ export function findMenuPath(RoleBasedMenuList, currentMenukey) {
 
 // 登录后的第一个路由.暂时定位第一个原素
 export function getDefaultMenuItem(menus) {
-    return menus[0];
+    let defaultMenuItem = menus[0];
+    console.log('💜💜💜💜💜💜💜defaultMenuItem: ', defaultMenuItem);
+    return defaultMenuItem;
 }

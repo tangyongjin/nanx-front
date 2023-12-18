@@ -1,23 +1,26 @@
-import React from 'react';
-import { Input } from 'antd';
-import { randomString } from '@/utils/tools';
-import LoginService from './LoginService';
-import { inject, observer } from 'mobx-react';
 import '@/styles/login.css';
 import { BsFingerprint } from 'react-icons/bs';
-import { Spin } from 'antd';
+import { getDefaultMenuItem } from '@/utils/tools';
+import { inject, observer } from 'mobx-react';
+import { Input } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import { randomString } from '@/utils/tools';
+import { Spin } from 'antd';
+import LoginService from './LoginService';
+import React from 'react';
 
-@inject('MenuStore')
+@inject('MenuStore', 'UserStore')
 @observer
 export default class Login extends React.Component {
     constructor(props) {
+        console.log('Login>props: ', props);
         super();
         this.state = {};
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmitMobile = this.handleFormSubmitMobile.bind(this);
         this.Auth = new LoginService();
         this.MenuStore = props.MenuStore;
+        this.UserStore = props.UserStore;
     }
 
     componentDidMount() {
@@ -27,10 +30,42 @@ export default class Login extends React.Component {
         this.MenuStore.setBossTitle(null);
     }
 
-    handleFormSubmitMobile(e) {
+    handleFormSubmitMobile = async (e) => {
         e.preventDefault();
-        this.Auth.loginMobile(this.state.mobile, this.state.password, this.state.transaction_id);
-    }
+        let res = await this.Auth.loginMobile(this.state.mobile, this.state.password, this.state.transaction_id);
+        console.log('logResult: ', res);
+
+        if (res.code == 401) {
+            document.getElementById('loadingSpin').style.display = 'none';
+            document.getElementById('login_msg').style.display = 'block';
+            return;
+        }
+
+        if (res.code == 500) {
+            document.getElementById('loadingSpin').style.display = 'none';
+            document.getElementById('login_msg').style.display = 'block';
+            return;
+        }
+
+        if (res.code == 200) {
+            await this.UserStore.setToken(res.token);
+            await this.UserStore.setUserProfile(res.profile);
+            await this.afterLoginSuccess(res);
+        }
+    };
+
+    afterLoginSuccess = async () => {
+        await this.MenuStore.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
+
+        // let defaultMenuItem = getDefaultMenuItem(this.MenuStore.RoleMenuArray);
+        // console.log('defaultMenuItem: ', defaultMenuItem);
+        // this.MenuStore.setCurrentMenu(defaultMenuItem, 'afterLoginSuccess');
+
+        this.props.history.push({
+            pathname: '/welcome',
+            state: { key: -1989 }
+        });
+    };
 
     handleChange(e) {
         this.setState({

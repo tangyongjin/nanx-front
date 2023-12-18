@@ -1,35 +1,42 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { inject, observer } from 'mobx-react';
-import { hashHistory } from 'react-router';
 import { findItemByKey } from '@/utils/tools';
 
-const LeftMenu = inject(
-    'MenuStore',
-    'GridConfigStore'
-)(
+const LeftMenu = inject('MenuStore')(
     observer((props) => {
-        console.log('props菜单渲染: ', props);
-
         const handleMenuClick = async (item) => {
             const menuClicked = findItemByKey(props.MenuStore.RoleMenuArray, item.key);
-            if (menuClicked.router == '/table/commonXTable') {
-                if (menuClicked?.datagrid_code == 'GirdMNT') {
-                    console.log('GirdMNT: ', 'GirdMNT');
-                }
-            }
-
             props.MenuStore.setCurrentMenu(menuClicked, 'handleMenuClick');
             props.MenuStore.addMenuTabItem(menuClicked.key, menuClicked.label);
 
-            hashHistory.push({
+            let searchStr;
+
+            if (menuClicked.router == '/datagrid') {
+                searchStr = `?datagrid_code=${menuClicked.datagrid_code}&key=${menuClicked.key}`;
+            } else {
+                searchStr = `?key=${menuClicked.key}`;
+            }
+
+            props.MenuStore.history.push({
                 pathname: menuClicked.router,
+                search: searchStr,
                 state: {
                     datagrid_code: menuClicked?.datagrid_code,
                     key: menuClicked.key
                 }
             });
         };
+
+        // useEffect(() => {
+        //     // 模拟点击默认菜单项
+
+        //     const defaultMenuItem = getDefaultMenuItem(props.MenuStore.RoleMenuArray);
+        //     if (defaultMenuItem) {
+        //         console.log('模拟点击默认菜单项 ', defaultMenuItem);
+        //         handleMenuClick(defaultMenuItem);
+        //     }
+        // }, [props.MenuStore.RoleMenuArray]); // 依赖数组为空，表示只在组件加载时执行一次
 
         return (
             <div>

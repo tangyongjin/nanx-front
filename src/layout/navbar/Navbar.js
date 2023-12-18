@@ -31,7 +31,7 @@ export default class Navbar extends React.Component {
                     <img src={LoadingGif} alt="loading" />
                 </div>
                 <div id="navbar_dropdown">
-                    <NavDropDown />
+                    <NavDropDown history={this.props.history} />
                 </div>
             </div>
         );

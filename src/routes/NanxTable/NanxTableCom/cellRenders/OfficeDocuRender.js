@@ -21,7 +21,6 @@ const OfficeDocuRender = (text) => {
     const segments = _download.split('/');
     const lastSegment = segments[segments.length - 1];
     const short = lastSegment.length > 20 ? `${lastSegment.slice(-20)}` : lastSegment;
-    console.log('short: ', short);
 
     const getFileExtension = (filename) => {
         const parts = filename.split('.');
@@ -53,8 +52,6 @@ const OfficeDocuRender = (text) => {
     };
 
     let docuIcon = getDocumentType(short);
-    console.log('docuType: ', docuIcon);
-
     return (
         <>
             <a style={{ color: 'black' }} href={_download}>

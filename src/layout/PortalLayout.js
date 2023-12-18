@@ -1,16 +1,30 @@
 import React, { useEffect } from 'react';
 import LeftMenu from './leftMenu/leftMenu';
 import Navbar from './navbar//Navbar';
-import { Layout } from 'antd';
+import { Layout, Tabs } from 'antd';
 import { inject, observer } from 'mobx-react';
 import { getTargetMenuKey, findItemByKey } from '@/utils/tools';
-import { Tabs } from 'antd';
 
 const { Header, Sider, Content } = Layout;
 
 const PortalLayout = inject('MenuStore')(
     observer((props) => {
-        props.MenuStore.setMenuTabItemChildren(props.location.state.key, props.children);
+        console.log('PortalLayout>>props: ', props);
+        props.MenuStore.setHistory(props.history);
+
+        const params = new URLSearchParams(props.history.location.search);
+        // const Mkey = params.get('key');
+        // props.MenuStore.setMenuTabItemChildren(Mkey, props.children);
+
+        let goHref = window.location.href;
+        let targetMenuKey = getTargetMenuKey(goHref);
+        console.log('targetMenuKey: ', targetMenuKey);
+
+        let targetMenu = findItemByKey(props.MenuStore.RoleMenuArray, targetMenuKey);
+        // // 点击profile 会找不到 targetMenu
+        if (targetMenu) {
+            props.MenuStore.setCurrentMenu(targetMenu, 'onPrev');
+        }
 
         window.onload = () => {
             console.log('浏览器刷新');
@@ -19,46 +33,29 @@ const PortalLayout = inject('MenuStore')(
         };
 
         useEffect(() => {
-            const onPrev = () => {
-                let goHref = window.location.href;
-                let targetMenuKey = getTargetMenuKey(goHref);
-                let targetMenu = findItemByKey(props.MenuStore.RoleMenuArray, targetMenuKey);
-                // 点击profile 会找不到 targetMenu
-                if (targetMenu) {
-                    props.MenuStore.setCurrentMenu(targetMenu, 'onPrev');
-                }
-            };
-
             const asyncFun = async () => {
                 await props.MenuStore.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
-                window.addEventListener('popstate', onPrev, false);
-                return () => {
-                    window.removeEventListener('popstate');
-                };
+                props.MenuStore.setMenuTabItemChildren(targetMenuKey, props.children);
             };
             asyncFun();
-        }, [props.MenuStore]);
+        }, [props.MenuStore, targetMenuKey, props.children]);
 
         return (
-            <Layout key={props.location.state.key} style={{ minHeight: '100vh', minWidth: '100vh' }}>
+            <Layout key={targetMenuKey} style={{ minHeight: '100vh', minWidth: '100vh' }}>
                 <Sider collapsed={props.MenuStore.isCollapse}>
-                    <LeftMenu
-                        className="portal_menu"
-                        style={{ padding: 0, height: '100vh', overflowY: 'scroll' }}
-                        width={300}
-                    />
+                    <LeftMenu style={{ padding: 0, height: '100vh', overflowY: 'scroll' }} width={300} />
                 </Sider>
                 <Layout style={{ minHeight: '100vh', minWidth: '100vh' }}>
                     <Header>
-                        <Navbar bread={props.MenuStore.breadcrumb} />
+                        <Navbar history={props.history} bread={props.MenuStore.breadcrumb} />
                     </Header>
                     <Content
                         key={props.MenuStore.randomKey}
                         style={{
                             marginLeft: '4px'
                         }}>
-                        {/* {props.children} */}
                         <Tabs items={props.MenuStore.MenuTabItems} />
+                        {props.children}
                     </Content>
                 </Layout>
             </Layout>

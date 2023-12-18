@@ -1,7 +1,6 @@
 import { Dropdown, Modal } from 'antd';
 import { observer } from 'mobx-react';
 import React from 'react';
-import { hashHistory } from 'react-router';
 import LoginService from '@/routes/login/LoginService';
 import { port, root_url } from '@/api/api_config/base_config';
 const avatarRoot = `${root_url}:${port}/`;
@@ -11,12 +10,13 @@ const { confirm } = Modal;
 export default class NavDropDown extends React.Component {
     constructor(props) {
         super(props);
+        console.log('NavDropDown>props: ', props);
         this.LoginService = new LoginService();
     }
 
     logout = () => {
-        // this.MenuStore.setBossTitle(null);
         this.LoginService.logout();
+        this.props.history.push('/login');
     };
 
     showConfirm() {
@@ -25,7 +25,6 @@ export default class NavDropDown extends React.Component {
             onOk: () => this.logout(),
             cancelText: '取消',
             okText: '确定',
-
             okButtonProps: {
                 type: 'primary',
                 style: { color: 'green', backgroundColor: '#070707', borderColor: '#343c41' }
@@ -43,7 +42,7 @@ export default class NavDropDown extends React.Component {
                     console.log('点击 /profile 相同菜单');
                     return;
                 }
-                hashHistory.push('/profile');
+                // hashHistory.push('/profile');
             }
             if (key == 2) {
                 this.showConfirm();
