@@ -7,7 +7,9 @@ export default class AppBackUp extends React.Component {
         const logurl = api_root + '/log';
         return (
             <div>
-                <iframe title="applog" style={{ width: '100%', height: '1000px' }} src={logurl} />
+
+               <h1>SYS_OP</h1>  
+                {/* <iframe title="applog" style={{ width: '100%', height: '1000px' }} src={logurl} /> */}
             </div>
         );
     }

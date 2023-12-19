@@ -8,7 +8,6 @@ const LeftMenu = inject('MenuStore')(
         const handleMenuClick = async (item) => {
             const menuClicked = findItemByKey(props.MenuStore.RoleMenuArray, item.key);
             props.MenuStore.setCurrentMenu(menuClicked, 'handleMenuClick');
-            props.MenuStore.addMenuTabItem(menuClicked.key, menuClicked.label);
 
             let searchStr;
 
@@ -18,14 +17,18 @@ const LeftMenu = inject('MenuStore')(
                 searchStr = `?key=${menuClicked.key}`;
             }
 
-            props.MenuStore.history.push({
+            const pushObj = {
+                executed: false,
                 pathname: menuClicked.router,
                 search: searchStr,
                 state: {
                     datagrid_code: menuClicked?.datagrid_code,
                     key: menuClicked.key
                 }
-            });
+            };
+
+            props.MenuStore.addMenuTabItem(menuClicked.key, menuClicked.label, pushObj);
+            props.MenuStore.history.push(pushObj);
         };
 
         // useEffect(() => {

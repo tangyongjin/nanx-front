@@ -57,14 +57,31 @@ export default class Login extends React.Component {
     afterLoginSuccess = async () => {
         await this.MenuStore.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
 
-        // let defaultMenuItem = getDefaultMenuItem(this.MenuStore.RoleMenuArray);
-        // console.log('defaultMenuItem: ', defaultMenuItem);
-        // this.MenuStore.setCurrentMenu(defaultMenuItem, 'afterLoginSuccess');
+        let defaultMenuItem = getDefaultMenuItem(this.MenuStore.RoleMenuArray);
+        this.MenuStore.setCurrentMenu(defaultMenuItem, 'afterLoginSuccess');
+        console.log('defaultMenuItem',defaultMenuItem);
 
-        this.props.history.push({
-            pathname: '/welcome',
-            state: { key: -1989 }
-        });
+        let searchStr;
+        if (defaultMenuItem.router == '/datagrid') {
+            searchStr = `?datagrid_code=${defaultMenuItem.datagrid_code}&key=${defaultMenuItem.key}`;
+        } else {
+            searchStr = `?key=${defaultMenuItem.key}`;
+        }
+ 
+        const pushObj = {
+            executed: false,
+            pathname: defaultMenuItem.router,
+            search: searchStr,
+            state: {
+                datagrid_code: defaultMenuItem?.datagrid_code,
+                key: defaultMenuItem.key
+            }
+        };
+
+        
+        this.props.history.push(pushObj);
+
+        
     };
 
     handleChange(e) {

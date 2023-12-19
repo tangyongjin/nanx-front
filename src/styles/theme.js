@@ -63,10 +63,12 @@ const themeJson = {
 
         Tabs: {
             colorPrimaryActive: '#366503',
-            cardBg: '#3B3B47',
-            itemColor: '#366503',
+            cardBg: '#f3f3f9',
+            cardHeight:12,
+            cardGutter:6,
+            itemColor: '#191819',
             itemActiveColor: '#366503',
-            titleFontSize: '15px'
+            titleFontSize: '14px'
         },
 
         Input: {
@@ -90,7 +92,7 @@ const themeJson = {
             actionsBg: 'red',
             // headerFontSize: 14,
             // headerFontSizeSM: 14,
-            headerBg: 'white'
+            headerBg: 'blue'
         }
     }
 };

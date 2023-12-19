@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action, set, computed } from 'mobx';
 import api from '../api/api';
 import IconWrapper from '@/utils/IconWrapper';
 import { randomString, getAllKeys, findMenuPath } from '@/utils/tools';
@@ -26,6 +26,17 @@ class _MenuStore {
     // 菜单对应的 Tabs
     @observable MenuTabItems = [];
 
+    @action setMenuTabItems = (tabs) => {
+        this.MenuTabItems = tabs;
+    };
+
+    @observable activeTabKey = null;
+
+    @action setActiveTabKey = (key) => {
+        console.log('当前活动Tab::' + key);
+        this.activeTabKey = key;
+    };
+
     @observable history = null;
 
     @action setHistory = (his) => {
@@ -48,7 +59,6 @@ class _MenuStore {
         }
 
         let currentMenyKey = this.currentMenu.key;
-
         let _path = findMenuPath(this.RoleBasedMenuList, currentMenyKey);
         let bread = '';
         _path &&
@@ -210,8 +220,9 @@ class _MenuStore {
     @action.bound
     setCurrentMenu = (menu, scense) => {
         // console.log('scense: ', scense);
-        // console.log('menu: ', menu);
+        console.log('设置当前菜单:menu: ', menu);
         // console.log(JSON.stringify(menu));
+        menu.icon = null;
 
         this.currentMenu = menu;
         if (menu) {
@@ -220,36 +231,45 @@ class _MenuStore {
         sessionStorage.setItem('currentMenu', JSON.stringify(menu));
     };
 
-    // Assuming this.MenuTabItems is an array where you want to store unique items
-
-    @action addMenuTabItem = (key, label) => {
+    @action addMenuTabItem = (key, label, pushObj) => {
+        // this.freshRandomKey();
         let keyAlreadyExists = this.MenuTabItems.some((item) => item.key === key);
         if (!keyAlreadyExists) {
             let _tmpTab = {
                 key: key,
-                label: label,
+                label: label + ':' + key,
                 children: null,
-                closable: true
+                closable: true,
+                pushObj: pushObj
             };
 
             console.log('添加 Tab');
             this.MenuTabItems.push(_tmpTab);
+            this.setActiveTabKey(key);
         } else {
             console.log('Key already exists. Do not add duplicate.');
         }
     };
 
     @action setMenuTabItemChildren = (key, children) => {
-        this.MenuTabItems.forEach((element) => {
-            if (element.key == key) {
-                if (element.children == null) {
-                    console.info('添加子组件...' + key);
-                    element.children = children;
-                }
+        const updatedMenuTabItems = this.MenuTabItems.map((element) => {
+            if (element.key === key && element.children == null) {
+                console.info('Adding children for key: ' + key);
+                // Use mobx.set to update the observable property
+                set(element, 'children', children);
             }
+            return element;
         });
 
-        console.info(' this.MenuTabItems💓💓💓💓💓💓💓💓💓💓  ', this.MenuTabItems);
+        this.setActiveTabKey(key);
+        this.setMenuTabItems(updatedMenuTabItems);
+    };
+
+    @action setExecutedStatusForKey = (key) => {
+        const currentItem = this.MenuTabItems.find((item) => item.key === key);
+        if (currentItem) {
+            currentItem.pushObj.executed = true;
+        }
     };
 }
 
