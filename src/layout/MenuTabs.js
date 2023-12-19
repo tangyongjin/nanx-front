@@ -22,11 +22,13 @@ const MenuTabs = inject('MenuStore')(
             }
         };
 
+        // destroyInactiveTabPane={true} 必须是 false
+
         return (
             <div style={{paddingLeft:'4px'}} >  
             <Tabs
                 hideAdd={true}
-                destroyInactiveTabPane={true}
+                destroyInactiveTabPane={false}
                 size={'middle'}
                 type='editable-card'
                 key={props.MenuStore.randomKey}
@@ -38,5 +40,7 @@ const MenuTabs = inject('MenuStore')(
         );
     })
 );
+
+// export default  MenuTabs ; //这里要执行一下WithRouter
 
 export default withRouter(MenuTabs); //这里要执行一下WithRouter

@@ -10,6 +10,7 @@ const DynaLoader = ({ idx, icon, NanxTableStore, comPath, formTitle, buttontext,
             try {
                 const module = await import(`./${comPath}.js`);
                 const loadedComponent = module.default;
+                console.log(` 🤬🤬🤬🤬🤬loadedComponent: ./${comPath}.js `, loadedComponent);
                 setComponent(() => loadedComponent);
             } catch (error) {
                 console.error('Error loading component:', error);
@@ -21,7 +22,22 @@ const DynaLoader = ({ idx, icon, NanxTableStore, comPath, formTitle, buttontext,
 
     const handleButtonClick = async () => {
         if (Component) {
-            const Instance = await new Component({ NanxTableStore });
+            console.log('Component: ',    Component);
+            console.log('typeof: ',  typeof  Component);
+            let Instance
+            if(typeof  Component=='object'){
+            // object : mobx 注入的 isMobxInjector
+            Instance = await new Component.wrappedComponent({ NanxTableStore });
+            
+            } else {
+            // function : React compoment
+                  Instance = await new Component({ NanxTableStore });
+            
+            }
+            
+            
+            
+            console.log('Component_Instance: ', Instance);
             if (typeof Instance.init === 'function') {
                 Instance.init();
             }
