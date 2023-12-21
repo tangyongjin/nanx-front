@@ -17,7 +17,9 @@ class _NanxTableStore {
         });
     }
 
-    @observable formTitle = 'formTitle';
+    @observable formTitle = null;
+    @observable iconStr = null;
+
     @observable AlphaVersion = null;
     @observable DefaultPageSize = 20;
     @observable SERIALNO = null;
@@ -58,6 +60,10 @@ class _NanxTableStore {
 
     @action setFormTitle = (formTitle) => {
         this.formTitle = formTitle;
+    };
+
+    @action setIconStr = (str) => {
+        this.iconStr = str;
     };
 
     @action setModalContent = async (children) => (this.ModalContent = children);

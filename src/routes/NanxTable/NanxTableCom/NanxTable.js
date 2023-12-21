@@ -53,10 +53,7 @@ export default class NanxTable extends React.Component {
                     rowSelection={rowSelection(this.tbStore)}
                     onRow={this.onRowHandler}
                 />
-
-                {this.tbStore.lazyButtonUsedCom && this.tbStore.buttonModalVisuble ? (
-                    <TableModal tbStore={this.tbStore} />
-                ) : null}
+                <TableModal tbStore={this.tbStore} />
             </div>
         );
     }

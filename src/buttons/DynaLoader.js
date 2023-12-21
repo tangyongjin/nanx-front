@@ -1,4 +1,5 @@
 import React from 'react';
+import { message } from 'antd';
 import { Button } from 'antd';
 import IconWrapper from '@/utils/IconWrapper';
 
@@ -13,9 +14,19 @@ const DynaLoader = ({ NanxTableStore, buttonSelf }) => {
     };
 
     const handleButtonClick = async () => {
-        console.log('按钮点击>>');
+        console.log('按钮点击>>', buttonSelf);
         await loadDynamic(buttonSelf.file_path);
-        // await NanxTableStore.showButtonModal();
+
+        if (buttonSelf.form_show_spec == 'must_have') {
+            if (NanxTableStore.selectedRows.length != 1) {
+                message.error('请选择1条数据.');
+                return;
+            }
+        }
+
+        await NanxTableStore.setFormTitle(buttonSelf.form_title);
+        await NanxTableStore.setIconStr(buttonSelf.icon);
+        await NanxTableStore.showButtonModal();
     };
 
     return (

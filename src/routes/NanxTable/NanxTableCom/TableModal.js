@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Suspense } from 'react';
 import { Modal, Button } from 'antd';
 import { observer } from 'mobx-react';
-
+import IconWrapper from '@/utils/IconWrapper';
 import Draggable from 'react-draggable';
 
 const TableModal = observer((props) => {
@@ -68,6 +68,7 @@ const TableModal = observer((props) => {
                     onBlur={() => {}}
                     // end
                 >
+                    {IconWrapper(props.tbStore.iconStr)}
                     {props.tbStore.formTitle}
                 </div>
             }
@@ -100,9 +101,7 @@ const TableModal = observer((props) => {
             <Suspense fallback={<div>Loading...</div>}>
                 {props.tbStore.lazyButtonUsedCom ? (
                     <props.tbStore.lazyButtonUsedCom NanxTableStore={props.tbStore} />
-                ) : (
-                    <div>AA</div>
-                )}
+                ) : null}
             </Suspense>
         </Modal>
     );
