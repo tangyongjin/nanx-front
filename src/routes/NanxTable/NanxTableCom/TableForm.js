@@ -10,8 +10,6 @@ import cloneDeep from 'lodash/cloneDeep';
 const actions = createFormActions();
 
 const TableSchemaForm = (props) => {
-    console.log('💟💟💟💟💟💟💟💟💟 TableForm 💟>props>💟:💟💟 ', props);
-
     /**
      *
      * 如果有 A自动 点击按钮,设置B字段
@@ -19,7 +17,6 @@ const TableSchemaForm = (props) => {
      *
      */
     const prepareFormSchema = () => {
-        console.log('before sort', props.NanxTableStore.formCfg);
         let formCfg = cloneDeep(props.NanxTableStore.formCfg);
         let Fixed = cloneDeep(props.NanxTableStore.formCfg);
 
@@ -35,18 +32,15 @@ const TableSchemaForm = (props) => {
             Fixed.properties[key] = keyConfig;
         }
 
-        console.log('Fixed: ', Fixed);
+        console.log('Fixe💭💭💭💭💭💭💭d: ', Fixed);
         return Fixed;
     };
 
     const prepareRawData = () => {
-        console.log('prepareRawData: ', prepareRawData);
-        console.log('props.NanxTableStore.table_action: ', props.NanxTableStore.table_action);
+        console.log('💭💭💭💭💭💭💭>>Action ', props.NanxTableStore.table_action);
 
         if (props.NanxTableStore.table_action == 'edit') {
-            console.log('编辑场景');
             let _tmp_for_edit = { ...props.NanxTableStore.selectedRows[0] };
-            console.log('_tmp_for_edit: ', _tmp_for_edit);
             return _tmp_for_edit;
         }
 

@@ -32,6 +32,15 @@ class _AuthStore {
     };
 
     @action setLoading = async (loadingState) => {
+        // if (loadingState) {
+        //     console.log('show Loading');
+        //     console.log(document.getElementById('appLoading'));
+        //     document.getElementById('appLoading').style.display = 'block';
+        // } else {
+        //     console.log('hide Loading');
+        //     document.getElementById('appLoading').style.display = 'none';
+        // }
+
         this._loading = loadingState;
     };
 

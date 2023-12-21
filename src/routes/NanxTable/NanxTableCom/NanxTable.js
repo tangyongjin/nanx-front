@@ -24,6 +24,7 @@ export default class NanxTable extends React.Component {
     refreshTable = async () => {
         await this.tbStore.resetTableStore();
         await this.tbStore.fetchDataGridCfg();
+        await this.tbStore.setLazyComponent();
         await this.tbStore.listData('from refreshTable');
     };
 
@@ -39,6 +40,7 @@ export default class NanxTable extends React.Component {
         return (
             <div className="table_wrapper">
                 <ButtonArray NanxTableStore={this.tbStore} buttons={this.tbStore.tableButtons} />
+
                 <Table
                     size="small"
                     bordered={true}
@@ -51,7 +53,10 @@ export default class NanxTable extends React.Component {
                     rowSelection={rowSelection(this.tbStore)}
                     onRow={this.onRowHandler}
                 />
-                <TableModal ModalContent={this.tbStore.ModalContent} tbStore={this.tbStore} />
+
+                {this.tbStore.lazyButtonUsedCom && this.tbStore.buttonModalVisuble ? (
+                    <TableModal tbStore={this.tbStore} />
+                ) : null}
             </div>
         );
     }

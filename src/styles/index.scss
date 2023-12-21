@@ -384,3 +384,14 @@ div.formItem svg {
     text-overflow: ellipsis;
     max-width: 140px; /* 设置最大宽度，超过的部分将显示省略号 */
   }
+  
+  
+  .ant-tabs-tab-active {
+    background-color: #031f0e
+}
+
+
+div.ant-tabs-tab-active > div.ant-tabs-tab-btn {
+     color: #074c06 !important ;
+    font-weight:bold !important;
+  }

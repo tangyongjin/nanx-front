@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { Suspense } from 'react';
 import { Modal, Button } from 'antd';
 import { observer } from 'mobx-react';
-import { useRef, useState } from 'react';
+
 import Draggable from 'react-draggable';
 
 const TableModal = observer((props) => {
@@ -27,6 +28,21 @@ const TableModal = observer((props) => {
             bottom: clientHeight - (targetRect.bottom - uiData.y)
         });
     };
+
+    useEffect(() => {
+        // const prepareComponent = async () => {
+        //     let Instance;
+        //     if (typeof props.ModalContent == 'object') {
+        //         // object : mobx 注入的 isMobxInjector
+        //         Instance = await new props.ModalContent.wrappedComponent({ NanxTableStore: props.tbStore });
+        //     } else {
+        //         // function : React compoment
+        //         Instance = await new props.ModalContent({ NanxTableStore: props.tbStore });
+        //     }
+        //     await Instance.init();
+        // };
+        // prepareComponent();
+    }, []);
 
     return (
         <Modal
@@ -81,7 +97,13 @@ const TableModal = observer((props) => {
                     关闭
                 </Button>
             ]}>
-            {props.tbStore.ModalContent}
+            <Suspense fallback={<div>Loading...</div>}>
+                {props.tbStore.lazyButtonUsedCom ? (
+                    <props.tbStore.lazyButtonUsedCom NanxTableStore={props.tbStore} />
+                ) : (
+                    <div>AA</div>
+                )}
+            </Suspense>
         </Modal>
     );
 });

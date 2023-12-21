@@ -84,8 +84,6 @@ const FileUploder = (props) => {
                 setLoading(false);
                 setPercent(0);
                 // 上传完成后,修改对应的组件的渲染值
-                console.log('// 上传完成后,修改对应的组件的渲染值: ');
-                console.log(props);
             }, 800);
         }
         onProgress({ percent: (event.loaded / event.total) * 100 });
@@ -111,9 +109,7 @@ const FileUploder = (props) => {
         onSuccess('Ok');
     };
 
-    console.log(props);
     const buttonwidth = props?.buttonWidth ? props.buttonWidth : 'auto';
-    console.log('buttonwidth: ', buttonwidth);
 
     return (
         <span>

@@ -33,7 +33,6 @@ class _MenuStore {
     @observable activeTabKey = null;
 
     @action setActiveTabKey = (key) => {
-        console.log('当前活动Tab::' + key);
         this.activeTabKey = key;
     };
 
@@ -180,12 +179,12 @@ class _MenuStore {
         this.openKeys = [];
         this.currentMenu = {};
         this.selectedKeys = [];
+        this.setMenuTabItems([]);
         sessionStorage.clear();
     };
 
     @action freshRandomKey = () => {
         setTimeout(() => {
-            console.log('freshRandomKey');
             this.randomKey = randomString(10);
         }, 0);
     };
@@ -219,11 +218,7 @@ class _MenuStore {
 
     @action.bound
     setCurrentMenu = (menu, scense) => {
-        // console.log('scense: ', scense);
-        console.log('设置当前菜单:menu: ', menu);
-        // console.log(JSON.stringify(menu));
         menu.icon = null;
-
         this.currentMenu = menu;
         if (menu) {
             this.setSelectedKeys([menu.key]);
@@ -232,7 +227,6 @@ class _MenuStore {
     };
 
     @action addMenuTabItem = (key, label, pushObj) => {
-        // this.freshRandomKey();
         let keyAlreadyExists = this.MenuTabItems.some((item) => item.key === key);
         if (!keyAlreadyExists) {
             let _tmpTab = {
@@ -243,18 +237,32 @@ class _MenuStore {
                 pushObj: pushObj
             };
 
-            console.log('添加 Tab');
             this.MenuTabItems.push(_tmpTab);
             this.setActiveTabKey(key);
         } else {
-            console.log('Key already exists. Do not add duplicate.');
+        }
+    };
+
+    @action removeMenuTabItem = (mkey) => {
+        /* 如果 MenuTabItems 只有一个元素,直接返回,否则
+        删除 mkey对应的item, 并且把后面一个item设为active,
+        如果没有后面的 item,则把第一个作为 active
+         */
+        const deleted = this.MenuTabItems.filter((item) => parseInt(item.key) !== parseInt(mkey));
+        this.setMenuTabItems(deleted);
+
+        if (deleted.length > 0) {
+            const activeItem = deleted.find((item) => item.key === this.activeTabKey);
+            if (!activeItem) {
+                this.setActiveTabKey(deleted[0].key);
+                this.history.replace(deleted[0].pushObj);
+            }
         }
     };
 
     @action setMenuTabItemChildren = (key, children) => {
         const updatedMenuTabItems = this.MenuTabItems.map((element) => {
             if (element.key === key && element.children == null) {
-                console.info('Adding children for key: ' + key);
                 // Use mobx.set to update the observable property
                 set(element, 'children', children);
             }

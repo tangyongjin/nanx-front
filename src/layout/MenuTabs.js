@@ -16,26 +16,36 @@ const MenuTabs = inject('MenuStore')(
                 props.MenuStore.history.push(current.pushObj);
             } else {
                 console.log('已经执行,do nothing');
-
                 // history.replace
                 props.MenuStore.history.replace(current.pushObj);
+            }
+        };
+
+        const onEdit = (targetKey, action) => {
+            console.log('action: ', action);
+            console.log('targetKey: ', targetKey);
+            if (action === 'add') {
+                // add();
+            } else {
+                props.MenuStore.removeMenuTabItem(targetKey);
             }
         };
 
         // destroyInactiveTabPane={true} 必须是 false
 
         return (
-            <div style={{paddingLeft:'4px'}} >  
-            <Tabs
-                hideAdd={true}
-                destroyInactiveTabPane={false}
-                size={'middle'}
-                type='editable-card'
-                key={props.MenuStore.randomKey}
-                activeKey={props.MenuStore.activeTabKey}
-                items={props.MenuStore.MenuTabItems}
-                onChange={onChange}
-            />
+            <div style={{ paddingLeft: '4px' }}>
+                <Tabs
+                    hideAdd={true}
+                    destroyInactiveTabPane={false}
+                    size={'middle'}
+                    type="editable-card"
+                    key={props.MenuStore.randomKey}
+                    activeKey={props.MenuStore.activeTabKey}
+                    items={props.MenuStore.MenuTabItems}
+                    onEdit={onEdit}
+                    onChange={onChange}
+                />
             </div>
         );
     })

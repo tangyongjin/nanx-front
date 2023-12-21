@@ -63,9 +63,9 @@ const themeJson = {
 
         Tabs: {
             colorPrimaryActive: '#366503',
-            cardBg: '#f3f3f9',
-            cardHeight:12,
-            cardGutter:6,
+            cardBg: '#ffffff',
+            cardHeight: 12,
+            cardGutter: 6,
             itemColor: '#191819',
             itemActiveColor: '#366503',
             titleFontSize: '14px'

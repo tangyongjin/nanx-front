@@ -9,6 +9,7 @@ export default class RefreshTable extends React.Component {
     init = async () => {
         await this.props.NanxTableStore.resetTableStore();
         await this.props.NanxTableStore.fetchDataGridCfg();
+        // await this.tbStore.setLazyComponent();
         await this.props.NanxTableStore.listData('from refreshTable');
     };
 

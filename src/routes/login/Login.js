@@ -55,11 +55,12 @@ export default class Login extends React.Component {
     };
 
     afterLoginSuccess = async () => {
+        document.getElementById('loadingSpin').style.display = 'none';
         await this.MenuStore.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
 
         let defaultMenuItem = getDefaultMenuItem(this.MenuStore.RoleMenuArray);
         this.MenuStore.setCurrentMenu(defaultMenuItem, 'afterLoginSuccess');
-        console.log('defaultMenuItem',defaultMenuItem);
+        console.log('defaultMenuItem', defaultMenuItem);
 
         let searchStr;
         if (defaultMenuItem.router == '/datagrid') {
@@ -67,7 +68,7 @@ export default class Login extends React.Component {
         } else {
             searchStr = `?key=${defaultMenuItem.key}`;
         }
- 
+
         const pushObj = {
             executed: false,
             pathname: defaultMenuItem.router,
@@ -78,10 +79,7 @@ export default class Login extends React.Component {
             }
         };
 
-        
         this.props.history.push(pushObj);
-
-        
     };
 
     handleChange(e) {

@@ -3,21 +3,21 @@ import { message } from 'antd';
 import { observer, inject } from 'mobx-react';
 import GridFieldManager from './GridFieldManager';
 import { toJS } from 'mobx';
- 
 
 @inject('GridConfigStore')
 @observer
-
 export default class GridFieldMnt extends React.Component {
     constructor(props) {
         console.log('props: ', props);
         super(props);
         this.init = this.init.bind(this);
-        
+    }
+
+    async componentWillMount() {
+        await this.init();
     }
 
     async init(buttonSource) {
-        
         console.log('item: ', buttonSource);
         let { selectedRows } = this.props.NanxTableStore;
         if (selectedRows.length == 0) {
@@ -25,20 +25,41 @@ export default class GridFieldMnt extends React.Component {
             return;
         } else {
             let record = selectedRows[0];
-
-            // this.props.GridConfigStore.setCurrentDataGridCode(toJS(record).datagrid_code);
-            // this.props.GridConfigStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
-            // this.props.GridConfigStore.setCurrentBasetable(toJS(record).base_table);
-            // this.props.GridConfigStore.initAll();
-            // this.props.GridConfigStore.prepareDataGirdEnv();
-            
+            console.log(this.props);
+            this.props.GridConfigStore.setCurrentDataGridCode(toJS(record).datagrid_code);
+            this.props.GridConfigStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
+            this.props.GridConfigStore.setCurrentBasetable(toJS(record).base_table);
+            this.props.GridConfigStore.initAll();
+            this.props.GridConfigStore.prepareDataGirdEnv();
             this.props.NanxTableStore.showButtonModal();
         }
     }
 
     render() {
-          return (
-            <GridFieldManager NanxTableStore={this.props.NanxTableStore}  />
-           )
-        }
+        return <GridFieldManager NanxTableStore={this.props.NanxTableStore} />;
+    }
 }
+
+// import React from 'react';
+// import { observer, inject } from 'mobx-react'; // Moved these decorators to the end
+
+// class GridFieldMnt extends React.Component {
+//     constructor(props) {
+//         console.log('props: ', props);
+//         super(props);
+//         this.init = this.init.bind(this);
+//     }
+
+//     async init() {
+//         console.log(this.props);
+//         this.props.GridConfigStore.setCurrentDataGridCode('AAA');
+//         this.props.NanxTableStore.showButtonModal();
+//     }
+
+//     render() {
+//         return <div>aaa</div>;
+//     }
+// }
+
+// const WrappedGridFieldMnt = inject('GridConfigStore')(observer(GridFieldMnt));
+// export default WrappedGridFieldMnt;

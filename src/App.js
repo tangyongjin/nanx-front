@@ -14,7 +14,6 @@ import '@/styles/index.scss';
 export default class App extends React.Component {
     constructor(props) {
         super(props);
-        console.log('APP_props: ', this.props);
     }
 
     renderRoute = (route, index) => {
@@ -25,8 +24,6 @@ export default class App extends React.Component {
                 path={route.path}
                 exact={true}
                 render={(props) => {
-                    console.log('route>>: ', route);
-                    console.log('Route>>路由属性: ', props);
                     return (
                         <route.component {...props}>
                             {route.childRoutes && route.childRoutes.map(this.renderRoute)}

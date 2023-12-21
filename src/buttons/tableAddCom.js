@@ -5,12 +5,17 @@ import api from '@/api/api';
 export default class TableAddCom extends React.Component {
     constructor(props) {
         super(props);
-        console.log('TableAddCom', this);
         this.init = this.init.bind(this);
     }
 
-    init = async () => {
+    async componentWillMount() {
         await this.props.NanxTableStore.setTableAction('add');
+        await this.init();
+    }
+
+    init = async () => {
+        console.log('Add,初始化');
+        console.log('😻😻😻😻this.props: ', this.props);
         await this.props.NanxTableStore.clearSelectedRows();
         await this.props.NanxTableStore.rowSelectChange([], []);
         await this.props.NanxTableStore.showButtonModal();
@@ -35,7 +40,12 @@ export default class TableAddCom extends React.Component {
 
     render() {
         return (
-            <TableSchemaForm NanxTableStore={this.props.NanxTableStore} saveFormData={this.saveFormData.bind(this)} />
+            <div>
+                <TableSchemaForm
+                    NanxTableStore={this.props.NanxTableStore}
+                    saveFormData={this.saveFormData.bind(this)}
+                />
+            </div>
         );
     }
 }

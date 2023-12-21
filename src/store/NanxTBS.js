@@ -1,4 +1,4 @@
-import { observable, action, autorun } from 'mobx';
+import { observable, action, autorun, set } from 'mobx';
 import CellRender from '@/routes/NanxTable/NanxTableCom/cellRender';
 import getTextWidth from '@/routes/NanxTable/NanxTableCom/commonTableTextTool';
 import listDataParams from '@/routes/NanxTable/NanxTableCom/listDataParams';
@@ -64,7 +64,6 @@ class _NanxTableStore {
 
     @action hideButtonModal = async () => (this.buttonModalVisuble = false);
     @action showButtonModal = async () => {
-        console.log(this.ModalContent);
         this.buttonModalVisuble = true;
     };
 
@@ -198,7 +197,7 @@ class _NanxTableStore {
     @action setTableButtons = (json) => (this.tableButtons = json);
     @action setCurd = (curd) => (this.curd = curd);
     @action setGridType = (type) => (this.gridType = type);
-    @action setLazyButtonUsedCom = (com) => {
+    @action setLazyButtonUsedCom = async (com) => {
         this.lazyButtonUsedCom = com;
     };
 
@@ -286,6 +285,17 @@ class _NanxTableStore {
         });
         return summary;
     }
+
+    @action setLazyComponent = async () => {
+        await Promise.all(
+            this.tableButtons.map(async (button) => {
+                let comPath = button.file_path;
+                const module = await import(`../buttons/${comPath}.js`);
+                set(button, 'lazy', module.default);
+                return button;
+            })
+        );
+    };
 
     @action debug = async () => {
         console.log(this);
