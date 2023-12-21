@@ -7,6 +7,16 @@ const DynaLoader = ({ NanxTableStore, buttonSelf }) => {
     const loadDynamic = async (file_path) => {
         try {
             let module = await require(`./${file_path}.js`).default;
+
+            // const module = React.lazy(() => require(`./${file_path}.js`).default);
+
+            // if (file_path == 'refreshTable') {
+            //     console.log('refreshTable: ');
+            //     console.log('module: ', module);
+            //     let IN = new module({ NanxTableStore: NanxTableStore });
+            //     IN.componentDidMount();
+            // }
+
             await NanxTableStore.setLazyButtonUsedCom(module);
         } catch (error) {
             console.error('Error loading dynamic component:', error);
@@ -16,12 +26,22 @@ const DynaLoader = ({ NanxTableStore, buttonSelf }) => {
     const handleButtonClick = async () => {
         console.log('按钮点击>>', buttonSelf);
         await loadDynamic(buttonSelf.file_path);
+        console.log('buttonSelf.file_path: ', buttonSelf.file_path);
 
         if (buttonSelf.form_show_spec == 'must_have') {
             if (NanxTableStore.selectedRows.length != 1) {
                 message.error('请选择1条数据.');
                 return;
             }
+        }
+
+        if (buttonSelf.file_path == 'refreshTable') {
+            console.log('refreshTable: ');
+            console.log('module: ', NanxTableStore.lazyButtonUsedCom);
+            let IN = new NanxTableStore.lazyButtonUsedCom({ NanxTableStore: NanxTableStore });
+            IN.componentDidMount();
+            return; 
+            
         }
 
         await NanxTableStore.setFormTitle(buttonSelf.form_title);
