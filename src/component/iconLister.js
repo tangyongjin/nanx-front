@@ -1,512 +1,69 @@
-/*
+// /*
 
-来源:
-https://react-icons.github.io/react-icons/icons/vsc/
+// 来源:
+// https://react-icons.github.io/react-icons/icons/vsc/
 
-*/
+// */
 
-import React from 'react';
-
+import { useMemo } from 'react';
 import * as BootStrapIcons from 'react-icons/bs';
 import * as VscIcons from 'react-icons/vsc';
+import React from 'react';
+import { FixedSizeGrid } from 'react-window';
 
 const IconLister = (props) => {
-    const VscIconsList = [
-        'VscAccount',
-        'VscActivateBreakpoints',
-        'VscAdd',
-        'VscArchive',
-        'VscArrowBoth',
-        'VscArrowCircleDown',
-        'VscArrowCircleLeft',
-        'VscArrowCircleRight',
-        'VscArrowCircleUp',
-        'VscArrowDown',
-        'VscArrowLeft',
-        'VscArrowRight',
-        'VscArrowSmallDown',
-        'VscArrowSmallLeft',
-        'VscArrowSmallRight',
-        'VscArrowSmallUp',
-        'VscArrowSwap',
-        'VscArrowUp',
-        'VscAzure',
-        'VscAzureDevops',
-        'VscBeaker',
-        'VscBeakerStop',
-        'VscBell',
-        'VscBellDot',
-        'VscBellSlash',
-        'VscBellSlashDot',
-        'VscBlank',
-        'VscBold',
-        'VscBook',
-        'VscBookmark',
-        'VscBracketDot',
-        'VscBracketError',
-        'VscBriefcase',
-        'VscBroadcast',
-        'VscBrowser',
-        'VscBug',
-        'VscCalendar',
-        'VscCallIncoming',
-        'VscCallOutgoing',
-        'VscCaseSensitive',
-        'VscCheck',
-        'VscCheckAll',
-        'VscChecklist',
-        'VscChevronDown',
-        'VscChevronLeft',
-        'VscChevronRight',
-        'VscChevronUp',
-        'VscChip',
-        'VscChromeClose',
-        'VscChromeMaximize',
-        'VscChromeMinimize',
-        'VscChromeRestore',
-        'VscCircle',
-        'VscCircleFilled',
-        'VscCircleLarge',
-        'VscCircleLargeFilled',
-        'VscCircleSlash',
-        'VscCircleSmall',
-        'VscCircleSmallFilled',
-        'VscCircuitBoard',
-        'VscClearAll',
-        'VscClippy',
-        'VscClose',
-        'VscCloseAll',
-        'VscCloud',
-        'VscCloudDownload',
-        'VscCloudUpload',
-        'VscCode',
-        'VscCoffee',
-        'VscCollapseAll',
-        'VscColorMode',
-        'VscCombine',
-        'VscComment',
-        'VscCommentDiscussion',
-        'VscCommentDraft',
-        'VscCommentUnresolved',
-        'VscCompass',
-        'VscCompassActive',
-        'VscCompassDot',
-        'VscCopilot',
-        'VscCopy',
-        'VscCreditCard',
-        'VscDash',
-        'VscDashboard',
-        'VscDatabase',
-        'VscDebug',
-        'VscDebugAll',
-        'VscDebugAlt',
-        'VscDebugAltSmall',
-        'VscDebugBreakpointConditional',
-        'VscDebugBreakpointConditionalUnverified',
-        'VscDebugBreakpointData',
-        'VscDebugBreakpointDataUnverified',
-        'VscDebugBreakpointFunction',
-        'VscDebugBreakpointFunctionUnverified',
-        'VscDebugBreakpointLog',
-        'VscDebugBreakpointLogUnverified',
-        'VscDebugBreakpointUnsupported',
-        'VscDebugConsole',
-        'VscDebugContinue',
-        'VscDebugContinueSmall',
-        'VscDebugCoverage',
-        'VscDebugDisconnect',
-        'VscDebugLineByLine',
-        'VscDebugPause',
-        'VscDebugRerun',
-        'VscDebugRestart',
-        'VscDebugRestartFrame',
-        'VscDebugReverseContinue',
-        'VscDebugStackframe',
-        'VscDebugStackframeActive',
-        'VscDebugStart',
-        'VscDebugStepBack',
-        'VscDebugStepInto',
-        'VscDebugStepOut',
-        'VscDebugStepOver',
-        'VscDebugStop',
-        'VscDesktopDownload',
-        'VscDeviceCamera',
-        'VscDeviceCameraVideo',
-        'VscDeviceMobile',
-        'VscDiff',
-        'VscDiffAdded',
-        'VscDiffIgnored',
-        'VscDiffModified',
-        'VscDiffRemoved',
-        'VscDiffRenamed',
-        'VscDiscard',
-        'VscEdit',
-        'VscEditorLayout',
-        'VscEllipsis',
-        'VscEmptyWindow',
-        'VscError',
-        'VscErrorSmall',
-        'VscExclude',
-        'VscExpandAll',
-        'VscExport',
-        'VscExtensions',
-        'VscEye',
-        'VscEyeClosed',
-        'VscFeedback',
-        'VscFile',
-        'VscFileBinary',
-        'VscFileCode',
-        'VscFileMedia',
-        'VscFilePdf',
-        'VscFileSubmodule',
-        'VscFileSymlinkDirectory',
-        'VscFileSymlinkFile',
-        'VscFileZip',
-        'VscFiles',
-        'VscFilter',
-        'VscFilterFilled',
-        'VscFlame',
-        'VscFold',
-        'VscFoldDown',
-        'VscFoldUp',
-        'VscFolder',
-        'VscFolderActive',
-        'VscFolderLibrary',
-        'VscFolderOpened',
-        'VscGame',
-        'VscGear',
-        'VscGift',
-        'VscGist',
-        'VscGistSecret',
-        'VscGitCommit',
-        'VscGitCompare',
-        'VscGitFetch',
-        'VscGitMerge',
-        'VscGitPullRequest',
-        'VscGitPullRequestClosed',
-        'VscGitPullRequestCreate',
-        'VscGitPullRequestDraft',
-        'VscGitPullRequestGoToChanges',
-        'VscGitPullRequestNewChanges',
-        'VscGithub',
-        'VscGithubAction',
-        'VscGithubAlt',
-        'VscGithubInverted',
-        'VscGlobe',
-        'VscGoToFile',
-        'VscGrabber',
-        'VscGraph',
-        'VscGraphLeft',
-        'VscGraphLine',
-        'VscGraphScatter',
-        'VscGripper',
-        'VscGroupByRefType',
-        'VscHeart',
-        'VscHeartFilled',
-        'VscHistory',
-        'VscHome',
-        'VscHorizontalRule',
-        'VscHubot',
-        'VscInbox',
-        'VscIndent',
-        'VscInfo',
-        'VscInsert',
-        'VscInspect',
-        'VscIssueDraft',
-        'VscIssueReopened',
-        'VscIssues',
-        'VscItalic',
-        'VscJersey',
-        'VscJson',
-        'VscKebabVertical',
-        'VscKey',
-        'VscLaw',
-        'VscLayers',
-        'VscLayersActive',
-        'VscLayersDot',
-        'VscLayout',
-        'VscLayoutActivitybarLeft',
-        'VscLayoutActivitybarRight',
-        'VscLayoutCentered',
-        'VscLayoutMenubar',
-        'VscLayoutPanel',
-        'VscLayoutPanelCenter',
-        'VscLayoutPanelJustify',
-        'VscLayoutPanelLeft',
-        'VscLayoutPanelOff',
-        'VscLayoutPanelRight',
-        'VscLayoutSidebarLeft',
-        'VscLayoutSidebarLeftOff',
-        'VscLayoutSidebarRight',
-        'VscLayoutSidebarRightOff',
-        'VscLayoutStatusbar',
-        'VscLibrary',
-        'VscLightbulb',
-        'VscLightbulbAutofix',
-        'VscLink',
-        'VscLinkExternal',
-        'VscListFilter',
-        'VscListFlat',
-        'VscListOrdered',
-        'VscListSelection',
-        'VscListTree',
-        'VscListUnordered',
-        'VscLiveShare',
-        'VscLoading',
-        'VscLocation',
-        'VscLock',
-        'VscLockSmall',
-        'VscMagnet',
-        'VscMail',
-        'VscMailRead',
-        'VscMap',
-        'VscMapFilled',
-        'VscMarkdown',
-        'VscMegaphone',
-        'VscMention',
-        'VscMenu',
-        'VscMerge',
-        'VscMic',
-        'VscMicFilled',
-        'VscMilestone',
-        'VscMirror',
-        'VscMortarBoard',
-        'VscMove',
-        'VscMultipleWindows',
-        'VscMusic',
-        'VscMute',
-        'VscNewFile',
-        'VscNewFolder',
-        'VscNewline',
-        'VscNoNewline',
-        'VscNote',
-        'VscNotebook',
-        'VscNotebookTemplate',
-        'VscOctoface',
-        'VscOpenPreview',
-        'VscOrganization',
-        'VscOutput',
-        'VscPackage',
-        'VscPaintcan',
-        'VscPass',
-        'VscPassFilled',
-        'VscPerson',
-        'VscPersonAdd',
-        'VscPiano',
-        'VscPieChart',
-        'VscPin',
-        'VscPinned',
-        'VscPinnedDirty',
-        'VscPlay',
-        'VscPlayCircle',
-        'VscPlug',
-        'VscPreserveCase',
-        'VscPreview',
-        'VscPrimitiveSquare',
-        'VscProject',
-        'VscPulse',
-        'VscQuestion',
-        'VscQuote',
-        'VscRadioTower',
-        'VscReactions',
-        'VscRecord',
-        'VscRecordKeys',
-        'VscRecordSmall',
-        'VscRedo',
-        'VscReferences',
-        'VscRefresh',
-        'VscRegex',
-        'VscRemote',
-        'VscRemoteExplorer',
-        'VscRemove',
-        'VscReplace',
-        'VscReplaceAll',
-        'VscReply',
-        'VscRepo',
-        'VscRepoClone',
-        'VscRepoForcePush',
-        'VscRepoForked',
-        'VscRepoPull',
-        'VscRepoPush',
-        'VscReport',
-        'VscRequestChanges',
-        'VscRocket',
-        'VscRootFolder',
-        'VscRootFolderOpened',
-        'VscRss',
-        'VscRuby',
-        'VscRunAbove',
-        'VscRunAll',
-        'VscRunBelow',
-        'VscRunErrors',
-        'VscSave',
-        'VscSaveAll',
-        'VscSaveAs',
-        'VscScreenFull',
-        'VscScreenNormal',
-        'VscSearch',
-        'VscSearchFuzzy',
-        'VscSearchStop',
-        'VscSend',
-        'VscServer',
-        'VscServerEnvironment',
-        'VscServerProcess',
-        'VscSettings',
-        'VscSettingsGear',
-        'VscShield',
-        'VscSignIn',
-        'VscSignOut',
-        'VscSmiley',
-        'VscSnake',
-        'VscSortPrecedence',
-        'VscSourceControl',
-        'VscSparkle',
-        'VscSplitHorizontal',
-        'VscSplitVertical',
-        'VscSquirrel',
-        'VscStarEmpty',
-        'VscStarFull',
-        'VscStarHalf',
-        'VscStopCircle',
-        'VscSymbolArray',
-        'VscSymbolBoolean',
-        'VscSymbolClass',
-        'VscSymbolColor',
-        'VscSymbolConstant',
-        'VscSymbolEnum',
-        'VscSymbolEnumMember',
-        'VscSymbolEvent',
-        'VscSymbolField',
-        'VscSymbolFile',
-        'VscSymbolInterface',
-        'VscSymbolKey',
-        'VscSymbolKeyword',
-        'VscSymbolMethod',
-        'VscSymbolMisc',
-        'VscSymbolNamespace',
-        'VscSymbolNumeric',
-        'VscSymbolOperator',
-        'VscSymbolParameter',
-        'VscSymbolProperty',
-        'VscSymbolRuler',
-        'VscSymbolSnippet',
-        'VscSymbolString',
-        'VscSymbolStructure',
-        'VscSymbolVariable',
-        'VscSync',
-        'VscSyncIgnored',
-        'VscTable',
-        'VscTag',
-        'VscTarget',
-        'VscTasklist',
-        'VscTelescope',
-        'VscTerminal',
-        'VscTerminalBash',
-        'VscTerminalCmd',
-        'VscTerminalDebian',
-        'VscTerminalLinux',
-        'VscTerminalPowershell',
-        'VscTerminalTmux',
-        'VscTerminalUbuntu',
-        'VscTextSize',
-        'VscThreeBars',
-        'VscThumbsdown',
-        'VscThumbsdownFilled',
-        'VscThumbsup',
-        'VscThumbsupFilled',
-        'VscTools',
-        'VscTrash',
-        'VscTriangleDown',
-        'VscTriangleLeft',
-        'VscTriangleRight',
-        'VscTriangleUp',
-        'VscTwitter',
-        'VscTypeHierarchy',
-        'VscTypeHierarchySub',
-        'VscTypeHierarchySuper',
-        'VscUnfold',
-        'VscUngroupByRefType',
-        'VscUnlock',
-        'VscUnmute',
-        'VscUnverified',
-        'VscVariableGroup',
-        'VscVerified',
-        'VscVerifiedFilled',
-        'VscVersions',
-        'VscVm',
-        'VscVmActive',
-        'VscVmConnect',
-        'VscVmOutline',
-        'VscVmRunning',
-        'VscVr',
-        'VscWand',
-        'VscWarning',
-        'VscWatch',
-        'VscWhitespace',
-        'VscWholeWord',
-        'VscWindow',
-        'VscWordWrap',
-        'VscWorkspaceTrusted',
-        'VscWorkspaceUnknown',
-        'VscWorkspaceUntrusted',
-        'VscZoomIn',
-        'VscZoomOut'
-    ];
-
     const { ifShowList } = props;
 
-    const BootStrapIconsList = [];
-    // const VscIconsList = [];
-
-    for (let key in BootStrapIcons) {
-        BootStrapIconsList.push(key);
-    }
-
-    // for (let key in VscIcons) {
-    //     VscIconsList.push(key);
-    // }
-    // console.log('VscIconsList: ', JSON.stringify(VscIconsList));
+    const iconList = useMemo(() => {
+        const list = [];
+        for (let key in VscIcons) {
+            list.push({ type: 'Vsc', name: key });
+        }
+        for (let key in BootStrapIcons) {
+            list.push({ type: 'Bs', name: key });
+        }
+        return list;
+    }, []); // 空数组作为依赖，表示这个 useMemo 只在组件挂载时运行一次
 
     const containerMainStyle = {
-        width: '812px',
+        width: '412px',
         maxHeight: '400px',
         backgroundColor: 'white',
         overflow: 'auto'
     };
 
-    const containerStyle = {
-        width: '812px',
-        display: ifShowList ? 'flex' : 'none',
-        flexWrap: 'wrap' // Allow items to wrap onto a new line
+    const handleClick = (type, name) => {
+        props.callbackRender(`${type}:${name}`);
+    };
+
+    const Cell = ({ columnIndex, rowIndex, style }) => {
+        const index = rowIndex * 4 + columnIndex;
+        const { type, name } = iconList[index];
+
+        return (
+            <div
+                style={{ ...style, cursor: 'pointer', margin: '6px', height: '32px', width: '32px' }}
+                onClick={() => handleClick(type, name)}>
+                <div style={{ fontSize: '22px' }}>
+                    {React.createElement(type === 'Vsc' ? VscIcons[name] : BootStrapIcons[name])}
+                </div>
+            </div>
+        );
     };
 
     return (
         <div style={containerMainStyle}>
-            <div style={containerStyle}>
-                {VscIconsList.map((IconText, index) => (
-                    <div
-                        style={{ cursor: 'pointer', margin: '6px', height: '32px', width: '32px' }}
-                        onClick={() => {
-                            props.callbackRender('Vsc:' + IconText);
-                        }}
-                        key={index}>
-                        <div style={{ fontSize: '22px' }}> {React.createElement(VscIcons[IconText])}</div>
-                    </div>
-                ))}
-            </div>
-            <div style={containerStyle}>
-                {BootStrapIconsList.map((IconText, index) => (
-                    <div
-                        style={{ cursor: 'pointer', margin: '6px', height: '32px', width: '32px' }}
-                        onClick={() => {
-                            props.callbackRender('Bs:' + IconText);
-                        }}
-                        key={index}>
-                        <div style={{ fontSize: '22px' }}> {React.createElement(BootStrapIcons[IconText])}</div>
-                    </div>
-                ))}
-            </div>
+            <FixedSizeGrid
+                columnCount={10}
+                columnWidth={40}
+                height={400}
+                rowCount={Math.ceil(iconList.length / 4)}
+                rowHeight={40}
+                width={412}>
+                {Cell}
+            </FixedSizeGrid>
         </div>
     );
 };
+
 export default IconLister;

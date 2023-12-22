@@ -7,13 +7,8 @@ const LeftMenu = inject('MenuStore')(
     observer((props) => {
         const handleMenuClick = async (item) => {
             const menuClicked = findItemByKey(props.MenuStore.RoleBasedMenuList, item.key);
-
-            console.log('点击的:', menuClicked);
-
             props.MenuStore.setCurrentMenu(menuClicked, 'handleMenuClick');
-
             let searchStr;
-
             if (menuClicked.router == '/datagrid') {
                 searchStr = `?datagrid_code=${menuClicked.datagrid_code}&key=${menuClicked.key}`;
             } else {

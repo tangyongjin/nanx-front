@@ -9,8 +9,6 @@ import api from '@/api/api';
 
 const MenuDetailCom = inject('MenuItemStore')(
     observer((props) => {
-        console.log('props: ', props);
-
         useEffect(() => {
             const asyncFun = async () => {
                 let params = { data: { menu_id: props.menuID } };

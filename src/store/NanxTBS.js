@@ -207,10 +207,7 @@ class _NanxTableStore {
         this.lazyButtonUsedCom = com;
     };
 
-    @action setButtonUsedCom = async (com) => {
-        this.ButtonUsedCom = com;
-    };
-
+ 
     @action fetchDataGridCfg = async () => {
         let params = {
             data: {

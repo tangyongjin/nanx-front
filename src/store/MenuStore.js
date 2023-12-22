@@ -4,7 +4,6 @@ import api from '@/api/api';
 import IconWrapper from '@/utils/IconWrapper';
 import { randomString, getAllKeys, findMenuPath, menuTransformer } from '@/utils/tools';
 import { message } from 'antd';
-import { AndroidOutlined, AppleOutlined } from '@ant-design/icons';
 
 class _MenuStore {
     @observable randomKey = randomString(10);
@@ -212,9 +211,6 @@ class _MenuStore {
     };
 
     @action addMenuTabItem = (key, label, icon, pushObj) => {
-        console.log('添加 TAB');
-        console.log('key, label, icon,: ', key, label, icon);
-
         let keyAlreadyExists = this.MenuTabItems.some((item) => item.key === key);
         console.log(IconWrapper(icon));
         const Xlabel = (
