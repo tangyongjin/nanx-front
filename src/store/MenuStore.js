@@ -218,7 +218,7 @@ class _MenuStore {
         let keyAlreadyExists = this.MenuTabItems.some((item) => item.key === key);
         console.log(IconWrapper(icon));
         const Xlabel = (
-            <div className="modeal-drag-title">
+            <div className="menu-tab-title">
                 {IconWrapper(icon)} {label}
             </div>
         );

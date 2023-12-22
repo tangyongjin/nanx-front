@@ -1,6 +1,5 @@
 import React from 'react';
 import { Tabs } from 'antd';
-import { AndroidOutlined, AppleOutlined } from '@ant-design/icons';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
 
@@ -46,5 +45,4 @@ const MenuTabs = inject('MenuStore')(
 );
 
 // export default  MenuTabs ; //这里要执行一下WithRouter
-
 export default withRouter(MenuTabs); //这里要执行一下WithRouter

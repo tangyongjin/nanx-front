@@ -395,3 +395,13 @@ div.ant-tabs-tab-active > div.ant-tabs-tab-btn {
      color: #074c06 !important ;
     font-weight:bold !important;
   }
+  
+  
+  .menu-tab-title {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-tab-title > svg {
+      margin: 8px !important; 
+  }
