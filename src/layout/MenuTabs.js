@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tabs } from 'antd';
+import { AndroidOutlined, AppleOutlined } from '@ant-design/icons';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
 

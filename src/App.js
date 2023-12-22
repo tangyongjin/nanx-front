@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider as MobxStoreProvider } from 'mobx-react';
 import { HashRouter } from 'react-router-dom';
-import { Layout, App as AntApp } from 'antd';
+import { App as AntApp } from 'antd';
 
 import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 
@@ -36,7 +36,6 @@ export default class App extends React.Component {
                 <MobxStoreProvider {...RootStore}>
                     <AntApp>
                         <HashRouter>
-                            {/* <Redirect from="/" to="/home" exact /> */}
                             <CacheSwitch>{routes.map(this.renderRoute)}</CacheSwitch>
                         </HashRouter>
                     </AntApp>

@@ -61,7 +61,7 @@ const themeJson = {
             rowSelectedHoverBg: '#748A3D'
         },
 
-        Tabs: {
+        Tabs2: {
             colorPrimaryActive: '#366503',
             cardBg: '#ffffff',
             cardHeight: 12,

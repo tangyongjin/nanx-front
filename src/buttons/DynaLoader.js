@@ -7,15 +7,6 @@ const DynaLoader = ({ NanxTableStore, buttonSelf }) => {
     const loadDynamic = async (file_path) => {
         try {
             let module = await require(`./${file_path}.js`).default;
-
-            // const module = React.lazy(() => require(`./${file_path}.js`).default);
-            // if (file_path == 'refreshTable') {
-            //     console.log('refreshTable: ');
-            //     console.log('module: ', module);
-            //     let IN = new module({ NanxTableStore: NanxTableStore });
-            //     IN.componentDidMount();
-            // }
-
             await NanxTableStore.setLazyButtonUsedCom(module);
         } catch (error) {
             console.error('Error loading dynamic component:', error);

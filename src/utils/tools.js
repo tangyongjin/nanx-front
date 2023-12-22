@@ -1,4 +1,5 @@
 import moment from 'moment';
+import IconWrapper from '@/utils/IconWrapper';
 
 export function isEmpty(value) {
     return typeof value === 'undefined' || value === null;
@@ -37,6 +38,8 @@ export function getTargetMenuKey(url) {
 }
 
 export function findItemByKey(menuArray, key) {
+    console.log('所有的>>>,寻找可以>>>>>: ', menuArray, key);
+
     for (const item of menuArray) {
         if (item.key === key) {
             return item; // 返回找到的项
@@ -140,4 +143,25 @@ export function getDefaultMenuItem(menus) {
     let defaultMenuItem = menus[0];
     console.log('💜💜💜💜💜💜💜defaultMenuItem: ', defaultMenuItem);
     return defaultMenuItem;
+}
+
+export function menuTransformer(menuList) {
+    function transformMenuArray(menuArray) {
+        return menuArray.map((item) => {
+            const { key, children, title, menu, icon, router, datagrid_code } = item;
+            const transformedItem = {
+                key,
+                icon: IconWrapper(icon),
+                ...(children && children.length > 0 && { children: transformMenuArray(children) }),
+                label: title,
+                menu,
+                router,
+                datagrid_code,
+                type: null
+            };
+            return transformedItem;
+        });
+    }
+    let _mit = transformMenuArray(menuList);
+    return _mit;
 }

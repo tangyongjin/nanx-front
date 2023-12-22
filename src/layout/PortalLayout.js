@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import LeftMenu from './leftMenu/leftMenu';
 import Navbar from './navbar//Navbar';
+import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
+import { AndroidOutlined, AppleOutlined } from '@ant-design/icons';
 import MenuTabs from './MenuTabs';
-import { LoadingOutlined } from '@ant-design/icons';
-import { Spin } from 'antd';
 
 const { Header, Sider, Content } = Layout;
 
@@ -36,20 +36,6 @@ const PortalLayout = inject('MenuStore')(
                             marginLeft: '4px'
                         }}>
                         <MenuTabs />
-                        <Spin
-                            indicator={
-                                <LoadingOutlined
-                                    id="appLoading"
-                                    style={{
-                                        display: 'none',
-                                        marginLeft: '20px',
-                                        color: 'red',
-                                        fontSize: 32
-                                    }}
-                                    spin
-                                />
-                            }
-                        />
                     </Content>
                 </Layout>
             </Layout>

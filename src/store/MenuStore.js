@@ -1,8 +1,10 @@
 import { observable, action, set, computed } from 'mobx';
-import api from '../api/api';
+import React from 'react';
+import api from '@/api/api';
 import IconWrapper from '@/utils/IconWrapper';
-import { randomString, getAllKeys, findMenuPath } from '@/utils/tools';
+import { randomString, getAllKeys, findMenuPath, menuTransformer } from '@/utils/tools';
 import { message } from 'antd';
+import { AndroidOutlined, AppleOutlined } from '@ant-design/icons';
 
 class _MenuStore {
     @observable randomKey = randomString(10);
@@ -18,6 +20,11 @@ class _MenuStore {
     // 基于当前登录的角色的菜单
     @observable RoleBasedMenuList = [];
     @observable RoleUsedKeys = [];
+    @observable RoleMenuArray = [];
+
+    @action setRoleMenuArray = (arr) => {
+        this.RoleMenuArray = arr;
+    };
 
     // 要设置的角色的信息
     @observable TargetRoleBasedMenuList = [];
@@ -48,6 +55,7 @@ class _MenuStore {
     };
 
     @action setRoleBasedMenuList = (para) => {
+        console.log('setRoleBasedMenuList:💌💌💌 ', para);
         this.RoleBasedMenuList = para;
     };
 
@@ -67,33 +75,8 @@ class _MenuStore {
         return bread.slice(0, -1);
     }
 
-    // 给 Menu 的数组
-    // 自动计算菜单项给 antd Menu
-    @computed
-    get RoleMenuArray() {
-        function transformMenuArray(menuArray) {
-            return menuArray.map((item) => {
-                const { key, children, title, menu, router, datagrid_code } = item;
-                const icon = IconWrapper(item.icon);
-                const transformedItem = {
-                    key,
-                    icon,
-                    ...(children && children.length > 0 && { children: transformMenuArray(children) }),
-                    label: title,
-                    menu,
-                    router,
-                    datagrid_code,
-                    type: null
-                };
-                return transformedItem;
-            });
-        }
-
-        let _mit = transformMenuArray(this.RoleBasedMenuList);
-        return _mit;
-    }
-
-    @action saveMenuPermission = async (rolecode, menu_level, menuid, parentid) => {
+    @action
+    saveMenuPermission = async (rolecode, menu_level, menuid, parentid) => {
         let params = {
             data: {
                 rolecode: rolecode,
@@ -147,6 +130,9 @@ class _MenuStore {
         let res = await api.permission.getMenuTreeByRoleCode(params);
         if (res.code == 200) {
             this.setRoleBasedMenuList(res.data.menuList);
+
+            let tmpArr = menuTransformer(res.data.menuList);
+            this.setRoleMenuArray(tmpArr);
             this.RoleUsedKeys = getAllKeys(res.data.menuList);
         }
     }
@@ -218,7 +204,6 @@ class _MenuStore {
 
     @action.bound
     setCurrentMenu = (menu) => {
-        menu.icon = null;
         this.currentMenu = menu;
         if (menu) {
             this.setSelectedKeys([menu.key]);
@@ -226,12 +211,22 @@ class _MenuStore {
         sessionStorage.setItem('currentMenu', JSON.stringify(menu));
     };
 
-    @action addMenuTabItem = (key, label, pushObj) => {
+    @action addMenuTabItem = (key, label, icon, pushObj) => {
+        console.log('添加 TAB');
+        console.log('key, label, icon,: ', key, label, icon);
+
         let keyAlreadyExists = this.MenuTabItems.some((item) => item.key === key);
+        console.log(IconWrapper(icon));
+        const Xlabel = (
+            <div className="modeal-drag-title">
+                {IconWrapper(icon)} {label}
+            </div>
+        );
+
         if (!keyAlreadyExists) {
             let _tmpTab = {
                 key: key,
-                label: label,
+                label: Xlabel,
                 children: null,
                 closable: true,
                 pushObj: pushObj

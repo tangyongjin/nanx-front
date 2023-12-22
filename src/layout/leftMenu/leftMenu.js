@@ -6,7 +6,10 @@ import { findItemByKey } from '@/utils/tools';
 const LeftMenu = inject('MenuStore')(
     observer((props) => {
         const handleMenuClick = async (item) => {
-            const menuClicked = findItemByKey(props.MenuStore.RoleMenuArray, item.key);
+            const menuClicked = findItemByKey(props.MenuStore.RoleBasedMenuList, item.key);
+
+            console.log('点击的:', menuClicked);
+
             props.MenuStore.setCurrentMenu(menuClicked, 'handleMenuClick');
 
             let searchStr;
@@ -27,7 +30,7 @@ const LeftMenu = inject('MenuStore')(
                 }
             };
 
-            props.MenuStore.addMenuTabItem(menuClicked.key, menuClicked.label, pushObj);
+            props.MenuStore.addMenuTabItem(menuClicked.key, menuClicked.title, menuClicked.icon, pushObj);
             props.MenuStore.history.push(pushObj);
         };
 
