@@ -217,7 +217,7 @@ class _MenuStore {
     };
 
     @action.bound
-    setCurrentMenu = (menu, scense) => {
+    setCurrentMenu = (menu) => {
         menu.icon = null;
         this.currentMenu = menu;
         if (menu) {
@@ -231,7 +231,7 @@ class _MenuStore {
         if (!keyAlreadyExists) {
             let _tmpTab = {
                 key: key,
-                label: label + ':' + key,
+                label: label,
                 children: null,
                 closable: true,
                 pushObj: pushObj

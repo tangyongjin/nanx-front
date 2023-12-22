@@ -9,7 +9,6 @@ const DynaLoader = ({ NanxTableStore, buttonSelf }) => {
             let module = await require(`./${file_path}.js`).default;
 
             // const module = React.lazy(() => require(`./${file_path}.js`).default);
-
             // if (file_path == 'refreshTable') {
             //     console.log('refreshTable: ');
             //     console.log('module: ', module);
@@ -40,8 +39,7 @@ const DynaLoader = ({ NanxTableStore, buttonSelf }) => {
             console.log('module: ', NanxTableStore.lazyButtonUsedCom);
             let IN = new NanxTableStore.lazyButtonUsedCom({ NanxTableStore: NanxTableStore });
             IN.componentDidMount();
-            return; 
-            
+            return;
         }
 
         await NanxTableStore.setFormTitle(buttonSelf.form_title);

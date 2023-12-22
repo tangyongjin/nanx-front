@@ -4,12 +4,9 @@ const api_root = `${root_url}:${port}/${version}`;
 export { api_root };
 export default class AppBackUp extends React.Component {
     render() {
-        const logurl = api_root + '/log';
         return (
             <div>
-
-               <h1>SYS_OP</h1>  
-                {/* <iframe title="applog" style={{ width: '100%', height: '1000px' }} src={logurl} /> */}
+                <h1>SYS_OP</h1>
             </div>
         );
     }

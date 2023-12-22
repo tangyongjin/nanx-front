@@ -1,5 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Suspense } from 'react';
+import React, { useRef, useState } from 'react';
 import { Modal, Button } from 'antd';
 import { observer } from 'mobx-react';
 import IconWrapper from '@/utils/IconWrapper';
@@ -29,21 +28,6 @@ const TableModal = observer((props) => {
         });
     };
 
-    useEffect(() => {
-        // const prepareComponent = async () => {
-        //     let Instance;
-        //     if (typeof props.ModalContent == 'object') {
-        //         // object : mobx 注入的 isMobxInjector
-        //         Instance = await new props.ModalContent.wrappedComponent({ NanxTableStore: props.tbStore });
-        //     } else {
-        //         // function : React compoment
-        //         Instance = await new props.ModalContent({ NanxTableStore: props.tbStore });
-        //     }
-        //     await Instance.init();
-        // };
-        // prepareComponent();
-    }, []);
-
     return (
         <Modal
             destroyOnClose={true}
@@ -68,8 +52,10 @@ const TableModal = observer((props) => {
                     onBlur={() => {}}
                     // end
                 >
-                    {IconWrapper(props.tbStore.iconStr)}
-                    {props.tbStore.formTitle}
+                    <div>
+                        {IconWrapper(props.tbStore.iconStr)}
+                        {props.tbStore.formTitle}
+                    </div>
                 </div>
             }
             styles={{
@@ -98,11 +84,9 @@ const TableModal = observer((props) => {
                     关闭
                 </Button>
             ]}>
-            <Suspense fallback={<div>Loading...</div>}>
-                {props.tbStore.lazyButtonUsedCom ? (
-                    <props.tbStore.lazyButtonUsedCom NanxTableStore={props.tbStore} />
-                ) : null}
-            </Suspense>
+            {props.tbStore.lazyButtonUsedCom ? (
+                <props.tbStore.lazyButtonUsedCom NanxTableStore={props.tbStore} />
+            ) : null}
         </Modal>
     );
 });

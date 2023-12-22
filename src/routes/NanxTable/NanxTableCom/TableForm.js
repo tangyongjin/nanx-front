@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
 import '@/UFormPlugin';
-import { SchemaForm, createFormActions } from '@uform/antd';
+import { createFormActions, SchemaForm } from '@uform/antd';
 import 'antd/dist/reset.css';
 import 'dayjs/locale/zh-cn';
 import CalucateInitValue from './tableUtils/calucateInitValue';
@@ -32,13 +32,10 @@ const TableSchemaForm = (props) => {
             Fixed.properties[key] = keyConfig;
         }
 
-        console.log('Fixe💭💭💭💭💭💭💭d: ', Fixed);
         return Fixed;
     };
 
     const prepareRawData = () => {
-        console.log('💭💭💭💭💭💭💭>>Action ', props.NanxTableStore.table_action);
-
         if (props.NanxTableStore.table_action == 'edit') {
             let _tmp_for_edit = { ...props.NanxTableStore.selectedRows[0] };
             return _tmp_for_edit;

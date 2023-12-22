@@ -6,7 +6,6 @@ import api from '@/api/api';
 export default class EditCom extends React.Component {
     constructor(props) {
         super(props);
-        console.log('EditCom', this);
         this.init = this.init.bind(this);
     }
 
@@ -16,7 +15,6 @@ export default class EditCom extends React.Component {
     }
 
     init = async () => {
-        console.log('init呼叫>>>>Button props 属性', this.props);
         if (this.props.NanxTableStore.selectedRows.length != 1) {
             message.error('必须请选择1条数据进行相应操作');
             this.props.NanxTableStore.hideButtonModal();
@@ -35,7 +33,6 @@ export default class EditCom extends React.Component {
             DataGridCode: this.props.NanxTableStore.datagrid_code,
             rawdata: fmdata
         };
-
         this.updateGridData(data);
     };
 
@@ -51,7 +48,6 @@ export default class EditCom extends React.Component {
     };
 
     render() {
-        console.log('💝💝💝💝💝💝💝💝💝💝', this.props.NanxTableStore);
         return (
             <TableSchemaForm NanxTableStore={this.props.NanxTableStore} saveFormData={this.saveFormData.bind(this)} />
         );

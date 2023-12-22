@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import LeftMenu from './leftMenu/leftMenu';
 import Navbar from './navbar//Navbar';
-import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
 import MenuTabs from './MenuTabs';
 import { LoadingOutlined } from '@ant-design/icons';

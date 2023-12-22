@@ -1,10 +1,13 @@
 import React from 'react';
+import { Suspense } from 'react';
 import { Input as AntInput } from 'antd';
 import { compose, mapStyledProps, mapTextComponent } from './uformHelpers/UFormUtils';
 import { registerFormField, connect } from '@uform/react';
 import IconToggleButton from '@/component/IconToggleButton';
-import IconLister from '@/component/iconLister';
+// import IconLister from '@/component/iconLister';
 import IconWrapper from '@/utils/IconWrapper';
+
+const IconLister = React.lazy(() => import('@/component/iconLister'));
 
 const WrapperAntStringComomnet = (TarGet) => {
     return class Select extends React.Component {
@@ -40,7 +43,9 @@ const WrapperAntStringComomnet = (TarGet) => {
                     <TarGet readOnly style={{ width: '288px' }} placeholder={'请输入....'} {...this.props} />
                     <span style={{ marginLeft: '6px' }}>{IconWrapper(this.props.value)}</span>
                     <IconToggleButton ifShowList={this.state.ifShowList} toggleShow={this.toggleShow} />
-                    <IconLister ifShowList={this.state.ifShowList} callbackRender={uploadCallbackRender} />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <IconLister ifShowList={this.state.ifShowList} callbackRender={uploadCallbackRender} />
+                    </Suspense>
                 </>
             );
         }
