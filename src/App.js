@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider as MobxStoreProvider } from 'mobx-react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Redirect } from 'react-router-dom';
 
 import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 
@@ -12,17 +12,12 @@ import { routes } from './routes/routes.js';
 import '@/styles/index.scss';
 
 export default class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     renderRoute = (route, index) => {
-        console.log(route);
         return (
             <CacheRoute
                 key={index}
                 path={route.path}
-                exact={true}
+                exact={false}
                 render={(props) => {
                     return (
                         <route.component {...props}>
@@ -39,6 +34,7 @@ export default class App extends React.Component {
             <ConfigProvider locale={zhCN} theme={themeJson}>
                 <MobxStoreProvider {...RootStore}>
                     <HashRouter>
+                        {/* <Redirect from="/" to="/home" exact /> */}
                         <CacheSwitch>{routes.map(this.renderRoute)}</CacheSwitch>
                     </HashRouter>
                 </MobxStoreProvider>

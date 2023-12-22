@@ -14,19 +14,6 @@ const PortalLayout = inject('MenuStore')(
         console.log('PortalLayout>>props: ', props);
         props.MenuStore.setHistory(props.history);
 
-        // let goHref = window.location.href;
-        // let targetMenuKey = getTargetMenuKey(goHref);
-        // let targetMenu = findItemByKey(props.MenuStore.RoleMenuArray, targetMenuKey);
-        // if (targetMenu) {
-        //     props.MenuStore.setCurrentMenu(targetMenu, 'onPrev');
-        // }
-
-        // window.onload = () => {
-        //     console.log('浏览器刷新');
-        //     let storeageMenu = props.MenuStore.getCurrentMenuKeyFromSessionStorage();
-        //     props.MenuStore.setCurrentMenu(storeageMenu, '浏览器刷新');
-        // };
-
         useEffect(() => {
             const asyncFun = async () => {
                 const params = new URLSearchParams(props.history.location.search);
@@ -50,7 +37,6 @@ const PortalLayout = inject('MenuStore')(
                             marginLeft: '4px'
                         }}>
                         <MenuTabs />
-
                         <Spin
                             indicator={
                                 <LoadingOutlined

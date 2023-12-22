@@ -79,7 +79,9 @@ export default class Login extends React.Component {
             }
         };
 
+        console.log('pushObj: ', pushObj);
         this.props.history.push(pushObj);
+        
     };
 
     handleChange(e) {
