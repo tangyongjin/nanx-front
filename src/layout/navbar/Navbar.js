@@ -2,7 +2,6 @@ import { inject, observer } from 'mobx-react';
 import { PicLeftOutlined } from '@ant-design/icons';
 import React from 'react';
 import LoadingGif from '@/styles/loading.gif';
-
 import NavDropDown from './NavDropDown';
 
 @inject('MenuStore')
@@ -24,7 +23,7 @@ export default class Navbar extends React.Component {
                         />
                     </div>
                     <div style={{ flex: '90%', textAlign: 'left', color: '#1c4308' }}>
-                        <span>{this.props.bread || '首页'}</span>
+                        <span>{this.MenuStore.breadcrumb || '首页'}</span>
                     </div>
                 </div>
                 <div id="navbar_preloader">

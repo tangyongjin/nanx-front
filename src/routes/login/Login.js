@@ -1,20 +1,19 @@
-import '@/styles/login.css';
+import React from 'react';
 import { BsFingerprint } from 'react-icons/bs';
-import { getDefaultMenuItem } from '@/utils/tools';
 import { inject, observer } from 'mobx-react';
 import { Input } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { randomString } from '@/utils/tools';
 import { Spin } from 'antd';
 import LoginService from './LoginService';
-import React from 'react';
+import '@/styles/login.css';
 
 @inject('MenuStore', 'UserStore')
 @observer
 export default class Login extends React.Component {
     constructor(props) {
         console.log('Login>props: ', props);
-        super();
+        super(props);
         this.state = {};
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmitMobile = this.handleFormSubmitMobile.bind(this);
@@ -50,39 +49,15 @@ export default class Login extends React.Component {
         if (res.code == 200) {
             await this.UserStore.setToken(res.token);
             await this.UserStore.setUserProfile(res.profile);
-            await this.afterLoginSuccess(res);
+            document.getElementById('loadingSpin').style.display = 'none';
+            await this.MenuStore.afterLogin(this.props.history);
         }
     };
 
-    afterLoginSuccess = async () => {
-        document.getElementById('loadingSpin').style.display = 'none';
-        await this.MenuStore.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
-
-        let defaultMenuItem = getDefaultMenuItem(this.MenuStore.RoleMenuArray);
-        this.MenuStore.setCurrentMenu(defaultMenuItem, 'afterLoginSuccess');
-        console.log('defaultMenuItem', defaultMenuItem);
-
-        let searchStr;
-        if (defaultMenuItem.router == '/datagrid') {
-            searchStr = `?datagrid_code=${defaultMenuItem.datagrid_code}&key=${defaultMenuItem.key}`;
-        } else {
-            searchStr = `?key=${defaultMenuItem.key}`;
-        }
-
-        const pushObj = {
-            executed: false,
-            pathname: defaultMenuItem.router,
-            search: searchStr,
-            state: {
-                datagrid_code: defaultMenuItem?.datagrid_code,
-                key: defaultMenuItem.key
-            }
-        };
-
-        console.log('pushObj: ', pushObj);
-        this.props.history.push(pushObj);
-        
-    };
+    // afterLoginSuccess = async () => {
+    //     document.getElementById('loadingSpin').style.display = 'none';
+    //     this.MenuStore.afterLogin(this.props.history);
+    // };
 
     handleChange(e) {
         this.setState({

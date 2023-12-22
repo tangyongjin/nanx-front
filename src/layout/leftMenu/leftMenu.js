@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Menu } from 'antd';
 import { inject, observer } from 'mobx-react';
 import { findItemByKey } from '@/utils/tools';
+import { getDefaultMenuItem } from '@/utils/tools';
 
 const LeftMenu = inject('MenuStore')(
     observer((props) => {
@@ -29,15 +30,14 @@ const LeftMenu = inject('MenuStore')(
             props.MenuStore.history.push(pushObj);
         };
 
-        // useEffect(() => {
-        //     // 模拟点击默认菜单项
-
-        //     const defaultMenuItem = getDefaultMenuItem(props.MenuStore.RoleMenuArray);
-        //     if (defaultMenuItem) {
-        //         console.log('模拟点击默认菜单项 ', defaultMenuItem);
-        //         handleMenuClick(defaultMenuItem);
-        //     }
-        // }, [props.MenuStore.RoleMenuArray]); // 依赖数组为空，表示只在组件加载时执行一次
+        useEffect(() => {
+            // 模拟点击默认菜单项
+            const defaultMenuItem = getDefaultMenuItem(props.MenuStore.RoleMenuArray);
+            if (defaultMenuItem) {
+                console.log('模拟点击默认菜单项 ', defaultMenuItem);
+                handleMenuClick(defaultMenuItem);
+            }
+        }, []); // 依赖数组为空，表示只在组件加载时执行一次
 
         return (
             <div>

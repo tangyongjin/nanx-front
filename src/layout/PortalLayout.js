@@ -3,7 +3,6 @@ import LeftMenu from './leftMenu/leftMenu';
 import Navbar from './navbar//Navbar';
 import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react';
-import { AndroidOutlined, AppleOutlined } from '@ant-design/icons';
 import MenuTabs from './MenuTabs';
 
 const { Header, Sider, Content } = Layout;
@@ -29,7 +28,7 @@ const PortalLayout = inject('MenuStore')(
                 </Sider>
                 <Layout style={{ minHeight: '100vh', minWidth: '100vh' }}>
                     <Header>
-                        <Navbar history={props.history} bread={props.MenuStore.breadcrumb} />
+                        <Navbar  />
                     </Header>
                     <Content
                         style={{

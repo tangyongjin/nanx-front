@@ -1,10 +1,7 @@
 import React from 'react';
 import { Provider as MobxStoreProvider } from 'mobx-react';
 import { HashRouter } from 'react-router-dom';
-import { App as AntApp } from 'antd';
-
 import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
-
 import RootStore from './store';
 import { ConfigProvider } from 'antd';
 import themeJson from '@/styles/theme';
@@ -34,11 +31,9 @@ export default class App extends React.Component {
         return (
             <ConfigProvider locale={zhCN} theme={themeJson}>
                 <MobxStoreProvider {...RootStore}>
-                    <AntApp>
-                        <HashRouter>
-                            <CacheSwitch>{routes.map(this.renderRoute)}</CacheSwitch>
-                        </HashRouter>
-                    </AntApp>
+                    <HashRouter>
+                        <CacheSwitch>{routes.map(this.renderRoute)}</CacheSwitch>
+                    </HashRouter>
                 </MobxStoreProvider>
             </ConfigProvider>
         );

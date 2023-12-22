@@ -1,11 +1,12 @@
 import { Dropdown, Modal } from 'antd';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import React from 'react';
 import LoginService from '@/routes/login/LoginService';
 import { port, root_url } from '@/api/api_config/base_config';
 const avatarRoot = `${root_url}:${port}/`;
 const { confirm } = Modal;
 
+@inject('MenuStore')
 @observer
 export default class NavDropDown extends React.Component {
     constructor(props) {
@@ -16,7 +17,7 @@ export default class NavDropDown extends React.Component {
 
     logout = () => {
         this.LoginService.logout();
-        this.props.history.push('/login');
+        this.props.MenuStore.history.push('/login');
     };
 
     showConfirm() {

@@ -4,6 +4,7 @@ import api from '@/api/api';
 import IconWrapper from '@/utils/IconWrapper';
 import { randomString, getAllKeys, findMenuPath, menuTransformer } from '@/utils/tools';
 import { message } from 'antd';
+import { getDefaultMenuItem } from '@/utils/tools';
 
 class _MenuStore {
     @observable randomKey = randomString(10);
@@ -269,6 +270,32 @@ class _MenuStore {
         if (currentItem) {
             currentItem.pushObj.executed = true;
         }
+    };
+
+    @action afterLogin = async (history) => {
+        this.setHistory(history);
+        await this.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
+        let defaultMenuItem = getDefaultMenuItem(this.RoleMenuArray);
+        this.setCurrentMenu(defaultMenuItem, 'afterLoginSuccess');
+
+        let searchStr;
+        if (defaultMenuItem.router == '/datagrid') {
+            searchStr = `?datagrid_code=${defaultMenuItem.datagrid_code}&key=${defaultMenuItem.key}`;
+        } else {
+            searchStr = `?key=${defaultMenuItem.key}`;
+        }
+
+        const pushObj = {
+            executed: false,
+            pathname: defaultMenuItem.router,
+            search: searchStr,
+            state: {
+                datagrid_code: defaultMenuItem?.datagrid_code,
+                key: defaultMenuItem.key
+            }
+        };
+
+        this.history.push(pushObj);
     };
 }
 
