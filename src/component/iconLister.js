@@ -12,8 +12,6 @@ import React from 'react';
 import { FixedSizeGrid } from 'react-window';
 
 const IconLister = (props) => {
-    const { ifShowList } = props;
-
     const iconList = useMemo(() => {
         const list = [];
         for (let key in VscIcons) {
@@ -38,17 +36,21 @@ const IconLister = (props) => {
 
     const Cell = ({ columnIndex, rowIndex, style }) => {
         const index = rowIndex * 4 + columnIndex;
-        const { type, name } = iconList[index];
 
-        return (
-            <div
-                style={{ ...style, cursor: 'pointer', margin: '6px', height: '32px', width: '32px' }}
-                onClick={() => handleClick(type, name)}>
-                <div style={{ fontSize: '22px' }}>
-                    {React.createElement(type === 'Vsc' ? VscIcons[name] : BootStrapIcons[name])}
+        if (index >= iconList.length) {
+            return null;
+        } else {
+            const { type, name } = iconList[index];
+            return (
+                <div
+                    style={{ ...style, cursor: 'pointer', margin: '6px', height: '32px', width: '32px' }}
+                    onClick={() => handleClick(type, name)}>
+                    <div style={{ fontSize: '22px' }}>
+                        {React.createElement(type === 'Vsc' ? VscIcons[name] : BootStrapIcons[name])}
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
     };
 
     return (

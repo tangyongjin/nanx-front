@@ -73,6 +73,7 @@ const MenuDetailCom = inject('MenuItemStore')(
             <div>
                 <Table
                     size="small"
+                    bordered={true}
                     rowKey={(row) => row.name}
                     pagination={false}
                     columns={columns}

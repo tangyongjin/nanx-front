@@ -10,6 +10,10 @@ export default class MenuAssign extends React.Component {
         };
     }
 
+    async componentWillMount() {
+        await this.init();
+    }
+
     // eslint-disable-next-line
     async init(buttonSource) {
         let currentrow = this.props.NanxTableStore.selectedRows[0];

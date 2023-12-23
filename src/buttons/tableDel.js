@@ -9,12 +9,11 @@ export default class DeleteData extends React.Component {
         this.init = this.init.bind(this);
     }
 
-    async init() {
-        if (this.props.NanxTableStore.selectedRowKeys.length <= 0) {
-            message.error('请选择一条数据');
-            return;
-        }
+    async componentDidMount() {
+        await this.init();
+    }
 
+    async init() {
         let _tmprec = this.props.NanxTableStore.selectedRows[0];
 
         if (_tmprec.hasOwnProperty('ghost_author') && _tmprec.ghost_author != sessionStorage.getItem('user')) {

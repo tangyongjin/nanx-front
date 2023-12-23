@@ -14,7 +14,7 @@ const DynaLoader = ({ NanxTableStore, buttonSelf }) => {
     };
 
     const handleButtonClick = async () => {
-        // console.log('按钮点击>>', buttonSelf);
+        console.log('按钮点击>>', buttonSelf);
         await loadDynamic(buttonSelf.file_path);
         // console.log('buttonSelf.file_path: ', buttonSelf.file_path);
 
@@ -26,12 +26,17 @@ const DynaLoader = ({ NanxTableStore, buttonSelf }) => {
         }
 
         if (buttonSelf.file_path == 'refreshTable') {
-            // console.log('refreshTable: ');
-            // console.log('module: ', NanxTableStore.lazyButtonUsedCom);
             let IN = new NanxTableStore.lazyButtonUsedCom({ NanxTableStore: NanxTableStore });
             IN.componentDidMount();
             return;
         }
+
+        if (buttonSelf.file_path == 'tableDel') {
+            let IN = new NanxTableStore.lazyButtonUsedCom({ NanxTableStore: NanxTableStore });
+            IN.componentDidMount();
+            return;
+        }
+
         await NanxTableStore.setFormWidth(buttonSelf.form_width);
         await NanxTableStore.setFormTitle(buttonSelf.form_title);
         await NanxTableStore.setIconStr(buttonSelf.icon);
