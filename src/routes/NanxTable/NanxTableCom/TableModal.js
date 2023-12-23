@@ -67,11 +67,7 @@ const TableModal = observer((props) => {
                 </Draggable>
             )}
             footer={[
-                <Button
-                    style={{ marginRight: '-10px' }}
-                    type="primary"
-                    key="submit"
-                    onClick={props.tbStore.hideButtonModal}>
+                <Button type="primary" key="submit" onClick={props.tbStore.hideButtonModal}>
                     关闭
                 </Button>
             ]}>

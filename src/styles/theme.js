@@ -90,9 +90,8 @@ const themeJson = {
         },
         Card: {
             actionsBg: 'red',
-            // headerFontSize: 14,
-            // headerFontSizeSM: 14,
-            headerBg: 'blue'
+            headerFontSize: 14,
+            headerFontSizeSM: 14
         }
     }
 };
