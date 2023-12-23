@@ -55,13 +55,7 @@ const themeJson = {
             colorBgContainer: '#366503'
         },
 
-        Table: {
-            borderColor: '#b3bab0',
-            rowSelectedBg: '#748A3D',
-            rowSelectedHoverBg: '#748A3D'
-        },
-
-        Tabs2: {
+        Tabs: {
             colorPrimaryActive: '#366503',
             cardBg: '#ffffff',
             cardHeight: 12,

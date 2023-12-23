@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, message, Popconfirm, Button, Select, Table } from 'antd';
+import { Input, Popconfirm, Button, Select, Table } from 'antd';
 import api from '@/api/api';
 import cloneDeep from 'lodash/cloneDeep';
 import IconWrapper from '@/utils/IconWrapper';
@@ -15,9 +15,12 @@ export default class GridButtonAdder extends React.Component {
             allButtons: [],
             gridButtons: [],
             gridButtonOrders: [],
-            btncode: null,
-            iconStr: null
+            btncode: null
         };
+    }
+
+    async componentWillMount() {
+        await this.init();
     }
 
     onChange = (v) => {
@@ -27,12 +30,6 @@ export default class GridButtonAdder extends React.Component {
 
     //eslint-disable-next-line
     async init(buttonSource) {
-        this.setState({ iconStr: buttonSource.icon });
-        if (this.props.NanxTableStore.selectedRows.length <= 0) {
-            message.error('请选择一条数据');
-            return;
-        }
-
         let currentrow = this.props.NanxTableStore.selectedRows[0];
         let params = {};
         let res = await api.button.getAllButtons(params);
@@ -42,7 +39,6 @@ export default class GridButtonAdder extends React.Component {
         });
 
         this.getDataGridButtons();
-        this.props.NanxTableStore.showButtonModal();
     }
 
     getDataGridButtons = async () => {
@@ -50,7 +46,6 @@ export default class GridButtonAdder extends React.Component {
         let res = await api.button.getGridButtons(params);
         let res2 = cloneDeep(res);
         this.setState({
-            open: true,
             gridButtonOrders: res2.buttons,
             gridButtons: res.buttons
         });
@@ -101,6 +96,7 @@ export default class GridButtonAdder extends React.Component {
                     value={this.state.gridButtonOrders[rowIndex]['btnorder']}
                 />
                 <Button
+                    style={{ marginLeft: '4px' }}
                     type="danger"
                     onClick={() => this.saveBtnOrder(rowIndex, record)}
                     size="small"
@@ -112,7 +108,7 @@ export default class GridButtonAdder extends React.Component {
     }
 
     handleCancel = () => {
-        this.setState({ open: false });
+        // this.setState({ open: false });
     };
 
     columns = [

@@ -69,12 +69,12 @@ export default class TableSortCom extends React.Component {
         );
     };
 
-    async savedata() {
+    async saveGridFieldOrder() {
         let maintableColumns = this.state.maintableColumns;
         const dataarr = maintableColumns.map((col) => col.Field);
         let params = {
             data: {
-                datagrid_code: this.props.GridConfigStore.DataGridCode,
+                datagrid_code: this.props.DataGridCode,
                 filedids: dataarr
             }
         };
@@ -112,7 +112,7 @@ export default class TableSortCom extends React.Component {
                 />
                 <Button
                     style={{ display: 'block', margin: '20px auto' }}
-                    onClick={() => this.savedata()}
+                    onClick={() => this.saveGridFieldOrder()}
                     type="primary">
                     保存
                 </Button>

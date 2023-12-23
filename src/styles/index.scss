@@ -405,3 +405,14 @@ div.ant-tabs-tab-active > div.ant-tabs-tab-btn {
   .menu-tab-title > svg {
       margin: 8px !important; 
   }
+  
+  
+  .ant-btn-danger.ant-btn-sm   {
+    border:1px solid rgb(211, 207, 207);
+  }
+  
+  
+  .ant-btn-danger.ant-btn-sm:hover span {
+    color: black !important;
+  }
+  
