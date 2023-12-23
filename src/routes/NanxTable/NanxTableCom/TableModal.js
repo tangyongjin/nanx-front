@@ -46,24 +46,15 @@ const TableModal = observer((props) => {
                     onMouseOut={() => {
                         setDisabled(true);
                     }}
-                    // fix eslintjsx-a11y/mouse-events-have-key-events
-                    // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
                     onFocus={() => {}}
-                    onBlur={() => {}}
-                    // end
-                >
+                    onBlur={() => {}}>
                     <div>
                         {IconWrapper(props.tbStore.iconStr)}
                         {props.tbStore.formTitle}
                     </div>
                 </div>
             }
-            styles={{
-                height: '600px',
-                overflow: 'auto',
-                bottom: 0
-            }}
-            width={props.width || '650px'}
+            width={props.tbStore.formWidth}
             open={props.tbStore.buttonModalVisuble}
             onCancel={props.tbStore.hideButtonModal}
             modalRender={(modal) => (

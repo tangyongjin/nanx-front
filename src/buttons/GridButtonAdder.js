@@ -3,7 +3,6 @@ import { Input, message, Popconfirm, Button, Select, Table } from 'antd';
 import api from '@/api/api';
 import cloneDeep from 'lodash/cloneDeep';
 import IconWrapper from '@/utils/IconWrapper';
-import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 
 const { Option } = Select;
 
@@ -163,23 +162,7 @@ export default class GridButtonAdder extends React.Component {
         return (
             <div>
                 {this.state.record ? (
-                    <CommonModal
-                        title={
-                            <div>
-                                {IconWrapper(this.state.iconStr)}
-                                分配按钮
-                            </div>
-                        }
-                        footer={[
-                            <Button key="submit" type="primary" onClick={this.handleCancel}>
-                                关闭
-                            </Button>
-                        ]}
-                        okText="确认"
-                        onCancel={this.handleCancel}
-                        width="1200px"
-                        open={this.state.open}
-                        destroyOnClose={true}>
+                    <div>
                         {this.state.gridButtons.length == 0 ? null : (
                             <div style={{ marginTop: '10px' }}>
                                 <h3>已分配的按钮:</h3>
@@ -225,7 +208,7 @@ export default class GridButtonAdder extends React.Component {
                                 </Button>
                             </div>
                         )}
-                    </CommonModal>
+                    </div>
                 ) : null}
             </div>
         );

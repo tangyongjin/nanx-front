@@ -1,7 +1,6 @@
 import React from 'react';
 import { message, Popconfirm, Button, Select, Table } from 'antd';
 import api from '@/api/api';
-import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import IconWrapper from '@/utils/IconWrapper';
 
 const { Option } = Select;
@@ -102,64 +101,26 @@ export default class RoleAsign extends React.Component {
     render() {
         return (
             <div>
-                {this.state.record ? (
-                    <CommonModal
-                        title={
-                            <div>
-                                {IconWrapper(this.state.iconStr)}
-                                分配角色
-                            </div>
-                        }
-                        footer={[
-                            <Button key="submit" type="primary" onClick={this.handleCancel}>
-                                关闭
-                            </Button>
-                        ]}
-                        width="1200px">
-                        {this.state.currentRoles.length > 0 ? (
-                            <div style={{ marginTop: '10px' }}>
-                                <h3>已分配的角色:</h3>
-                                <Table
-                                    bordered={true}
-                                    dataSource={this.state.currentRoles}
-                                    size="small"
-                                    rowKey={(obj) => obj.id}
-                                    columns={this.columns}
-                                    pagination={false}
-                                />
-                            </div>
-                        ) : (
-                            <div style={{ marginTop: '10px' }}>
-                                <h3>当前未分配角色</h3>
-                            </div>
-                        )}
-
-                        {this.state.allRoles.length == 0 ? null : (
-                            <div>
-                                <h4>&nbsp;</h4>
-                                <h3>选择新分配角色:</h3>
-                                <Select
-                                    style={{ width: '400px' }}
-                                    value={this.state.btncode}
-                                    showSearch
-                                    allowClear
-                                    placeholder="角色列表"
-                                    onChange={(v) => this.onChange(v)}
-                                    name="category">
-                                    {this.state.allRoles.length &&
-                                        this.state.allRoles.map((item, index) => (
-                                            <Option key={index} value={item.role_code}>
-                                                {item.role_code} {item.name}
-                                            </Option>
-                                        ))}
-                                </Select>
-                                <Button onClick={() => this.assignUserRole()} style={{ marginLeft: '10px' }}>
-                                    分配
-                                </Button>
-                            </div>
-                        )}
-                    </CommonModal>
-                ) : null}
+                <h4>&nbsp;</h4>
+                <h3>选择新分配角色:</h3>
+                <Select
+                    style={{ width: '400px' }}
+                    value={this.state.btncode}
+                    showSearch
+                    allowClear
+                    placeholder="角色列表"
+                    onChange={(v) => this.onChange(v)}
+                    name="category">
+                    {this.state.allRoles.length &&
+                        this.state.allRoles.map((item, index) => (
+                            <Option key={index} value={item.role_code}>
+                                {item.role_code} {item.name}
+                            </Option>
+                        ))}
+                </Select>
+                <Button onClick={() => this.assignUserRole()} style={{ marginLeft: '10px' }}>
+                    分配
+                </Button>
             </div>
         );
     }

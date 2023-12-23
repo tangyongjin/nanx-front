@@ -1,8 +1,7 @@
 import { observable, action, autorun, set } from 'mobx';
 import CellRender from '@/routes/NanxTable/NanxTableCom/cellRender';
-import getTextWidth from '@/routes/NanxTable/NanxTableCom/commonTableTextTool';
 import listDataParams from '@/routes/NanxTable/NanxTableCom/listDataParams';
-import { randomString } from '@/utils/tools';
+import { randomString, getTextWidth } from '@/utils/tools';
 
 import api from '@/api/api';
 import { toJS } from 'mobx';
@@ -17,7 +16,9 @@ class _NanxTableStore {
         });
     }
 
+    @observable formWidth = 650; //缺省宽度
     @observable formTitle = null;
+
     @observable iconStr = null;
 
     @observable AlphaVersion = null;
@@ -60,6 +61,13 @@ class _NanxTableStore {
 
     @action setFormTitle = (formTitle) => {
         this.formTitle = formTitle;
+    };
+
+    @action setFormWidth = (width) => {
+        if (width) {
+            console.log('width: ', width);
+            this.formWidth = width;
+        }
     };
 
     @action setIconStr = (str) => {
@@ -207,7 +215,6 @@ class _NanxTableStore {
         this.lazyButtonUsedCom = com;
     };
 
- 
     @action fetchDataGridCfg = async () => {
         let params = {
             data: {

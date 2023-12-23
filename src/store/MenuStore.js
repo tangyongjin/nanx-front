@@ -231,6 +231,7 @@ class _MenuStore {
 
             this.MenuTabItems.push(_tmpTab);
             this.setActiveTabKey(key);
+            this.history.push(pushObj);
         } else {
         }
     };

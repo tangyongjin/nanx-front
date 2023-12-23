@@ -153,3 +153,11 @@ export function menuTransformer(menuList) {
     let _mit = transformMenuArray(menuList);
     return _mit;
 }
+
+export function getTextWidth(text) {
+    const canvas = document.createElement('canvas');
+    let context = canvas.getContext('2d');
+    context.font = '14px Microsoft YaHei';
+    let textmetrics = context.measureText(text);
+    return textmetrics.width;
+}

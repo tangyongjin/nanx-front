@@ -32,7 +32,7 @@ const DynaLoader = ({ NanxTableStore, buttonSelf }) => {
             IN.componentDidMount();
             return;
         }
-
+        await NanxTableStore.setFormWidth(buttonSelf.form_width);
         await NanxTableStore.setFormTitle(buttonSelf.form_title);
         await NanxTableStore.setIconStr(buttonSelf.icon);
         await NanxTableStore.showButtonModal();

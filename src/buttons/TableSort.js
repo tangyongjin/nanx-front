@@ -3,7 +3,6 @@ import { message, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
 import TableSortCom from './TableSort/TableSortCom';
 import { toJS } from 'mobx';
-import CommonModal from '@/routes/NanxTable/NanxTableCom/commonModal';
 import IconWrapper from '@/utils/IconWrapper';
 
 @inject('GridConfigStore')
@@ -36,24 +35,6 @@ export default class TableSort extends React.Component {
     }
 
     render() {
-        return (
-            <CommonModal
-                footer={[
-                    <Button key="submit" type="primary" onClick={this.onCancel}>
-                        关闭
-                    </Button>
-                ]}
-                width={'1300px'}
-                title={
-                    <div>
-                        {IconWrapper(this.state.iconStr)}
-                        字段排序
-                    </div>
-                }>
-                {this.props.GridConfigStore.ColsDbInfo.length == 0 ? null : (
-                    <TableSortCom DataGridCode={this.props.GridConfigStore.DataGridCode} />
-                )}
-            </CommonModal>
-        );
+        return <TableSortCom DataGridCode={this.props.GridConfigStore.DataGridCode} />;
     }
 }

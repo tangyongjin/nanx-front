@@ -25,9 +25,7 @@ const LeftMenu = inject('MenuStore')(
                     key: menuClicked.key
                 }
             };
-
             props.MenuStore.addMenuTabItem(menuClicked.key, menuClicked.title, menuClicked.icon, pushObj);
-            props.MenuStore.history.push(pushObj);
         };
 
         useEffect(() => {

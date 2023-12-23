@@ -39,27 +39,3 @@ export default class GridFieldMnt extends React.Component {
         return <GridFieldManager NanxTableStore={this.props.NanxTableStore} />;
     }
 }
-
-// import React from 'react';
-// import { observer, inject } from 'mobx-react'; // Moved these decorators to the end
-
-// class GridFieldMnt extends React.Component {
-//     constructor(props) {
-//         console.log('props: ', props);
-//         super(props);
-//         this.init = this.init.bind(this);
-//     }
-
-//     async init() {
-//         console.log(this.props);
-//         this.props.GridConfigStore.setCurrentDataGridCode('AAA');
-//         this.props.NanxTableStore.showButtonModal();
-//     }
-
-//     render() {
-//         return <div>aaa</div>;
-//     }
-// }
-
-// const WrappedGridFieldMnt = inject('GridConfigStore')(observer(GridFieldMnt));
-// export default WrappedGridFieldMnt;
