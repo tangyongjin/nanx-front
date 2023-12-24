@@ -170,21 +170,21 @@ span.anticon.anticon-exclamation-circle {
     flex-wrap: wrap;
 }
 
-.fromBox {
-    flex: 1 1 35%;
-    /* 每个 fromBox 占据整行 */
+.fromBox-half {
+    width: 540px;
     box-sizing: border-box;
     display: flex;
-    /* 让 formItem 在同一行内显示 */
 }
+
+.fromBox-full {
+    width: 1080px;
+    box-sizing: border-box;
+    display: flex;
+}
+
+
 
 .formItem {
-    display: flex;
-    align-items: center;
-    height: 44px;
-}
-
-.formItemBig {
     display: flex;
     align-items: center;
     height: 44px;
@@ -201,17 +201,9 @@ span.anticon.anticon-exclamation-circle {
     /* 第一个 formItem 固定宽度 */
 }
 
-.longInput {
-    width: 696px !important;
+.longInput ,div.longSelect {
+    width: 856px !important;
 }
-
-div.longSelect {
-    width: 668px !important;
-}
-
- 
-
- 
 
 /* uform css hack */
 /* Apply styles when input is hovered or focused */

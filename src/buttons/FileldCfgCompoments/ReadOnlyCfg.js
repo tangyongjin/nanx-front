@@ -8,7 +8,7 @@ import { VscCircleSlash } from 'react-icons/vsc';
 class PluginCfg extends React.Component {
     render() {
         return (
-            <div className="fromBox">
+            <div className="fromBox-half">
                 <div className="formItem">
                     <VscCircleSlash style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                     只读属性

@@ -11,12 +11,12 @@ const { Option } = Select;
 class PluginCfg extends React.Component {
     render() {
         return (
-            <div className="fromBox">
+            <div className="fromBox-half">
                 <div className="formItem">
                     <BsCardList style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                     数据字典
                 </div>
-                <div className="formItemBig">
+                <div className="formItem">
                     <Select
                         style={{ width: '200px' }}
                         value={this.props.col.category}

@@ -16,14 +16,13 @@ class ColRenderCfg extends React.Component {
         }
 
         return (
-            <div className="fromBox">
+            <div className="fromBox-half">
                 <div className="formItem">
                     <BsCodeSquare style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                     列渲染函数
                 </div>
-                <div className="formItemBig">
+                <div className="formItem">
                     <Select
-                        style={{ width: '200px' }}
                         value={this.props.col.handler}
                         onChange={(e) => {
                             this.props.GridConfigStore.changeCfg_dropdown(e, 'handler', this.props.col.Field);

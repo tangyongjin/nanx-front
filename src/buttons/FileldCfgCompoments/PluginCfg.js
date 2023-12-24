@@ -36,16 +36,15 @@ const PluginCfg = inject('GridConfigStore')(
 
         return (
             <div className="formWrapper">
-                <div className="fromBox">
+                <div className="fromBox-full">
                     <div className="formItem">
                         <BsGearWideConnected style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                         字段类型/插件
                     </div>
 
-                    <div className="formItemBig">
+                    <div className="formItem">
                         <Select
                             className="longSelect"
-                            style={{ width: '500px' }}
                             allowClear={true}
                             listItemHeight={321}
                             popupClassName="drop"
@@ -112,13 +111,14 @@ const PluginCfg = inject('GridConfigStore')(
                 </div>
 
                 {willShowParaComponent && (
-                    <div className="fromBox">
+                    <div className="fromBox-full">
                         <div className="formItem">
                             <BsBraces style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                             插件参数(json)
                         </div>
-                        <div className="formItem longInput">
+                        <div className="formItem">
                             <Input
+                                className={'longInput'}
                                 disabled={props.col.Field === 'id'}
                                 value={props.col.uform_para || TplFromCfg}
                                 onChange={(e) => {

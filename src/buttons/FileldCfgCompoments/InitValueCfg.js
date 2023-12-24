@@ -53,18 +53,17 @@ const InitValueCfg = inject('GridConfigStore')(
         };
 
         return (
-            <div className="formWrapper">
-                <div className="fromBox">
+            <>
+                <div className="fromBox-full">
                     <div className="formItem">
                         <BsSignRailroadFill style={{ marginRight: '6px' }} />
                         初始值
                     </div>
 
-                    <div className="formItemBig">
+                    <div className="formItem">
                         <Select
                             className="longSelect"
                             allowClear={true}
-                            style={{ width: '500px' }}
                             listItemHeight={321}
                             value={props.col.default_v}
                             key={props.col.default_v}
@@ -115,14 +114,15 @@ const InitValueCfg = inject('GridConfigStore')(
                 </div>
 
                 {willShowParaComponent && (
-                    <div className="fromBox">
+                    <div className="fromBox-full">
                         <div className="formItem">
                             <BsBraces style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                             初始值参数
                         </div>
 
-                        <div className="formItem longInput">
+                        <div className="formItem">
                             <Input
+                                className="longInput"
                                 disabled={props.col.Field == 'id'}
                                 value={props.col.defaultv_para || TplFromCfg}
                                 onChange={(e) => {
@@ -142,7 +142,7 @@ const InitValueCfg = inject('GridConfigStore')(
                         </div>
                     </div>
                 )}
-            </div>
+            </>
         );
     })
 );

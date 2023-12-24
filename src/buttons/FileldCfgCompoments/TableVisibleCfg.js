@@ -8,7 +8,7 @@ import { BsEyeFill } from 'react-icons/bs';
 class TableVisibleCfg extends React.Component {
     render() {
         return (
-            <div className="fromBox">
+            <div className="fromBox-half">
                 <div className="formItem">
                     <BsEyeFill style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                     表格隐藏/可见

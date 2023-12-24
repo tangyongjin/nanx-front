@@ -8,7 +8,7 @@ import { VscQuote } from 'react-icons/vsc';
 class LabelCfg extends React.Component {
     render() {
         return (
-            <div className="fromBox">
+            <div className="fromBox-half">
                 <div className="formItem">
                     <VscQuote style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                     列名显示为

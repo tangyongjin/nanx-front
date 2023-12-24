@@ -8,7 +8,7 @@ import { BsEyeFill } from 'react-icons/bs';
 class PluginCfg extends React.Component {
     render() {
         return (
-            <div className="fromBox">
+            <div className="fromBox-half">
                 <div className="formItem">
                     <BsEyeFill style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                     表单隐藏/可见

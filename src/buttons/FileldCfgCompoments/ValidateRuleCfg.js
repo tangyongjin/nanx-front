@@ -28,7 +28,7 @@ class PluginCfg extends React.Component {
 
     render() {
         return (
-            <div className="fromBox">
+            <div className="fromBox-half">
                 <div className="formItem">
                     <VscCheck style={{ marginRight: '4px', fontSize: '18px', color: 'black' }} />
                     校验规则
