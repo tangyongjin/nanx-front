@@ -15,6 +15,7 @@ class LabelCfg extends React.Component {
                 </div>
                 <div className="formItem">
                     <Input
+                        className="longInput-half"
                         value={this.props.col.label || this.props.col.Comment || this.props.col.Field}
                         onChange={(e) => {
                             this.props.GridConfigStore.changeCfg_input(e, 'label', this.props.col.Field);
