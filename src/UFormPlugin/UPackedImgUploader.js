@@ -36,9 +36,8 @@ const WrapperAntStringComomnet = (TarGet) => {
             };
 
             return (
-                <div>
+                <div style={{ display: 'flex' }}>
                     <TarGet style={{ width: '312px' }} placeholder={'请输入....'} {...this.props} />
-
                     <span style={{ marginLeft: '5px' }}>
                         <FileUploder
                             callbackRender={uploadCallbackRender}

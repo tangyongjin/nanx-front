@@ -38,9 +38,11 @@ const WrapperAntStringComomnet = (TarGet) => {
 
             return (
                 <>
-                    <TarGet readOnly style={{ width: '288px' }} placeholder={'请输入....'} {...this.props} />
-                    <span style={{ marginLeft: '6px' }}>{IconWrapper(this.props.value)}</span>
-                    <IconToggleButton ifShowList={this.state.ifShowList} toggleShow={this.toggleShow} />
+                    <div style={{ display: 'flex' }}>
+                        <TarGet readOnly style={{ width: '288px' }} placeholder={'请输入....'} {...this.props} />
+                        <span style={{ marginLeft: '6px' }}>{IconWrapper(this.props.value)}</span>
+                        <IconToggleButton ifShowList={this.state.ifShowList} toggleShow={this.toggleShow} />
+                    </div>
                     <IconLister ifShowList={this.state.ifShowList} callbackRender={uploadCallbackRender} />
                 </>
             );

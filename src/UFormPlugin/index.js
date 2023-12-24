@@ -29,7 +29,7 @@ registerFormFields({
 
     UTextarea: connect()((props) => {
         // console.log('text_area: ', props);
-        return <Input.TextArea {...props} value={props.value || ''} />;
+        return <Input.TextArea width={100} style={{ width: '100px' }} {...props} value={props.value || ''} />;
     }),
 
     UDropdownList: connect()((props) => {

@@ -1,7 +1,9 @@
 import React from 'react';
+import { Row, Col } from 'antd';
 import { withLatestFrom, map } from 'rxjs/operators';
 import { toJS } from 'mobx';
 import { SchemaForm, createAsyncFormActions, Field, FormItemGrid } from '@uform/antd';
+import 'antd/dist/reset.css';
 
 export default class TableSearchForm extends React.Component {
     constructor(props) {
@@ -83,6 +85,8 @@ export default class TableSearchForm extends React.Component {
     render() {
         return (
             <SchemaForm
+                labelCol={5}
+                wrapperCol={15}
                 actions={this.state.actions}
                 effects={($, { setFieldState }) => {
                     $('onFormInit').subscribe(() => {
@@ -168,37 +172,50 @@ export default class TableSearchForm extends React.Component {
                                     setType('vset_' + this.props.form_index, 'string');
                             }
                         });
-                }}
-                labelCol={5}
-                wrapperCol={14}>
-                <FormItemGrid gutter={6}>
-                    <Field
-                        type="string"
-                        title="字段"
-                        name={'field_' + this.props.form_index}
-                        default=""
-                        required
-                        enum={this.props.fieldsList}
-                        x-effect={(dispatch) => ({
-                            onChange(value, type, option) {
-                                dispatch('onChangeOption', option);
-                            }
-                        })}
-                    />
-
-                    <Field type="string" title="条件" required name={'operator_' + this.props.form_index} />
-                    <Field
-                        type="string"
-                        title="内容"
-                        name={'vset_' + this.props.form_index}
-                        required
-                        default={null}
-                        x-effect={(dispatch) => ({
-                            onPressEnter(value, type, option) {
-                                dispatch('savevalue', option);
-                            }
-                        })}
-                    />
+                }}>
+                <FormItemGrid gutter={2}>
+                    <Row gutter={20}>
+                        <Col span={6}>
+                            <Field
+                                type="string"
+                                title="字段"
+                                x-props={{ style: { width: '40' } }}
+                                x-component-props={{ width: '40' }}
+                                name={'field_' + this.props.form_index}
+                                default=""
+                                required
+                                enum={this.props.fieldsList}
+                                x-effect={(dispatch) => ({
+                                    onChange(value, type, option) {
+                                        dispatch('onChangeOption', option);
+                                    }
+                                })}
+                            />
+                        </Col>
+                        <Col span={6}>
+                            <Field
+                                maxLength="50"
+                                type="string"
+                                title="条件"
+                                required
+                                name={'operator_' + this.props.form_index}
+                            />
+                        </Col>
+                        <Col span={6}>
+                            <Field
+                                type="string"
+                                title="内容"
+                                name={'vset_' + this.props.form_index}
+                                required
+                                default={null}
+                                x-effect={(dispatch) => ({
+                                    onPressEnter(value, type, option) {
+                                        dispatch('savevalue', option);
+                                    }
+                                })}
+                            />
+                        </Col>
+                    </Row>
                 </FormItemGrid>
             </SchemaForm>
         );

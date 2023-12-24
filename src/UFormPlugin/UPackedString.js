@@ -28,7 +28,7 @@ const WrapperAntStringComomnet = (TarGet) => {
             };
 
             return (
-                <>
+                <div style={{ display: 'flex' }}>
                     <TarGet style={{ width: '312px' }} placeholder={'请输入....'} {...this.props} />
                     <Button
                         className="form-operation-button"
@@ -91,7 +91,7 @@ const WrapperAntStringComomnet = (TarGet) => {
                             <VscLink style={{ verticalAlign: '-2px' }} />
                         )}
                     </Button>
-                </>
+                </div>
             );
         }
     };

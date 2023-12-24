@@ -24,10 +24,13 @@ const IconLister = (props) => {
     }, []); // 空数组作为依赖，表示这个 useMemo 只在组件挂载时运行一次
 
     const containerMainStyle = {
-        width: '412px',
+        width: '346px',
         maxHeight: '400px',
         backgroundColor: 'white',
-        overflow: 'auto'
+        marginTop: '8px',
+        border: '1px solid #366503',
+        overflow: 'auto',
+        display: props.ifShowList ? 'flex' : 'none'
     };
 
     const handleClick = (type, name) => {
@@ -56,12 +59,12 @@ const IconLister = (props) => {
     return (
         <div style={containerMainStyle}>
             <FixedSizeGrid
-                columnCount={10}
+                columnCount={8}
                 columnWidth={40}
                 height={400}
                 rowCount={Math.ceil(iconList.length / 4)}
                 rowHeight={40}
-                width={412}>
+                width={346}>
                 {Cell}
             </FixedSizeGrid>
         </div>
