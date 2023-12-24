@@ -32,11 +32,10 @@ class FieldPropertyRender extends React.Component {
                     <InitValueCfg col={this.props.col} />
                     <ValidateRuleCfg col={this.props.col} />
                 </div>
-                <div style={{ marginLeft: '390px', marginTop: '46px' }}>
+                <div style={{ marginLeft: '386px', marginTop: '46px' }}>
                     <Button
                         disabled={this.props.col.Field == 'id'}
                         type="primary"
-                        size="small"
                         onClick={() => this.props.GridConfigStore.saveCfg(this.props.col.Field)}>
                         保存字段配置
                     </Button>

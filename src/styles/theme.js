@@ -6,7 +6,7 @@ const themeJson = {
         colorSuccess: '#225e04',
         colorWarning: '#225e04',
         colorTextBase: '#000000ef',
-        borderRadius: 4,
+        borderRadius: 2,
         borderRadiusLG: 6,
         headerPadding: '150px',
         colorPrimaryHover: '#225e04',
@@ -15,6 +15,14 @@ const themeJson = {
     },
 
     components: {
+        Layout: {
+            lightSiderBg: '#ffffff',
+            headerPadding: '0 0 0 0',
+            bodyBg: '#ffffff',
+            headerBg: '#ffffff',
+            siderBg: '#032c05'
+        },
+
         Menu: {
             groupTitleColor: 'rgba(245, 237, 237, 0.45)',
             dangerItemActiveBg: 'rgb(70, 187, 13)',
@@ -32,20 +40,9 @@ const themeJson = {
             itemBorderRadius: '1',
             subMenuItemBorderRadius: 1
         },
+
         Upload: {
             colorError: 'rgb(250, 84, 28)'
-        },
-
-        Message: {
-            contentBg: 'red'
-        },
-
-        Layout: {
-            lightSiderBg: '#ffffff',
-            headerPadding: '0 0 0 0',
-            bodyBg: '#ffffff',
-            headerBg: '#ffffff',
-            siderBg: '#032c05'
         },
 
         Button: {
@@ -55,10 +52,15 @@ const themeJson = {
             colorBgContainer: '#366503'
         },
 
+        Table: {
+            headerBg: '#091001',
+            headerColor: '#e3dddd',
+            rowSelectedBg: '#151512',
+            rowSelectedHoverBg: '#151512'
+        },
+
         Tabs: {
             colorPrimaryActive: '#366503',
-            cardBg: '#ffffff',
-            cardHeight: 12,
             cardGutter: 6,
             itemColor: '#191819',
             itemActiveColor: '#366503',
@@ -82,6 +84,7 @@ const themeJson = {
             colorError: '#366503',
             colorErrorBorderHover: '#366503'
         },
+
         Card: {
             actionsBg: 'red',
             headerFontSize: 14,

@@ -4,6 +4,7 @@ import api from '@/api/api';
 import IconWrapper from '@/utils/IconWrapper';
 import { randomString, getAllKeys, findMenuPath, menuTransformer } from '@/utils/tools';
 import { message } from 'antd';
+import { findItemByKey } from '@/utils/tools';
 import { getDefaultMenuItem } from '@/utils/tools';
 
 class _MenuStore {
@@ -55,7 +56,6 @@ class _MenuStore {
     };
 
     @action setRoleBasedMenuList = (para) => {
-        console.log('setRoleBasedMenuList:💌💌💌 ', para);
         this.RoleBasedMenuList = para;
     };
 
@@ -204,6 +204,8 @@ class _MenuStore {
 
     @action.bound
     setCurrentMenu = (menu) => {
+        console.log('当前菜单项', menu);
+
         this.currentMenu = menu;
         if (menu) {
             this.setSelectedKeys([menu.key]);
@@ -211,7 +213,7 @@ class _MenuStore {
         sessionStorage.setItem('currentMenu', JSON.stringify(menu));
     };
 
-    @action addMenuTabItem = (key, label, icon, pushObj) => {
+    @action addMenuTabItem = async (key, label, icon, pushObj) => {
         let keyAlreadyExists = this.MenuTabItems.some((item) => item.key === key);
         console.log(IconWrapper(icon));
         const Xlabel = (
@@ -248,6 +250,8 @@ class _MenuStore {
             const activeItem = deleted.find((item) => item.key === this.activeTabKey);
             if (!activeItem) {
                 this.setActiveTabKey(deleted[0].key);
+                let curMenuItem = findItemByKey(this.RoleBasedMenuList, deleted[0].key);
+                this.setCurrentMenu(curMenuItem);
                 this.history.replace(deleted[0].pushObj);
             }
         }

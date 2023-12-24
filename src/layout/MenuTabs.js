@@ -2,12 +2,17 @@ import React from 'react';
 import { Tabs } from 'antd';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
+import { findItemByKey } from '@/utils/tools';
 
+import { toJS } from 'mobx';
 const MenuTabs = inject('MenuStore')(
     observer((props) => {
         const onChange = (key) => {
             props.MenuStore.setActiveTabKey(key);
             let current = props.MenuStore.MenuTabItems.find((item) => item.key === key);
+            let curMenuItem = findItemByKey(props.MenuStore.RoleBasedMenuList, key);
+            props.MenuStore.setCurrentMenu(toJS(curMenuItem));
+
             if (!current.pushObj.executed) {
                 props.MenuStore.setExecutedStatusForKey(key);
                 props.MenuStore.history.push(current.pushObj);

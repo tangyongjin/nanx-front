@@ -3,7 +3,7 @@ import DynaLoader from './DynaLoader';
 
 const ButtonArray = ({ NanxTableStore, buttons }) => {
     return (
-        <div>
+        <div id="ButtonBar">
             {buttons.map((item, index) => (
                 <DynaLoader key={index} NanxTableStore={NanxTableStore} buttonSelf={item} />
             ))}

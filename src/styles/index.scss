@@ -53,8 +53,11 @@ body {
     width: 222px !important;
 }
 
+// 分页 pagination
 
-SchemaFormContainer
+.ant-pagination-options .ant-select {
+    width: 102px !important;
+}
 
 .ant-btn-dangerous {
     color: #2e940d !important;
@@ -125,11 +128,11 @@ SchemaFormContainer
     border: #fff;
 }
 
-.ant-tree-checkbox-disabled > span {
+.ant-tree-checkbox-disabled>span {
     border-color: rgb(5, 82, 9) !important;
 }
 
-.ant-tree-checkbox-disabled > span::after {
+.ant-tree-checkbox-disabled>span::after {
     border-color: rgb(5, 82, 9) !important;
 }
 
@@ -315,7 +318,7 @@ div.longSelect {
     margin-bottom: 6px;
 }
 
- 
+
 
 .pointerHand {
     cursor: pointer;
@@ -338,12 +341,12 @@ div.longSelect {
 }
 
 // 菜单的  icon
-span.ant-menu-title-content > span > svg {
+span.ant-menu-title-content>span>svg {
     vertical-align: -2px;
     margin-right: 6px;
 }
 
-span.ant-menu-title-content > span > svg {
+span.ant-menu-title-content>span>svg {
     vertical-align: -2px;
     margin-right: 6px;
 }
@@ -367,15 +370,13 @@ div.formItem svg {
     align-items: center;
 }
 
-// 表格选中后的背景颜色
-.ant-table-row-selected > td {
+// // 表格选中后的背景颜色
+.ant-table-row-selected>td {
     color: white !important;
-    background: rgb(6, 48, 8) !important;
 }
 
-.ant-table-row-selected > td > a {
+.ant-table-row-selected>td>a {
     color: white !important;
-    background: rgb(6, 48, 8) !important;
 }
 
 .truncate {
@@ -383,15 +384,16 @@ div.formItem svg {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 140px; /* 设置最大宽度，超过的部分将显示省略号 */
+    max-width: 140px;
+    /* 设置最大宽度，超过的部分将显示省略号 */
 }
 
 .ant-tabs-tab-active {
     background-color: #031f0e;
 }
 
-div.ant-tabs-tab-active > div.ant-tabs-tab-btn {
-    color: #074c06 !important ;
+div.ant-tabs-tab-active>div.ant-tabs-tab-btn {
+    color: #074c06 !important;
     font-weight: bold !important;
 }
 
@@ -400,7 +402,7 @@ div.ant-tabs-tab-active > div.ant-tabs-tab-btn {
     align-items: center;
 }
 
-.menu-tab-title > svg {
+.menu-tab-title>svg {
     margin: 8px !important;
 }
 
@@ -412,6 +414,24 @@ div.ant-tabs-tab-active > div.ant-tabs-tab-btn {
     color: black !important;
 }
 
-.xxx-ant-select {
-    width: 340px !important;
+
+
+#ButtonBar {
+    width: 100%;
+    height: 42px;
+    padding: 8px 0 0 4px;
+    margin-bottom: 6px;
+    background: #e9ecef;
+    color: #333;
+    box-shadow: 0 0 10px;
+}
+
+
+.ant-tabs-nav-list {
+    height: 34px;
+}
+
+.ant-tabs-tab {
+    border: 0.5px solid rgb(43, 41, 41) !important;
+    border-radius: 0px !important;
 }

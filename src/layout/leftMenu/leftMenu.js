@@ -8,6 +8,7 @@ const LeftMenu = inject('MenuStore')(
     observer((props) => {
         const handleMenuClick = async (item) => {
             const menuClicked = findItemByKey(props.MenuStore.RoleBasedMenuList, item.key);
+            props.MenuStore.setActiveTabKey(item.key);
             props.MenuStore.setCurrentMenu(menuClicked, 'handleMenuClick');
             let searchStr;
             if (menuClicked.router == '/datagrid') {
