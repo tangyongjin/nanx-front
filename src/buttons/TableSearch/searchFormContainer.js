@@ -118,17 +118,16 @@ export default class SearchFormContainer extends React.Component {
 
     render() {
         return (
-            <div style={{ width: '800px', marginTop: '25px', border: '1px solid red' }}>
+            <div style={{ width: '1000px', marginTop: '25px' }}>
                 <div style={{ marginBottom: '14px' }}>
                     <Button
                         type="primary"
                         className="round-button"
-                        size="small"
                         onClick={this.addLine}
                         style={{ marginRight: '10px' }}>
-                        增加
+                        增加搜索条件
                     </Button>
-                    <Button type="primary" className="round-button" size="small" onClick={this.deleteLine}>
+                    <Button type="primary" className="round-button" onClick={this.deleteLine}>
                         删除
                     </Button>
 
@@ -136,17 +135,15 @@ export default class SearchFormContainer extends React.Component {
                         <Button
                             type="primary"
                             className="round-button"
-                            size="small"
-                            style={{ marginLeft: '378px' }}
+                            style={{ marginLeft: '664px' }}
                             onClick={this.saveFixedQueryConfigure}>
                             保存固定搜索条件
                         </Button>
                     ) : (
                         <Button
                             type="primary"
-                            style={{ marginLeft: '458px' }}
+                            style={{ marginLeft: '744px' }}
                             className="round-button"
-                            size="small"
                             onClick={this.searchHandler}>
                             查询
                         </Button>

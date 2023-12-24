@@ -1,5 +1,4 @@
 import React from 'react';
-import { message } from 'antd';
 import SearchFormContainer from './TableSearch/searchFormContainer';
 
 import api from '@/api/api';
@@ -12,14 +11,12 @@ export default class FixedQueryBuilder extends React.Component {
         };
     }
 
+    async componentWillMount() {
+        await this.init();
+    }
+
     //eslint-disable-next-line
     async init(buttonSource) {
-        if (this.props.NanxTableStore.selectedRows.length <= 0) {
-            message.error('请选择一条数据');
-            return;
-        }
-
-        await this.props.NanxTableStore.showButtonModal();
         await this.getFieldList();
     }
 

@@ -85,6 +85,7 @@ export default class TableSearchForm extends React.Component {
     render() {
         return (
             <SchemaForm
+                id="SchemaFormContainer"
                 labelCol={5}
                 wrapperCol={15}
                 actions={this.state.actions}
@@ -179,8 +180,6 @@ export default class TableSearchForm extends React.Component {
                             <Field
                                 type="string"
                                 title="字段"
-                                x-props={{ style: { width: '40' } }}
-                                x-component-props={{ width: '40' }}
                                 name={'field_' + this.props.form_index}
                                 default=""
                                 required

@@ -48,7 +48,7 @@ const themeJson = {
             siderBg: '#032c05'
         },
 
-        Button2: {
+        Button: {
             controlHeight: '30px',
             defaultBorderColor: '#366503',
             defaultColor: 'white',

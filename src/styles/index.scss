@@ -1,6 +1,7 @@
 @import 'antd/dist/reset.css';
 @import 'modal-title.scss';
 
+
 body {
     font-family: Arial, 'Microsoft YaHei', '微软雅黑' !important;
 }
@@ -38,12 +39,22 @@ body {
     background: white;
 }
 
+// form 强制宽度
 .ant-select,
 .ant-input-number-affix-wrapper,
 .ant-input-number,
 .ant-input-number-input-wrap {
     width: 346px !important;
 }
+
+//Search  form 强制宽度
+
+#SchemaFormContainer .ant-select {
+    width: 222px !important;
+}
+
+
+SchemaFormContainer
 
 .ant-btn-dangerous {
     color: #2e940d !important;
@@ -304,11 +315,7 @@ div.longSelect {
     margin-bottom: 6px;
 }
 
-// commonModal 标题的 icon
-div.modeal-drag-title > div > svg {
-    vertical-align: -3px;
-    margin-right: 4px;
-}
+ 
 
 .pointerHand {
     cursor: pointer;
