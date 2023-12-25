@@ -67,7 +67,7 @@ export default class TriggerAddCom extends React.Component {
 
     render() {
         return (
-            <div style={{ marginLeft: '40px', marginTop: '30px' }}>
+            <div style={{ marginLeft: '40px', marginTop: '50px' }}>
                 <div style={{ marginBottom: '10px' }}>联动组名称:</div>
                 <div style={{ marginBottom: '10px' }}>
                     <Input onChange={(event) => this.setGroupName(event)} />
@@ -92,7 +92,11 @@ export default class TriggerAddCom extends React.Component {
 
                 <Row>
                     <Col offset={12} span={4}>
-                        <Button type="primary" htmlType="submit" onClick={this.saveTriggerGroup.bind(this)}>
+                        <Button
+                            style={{ marginTop: '20px' }}
+                            type="primary"
+                            htmlType="submit"
+                            onClick={this.saveTriggerGroup.bind(this)}>
                             保存
                         </Button>
                     </Col>

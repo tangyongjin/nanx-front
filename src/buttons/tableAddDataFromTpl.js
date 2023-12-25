@@ -16,8 +16,6 @@ export default class TableAddFromTplCom extends React.Component {
             message.error('请选择1条数据作为添加的模板.');
             return;
         }
-
-        await this.props.NanxTableStore.showButtonModal();
     };
 
     saveFormData(fmdata) {

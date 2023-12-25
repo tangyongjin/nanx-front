@@ -18,7 +18,6 @@ export default class TableAddCom extends React.Component {
         console.log('😻😻😻😻this.props: ', this.props);
         await this.props.NanxTableStore.clearSelectedRows();
         await this.props.NanxTableStore.rowSelectChange([], []);
-        await this.props.NanxTableStore.showButtonModal();
     };
 
     saveFormData(fmdata) {

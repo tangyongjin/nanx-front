@@ -1,11 +1,11 @@
 import React from 'react';
 import DynaLoader from './DynaLoader';
 
-const ButtonArray = ({ NanxTableStore, buttons }) => {
+const ButtonArray = ({ NanxTableStore, ModalStore }) => {
     return (
         <div id="ButtonBar">
-            {buttons.map((item, index) => (
-                <DynaLoader key={index} NanxTableStore={NanxTableStore} buttonSelf={item} />
+            {NanxTableStore.tableButtons.map((item, index) => (
+                <DynaLoader key={index} NanxTableStore={NanxTableStore} ModalStore={ModalStore} buttonSelf={item} />
             ))}
         </div>
     );

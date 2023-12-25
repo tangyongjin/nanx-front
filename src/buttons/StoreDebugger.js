@@ -10,9 +10,7 @@ export default class StoreDebugger extends React.Component {
         this.init = this.init.bind(this);
     }
 
-    async init() {
-        await this.props.NanxTableStore.showButtonModal();
-    }
+    async init() {}
 
     render() {
         return (

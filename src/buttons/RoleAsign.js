@@ -23,7 +23,7 @@ export default class RoleAsign extends React.Component {
         this.setState({
             allRoles: res.roles
         });
-        this.props.NanxTableStore.showButtonModal();
+
         await this.getUserRole();
     }
 

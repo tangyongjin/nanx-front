@@ -47,11 +47,7 @@ body {
     width: 346px !important;
 }
 
-//Search  form 强制宽度
-
-#SchemaFormContainer .ant-select {
-    width: 222px !important;
-}
+ 
 
 // 分页 pagination
 
@@ -435,3 +431,15 @@ div.ant-tabs-tab-active>div.ant-tabs-tab-btn {
     border: 0.5px solid rgb(43, 41, 41) !important;
     border-radius: 0px !important;
 }
+
+
+
+//Search  form 强制宽度
+#SchemaFormContainer .ant-select {
+    width: 222px !important;
+}
+
+#TriggerLine .ant-select {
+    width: 180px !important;
+}
+ 

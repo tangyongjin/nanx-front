@@ -31,7 +31,6 @@ export default class GridFieldMnt extends React.Component {
             this.props.GridConfigStore.setCurrentBasetable(toJS(record).base_table);
             this.props.GridConfigStore.initAll();
             this.props.GridConfigStore.prepareDataGirdEnv();
-            this.props.NanxTableStore.showButtonModal();
         }
     }
 

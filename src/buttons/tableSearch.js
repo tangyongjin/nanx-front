@@ -7,9 +7,7 @@ export default class TableSearch extends React.Component {
         this.init = this.init.bind(this);
     }
 
-    init = async () => {
-        await this.props.NanxTableStore.showButtonModal();
-    };
+    init = async () => {};
 
     render() {
         return <SearchFormContainer HostedTableStore={this.props.NanxTableStore} />;

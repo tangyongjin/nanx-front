@@ -3,6 +3,8 @@ import { Table } from 'antd';
 import { observer } from 'mobx-react';
 import { pagination, rowSelection } from './tableUtils/tableUtil';
 import _NanxTableStore from '@/store/NanxTBS';
+import _NanxFormSTore from '@/store/NanxFormSTore';
+
 import TableModal from './TableModal';
 import ButtonArray from '@/buttons/ButtonArray';
 
@@ -12,6 +14,7 @@ export default class NanxTable extends React.Component {
         super(props);
         console.log('NanxTable>>>props: ', props);
         this.tbStore = new _NanxTableStore();
+        this.modalStore = new _NanxFormSTore();
     }
 
     async componentDidMount() {
@@ -39,7 +42,7 @@ export default class NanxTable extends React.Component {
     render() {
         return (
             <div className="table_wrapper">
-                <ButtonArray NanxTableStore={this.tbStore} buttons={this.tbStore.tableButtons} />
+                <ButtonArray NanxTableStore={this.tbStore} ModalStore={this.modalStore} />
 
                 <Table
                     size="small"
@@ -53,7 +56,7 @@ export default class NanxTable extends React.Component {
                     rowSelection={rowSelection(this.tbStore)}
                     onRow={this.onRowHandler}
                 />
-                <TableModal tbStore={this.tbStore} />
+                <TableModal tbStore={this.tbStore} modalStore={this.modalStore} />
             </div>
         );
     }

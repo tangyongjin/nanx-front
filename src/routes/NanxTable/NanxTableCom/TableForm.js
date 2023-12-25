@@ -10,6 +10,12 @@ import cloneDeep from 'lodash/cloneDeep';
 const actions = createFormActions();
 
 const TableSchemaForm = (props) => {
+    console.log('重新渲染>>>>>>>>props: ', props);
+    
+    
+    
+    
+    
     /**
      *
      * 如果有 A自动 点击按钮,设置B字段

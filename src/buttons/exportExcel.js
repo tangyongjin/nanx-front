@@ -14,9 +14,7 @@ export default class ExportExcel extends React.Component {
         this.exportExcel = this.exportExcel.bind(this);
     }
 
-    init = async () => {
-        await this.props.NanxTableStore.showButtonModal();
-    };
+    init = async () => {};
 
     exportExcel = async () => {
         let _para = await this.getExportExcelPara();
@@ -35,7 +33,6 @@ export default class ExportExcel extends React.Component {
     }
 
     async getExportExcelPara() {
-        this.props.NanxTableStore.showButtonModal();
         await fetchDataGridCfg(this.props.NanxTableStore);
         let paradata = listDataParams(this.props.NanxTableStore);
         let params = {

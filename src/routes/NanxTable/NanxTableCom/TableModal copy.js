@@ -1,12 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { Modal, Button } from 'antd';
+import { observer } from 'mobx-react';
 import IconWrapper from '@/utils/IconWrapper';
 import Draggable from 'react-draggable';
-import { observer } from 'mobx-react';
 
 const TableModal = observer((props) => {
-    console.log('TableModal props:', props);
-
     const [disabled, setDisabled] = useState(true);
     const [bounds, setBounds] = useState({
         left: 0,
@@ -30,10 +28,6 @@ const TableModal = observer((props) => {
         });
     };
 
-    // const MemoizedLazyButton = React.memo((props) => (
-    //     <props.tbStore.lazyButtonUsedCom NanxTableStore={props.tbStore} />
-    // ));
-
     return (
         <Modal
             destroyOnClose={true}
@@ -55,14 +49,14 @@ const TableModal = observer((props) => {
                     onFocus={() => {}}
                     onBlur={() => {}}>
                     <div>
-                        {IconWrapper(props.modalStore.iconStr)}
-                        {props.modalStore.formTitle}
+                        {IconWrapper(props.tbStore.iconStr)}
+                        {props.tbStore.formTitle}
                     </div>
                 </div>
             }
-            width={props.modalStore.formWidth}
-            open={props.modalStore.buttonModalVisuble}
-            onCancel={props.modalStore.hideButtonModal}
+            width={props.tbStore.formWidth}
+            open={props.tbStore.buttonModalVisuble}
+            onCancel={props.tbStore.hideButtonModal}
             modalRender={(modal) => (
                 <Draggable
                     disabled={disabled}
@@ -73,7 +67,7 @@ const TableModal = observer((props) => {
                 </Draggable>
             )}
             footer={[
-                <Button type="primary" key="submit" onClick={props.modalStore.hideButtonModal}>
+                <Button type="primary" key="submit" onClick={props.tbStore.hideButtonModal}>
                     关闭
                 </Button>
             ]}>

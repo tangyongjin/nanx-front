@@ -16,15 +16,9 @@ class _NanxTableStore {
         });
     }
 
-    @observable formWidth = 650; //缺省宽度
-    @observable formTitle = null;
-
-    @observable iconStr = null;
-
     @observable AlphaVersion = null;
     @observable DefaultPageSize = 20;
     @observable SERIALNO = null;
-    @observable buttonModalVisuble = false;
     @observable datagrid_code = null;
     @observable datagrid_title = '';
     @observable gridType = null;
@@ -52,30 +46,8 @@ class _NanxTableStore {
     // 给 Table用的 cols
     @observable tableColumns = [];
 
-
     @action setAlphaVersion = (code) => {
         this.AlphaVersion = 'NanxTBS_' + code;
-    };
-
-    @action setFormTitle = (formTitle) => {
-        this.formTitle = formTitle;
-    };
-
-    @action setFormWidth = (width) => {
-        if (width) {
-            console.log('width: ', width);
-            this.formWidth = width;
-        }
-    };
-
-    @action setIconStr = (str) => {
-        this.iconStr = str;
-    };
-
- 
-    @action hideButtonModal = async () => (this.buttonModalVisuble = false);
-    @action showButtonModal = async () => {
-        this.buttonModalVisuble = true;
     };
 
     @action setPageSize = (pageSize) => (this.pageSize = pageSize);
@@ -196,6 +168,7 @@ class _NanxTableStore {
                 return true;
             }
         }
+        console.log('hasTableEditor:False ');
         return false;
     }
 

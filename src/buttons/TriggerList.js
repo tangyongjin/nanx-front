@@ -23,7 +23,6 @@ export default class TriggerList extends React.Component {
         this.props.GridConfigStore.setCurrentDatagridTitle(toJS(record).datagrid_title);
         this.props.GridConfigStore.setCurrentBasetable(toJS(record).base_table);
         this.props.GridConfigStore.prepareDataGirdEnv();
-        this.props.NanxTableStore.showButtonModal();
     }
 
     render() {

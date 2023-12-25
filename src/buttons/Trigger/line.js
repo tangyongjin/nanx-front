@@ -22,7 +22,7 @@ class Line extends React.Component {
         let biztables = this.GridConfigStore.biztableList;
 
         return (
-            <div style={{ marginBottom: '10px' }}>
+            <div id="TriggerLine" style={{ marginBottom: '10px' }}>
                 <Row>
                     <Col span={2}>
                         <Button
