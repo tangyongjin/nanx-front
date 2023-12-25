@@ -49,7 +49,7 @@ export default class DeleteData extends React.Component {
         let json = await api.curd.deleteData(params);
 
         if (json.code == 200) {
-            await this.props.NanxTableStore.listData('add');
+            await this.props.NanxTableStore.listData('delete');
         }
     }
 

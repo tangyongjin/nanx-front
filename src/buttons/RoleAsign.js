@@ -1,7 +1,6 @@
 import React from 'react';
-import { message, Popconfirm, Button, Select, Table } from 'antd';
+import { Button, Select } from 'antd';
 import api from '@/api/api';
-import IconWrapper from '@/utils/IconWrapper';
 
 const { Option } = Select;
 
@@ -9,23 +8,19 @@ export default class RoleAsign extends React.Component {
     constructor(props) {
         super(props);
         this.NanxTableStore = props.NanxTableStore;
-        this.state = { iconStr: null, record: null, allRoles: [], currentRoles: [], role_code: null };
+        this.state = { allRoles: [], role_code: null, currentRole: null };
+    }
+
+    async componentWillMount() {
+        await this.init();
     }
 
     //eslint-disable-next-line
     async init(buttonSource) {
-        this.setState({ iconStr: buttonSource.icon });
-        if (this.props.NanxTableStore.selectedRows.length <= 0) {
-            message.error('请选择一个用户');
-            return;
-        }
-
-        let currentrow = this.props.NanxTableStore.selectedRows[0];
-        this.setState({ allRoles: [], currentRoles: [] });
+        this.setState({ allRoles: [] });
 
         let res = await api.permission.getAllRoles();
         this.setState({
-            record: currentrow,
             allRoles: res.roles
         });
         this.props.NanxTableStore.showButtonModal();
@@ -37,74 +32,29 @@ export default class RoleAsign extends React.Component {
     }
 
     getUserRole = async () => {
-        let params = { data: { user: this.state.record.user } };
+        let params = { data: { user: this.props.NanxTableStore.selectedRows[0].user } };
         let res = await api.permission.getUserRole(params);
         if (res.role) {
-            this.setState({ currentRoles: [res.role] });
+            this.setState({ currentRole: res.role });
         }
     };
 
     assignUserRole = async () => {
         let params = {
-            data: { role_code: this.state.role_code, user: this.state.record.user }
+            data: { role_code: this.state.role_code, user: this.props.NanxTableStore.selectedRows[0].user }
         };
         await api.permission.assignUserRole(params);
         await this.getUserRole();
     };
 
-    deleteUserRole = async (e, record) => {
-        this.setState({ currentRoles: [] });
-        let params = { data: { user: record.user, role: record.role_code } };
-        await api.permission.deleteUserRole(params);
-        await this.getUserRole();
-    };
-
-    getOperationButtons(record, rowIndex) {
-        return (
-            <div className="options">
-                <Popconfirm
-                    title="您确定要删除么?"
-                    okText="删除"
-                    cancelText="取消"
-                    onConfirm={(event) => this.deleteUserRole(event, record)}>
-                    <Button type="danger" size="small" htmlType="button">
-                        删除
-                    </Button>
-                </Popconfirm>
-            </div>
-        );
-    }
-
-    columns = [
-        {
-            title: '操作',
-            dataIndex: 'action',
-            key: 'action',
-            width: 250,
-            render: (text, record, rowIndex) => this.getOperationButtons(record, rowIndex)
-        },
-
-        {
-            title: 'ID',
-            dataIndex: 'id'
-        },
-        {
-            title: '用户名',
-            dataIndex: 'user'
-        },
-        {
-            title: '角色',
-            dataIndex: 'role_code'
-        }
-    ];
-
     render() {
         return (
             <div>
                 <h4>&nbsp;</h4>
-                <h3>选择新分配角色:</h3>
+                <h3> {this.state.currentRole ? `当前角色: ${this.state.currentRole.role_name}` : null} </h3>
+                选择新分配角色:
                 <Select
-                    style={{ width: '400px' }}
+                    style={{ width: '300px', marginLeft: '10px' }}
                     value={this.state.btncode}
                     showSearch
                     allowClear
@@ -113,8 +63,8 @@ export default class RoleAsign extends React.Component {
                     name="category">
                     {this.state.allRoles.length &&
                         this.state.allRoles.map((item, index) => (
-                            <Option key={index} value={item.role_code}>
-                                {item.role_code} {item.name}
+                            <Option key={index} label={item.role_name} value={item.role_code}>
+                                {item.role_code} {item.role_name}
                             </Option>
                         ))}
                 </Select>

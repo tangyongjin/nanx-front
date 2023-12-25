@@ -25,7 +25,6 @@ export default class EditCom extends React.Component {
             message.error('不是自己的数据不能编辑');
             return;
         }
-        await this.props.NanxTableStore.showButtonModal();
     };
 
     saveFormData = (fmdata) => {

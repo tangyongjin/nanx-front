@@ -54,11 +54,6 @@ export default class Login extends React.Component {
         }
     };
 
-    // afterLoginSuccess = async () => {
-    //     document.getElementById('loadingSpin').style.display = 'none';
-    //     this.MenuStore.afterLogin(this.props.history);
-    // };
-
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value

@@ -32,6 +32,7 @@ const TableSchemaForm = (props) => {
             Fixed.properties[key] = keyConfig;
         }
 
+        console.log('Fixed: ', Fixed);
         return Fixed;
     };
 

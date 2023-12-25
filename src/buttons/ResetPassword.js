@@ -1,22 +1,20 @@
 import React from 'react';
-import { Modal, message } from 'antd';
+import { Modal } from 'antd';
 import api from '@/api/api';
-import { observer, inject } from 'mobx-react';
+
 const { confirm } = Modal;
-@inject('NanxTableStore')
-@observer
+
 export default class ResetPassword extends React.Component {
     constructor(props) {
         super(props);
         this.init = this.init.bind(this);
     }
 
-    async init() {
-        if (this.props.NanxTableStore.selectedRowKeys.length <= 0) {
-            message.error('请选择一个用户');
-            return;
-        }
+    async componentDidMount() {
+        await this.init();
+    }
 
+    async init() {
         confirm({
             title: '你确定要重置密码?',
             content: '新密码为12345678,请尽快更改密码',

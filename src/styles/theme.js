@@ -6,7 +6,7 @@ const themeJson = {
         colorSuccess: '#225e04',
         colorWarning: '#225e04',
         colorTextBase: '#000000ef',
-        borderRadius: 2,
+        borderRadius: 4,
         borderRadiusLG: 6,
         headerPadding: '150px',
         colorPrimaryHover: '#225e04',

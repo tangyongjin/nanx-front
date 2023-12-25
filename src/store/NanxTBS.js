@@ -52,8 +52,6 @@ class _NanxTableStore {
     // 给 Table用的 cols
     @observable tableColumns = [];
 
-    // ModalContent
-    @observable ModalContent = null;
 
     @action setAlphaVersion = (code) => {
         this.AlphaVersion = 'NanxTBS_' + code;
@@ -74,8 +72,7 @@ class _NanxTableStore {
         this.iconStr = str;
     };
 
-    @action setModalContent = async (children) => (this.ModalContent = children);
-
+ 
     @action hideButtonModal = async () => (this.buttonModalVisuble = false);
     @action showButtonModal = async () => {
         this.buttonModalVisuble = true;

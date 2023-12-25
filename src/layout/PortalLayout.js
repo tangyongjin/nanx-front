@@ -28,7 +28,7 @@ const PortalLayout = inject('MenuStore')(
                 </Sider>
                 <Layout style={{ minHeight: '100vh', minWidth: '100vh' }}>
                     <Header>
-                        <Navbar  />
+                        <Navbar />
                     </Header>
                     <Content
                         style={{
