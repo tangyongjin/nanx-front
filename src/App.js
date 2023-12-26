@@ -1,5 +1,4 @@
 import React from 'react';
-import { Provider as MobxStoreProvider } from 'mobx-react';
 import { HashRouter } from 'react-router-dom';
 import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 import RootStore from './store';
@@ -8,6 +7,7 @@ import themeJson from '@/styles/theme';
 import zhCN from 'antd/es/locale/zh_CN';
 import { routes } from './routes/routes.js';
 import '@/styles/index.scss';
+import { StoreProvider } from '@/store/StoreHelpers';
 
 export default class App extends React.Component {
     renderRoute = (route, index) => {
@@ -30,11 +30,11 @@ export default class App extends React.Component {
     render() {
         return (
             <ConfigProvider locale={zhCN} theme={themeJson}>
-                <MobxStoreProvider {...RootStore}>
+                <StoreProvider {...RootStore}>
                     <HashRouter>
                         <CacheSwitch>{routes.map(this.renderRoute)}</CacheSwitch>
                     </HashRouter>
-                </MobxStoreProvider>
+                </StoreProvider>
             </ConfigProvider>
         );
     }

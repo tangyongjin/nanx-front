@@ -1,63 +1,95 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
 import { observer } from 'mobx-react';
 import { pagination, rowSelection } from './tableUtils/tableUtil';
 import _NanxTableStore from '@/store/NanxTBS';
-import _NanxFormSTore from '@/store/NanxFormSTore';
-
+import _NanxFormStore from '@/store/NanxFormStore';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import TableModal from './TableModal';
 import ButtonArray from '@/buttons/ButtonArray';
 
-@observer
-export default class NanxTable extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log('NanxTable>>>props: ', props);
-        this.tbStore = new _NanxTableStore();
-        this.modalStore = new _NanxFormSTore();
-    }
+const NanxTable = observer((props) => {
+    const [done, setDone] = useState(false);
+    const _tbStore = new _NanxTableStore();
+    const _modalStore = new _NanxFormStore();
 
-    async componentDidMount() {
-        const params = new URLSearchParams(this.props.history.location.search);
-        const datagridCode = params.get('datagrid_code');
-        await this.tbStore.setDataGridCode(datagridCode);
-        await this.refreshTable();
-    }
+    const [tbStore] = useState(_tbStore);
+    const [modalStore] = useState(_modalStore);
 
-    refreshTable = async () => {
-        await this.tbStore.resetTableStore();
-        await this.tbStore.fetchDataGridCfg();
-        await this.tbStore.setLazyComponent();
-        await this.tbStore.listData('from refreshTable');
+    useEffect(() => {
+        const fetchData = async () => {
+            const params = new URLSearchParams(props.location.search);
+            const datagridCode = params.get('datagrid_code');
+            await tbStore.setDataGridCode(datagridCode);
+            await refreshTable();
+        };
+
+        fetchData();
+
+        // Cleanup function if needed
+        return () => {
+            // Cleanup logic
+        };
+    }, []); // Add dependencies if needed
+
+    const refreshTable = async () => {
+        setDone(false);
+        await tbStore.resetTableStore();
+        await tbStore.fetchDataGridCfg();
+        await tbStore.setLazyComponent();
+        await tbStore.listData('from refreshTable');
+        setDone(true);
     };
 
-    onRowHandler = (record) => {
+    const onRowHandler = (record) => {
         return {
             onClick: async () => {
-                this.tbStore.rowSelectChange([record.id], [record]);
+                tbStore.rowSelectChange([record.id], [record]);
             }
         };
     };
 
-    render() {
-        return (
-            <div className="table_wrapper">
-                <ButtonArray NanxTableStore={this.tbStore} ModalStore={this.modalStore} />
+    return done ? (
+        <div className="table_wrapper">
+            <MemoizedButtonArray NanxTableStore={tbStore} ModalStore={modalStore} />
+            <Table
+                size="small"
+                bordered={true}
+                rowKey={(record) => record.id}
+                columns={tbStore.tableColumns}
+                key={tbStore.datagrid_code}
+                dataSource={tbStore.dataSource}
+                onChange={tbStore.TableOnChange}
+                pagination={pagination(tbStore)}
+                rowSelection={rowSelection(tbStore)}
+                onRow={onRowHandler}
+            />
+            <MemoizedModal tbStore={tbStore} modalStore={modalStore} />
+        </div>
+    ) : (
+        <div className="table_wrapper">
+            <Spin
+                indicator={
+                    <LoadingOutlined
+                        id="tableloadingSpin"
+                        style={{
+                            display: 'blcok',
+                            color: '#225e04',
+                            fontSize: 25
+                        }}
+                        spin
+                    />
+                }
+            />
+        </div>
+    );
+});
 
-                <Table
-                    size="small"
-                    bordered={true}
-                    rowKey={(record) => record.id}
-                    columns={this.tbStore.tableColumns}
-                    key={this.tbStore.datagrid_code}
-                    dataSource={this.tbStore.dataSource}
-                    onChange={this.tbStore.TableOnChange}
-                    pagination={pagination(this.tbStore)}
-                    rowSelection={rowSelection(this.tbStore)}
-                    onRow={this.onRowHandler}
-                />
-                <TableModal tbStore={this.tbStore} modalStore={this.modalStore} />
-            </div>
-        );
-    }
-}
+const MemoizedButtonArray = React.memo((props) => (
+    <ButtonArray NanxTableStore={props.NanxTableStore} ModalStore={props.ModalStore} />
+));
+
+const MemoizedModal = React.memo((props) => <TableModal tbStore={props.tbStore} modalStore={props.modalStore} />);
+
+export default NanxTable;

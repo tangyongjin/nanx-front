@@ -5,7 +5,7 @@ import Draggable from 'react-draggable';
 import { observer } from 'mobx-react';
 
 const TableModal = observer((props) => {
-    console.log('TableModal props:', props);
+    console.log('隶属于:TableModal props:', props.tbStore.datagrid_code);
 
     const [disabled, setDisabled] = useState(true);
     const [bounds, setBounds] = useState({
@@ -29,10 +29,6 @@ const TableModal = observer((props) => {
             bottom: clientHeight - (targetRect.bottom - uiData.y)
         });
     };
-
-    // const MemoizedLazyButton = React.memo((props) => (
-    //     <props.tbStore.lazyButtonUsedCom NanxTableStore={props.tbStore} />
-    // ));
 
     return (
         <Modal
