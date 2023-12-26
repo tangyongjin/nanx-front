@@ -11,11 +11,7 @@ const actions = createFormActions();
 
 const TableSchemaForm = (props) => {
     console.log('重新渲染>>>>>>>>props: ', props);
-    
-    
-    
-    
-    
+
     /**
      *
      * 如果有 A自动 点击按钮,设置B字段
@@ -108,7 +104,7 @@ const TableSchemaForm = (props) => {
                         onClick={async () => {
                             await actions.validate();
                             await props.saveFormData(actions.getFormState().values);
-                            props.NanxTableStore.hideButtonModal();
+                            props.ModalStore.hideButtonModal();
                         }}>
                         保存
                     </Button>

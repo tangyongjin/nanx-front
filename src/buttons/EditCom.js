@@ -17,7 +17,7 @@ export default class EditCom extends React.Component {
     init = async () => {
         if (this.props.NanxTableStore.selectedRows.length != 1) {
             message.error('必须请选择1条数据进行相应操作');
-            this.props.NanxTableStore.hideButtonModal();
+            this.props.ModalStore.hideButtonModal();
             return;
         }
         let _tmprec = this.props.NanxTableStore.selectedRows[0];

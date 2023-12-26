@@ -6,6 +6,8 @@ import { getDefaultMenuItem } from '@/utils/tools';
 
 const LeftMenu = inject('MenuStore')(
     observer((props) => {
+        // console.log('菜单渲染 ');
+
         const handleMenuClick = async (item) => {
             const menuClicked = findItemByKey(props.MenuStore.RoleBasedMenuList, item.key);
             props.MenuStore.setActiveTabKey(item.key);
