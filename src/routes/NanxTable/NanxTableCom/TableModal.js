@@ -73,11 +73,13 @@ const TableModal = observer((props) => {
                     关闭
                 </Button>
             ]}>
-            {props.tbStore.lazyButtonUsedCom ? (
-                <props.tbStore.lazyButtonUsedCom NanxTableStore={props.tbStore} />
-            ) : null}
+            {props.tbStore.lazyButtonUsedCom ? <MemoizedLazyComponent NanxTableStore={props.tbStore} /> : null}
         </Modal>
     );
 });
+
+const MemoizedLazyComponent = React.memo((props) => (
+    <props.NanxTableStore.lazyButtonUsedCom NanxTableStore={props.NanxTableStore} />
+));
 
 export default TableModal;
