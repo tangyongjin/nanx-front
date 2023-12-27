@@ -46,8 +46,11 @@ class _MenuStore {
 
     @observable history = null;
 
-    @action setHistory = (his) => {
-        this.history = his;
+    @action setHistory = (history) => {
+        if (!this.history) {
+            console.log('🙈🙈🙈🙈🙈设置history');
+            this.history = history;
+        }
     };
 
     @observable currentRole = {

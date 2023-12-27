@@ -8,17 +8,20 @@ import { toJS } from 'mobx';
 const MenuTabs = inject('MenuStore')(
     observer((props) => {
         const onChange = (key) => {
+            console.log('🤮🤮🤮切换Tab');
             props.MenuStore.setActiveTabKey(key);
             let current = props.MenuStore.MenuTabItems.find((item) => item.key === key);
             let curMenuItem = findItemByKey(props.MenuStore.RoleBasedMenuList, key);
             props.MenuStore.setCurrentMenu(toJS(curMenuItem));
 
-            if (!current.pushObj.executed) {
-                props.MenuStore.setExecutedStatusForKey(key);
-                props.MenuStore.history.push(current.pushObj);
-            } else {
-                props.MenuStore.history.replace(current.pushObj);
-            }
+            console.log('👻👻👻👻 replace');
+            props.MenuStore.history.replace(current.pushObj);
+            // else
+            // {
+            //     console.log('😻😻😻😻 push  ')
+            //     props.MenuStore.setExecutedStatusForKey(key);
+            //     props.MenuStore.history.push(current.pushObj);
+            // }
         };
 
         const onEdit = (targetKey, action) => {

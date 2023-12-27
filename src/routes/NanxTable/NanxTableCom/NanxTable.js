@@ -10,6 +10,7 @@ import TableModal from './TableModal';
 import ButtonArray from '@/buttons/ButtonArray';
 
 const NanxTable = observer((props) => {
+    console.log('NanxTable 渲染🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡');
     const [done, setDone] = useState(false);
     const _tbStore = new _NanxTableStore();
     const _modalStore = new _NanxFormStore();

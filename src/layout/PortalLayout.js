@@ -4,20 +4,14 @@ import Navbar from './navbar//Navbar';
 import { Layout } from 'antd';
 import { observer } from 'mobx-react';
 import MenuTabs from './MenuTabs';
-
 import { useStore } from '@/store/StoreHelpers';
 
 const { Header, Sider, Content } = Layout;
 
 const PortalLayout = observer((props) => {
-    // let allStores = useStore();
-
     const { MenuStore, DemoStore } = useStore();
     console.log('MenuStore: ', MenuStore);
     console.log('demoSt: ', DemoStore);
-
-    // console.log('allStores👺👺👺: ', allStores);
-
     console.log('PortalLayout>>props: ', props);
     MenuStore.setHistory(props.history);
 
