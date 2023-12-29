@@ -10,20 +10,21 @@ import TableModal from './TableModal';
 import ButtonArray from '@/buttons/ButtonArray';
 
 const NanxTable = observer((props) => {
-    console.log('NanxTable 渲染🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡');
     const [done, setDone] = useState(false);
+    console.log('NanxTable 渲染🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡', props.location.search);
+
     const _tbStore = new _NanxTableStore();
     const _modalStore = new _NanxFormStore();
-
-    const [tbStore] = useState(_tbStore);
-    const [modalStore] = useState(_modalStore);
+    const [NanxTableStore] = useState(_tbStore);
+    const [ModalStore] = useState(_modalStore);
 
     useEffect(() => {
+        console.log(' ++++ 👻useEffect❤️‍🩹👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹');
+
         const fetchData = async () => {
             const params = new URLSearchParams(props.location.search);
             const datagridCode = params.get('datagrid_code');
-            await tbStore.setDataGridCode(datagridCode);
-            await refreshTable();
+            await refreshTable(datagridCode);
         };
 
         fetchData();
@@ -34,39 +35,42 @@ const NanxTable = observer((props) => {
         };
     }, []); // Add dependencies if needed
 
-    const refreshTable = async () => {
+    const refreshTable = async (datagridCode) => {
+        console.log(' refreshTable >>> 👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹');
         setDone(false);
-        await tbStore.resetTableStore();
-        await tbStore.fetchDataGridCfg();
-        await tbStore.setLazyComponent();
-        await tbStore.listData('from refreshTable');
+
+        await NanxTableStore.resetTableStore();
+        await NanxTableStore.setDataGridCode(datagridCode);
+        await NanxTableStore.fetchDataGridCfg();
+        await NanxTableStore.listData('from refreshTable');
+
         setDone(true);
     };
 
     const onRowHandler = (record) => {
         return {
             onClick: async () => {
-                tbStore.rowSelectChange([record.id], [record]);
+                NanxTableStore.rowSelectChange([record.id], [record]);
             }
         };
     };
 
     return done ? (
         <div className="table_wrapper">
-            <MemoizedButtonArray NanxTableStore={tbStore} ModalStore={modalStore} />
+            <MemoizedButtonArray NanxTableStore={NanxTableStore} ModalStore={ModalStore} />
             <Table
                 size="small"
                 bordered={true}
                 rowKey={(record) => record.id}
-                columns={tbStore.tableColumns}
-                key={tbStore.datagrid_code}
-                dataSource={tbStore.dataSource}
-                onChange={tbStore.TableOnChange}
-                pagination={pagination(tbStore)}
-                rowSelection={rowSelection(tbStore)}
+                columns={NanxTableStore.tableColumns}
+                key={NanxTableStore.datagrid_code}
+                dataSource={NanxTableStore.dataSource}
+                onChange={NanxTableStore.TableOnChange}
+                pagination={pagination(NanxTableStore)}
+                rowSelection={rowSelection(NanxTableStore)}
                 onRow={onRowHandler}
             />
-            <MemoizedModal tbStore={tbStore} modalStore={modalStore} />
+            <MemoizedModal NanxTableStore={NanxTableStore} ModalStore={ModalStore} />
         </div>
     ) : (
         <div className="table_wrapper">
@@ -91,6 +95,28 @@ const MemoizedButtonArray = React.memo((props) => (
     <ButtonArray NanxTableStore={props.NanxTableStore} ModalStore={props.ModalStore} />
 ));
 
-const MemoizedModal = React.memo((props) => <TableModal tbStore={props.tbStore} modalStore={props.modalStore} />);
+const MemoizedModal = React.memo((props) => (
+    <TableModal NanxTableStore={props.NanxTableStore} ModalStore={props.ModalStore} />
+));
 
-export default NanxTable;
+// export default NanxTable;
+
+// export default React.memo(NanxTable);
+
+function shouldComponentUpdate(prevProps, nextProps) {
+    // 在这里，你可以添加你的比较逻辑
+    // 这个函数应该返回true如果前后两个props相等（即，不应该重新渲染）
+    // 或者返回false如果前后两个props不相等（即，应该重新渲染）
+
+    // if (prevProps.location.search == nextProps.location.search) {
+    //     console.log('比较逻辑💜💜💜💜💜💜💜💜💜💜 ==========');
+    //     return true;
+    // } else {
+    //     console.log('比较逻辑💜💜💜💜💜💜💜💜💜💜 <><><><><><>');
+    //     return false;
+    // }
+    return true;
+}
+
+// export default React.memo(NanxTable, shouldComponentUpdate);
+export default React.memo(NanxTable, shouldComponentUpdate);

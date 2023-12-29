@@ -5,7 +5,7 @@ import Draggable from 'react-draggable';
 import { observer } from 'mobx-react';
 
 const TableModal = observer((props) => {
-    console.log('隶属于:TableModal props:', props.tbStore.datagrid_code);
+    console.log('公共弹框：  props:', props);
 
     const [disabled, setDisabled] = useState(true);
     const [bounds, setBounds] = useState({
@@ -51,14 +51,14 @@ const TableModal = observer((props) => {
                     onFocus={() => {}}
                     onBlur={() => {}}>
                     <div>
-                        {IconWrapper(props.modalStore.iconStr)}
-                        {props.modalStore.formTitle}
+                        {IconWrapper(props.ModalStore.iconStr)}
+                        {props.ModalStore.formTitle}
                     </div>
                 </div>
             }
-            width={props.modalStore.formWidth}
-            open={props.modalStore.buttonModalVisuble}
-            onCancel={props.modalStore.hideButtonModal}
+            width={props.ModalStore.formWidth}
+            open={props.ModalStore.buttonModalVisuble}
+            onCancel={props.ModalStore.hideButtonModal}
             modalRender={(modal) => (
                 <Draggable
                     disabled={disabled}
@@ -69,17 +69,27 @@ const TableModal = observer((props) => {
                 </Draggable>
             )}
             footer={[
-                <Button type="primary" key="submit" onClick={props.modalStore.hideButtonModal}>
+                <Button type="primary" key="submit" onClick={props.ModalStore.hideButtonModal}>
                     关闭
                 </Button>
             ]}>
-            {props.tbStore.lazyButtonUsedCom ? <MemoizedLazyComponent NanxTableStore={props.tbStore} /> : null}
+            {props.NanxTableStore.lazyButtonUsedCom ? (
+                <MemoizedLazyComponent
+                    extraInfo={'ABCD'}
+                    ModalStore={props.ModalStore}
+                    NanxTableStore={props.NanxTableStore}
+                />
+            ) : null}
         </Modal>
     );
 });
 
 const MemoizedLazyComponent = React.memo((props) => (
-    <props.NanxTableStore.lazyButtonUsedCom NanxTableStore={props.NanxTableStore} />
+    <props.NanxTableStore.lazyButtonUsedCom
+        extraInfo={props.extraInfo}
+        ModalStore={props.ModalStore}
+        NanxTableStore={props.NanxTableStore}
+    />
 ));
 
 export default TableModal;

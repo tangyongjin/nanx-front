@@ -50,7 +50,7 @@ export default class FixedQueryBuilder extends React.Component {
     render() {
         return (
             <SearchFormContainer
-                HostedTableStore={this.props.NanxTableStore}
+                NanxTableStore={this.props.NanxTableStore}
                 targetDataGrid={this.targetDataGrid()}
                 fieldsList={this.state.fieldsList}
                 afterEditRefresh={this.props.afterEditRefresh}

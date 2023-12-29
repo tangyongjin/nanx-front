@@ -45,7 +45,7 @@ export default class UTableEditor extends React.Component {
                         {
                             key: '1',
                             label: '搜索...',
-                            children: <SearchFormContainer HostedTableStore={this.tbStore} />
+                            children: <SearchFormContainer NanxTableStore={this.tbStore} />
                         }
                     ]}
                 />

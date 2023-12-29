@@ -5,12 +5,9 @@ export default class TableSearch extends React.Component {
     constructor(props) {
         super(props);
         console.log('TableSearch>props: ', props);
-        this.init = this.init.bind(this);
     }
 
-    init = async () => {};
-
     render() {
-        return <SearchFormContainer HostedTableStore={this.props.NanxTableStore} />;
+        return <SearchFormContainer ModalStore={this.props.ModalStore} NanxTableStore={this.props.NanxTableStore} />;
     }
 }

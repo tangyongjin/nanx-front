@@ -8,7 +8,7 @@ import api from '@/api/api';
 export default class SearchFormContainer extends React.Component {
     constructor(props) {
         super(props);
-
+        console.log('SearchFormContainer>>>>>>>>', props);
         this.state = {
             field_group: [{ inner_order: 0 }]
         };
@@ -31,7 +31,7 @@ export default class SearchFormContainer extends React.Component {
         if (this.props.fieldsList) {
             return this.props.fieldsList;
         } else {
-            return this.props.HostedTableStore.tableColumnConfig.map(({ title, key }) => ({
+            return this.props.NanxTableStore.tableColumnConfig.map(({ title, key }) => ({
                 label: title,
                 value: key
             }));
@@ -65,11 +65,11 @@ export default class SearchFormContainer extends React.Component {
     // 执行带搜索条件的后台查询
     searchHandler = async () => {
         let queryLines = await this.returnQueryLines();
-        await this.props.HostedTableStore.setCurrentPage(1);
-        await this.props.HostedTableStore.setSearchQueryConfig(queryLines);
-        await this.props.HostedTableStore.rowSelectChange([], []);
-        await this.props.HostedTableStore.listData();
-        await this.props.HostedTableStore.hideButtonModal();
+        await this.props.NanxTableStore.setCurrentPage(1);
+        await this.props.NanxTableStore.setSearchQueryConfig(queryLines);
+        await this.props.NanxTableStore.rowSelectChange([], []);
+        await this.props.NanxTableStore.listData();
+        await this.props.ModalStore.hideButtonModal();
     };
 
     //  回传搜索条件给上级组件 returnQueryLines
@@ -152,7 +152,7 @@ export default class SearchFormContainer extends React.Component {
                 {this.state.field_group.map((item, index) => {
                     return (
                         <TableSearchForm
-                            NanxTableStore={this.props.HostedTableStore}
+                            NanxTableStore={this.props.NanxTableStore}
                             key={index}
                             fieldsList={this.getFieldList()}
                             saveActions={this.saveActions}
