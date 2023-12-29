@@ -1,13 +1,9 @@
 import React from 'react';
-import { observer } from 'mobx-react';
-import { withStore } from '@/store/StoreHelpers';
 
-@withStore
-@observer
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
-        console.log('Home->props: ', props.stores);
+        console.log('Home->props: ', props);
     }
 
     render() {

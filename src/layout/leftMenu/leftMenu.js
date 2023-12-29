@@ -7,8 +7,6 @@ import { useStore } from '@/store/StoreHelpers';
 
 const LeftMenu = observer(() => {
     const { MenuStore } = useStore();
-    console.log('MenuStore: ', MenuStore);
-
     console.log('菜单渲染 ');
     const handleMenuClick = async (item) => {
         const menuClicked = findItemByKey(MenuStore.RoleBasedMenuList, item.key);

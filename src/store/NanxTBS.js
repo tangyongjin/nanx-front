@@ -10,11 +10,18 @@ class _NanxTableStore {
     constructor() {
         autorun(() => {
             if (this.SERIALNO == null) {
+                this.initDone = false;
                 this.SERIALNO = randomString(10);
                 this.AlphaVersion = 'NanxTBS' + randomString(10);
             }
         });
     }
+
+    @observable initDone = null;
+
+    @action setInitDone = (done) => {
+        this.initDone = done;
+    };
 
     @observable AlphaVersion = null;
     @observable DefaultPageSize = 20;

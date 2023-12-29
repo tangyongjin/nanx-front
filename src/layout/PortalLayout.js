@@ -9,9 +9,7 @@ import { useStore } from '@/store/StoreHelpers';
 const { Header, Sider, Content } = Layout;
 
 const PortalLayout = observer((props) => {
-    const { MenuStore, DemoStore } = useStore();
-    console.log('MenuStore: ', MenuStore);
-    console.log('demoSt: ', DemoStore);
+    const { MenuStore } = useStore();
     console.log('PortalLayout>>props: ', props);
     MenuStore.setHistory(props.history);
 

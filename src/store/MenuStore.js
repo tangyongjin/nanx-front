@@ -207,8 +207,6 @@ class _MenuStore {
 
     @action.bound
     setCurrentMenu = (menu) => {
-        console.log('当前菜单项', menu);
-
         this.currentMenu = menu;
         if (menu) {
             this.setSelectedKeys([menu.key]);
