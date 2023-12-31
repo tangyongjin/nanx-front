@@ -17,8 +17,13 @@ const PortalLayout = observer((props) => {
         console.log('🤡🤡Portal_Layout useEffect  🤡🤡🤡');
         const asyncFun = async () => {
             const params = new URLSearchParams(props.history.location.search);
+             const usedChild = React.Children.toArray(props.children).find(
+                 (child) => child.props.path === props.history.location.pathname
+            );
+
+             
             const Mkey = params.get('key');
-            MenuStore.setMenuTabItemChildren(Mkey, props.children);
+            MenuStore.setMenuTabItemChildren(Mkey,usedChild);
         };
         asyncFun();
     }, [props.children]);
