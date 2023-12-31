@@ -283,25 +283,31 @@ class _MenuStore {
         await this.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
         let defaultMenuItem = getDefaultMenuItem(this.RoleMenuArray);
         this.setCurrentMenu(defaultMenuItem, 'afterLoginSuccess');
+        const pushObj = await this.getPushObj(defaultMenuItem.key);
+        console.log('登陆后>>>>>>>>>pushobj: ', pushObj);
+        this.history.push(pushObj);
+    };
 
+    @action getPushObj = async (key) => {
+        const menuClicked = findItemByKey(this.RoleBasedMenuList, key);
         let searchStr;
-        if (defaultMenuItem.router == '/datagrid') {
-            searchStr = `?datagrid_code=${defaultMenuItem.datagrid_code}&key=${defaultMenuItem.key}`;
+        if (menuClicked.router == '/datagrid') {
+            searchStr = `?datagrid_code=${menuClicked.datagrid_code}&key=${key}`;
         } else {
-            searchStr = `?key=${defaultMenuItem.key}`;
+            searchStr = `?key=${key}`;
         }
 
         const pushObj = {
             executed: false,
-            pathname: defaultMenuItem.router,
+            pathname: menuClicked.router,
             search: searchStr,
             state: {
-                datagrid_code: defaultMenuItem?.datagrid_code,
-                key: defaultMenuItem.key
+                datagrid_code: menuClicked?.datagrid_code,
+                key: key
             }
         };
 
-        this.history.push(pushObj);
+        return pushObj;
     };
 }
 
