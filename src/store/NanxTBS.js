@@ -284,6 +284,16 @@ class _NanxTableStore {
         );
     };
 
+    @action.bound rowSelection = async () => {
+        return {
+            type: 'radio',
+            selectedRowKeys: this.selectedRowKeys,
+            onChange: async (selectedRowKeys, selectedRows) => {
+                this.rowSelectChange(selectedRowKeys, selectedRows);
+            }
+        };
+    };
+
     @action debug = async () => {
         console.log(this);
     };

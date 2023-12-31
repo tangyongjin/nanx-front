@@ -11,7 +11,7 @@ import ButtonArray from '@/buttons/ButtonArray';
 
 const NanxTable = observer((props) => {
     const [done, setDone] = useState(false);
-    console.log('NanxTable 渲染🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡', props.location.search);
+    console.log('NanxTable 渲染🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡', props);
 
     const _tbStore = new _NanxTableStore();
     const _modalStore = new _NanxFormStore();
@@ -19,8 +19,6 @@ const NanxTable = observer((props) => {
     const [ModalStore] = useState(_modalStore);
 
     useEffect(() => {
-        console.log(' ++++ 👻useEffect❤️‍🩹👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹');
-
         const fetchData = async () => {
             const params = new URLSearchParams(props.location.search);
             const datagridCode = params.get('datagrid_code');
@@ -38,11 +36,10 @@ const NanxTable = observer((props) => {
     const refreshTable = async (datagridCode) => {
         console.log(' refreshTable >>> 👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹');
         setDone(false);
-
         await NanxTableStore.resetTableStore();
         await NanxTableStore.setDataGridCode(datagridCode);
         await NanxTableStore.fetchDataGridCfg();
-        await NanxTableStore.listData('from refreshTable');
+        await NanxTableStore.listData('from NanxTable');
 
         setDone(true);
     };

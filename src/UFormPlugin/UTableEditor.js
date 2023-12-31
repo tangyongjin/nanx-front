@@ -58,7 +58,13 @@ export default class UTableEditor extends React.Component {
                     dataSource={this.tbStore.dataSource}
                     onChange={this.tbStore.TableOnChange}
                     pagination={pagination(this.tbStore)}
-                    rowSelection={rowSelection(this.tbStore)}
+                    rowSelection={{
+                        type: 'radio',
+                        selectedRowKeys: this.tbStore.selectedRowKeys,
+                        onChange: async (selectedRowKeys, selectedRows) => {
+                            this.tbStore.rowSelectChange(selectedRowKeys, selectedRows);
+                        }
+                    }}
                     onRow={this.onRowHandler}
                 />
             </div>

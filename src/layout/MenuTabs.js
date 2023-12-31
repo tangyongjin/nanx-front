@@ -9,12 +9,14 @@ const MenuTabs = inject('MenuStore')(
     observer((props) => {
         const onChange = (key) => {
             console.log('🤮🤮🤮切换Tab');
-            props.MenuStore.setActiveTabKey(key);
+
+            // props.MenuStore.setActiveTabKey(key);
             let current = props.MenuStore.MenuTabItems.find((item) => item.key === key);
             let curMenuItem = findItemByKey(props.MenuStore.RoleBasedMenuList, key);
             props.MenuStore.setCurrentMenu(toJS(curMenuItem));
 
             console.log('👻👻👻👻 replace');
+            console.log('current.pushObj: ', current.pushObj);
             props.MenuStore.history.replace(current.pushObj);
             // else
             // {
@@ -53,4 +55,4 @@ const MenuTabs = inject('MenuStore')(
 );
 
 // export default  MenuTabs ; //这里要执行一下WithRouter
-export default withRouter(MenuTabs); //这里要执行一下WithRouter
+export default MenuTabs; //这里要执行一下WithRouter

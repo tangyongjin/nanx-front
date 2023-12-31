@@ -6,6 +6,7 @@ import api from '@/api/api';
 export default class EditCom extends React.Component {
     constructor(props) {
         super(props);
+        console.log('EditCom>props: ', props);
         this.init = this.init.bind(this);
     }
 
@@ -15,11 +16,6 @@ export default class EditCom extends React.Component {
     }
 
     init = async () => {
-        if (this.props.NanxTableStore.selectedRows.length != 1) {
-            message.error('必须请选择1条数据进行相应操作');
-            this.props.ModalStore.hideButtonModal();
-            return;
-        }
         let _tmprec = this.props.NanxTableStore.selectedRows[0];
         if (_tmprec.hasOwnProperty('ghost_author') && _tmprec.ghost_author != sessionStorage.getItem('user')) {
             message.error('不是自己的数据不能编辑');
@@ -48,7 +44,11 @@ export default class EditCom extends React.Component {
 
     render() {
         return (
-            <TableSchemaForm NanxTableStore={this.props.NanxTableStore} saveFormData={this.saveFormData.bind(this)} />
+            <TableSchemaForm
+                ModalStore={this.props.ModalStore}
+                NanxTableStore={this.props.NanxTableStore}
+                saveFormData={this.saveFormData.bind(this)}
+            />
         );
     }
 }

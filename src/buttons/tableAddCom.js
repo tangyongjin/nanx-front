@@ -41,6 +41,7 @@ export default class TableAddCom extends React.Component {
         return (
             <div>
                 <TableSchemaForm
+                    ModalStore={this.props.ModalStore}
                     NanxTableStore={this.props.NanxTableStore}
                     saveFormData={this.saveFormData.bind(this)}
                 />
