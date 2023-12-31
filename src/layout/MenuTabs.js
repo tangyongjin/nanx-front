@@ -1,7 +1,6 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import { inject, observer } from 'mobx-react';
-import { withRouter } from 'react-router-dom';
 import { findItemByKey } from '@/utils/tools';
 
 import { toJS } from 'mobx';
@@ -10,7 +9,6 @@ const MenuTabs = inject('MenuStore')(
         const onChange = (key) => {
             console.log('🤮🤮🤮切换Tab');
 
-            // props.MenuStore.setActiveTabKey(key);
             let current = props.MenuStore.MenuTabItems.find((item) => item.key === key);
             let curMenuItem = findItemByKey(props.MenuStore.RoleBasedMenuList, key);
             props.MenuStore.setCurrentMenu(toJS(curMenuItem));
@@ -18,12 +16,6 @@ const MenuTabs = inject('MenuStore')(
             console.log('👻👻👻👻 replace');
             console.log('current.pushObj: ', current.pushObj);
             props.MenuStore.history.replace(current.pushObj);
-            // else
-            // {
-            //     console.log('😻😻😻😻 push  ')
-            //     props.MenuStore.setExecutedStatusForKey(key);
-            //     props.MenuStore.history.push(current.pushObj);
-            // }
         };
 
         const onEdit = (targetKey, action) => {
@@ -54,5 +46,4 @@ const MenuTabs = inject('MenuStore')(
     })
 );
 
-// export default  MenuTabs ; //这里要执行一下WithRouter
-export default MenuTabs; //这里要执行一下WithRouter
+export default MenuTabs;

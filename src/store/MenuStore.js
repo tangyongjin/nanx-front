@@ -216,7 +216,6 @@ class _MenuStore {
 
     @action addMenuTabItem = async (key, label, icon, pushObj) => {
         let keyAlreadyExists = this.MenuTabItems.some((item) => item.key === key);
-        console.log(IconWrapper(icon));
         const Xlabel = (
             <div className="menu-tab-title">
                 {IconWrapper(icon)} {label}
@@ -261,8 +260,9 @@ class _MenuStore {
     @action setMenuTabItemChildren = (key, children) => {
         const updatedMenuTabItems = this.MenuTabItems.map((element) => {
             if (element.key === key && element.children == null) {
-                // Use mobx.set to update the observable property
-                set(element, 'children', children);
+                if (!element.children) {
+                    set(element, 'children', children);
+                }
             }
             return element;
         });

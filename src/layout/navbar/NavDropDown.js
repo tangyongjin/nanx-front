@@ -15,8 +15,8 @@ export default class NavDropDown extends React.Component {
         this.LoginService = new LoginService();
     }
 
-    logout = () => {
-        this.LoginService.logout();
+    logout = async () => {
+        await this.LoginService.logout();
         this.props.MenuStore.history.push('/login');
     };
 

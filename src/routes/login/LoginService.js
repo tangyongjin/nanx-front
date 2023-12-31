@@ -61,10 +61,10 @@ class LoginService {
         }
     }
 
-    logout() {
-        UserStore.clearToken();
-        sessionStorage.clear();
-        MenuStore.clear();
+    async logout() {
+        await UserStore.clearToken();
+        await sessionStorage.clear();
+        await MenuStore.clear();
     }
 }
 

@@ -14,6 +14,7 @@ const PortalLayout = observer((props) => {
     MenuStore.setHistory(props.history);
 
     useEffect(() => {
+        console.log('🤡🤡Portal_Layout useEffect  🤡🤡🤡');
         const asyncFun = async () => {
             const params = new URLSearchParams(props.history.location.search);
             const Mkey = params.get('key');
