@@ -10,6 +10,11 @@ import '@/styles/index.scss';
 import { StoreProvider } from '@/store/StoreHelpers';
 
 export default class App extends React.Component {
+    requireAuth = (nextState, replace, callback) => {
+        console.log('💚replace: ', replace);
+        console.log('💚nextState: ', nextState);
+    };
+
     renderRoute = (route, index) => {
         return (
             <CacheRoute
@@ -17,6 +22,7 @@ export default class App extends React.Component {
                 path={route.path}
                 exact={false}
                 render={(props) => {
+                    this.requireAuth(props.location, props.history, null);
                     return (
                         <route.component {...props}>
                             {route.childRoutes && route.childRoutes.map(this.renderRoute)}
