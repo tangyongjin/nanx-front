@@ -7,7 +7,7 @@ const DynaLoader = ({ NanxTableStore, ModalStore, buttonSelf }) => {
     const loadDynamic = async (file_path) => {
         try {
             let module = await require(`./${file_path}.js`).default;
-            buttonSelf.LazyButtonUsedCom = module;
+            // buttonSelf.LazyButtonUsedCom = module;
             await NanxTableStore.setLazyButtonUsedCom(module);
         } catch (error) {
             console.error('Error loading dynamic component:', error);
