@@ -38,26 +38,12 @@ export default class NavDropDown extends React.Component {
 
     render() {
         const onClick = ({ key }) => {
-            if (key == 1) {
-                if (window.location.href.includes('/profile')) {
-                    console.log('点击 /profile 相同菜单');
-                    return;
-                }
-                // hashHistory.push('/profile');
-            }
             if (key == 2) {
                 this.showConfirm();
             }
         };
 
         const items = [
-            {
-                label: '个人中心',
-                key: '1'
-            },
-            {
-                type: 'divider'
-            },
             {
                 label: '退出登录',
                 key: '2'

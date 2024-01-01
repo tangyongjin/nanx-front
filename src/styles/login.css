@@ -9,17 +9,19 @@
 
 
 #app {
-  height: 100%;
+  height: 100vh;
+  border: 0.5px solid white;
+
 }
 
 
 .auth-bg {
-  height: 100%;
+  height: 100vh;
+
   width: 100%;
-  /* background-color: #9EAEC2; */
   background-image: url("./download.jpeg");
   background-repeat: no-repeat;
-  background-position: 360px center;
+  background-position:  center;
   border: 0.5px solid white;
 }
 
