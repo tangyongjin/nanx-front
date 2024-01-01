@@ -10,7 +10,6 @@ import TableModal from './TableModal';
 import ButtonArray from '@/buttons/ButtonArray';
 
 const NanxTable = observer((props) => {
-    const [done, setDone] = useState(false);
     console.log('NanxTable 渲染🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡🤡', props);
 
     const _tbStore = new _NanxTableStore();
@@ -35,13 +34,13 @@ const NanxTable = observer((props) => {
 
     const refreshTable = async (datagridCode) => {
         console.log(' refreshTable >>> 👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹👻❤️‍🩹');
-        setDone(false);
         await NanxTableStore.resetTableStore();
         await NanxTableStore.setDataGridCode(datagridCode);
         await NanxTableStore.fetchDataGridCfg();
         await NanxTableStore.listData('from NanxTable');
+        await NanxTableStore.setInitDone(true);
 
-        setDone(true);
+        // setDone(true);
     };
 
     const onRowHandler = (record) => {
@@ -52,7 +51,7 @@ const NanxTable = observer((props) => {
         };
     };
 
-    return done ? (
+    return NanxTableStore.initDone ? (
         <div className="table_wrapper">
             <MemoizedButtonArray NanxTableStore={NanxTableStore} ModalStore={ModalStore} />
             <Table

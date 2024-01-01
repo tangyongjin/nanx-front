@@ -10,7 +10,7 @@ class _NanxTableStore {
     constructor() {
         autorun(() => {
             if (this.SERIALNO == null) {
-                this.initDone = false;
+                // this.initDone = false;
                 this.SERIALNO = randomString(10);
                 this.AlphaVersion = 'NanxTBS' + randomString(10);
             }
@@ -18,8 +18,7 @@ class _NanxTableStore {
     }
 
     @observable initDone = null;
-
-    @action setInitDone = (done) => {
+    @action setInitDone = async (done) => {
         this.initDone = done;
     };
 
