@@ -20,17 +20,16 @@ const themeJson = {
             headerPadding: '0 0 0 0',
             bodyBg: '#ffffff',
             headerBg: '#ffffff',
-            siderBg: '#032c05'
+            siderBg: '#010d01'
         },
 
         Menu: {
             groupTitleColor: 'rgba(245, 237, 237, 0.45)',
             dangerItemActiveBg: 'rgb(70, 187, 13)',
             algorithm: true,
-            itemBg: '#032c05',
-            darkItemColor: 'rgba(245, 237, 237, 0.45)',
-            darkItemBg: '#032c05',
-            darkSubMenuItemBg: '#032c05',
+            darkItemColor: '#ded9d9', // 菜单文本颜色
+            darkItemBg: '#010d01',
+            darkSubMenuItemBg: '#010d01',
             itemColor: 'rgba(245, 237, 237, 0.45)',
             itemHoverColor: 'rgb(160, 217, 17)',
             colorText: 'rgba(245, 237, 237, 0.45)',
@@ -47,9 +46,9 @@ const themeJson = {
 
         Button: {
             controlHeight: '30px',
-            defaultBorderColor: '#366503',
+            defaultBorderColor: '#f1f4ed',
             defaultColor: 'white',
-            colorBgContainer: '#366503'
+            colorBgContainer: '#0e1401'
         },
 
         Table: {
@@ -60,10 +59,10 @@ const themeJson = {
         },
 
         Tabs: {
-            colorPrimaryActive: '#366503',
+            colorPrimaryActive: '#151512',
             cardGutter: 6,
             itemColor: '#191819',
-            itemActiveColor: '#366503',
+            itemActiveColor: '#151512',
             titleFontSize: '14px'
         },
 

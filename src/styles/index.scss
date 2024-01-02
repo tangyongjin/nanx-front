@@ -2,19 +2,32 @@
 @import 'modal-title.scss';
 
 
+
+$colorMain :  #332d2def ;
+$colorHeavyblack :  #050000f6 ;
+
+
 body {
     font-family: Arial, 'Microsoft YaHei', '微软雅黑' !important;
 }
 
-.ant-layout-sider {
-    background: rgb(13, 73, 74);
+
+.heavColor{
+    color: $colorHeavyblack;
 }
 
 .nanx-role {
     padding-right: 5px;
-    color: #054807;
+    color:$colorHeavyblack ;
     font-size: 14px;
 }
+
+
+
+.ant-layout-sider {
+    background:  #000000ef;
+}
+
 
 .table_wrapper {
     padding: 4px;
@@ -226,7 +239,7 @@ div.longSelect {
 .ant-input-number input:hover,
 .ant-input-number input:focus,
 .ant-input-number:focus-within {
-    border-color: #225e04 !important;
+    border-color: $colorMain !important;
 }
 
 /* Apply styles to the input when the parent wrapper is focused or focused within */
@@ -234,7 +247,7 @@ div.longSelect {
 .ant-input-affix-wrapper:focus-within,
 .ant-input-number-affix-wrapper:focus,
 .ant-input-number-affix-wrapper:focus-within {
-    border-color: #225e04 !important;
+    border-color: $colorMain !important;
     box-shadow: 0 0 0 1px rgba(5, 145, 255, 0.1);
     outline: 0;
 }
@@ -246,34 +259,34 @@ div.longSelect {
 .ant-input-number-affix-wrapper:hover,
 .ant-input-number-affix-wrapper:active,
 .ant-input-number-affix-wrapper:focus {
-    border: 1px solid #225e04 !important;
+    border: 1px solid $colorMain !important;
 }
 
 .ant-input:hover {
-    border-color: #225e04 !important;
+    border-color: $colorMain !important;
 }
 
 .ant-select-open,
 .ant-select-selection-search {
-    border-color: #225e04 !important;
+    border-color: $colorMain !important;
 }
 
 .ant-select-open:focus-within {
-    border-color: #225e04 !important;
+    border-color: $colorMain !important;
 }
 
 .ant-select-open:focus {
-    border-color: #225e04 !important;
+    border-color: $colorMain !important;
 }
 
 .ant-select:hover {
-    border-color: #225e04 !important;
+    border-color: $colorMain !important;
 }
 
 .ant-select-selector:hover,
 .ant-select-selector:focus,
 .ant-select-selector:active {
-    border-color: #225e04 !important;
+    border-color: $colorMain !important;
 }
 
 .plugBox {
@@ -384,14 +397,8 @@ div.formItem svg {
     /* 设置最大宽度，超过的部分将显示省略号 */
 }
 
-.ant-tabs-tab-active {
-    background-color: #031f0e;
-}
 
-div.ant-tabs-tab-active>div.ant-tabs-tab-btn {
-    color: #074c06 !important;
-    font-weight: bold !important;
-}
+
 
 .menu-tab-title {
     display: flex;
@@ -411,6 +418,23 @@ div.ant-tabs-tab-active>div.ant-tabs-tab-btn {
 }
 
 
+.ant-tabs-nav-list {
+    height: 34px;
+}
+
+.ant-tabs-tab {
+    border: 0.5px solid rgb(43, 41, 41) !important;
+    border-radius: 0px !important;
+}
+
+.ant-tabs-tab-active {
+    background-color: #031f0e;
+    border-bottom:   1.5px solid  rgb(5, 82, 9) !important;
+}
+
+
+
+
 
 #ButtonBar {
     width: 100%;
@@ -423,15 +447,7 @@ div.ant-tabs-tab-active>div.ant-tabs-tab-btn {
 }
 
 
-.ant-tabs-nav-list {
-    height: 34px;
-}
-
-.ant-tabs-tab {
-    border: 0.5px solid rgb(43, 41, 41) !important;
-    border-radius: 0px !important;
-}
-
+ 
 
 
 //Search  form 强制宽度

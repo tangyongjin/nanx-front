@@ -20,17 +20,18 @@ export default class Navbar extends React.Component {
                 <div id="navbar_collapse_bread">
                     <div style={{ flex: '10%', width: '40px' }}>
                         <PicLeftOutlined
+                            className="heavColor"
                             onClick={this.MenuStore.toggleCollapse}
-                            style={{ paddingLeft: '15px', fontSize: '16px', color: '#225e04' }}
+                            style={{ paddingLeft: '15px', fontSize: '16px' }}
                         />
                     </div>
-                    <div style={{ flex: '90%', textAlign: 'left', color: '#1c4308' }}>
+                    <div className="heavColor" style={{ flex: '90%', textAlign: 'left' }}>
                         <span>{this.MenuStore.breadcrumb || '首页'}</span>
                     </div>
                 </div>
                 <div id="navbar_preloader">
                     {/* <img src={LoadingGif} alt="loading" /> */}
-                    <div class="custom-loader"></div>
+                    <div className="custom-loader"></div>
                 </div>
                 <div id="navbar_dropdown">
                     <NavDropDown history={this.props.history} />
