@@ -11,7 +11,6 @@ const LeftMenu = observer(() => {
         const menuClicked = findItemByKey(MenuStore.RoleBasedMenuList, item.key);
         MenuStore.setActiveTabKey(item.key);
         MenuStore.setCurrentMenu(menuClicked, 'handleMenuClick');
-
         let pushObj = await MenuStore.getPushObj(item.key);
         MenuStore.addMenuTabItem(menuClicked.key, menuClicked.title, menuClicked.icon, pushObj);
     };

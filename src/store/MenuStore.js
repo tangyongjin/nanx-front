@@ -4,6 +4,7 @@ import api from '@/api/api';
 import IconWrapper from '@/utils/IconWrapper';
 import { randomString, getAllKeys, findMenuPath, menuTransformer } from '@/utils/tools';
 import { message } from 'antd';
+import { toJS } from 'mobx';
 import { findItemByKey } from '@/utils/tools';
 import { getDefaultMenuItem } from '@/utils/tools';
 
@@ -222,6 +223,7 @@ class _MenuStore {
         );
 
         if (!keyAlreadyExists) {
+            console.log('Tab中不存在,添加');
             let _tmpTab = {
                 key: key,
                 label: Xlabel,
@@ -234,6 +236,8 @@ class _MenuStore {
             this.setActiveTabKey(key);
             this.history.push(pushObj);
         } else {
+            this.switchTab(key);
+            console.log('Tab中已经存在,激活');
         }
     };
 
@@ -307,6 +311,14 @@ class _MenuStore {
         };
 
         return pushObj;
+    };
+
+    @action switchTab = (key) => {
+        console.log('🤮🤮🤮切换Tab');
+        let current = this.MenuTabItems.find((item) => item.key === key);
+        let curMenuItem = findItemByKey(this.RoleBasedMenuList, key);
+        this.setCurrentMenu(toJS(curMenuItem));
+        this.history.replace(current.pushObj);
     };
 }
 

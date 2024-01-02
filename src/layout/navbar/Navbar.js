@@ -1,8 +1,10 @@
 import { inject, observer } from 'mobx-react';
 import { PicLeftOutlined } from '@ant-design/icons';
 import React from 'react';
-import LoadingGif from '@/styles/loading.gif';
+// import LoadingGif from '@/styles/loading.gif';
 import NavDropDown from './NavDropDown';
+
+import './loading.css';
 
 @inject('MenuStore')
 @observer
@@ -27,7 +29,8 @@ export default class Navbar extends React.Component {
                     </div>
                 </div>
                 <div id="navbar_preloader">
-                    <img src={LoadingGif} alt="loading" />
+                    {/* <img src={LoadingGif} alt="loading" /> */}
+                    <div class="custom-loader"></div>
                 </div>
                 <div id="navbar_dropdown">
                     <NavDropDown history={this.props.history} />
