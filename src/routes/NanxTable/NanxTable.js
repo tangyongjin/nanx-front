@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
 import { observer } from 'mobx-react';
 import { pagination, rowSelection } from './tableUtils/tableUtil';
-import _NanxTableStore from '@/store/NanxTBS';
+import _NanxTableStore from '@/store/NanxTableStore';
 import _NanxFormStore from '@/store/NanxFormStore';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';

@@ -1,15 +1,16 @@
-import UrlProtect from '@/routes/urlProtect';
+import React from 'react';
 
-export default {
-    onEnter: UrlProtect, // add this 判断是否登录
-    childRoutes: [
-        {
-            path: 'home',
-            getComponent(nextState, cb) {
-                import('./containers/home').then((m) => {
-                    cb(null, m.default);
-                });
-            }
-        }
-    ]
-};
+export default class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log('Home->props: ', props);
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Home</h1>
+            </div>
+        );
+    }
+}

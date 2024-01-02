@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select } from 'antd';
 import { observer, inject } from 'mobx-react';
-import CellsRenderHandlers from '@/routes/NanxTable/NanxTableCom/cellRenders/cellsRenderHandlers';
+import CellsRenderHandlers from '@/routes/NanxTable/cellRenders/cellsRenderHandlers';
 import { BsCodeSquare } from 'react-icons/bs';
 
 const { Option } = Select;

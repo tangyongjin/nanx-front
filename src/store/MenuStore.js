@@ -124,7 +124,7 @@ class _MenuStore {
     };
 
     @action
-    async getMenuTreeByRoleCode(roleCode) {
+    async setMenuTreeByRoleCode(roleCode) {
         let params = {
             data: {
                 role_code: roleCode
@@ -133,7 +133,6 @@ class _MenuStore {
         let res = await api.permission.getMenuTreeByRoleCode(params);
         if (res.code == 200) {
             this.setRoleBasedMenuList(res.data.menuList);
-
             let tmpArr = menuTransformer(res.data.menuList);
             this.setRoleMenuArray(tmpArr);
             this.RoleUsedKeys = getAllKeys(res.data.menuList);
@@ -280,7 +279,7 @@ class _MenuStore {
 
     @action afterLogin = async (history) => {
         this.setHistory(history);
-        await this.getMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
+        await this.setMenuTreeByRoleCode(sessionStorage.getItem('role_code'));
         let defaultMenuItem = getDefaultMenuItem(this.RoleMenuArray);
         this.setCurrentMenu(defaultMenuItem, 'afterLoginSuccess');
         const pushObj = await this.getPushObj(defaultMenuItem.key);

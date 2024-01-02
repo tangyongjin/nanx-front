@@ -1,7 +1,7 @@
 import { observable, action, autorun } from 'mobx';
-import CellRender from '@/routes/NanxTable/NanxTableCom/cellRender';
+import CellRender from '@/routes/NanxTable/cellRender';
 import { getTextWidth } from '@/utils/tools';
-import listDataParams from '@/routes/NanxTable/NanxTableCom/listDataParams';
+import listDataParams from '@/routes/NanxTable/listDataParams';
 import api from '@/api/api';
 import { toJS } from 'mobx';
 

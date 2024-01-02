@@ -1,4 +1,4 @@
-import TableSchemaForm from '@/routes/NanxTable/NanxTableCom/TableForm';
+import TableSchemaForm from '@/routes/NanxTable/TableForm';
 import React from 'react';
 import api from '@/api/api';
 

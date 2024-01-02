@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Table } from 'antd';
 import { toJS } from 'mobx';
-import ImgRender from '@/routes/NanxTable/NanxTableCom/cellRenders/ImgRender';
+import ImgRender from '@/routes/NanxTable/cellRenders/ImgRender';
 import { BsPerson } from 'react-icons/bs';
 import { BsPeople } from 'react-icons/bs';
 import { observer, inject } from 'mobx-react';

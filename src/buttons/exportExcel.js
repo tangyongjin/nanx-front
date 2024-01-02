@@ -1,7 +1,7 @@
 import React from 'react';
 import api from '@/api/api';
-import fetchDataGridCfg from '@/routes/NanxTable/NanxTableCom/fetchDataGridCfg';
-import listDataParams from '@/routes/NanxTable/NanxTableCom/listDataParams';
+import fetchDataGridCfg from '@/routes/NanxTable/fetchDataGridCfg';
+import listDataParams from '@/routes/NanxTable/listDataParams';
 import { toJS } from 'mobx';
 
 export default class ExportExcel extends React.Component {

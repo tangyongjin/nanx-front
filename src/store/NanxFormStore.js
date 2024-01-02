@@ -19,7 +19,7 @@ class _NanxFormStore {
     @observable AlphaVersion = null;
 
     @action setAlphaVersion = (code) => {
-        this.AlphaVersion = 'NanxTBS_' + code;
+        this.AlphaVersion = 'NanxFormStore_' + code;
     };
 
     @action setFormTitle = (formTitle) => {
